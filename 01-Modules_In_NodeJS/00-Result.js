@@ -6,9 +6,9 @@
     Functions Which Exports in Module File is Now Property of that File Object
 */
 
-// For Access Modules Files, First You Need to Import that file
-const arithmeticModule = require('./00-Arithmetic_Functions.js');
-const arithmeticModule2 = require('./00-Arithmetic_Functions.js');
+// For Access Modules Files through CommonJS, First You Need to Import that file
+const arithmeticModule = require('./00-Arithmetic_Functions_CommonJS.js');
+const arithmeticModule2 = require('./00-Arithmetic_Functions_CommonJS.js');
 /* 
     If We Import Same File Two Times Both Files Not Loaded File is Only Loaded Once Because Once 
     File is Loaded File is Stores in Cache Memory So that Require file Already in Cache so 
