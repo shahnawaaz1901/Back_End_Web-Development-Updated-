@@ -19,15 +19,15 @@ Solution Description : Option b is correct because the extra thread from thread 
 /*
 Working of Nodejs
 
-Which statement about Node.js processing incoming requests and executing tasks is correct?
+Which statement about Node.js processing incoming requests and executing tasks is correct? ( Multiple )
 
-1. Node.js adds incoming requests to the event queue and utilizes additional threads 
+1. Node.js adds incoming requests to the event queue and utilizes additional threads        // Correct
 for certain tasks such as I/O operations and executing asynchronous tasks.
 
-2. The main thread of Node.js manages the event loop and assigns the next task in the 
+2. The main thread of Node.js manages the event loop and assigns the next task in the       // Correct
 event queue to itself after determining whether the task is synchronous or asynchronous.
 
-3. Node.js employs a pool of threads to handle asynchronous tasks, allowing parallel 
+3. Node.js employs a pool of threads to handle asynchronous tasks, allowing parallel        // Correct
 execution without blocking the main thread and increasing server efficiency.
 
 4. The main thread delegates synchronous and time-consuming tasks to the Node.js runtime 
