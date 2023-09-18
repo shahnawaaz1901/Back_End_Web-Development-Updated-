@@ -1,0 +1,12 @@
+{
+  "name": "fix_mjs_extension_issue_in_es6",
+  "version": "1.0.0",
+  "description": "Set All mjs extension to js and fix problem of Extension in ES6",
+  "main": "result.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Shahnawaaz Ansari",
+  "license": "ISC",
+  "type": "module"
+}
