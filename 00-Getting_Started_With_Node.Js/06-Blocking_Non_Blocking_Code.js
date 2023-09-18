@@ -27,3 +27,59 @@ setTimeout(()=>{
 },8000);
 
 console.log('Print Statement After SetTimeOut');
+
+/*
+Blocking code
+
+Which of the following code implementations is a blocking piece of code? ( Multiple )
+
+A)
+console.log('Start');
+setTimeout(()=>{
+    console.log('Inside the SetTimeOut')
+},0)
+while(true){
+    console.log('Inside the While Loop')
+};
+console.log('End');
+
+B) 
+const compute = ()=>{
+    let sum = 0;
+    for(let i = 0; i < 1000000;i++){
+        sum += i;
+    }
+    console.log(sum);
+}
+setTimeout(compute, 0);
+console.log('Done !!');
+
+C) 
+let i = 0;
+setInterval(()=>{
+    i++;
+    console.log(i)
+},1000);
+console.log(i);
+D) 
+const idle = (ms)=>{
+    let start = new Date().getTime();
+    while(new Date().getTIme() < start + ms){}
+}
+console.log('Start');
+idle(1000);
+console.log('End');
+
+1. A                        // Correct
+2. B
+3. C
+4. D                        // Correct
+
+Solution Description : The code snippets a and d demonstrate blocking behavior. 
+                In option a, due to the infinite while loop, the callback function 
+                is only executed once when the loop is terminated, which never happens. 
+                In option d, the idle function blocks the program for a specified amount 
+                of time before continuing. The other code snippets use non-blocking 
+                techniques with setTimeout and setInterval to allow the program to continue
+                executing while functions run asynchronously.
+*/
