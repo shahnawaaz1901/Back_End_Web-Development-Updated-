@@ -32,6 +32,7 @@ printTotal(total);
 
 /*
     For Debugging in VS Code We Need to First Create launch.json file which
-    contains information regarding our file.
+    contains information regarding our file. and then run debugger and you can 
+    see many options to debug your code
 */
 
