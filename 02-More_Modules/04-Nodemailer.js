@@ -4,10 +4,13 @@
 */
 
 // Nodemailer is Package or external Module so we need to install first then import
+const { readlink } = require('fs');
 const nodemailer = require('nodemailer');
+const { stdout } = require('process');
+const readLine = require('readline');
 
 // NodeMailer is Work on Asynchrnous so we write async before
-async function sendMail(sender, receiver){
+async function sendMail(receiverEmail){
     /* 1. Create an Email Transporter
         Using Protocol SMTP (Simple Mail Transfer Protocol), to send mail
     */
@@ -18,8 +21,8 @@ async function sendMail(sender, receiver){
             use google's gmail service so we write
         */
         service : 'gmail',              
-        auth : {                        // Define Which User You Want to Send Email
-            user : sender,            // Define User Email Address Where From You Want to send Email
+        auth : {                                // Define Which User You Want to Send Email
+            user : 'shaan.ansari1901@gmail.com',            // Define User Email Address Where From You Want to send Email
             /* 
                 This is not login password this password is given by service 
                 provider gmail to us in 2 factor authentication Section 
@@ -36,8 +39,8 @@ async function sendMail(sender, receiver){
     */
     // 2. Configure Email Content
     const mailOptions = {                   // Object Which Contains all details from to bcc cc and content of email
-        from : sender,            // Sender Email(Email Which You Want to send mails)
-        to : receiver,                // Receiver Email (Email Where you Receive Emails)
+        from : 'shaan.ansari1901@gmail.com',            // Sender Email(Email Which You Want to send mails)
+        to : receiverEmail,                // Receiver Email (Email Where you Receive EmailEmails)
         subject : 'Email Send From NodeJS',
         text : 
         `
@@ -57,10 +60,18 @@ async function sendMail(sender, receiver){
     try {
         // Because asynchronous operation we want to wait until mail is sent or not
         const result = await transporter.sendMail(mailOptions);            
-        console.log(`Email Sent Successfully to ${receiver} `);
+        console.log(`Email Sent Successfully to ${receiverEmail} `);
     } catch (error) {
         console.log(`Error : ${error}`);
     }
 }
 
-sendMail('shaan.ansari1901@gmail.com','sahilhussain395@gmail.com');
+const interface = readLine.createInterface({
+    input : process.stdin,
+    output : stdout,
+})
+
+interface.question('Enter Receiver Email : ',function(email){
+    sendMail(email);
+    interface.close();
+})
