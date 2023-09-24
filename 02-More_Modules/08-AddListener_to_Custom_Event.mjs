@@ -1,10 +1,7 @@
 // Import UserEvent Class
 import {UserEvents} from './08-Creating_Custom_Events.mjs'
 
-
 const userEvent = new UserEvents();                 // Created Object
-
-
 
 function saveIntoDatabase(){
     console.log("Post Save to Database");
