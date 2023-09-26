@@ -43,7 +43,6 @@ Which code snippet(s) demonstrate(s) the correct implementation of different typ
 of requests in an Express Server? ( Multiple )
 
 A)
-
 const express = require('express');
 const server = express();
 // Get Request
@@ -66,33 +65,68 @@ server.listen(3200, function(){console.log(`Server is Up and Run On Port 3200`)}
 
 B)
 import express from 'express'
-const server = express();
+const app = express();
 
-server.get('/',function(req, res, next){
+app.get('/',function(req, res, next){
     next();
 })
 
 // Get Request
-server.get('/',function(req, res){
+app.get('/',function(req, res){
     res.send('Get Request Receive');
 })
 // Post Request
-server.post('/',function(req, res){
+app.post('/',function(req, res){
     res.send('Post Request Receive');
 })
 // Put Request
-server.put('/',function(req, res){
+app.put('/',function(req, res){
     res.send('Put Request Receive');
 })
 // Delete Request
+app.delete('/',function(req, res){
+    res.send('Delete Request Receive');
+})
+app.listen(3200, function(){console.log(`Server is Up and Run On Port 3200`)});
+
+C)
+const express = require('express');
+const server = express();
+server.get('/',function(req, res){
+    res.send('Get Request Receive');
+})
+server.post('/',function(req, res){
+    res.send('Post Request Receive');
+})
+server.update('/',function(req, res){
+    res.send('Put Request Receive');
+})
 server.delete('/',function(req, res){
     res.send('Delete Request Receive');
 })
 server.listen(3200, function(){console.log(`Server is Up and Run On Port 3200`)});
 
-C)
-
 D)
+const express = require('express');
+const app = express();
+
+app.get('/',function(req, res, next){
+    next();
+})
+
+app.get('/',function(req, res){
+    res.send('Get Request Receive');
+})
+app.post('/',function(req, res){
+    res.send('Post Request Receive');
+})
+app.update('/',function(req, res){
+    res.send('Put Request Receive');
+})
+app.delete('/',function(req, res){
+    res.send('Delete Request Receive');
+})
+app.listen(3200, function(){console.log(`Server is Up and Run On Port 3200`)});
 
 
 1. A                                                    // Correct
