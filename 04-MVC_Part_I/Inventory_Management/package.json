@@ -1,0 +1,14 @@
+{
+  "name": "inventory_management",
+  "version": "1.0.0",
+  "description": "A Web Based Inventory Management Application Using MVC Pattern",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Shahnawaaz Ansari",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
