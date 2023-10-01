@@ -1,6 +1,6 @@
 import express from 'express'
 import path from 'path'
-import ProductsController from './src/controllers/product.controller.js';
+import ProductsController from './src/controllers/product.controller.js'
 const server = express();
 
 // Use MiddleWare to render Static Files on Views Folder
@@ -20,9 +20,9 @@ server.get('/',products.getProduct);
 */
 
 server.listen(3200,function(err){
-    if(err){{
+    if(err){
         console.log(`Error : ${err}`);
         return;
-    }}
+    }
     console.log(`Server is Up and Run on Port : 3200`);
 })
