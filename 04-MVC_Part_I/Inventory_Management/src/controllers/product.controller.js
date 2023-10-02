@@ -1,7 +1,6 @@
 /* Convension of Write Controller is by add .controller next after the name */
 import path from 'path'         // Import Using ES6 Module
 import ProductModel from '../models/product.model.js';
-import { log } from 'console';
 
 // Export Products Controller class Default
 export default class ProductsController{
@@ -18,6 +17,7 @@ export default class ProductsController{
             root to Inventory_Management Folder Path not the Path of Product.controller.js
         */
         let filePath = path.resolve(path.resolve('src','views','products.html'));
+        // Send File Function take Address of File in String Format
         res.sendFile(filePath);
     }
 }
