@@ -3,6 +3,10 @@ import path from 'path'
 import ProductsController from './src/controllers/product.controller.js'
 const server = express();
 
+// SetUp View Engine
+server.set('view engine','ejs');                    // Tell Express that ejs is our View Engine
+server.set('views',path.join('src','views'));       // Set Views to the to the folder where our All Views file like ejs, css, js Stores
+
 // Use MiddleWare to render Static Files on Views Folder
 server.use(express.static(path.join('src','views')));
 

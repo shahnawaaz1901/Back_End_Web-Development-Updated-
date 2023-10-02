@@ -12,7 +12,7 @@
       crossorigin="anonymous"
     />
 
-    <title>Products</title>
+    <title><%= title %></title>
   </head>
 
   <body>
@@ -57,16 +57,21 @@
         </thead>
         <tbody>
           <tr>
-            <th>1</th>
-            <td>Atomic Habits</td>
-            <td>A supremely practical and useful book.</td>
-            <td scope="col">300</td>
-            <td>
-              <img
-                src="https://m.media-amazon.com/images/I/51-nXsSRfZL._SX328_BO1,204,203,200_.jpg"
-              />
-            </td>
+            <!-- This Angular Bracket Represent that this is Beggining of Dynamic Content -->
+            <!--EJS Allows you to Use javascript into the HTML and Convert Js Content into the HTML Content-->
+            <% products.forEach((product)=>{ %>
+            <!-- 
+              We Not Write Equal sign because we Equal Sign Means we want to render 
+              it on Browser but We Didn't want to Render Loop Statement on Broswer
+            -->
+            <th><%= product.id %></th>
+            <td><%= product.name %></td>
+            <td><%= product.description %></td>
+            <td scope="col"><%= product.price %></td>
+            <td><img src="<%= product.imageURL %>"/></td>
           </tr>
+          <% }) %>
+          <!-- Not Require Multiple Rows Because We Use Only One Row and Put that one Row into the Loop
           <tr>
             <th>2</th>
             <td>Ikigai</td>
@@ -89,6 +94,7 @@
               />
             </td>
           </tr>
+           -->
         </tbody>
       </table>
     </div>
