@@ -1,6 +1,7 @@
 import express from 'express'
 import path from 'path'
 import ProductsController from './src/controllers/product.controller.js'
+import expressEjsLayouts from 'express-ejs-layouts';
 const server = express();
 
 // SetUp View Engine
@@ -10,6 +11,8 @@ server.set('views',path.join('src','views'));       // Set Views to the to the f
 // Use MiddleWare to render Static Files on Views Folder
 server.use(express.static(path.join('src','views')));
 
+// Use Layouts 
+server.use(expressEjsLayouts);
 // For Use a function which is Inside in Class we Need to Create Object of that Class
 let products = new ProductsController();
 
