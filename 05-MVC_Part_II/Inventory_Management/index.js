@@ -15,6 +15,8 @@ server.use(express.static(path.join('src','views')));
 // Use Layouts 
 server.use(expressEjsLayouts);
 
+// urlEncoded as Middleware to encoded the data into the urlEncoded
+server.use(express.urlencoded({extended : true}));
 // For Use a function which is Inside in Class we Need to Create Object of that Class
 let products = new ProductsController();
 

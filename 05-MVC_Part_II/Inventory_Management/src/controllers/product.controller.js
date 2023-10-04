@@ -19,8 +19,16 @@ export default class ProductsController{
     }
 
     addNewProducts(req, res){
-
-        console.log(req.body);
+        /* 
+            Data is Sent By Browser in Encoded format so req.body gives undefined for fix this
+            we need to decode the data using body parser
+        */
+        let product = req.body;
+        ProductModel.addProduct(product.name, product.desc,product.price,product.imageUrl);
+        /*
+            After Adding New Data Again Fetch the Products and Render it On Browser
+        */
+        products = ProductModel.getProducts();
         res.render('products',{
             title:'Products',
             products,
