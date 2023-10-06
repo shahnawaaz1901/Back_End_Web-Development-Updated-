@@ -38,7 +38,7 @@ export default class ProductsController{
             errors.push("Enter a Valid URL");
         }
         if(errors.length > 0){
-            return res.render('new-product',{errorMassage : errors[0],title : 'Add New Product'});
+            return res.render('new-product',{errorMassages : errors,title : 'Add New Product'});
         }
         ProductModel.addProduct(product.name, product.desc,product.price,product.imageUrl);
         /*
