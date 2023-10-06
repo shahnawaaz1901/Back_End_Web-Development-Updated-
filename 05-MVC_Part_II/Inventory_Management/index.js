@@ -2,7 +2,7 @@ import express from 'express'
 import path from 'path'
 import ProductsController from './src/controllers/product.controller.js'
 import expressEjsLayouts from 'express-ejs-layouts';
-import { connect } from 'http2';
+import validate from './src/middlewares/validate.middlware.js';
 const server = express();
 
 // SetUp View Engine
@@ -22,7 +22,7 @@ let products = new ProductsController();
 
 server.get('/',products.getProduct);
 server.get('/new-product',products.getAddProductForm);
-server.post('/',products.addNewProducts);
+server.post('/',validate, products.addNewProducts);
 server.listen(3200,function(err){
     if(err){
         console.log(`Error : ${err}`);

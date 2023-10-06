@@ -1,13 +1,15 @@
 <!-- views/add-product.ejs -->
 
 <h1 class="mt-5 mb-4">Add New Product</h1>
-<div class="alert alert-danger" role="alert">
-<% for(let error of errorMassages){ %>
-    <li>
-        <%= error %>
-    </li>
+<% if(errorMassages){%>
+    <div class="alert alert-danger" role="alert">
+    <% for(let error of errorMassages){ %>
+        <li>
+            <%= error %>
+        </li>
+    <%}%>
+    </div>
 <%}%>
-</div>
 <!---->
 <form action="/" method="post">
     <div class="mb-3">

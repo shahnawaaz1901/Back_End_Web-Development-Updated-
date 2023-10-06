@@ -15,15 +15,21 @@ export default class ProductsController{
     getAddProductForm(req, res){
         res.render('new-product',{
             title : 'Add New Product',
-            errorMassage: undefined,
+            errorMassages : null,
         });
     }
 
     addNewProducts(req, res){
+        const {name, desc, price, imageUrl} = req.body;
         /* 
+            This code voilet one reason for Change principle and not loosely coupled for 
+            Loosely coupled and we need to Seprate it in a Middleware for Only this post 
+            request not for all
+
             Data is Sent By Browser in Encoded format so req.body gives undefined for fix this
             we need to decode the data using body parser
         */
+        /*
         let product = req.body;
         let errors = [];
         if(!product.name || product.name.trim() == ''){
@@ -40,7 +46,8 @@ export default class ProductsController{
         if(errors.length > 0){
             return res.render('new-product',{errorMassages : errors,title : 'Add New Product'});
         }
-        ProductModel.addProduct(product.name, product.desc,product.price,product.imageUrl);
+        */
+        ProductModel.addProduct(name,desc,price,imageUrl);
         /*
             After Adding New Data Again Fetch the Products and Render it On Browser
         */
