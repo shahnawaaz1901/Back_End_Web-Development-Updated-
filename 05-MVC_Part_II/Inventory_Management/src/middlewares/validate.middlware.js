@@ -20,7 +20,7 @@ const validateRequest = async (req, res, next) => {
   const Rules = [
     body("name").notEmpty().withMessage("Name is Required !"), // Check Name is Empty or Not
     body("price").isFloat({ gt: 0 }).withMessage("Price is Invalid"), // Check Number is Greater then 0 or not
-    body("imageURL").isEmpty().withMessage("URL is Not Valid"), // Check URL is Valid or Not
+    body("imageURL").notEmpty().withMessage("URL is Not Valid"), // Check URL is Valid or Not
   ];
 
   //3.Run Every Rule on Request for Error.Validation can be asynchronous Operation that's why async await

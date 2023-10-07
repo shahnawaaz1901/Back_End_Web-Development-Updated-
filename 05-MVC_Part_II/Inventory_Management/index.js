@@ -22,6 +22,7 @@ let products = new ProductsController();
 
 server.get('/',products.getProduct);
 server.get('/new-product',products.getAddProductForm);
+server.get('/update-product',products.getUpdateProductView);
 server.post('/',validate, products.addNewProducts);
 server.listen(3200,function(err){
     if(err){

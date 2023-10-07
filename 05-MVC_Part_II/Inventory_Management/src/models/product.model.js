@@ -13,6 +13,9 @@ export default class ProductModel {
     let newProduct = new ProductModel(products.length + 1,name, description, price,  imageURL);
     products.push(newProduct);
   }
+  static getById(id){
+    return products.findIndex((everyProduct)=> everyProduct.id == id);
+  }
 }
 
 var products = [
