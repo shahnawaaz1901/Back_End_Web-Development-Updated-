@@ -1,4 +1,5 @@
 export default class ProductModel {
+  //** Constructor
   constructor(_id, _name, _description, _price, _imageURL) {
     this.id = _id;
     this.name = _name;
@@ -6,18 +7,25 @@ export default class ProductModel {
     this.price = _price;
     this.imageURL = _imageURL;
   }
+
+  // *? Get Product Array
   static getProducts() {
     return products;
   }
+  
+  // *? Add New Product in the Product Array
   static addProduct(name,description, price, imageURL ){
     let newProduct = new ProductModel(products.length + 1,name, description, price,  imageURL);
     products.push(newProduct);
   }
+
+  // *? Get the Product By Id
   static getById(id){
     return products.findIndex((everyProduct)=> everyProduct.id == id);
   }
 }
 
+// **Product Array
 var products = [
   new ProductModel(
     1,
