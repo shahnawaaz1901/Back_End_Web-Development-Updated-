@@ -61,14 +61,13 @@ export default class ProductsController{
 
     getUpdateProductView(req, res , next){
         // Check Whether id is Present or Not
-        let { id } = req.body;
-        console.log(id);
-        const productFound = ProductModel.getById(id);
-        if(productFound != -1){
+        let id = req.params.id;
+        const productIndex = ProductModel.getById(id);
+        let productArray = ProductModel.getProducts();
+        if(productIndex != -1){
             res.status(202).render('update-product',{
                 title:'Update Product',
-                product : ProductModel.getProducts(),
-                productIndex : productFound,
+                product : productArray[productIndex],
                 errorMassages : null,
             })
             
@@ -77,6 +76,13 @@ export default class ProductsController{
         else{
             res.status(401).send('Product Not Found');
         }
+    }
+    postUpdateProduct(req, res){
+        ProductModel.update(req.body);
+        res.render('products',{
+            title:'Products',
+            products : ProductModel.getProducts(),
+        })
     }
 
 }

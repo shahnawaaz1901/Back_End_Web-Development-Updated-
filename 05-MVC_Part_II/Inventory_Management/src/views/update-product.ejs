@@ -9,17 +9,16 @@
     </div>
 <%}%>
 <!---->
-<%let product = product[productIndex]%>
-<form action="/" method="post">
-    <input type="text" class="form-control" id="name" name="name" value="<%= product.id %>" disabled />
-
+<form action="/update-product" method="post">
+    <input type="text" class="form-control" id="name" name="id" value="<%= product.id %>" hidden/>          <!-- For Receive the ID to Controller -->
+    <input type="text" class="form-control" id="name" name="id" value="<%= product.id %>" disabled/>        <!-- For Render the ID at the User End -->
     <div class="mb-3">
         <label for="name" class="form-label">Product Name</label>
         <input type="text" class="form-control" id="name" name="name" value="<%= product.name %>">
     </div>
     <div class="mb-3">
         <label for="desc" class="form-label">Product Description</label>
-        <textarea class="form-control" id="desc" name="desc" rows="3" value="<%= product.description %>" ></textarea>
+        <textarea class="form-control" id="desc" name="description" rows="3"><%= product.description %></textarea>
     </div>
     <div class="mb-3">
         <label for="price" class="form-label">Price</label>
@@ -27,7 +26,7 @@
     </div>
     <div class="mb-3">
         <label for="imageUrl" class="form-label">Image URL</label>
-        <input type="text" class="form-control" id="imageUrl" name="imageUrl" value="<%= product.imageURL %>">
+        <input type="text" class="form-control" id="imageUrl" name="imageURL" value="<%= product.imageURL %>">
     </div>
     <button type="submit" class="btn btn-primary">Add Product</button>
 </form>

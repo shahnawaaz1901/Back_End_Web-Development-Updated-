@@ -24,7 +24,12 @@ let products = new ProductsController();
 //* Setup the Router 
 server.get('/',products.getProduct);
 server.get('/new-product',products.getAddProductForm);
-server.get('/update-product',products.getUpdateProductView);
+/*
+    If You Want to Pass Parameters with the url You can use params
+    by writing colon and after the colon name of the parameter
+*/
+server.get('/update-product/:id',products.getUpdateProductView);
+server.post('/update-product',products.postUpdateProduct);
 server.post('/',validate, products.addNewProducts);
 
 //? Listen the Server at PORT 3200
