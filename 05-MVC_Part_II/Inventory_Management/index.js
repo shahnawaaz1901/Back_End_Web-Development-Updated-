@@ -30,6 +30,7 @@ server.get('/new-product',products.getAddProductForm);
 */
 server.get('/update-product/:id',products.getUpdateProductView);
 server.post('/update-product',products.postUpdateProduct);
+server.get('/delete-product/:id',products.deleteProduct);
 server.post('/',validate, products.addNewProducts);
 
 //? Listen the Server at PORT 3200

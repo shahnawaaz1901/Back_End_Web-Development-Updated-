@@ -77,6 +77,7 @@ export default class ProductsController{
             res.status(401).send('Product Not Found');
         }
     }
+
     postUpdateProduct(req, res){
         ProductModel.update(req.body);
         res.render('products',{
@@ -85,4 +86,16 @@ export default class ProductsController{
         })
     }
 
+    deleteProduct(req, res){
+        let id = req.params.id;
+        let productFound = ProductModel.getById(id);
+        if(productFound == -1){
+            return res.status(401).send('Product Not Found');
+        }
+        ProductModel.delete(id);
+        res.render('products',{
+            products : ProductModel.getProducts(),
+            title : 'Products',
+        })
+    }
 }
