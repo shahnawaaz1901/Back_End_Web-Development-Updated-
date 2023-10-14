@@ -3,26 +3,28 @@ import path from "path";
 import ProductsController from "./src/controllers/product.controller.js";
 import expressEjsLayouts from "express-ejs-layouts";
 import validate from "./src/middlewares/validate.middlware.js";
-const server = express();
+import multer from 'multer';
 
-//* SetUp View Engine
+const server = express();
+// **MiddleWares**
+//? SetUp View Engine
 server.set("view engine", "ejs");
 server.set("views", path.join("src", "views"));
 
-//* Use MiddleWare express.static to Render the css and js file
+//? Use MiddleWare express.static to Render the css and js file
 server.use(express.static(path.join("src", "views")));
 server.use(express.static("public"));
 
-//* Use Layouts
+//? Use Layouts
 server.use(expressEjsLayouts);
 
-//* urlEncoded as Middleware to decode the data which browser sent from the user
+//? urlEncoded as Middleware to decode the data which browser sent from the user
 server.use(express.urlencoded({ extended: true }));
 
 //* For Use a function which is Inside in Class we Need to Create Object of that Class
 let products = new ProductsController();
 
-//* Setup the Router
+//* Setup the Routers
 server.get("/", products.getProduct);
 server.get("/new-product", products.getAddProductForm);
 server.get("/update-product/:id", products.getUpdateProductView);
