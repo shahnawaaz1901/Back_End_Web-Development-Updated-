@@ -9,11 +9,12 @@ const deleteProduct = (id) => {
         console.log(`/delete-product/${id}`);
         fetch(`/delete-product/${id}`,{
             method : "POST",
-        }).then((response)=>{
+        }).then((response)=>{           //! Fetch Function Returns Promise
             if(response.ok){
-                console.log('Inside Response !!');
+                // ?Reload the Page
+                window.alert("Deleted Successfully !!");
                 location.reload();
             }
-        })
+        }).catch(error=> location.reload());
     }
 }
