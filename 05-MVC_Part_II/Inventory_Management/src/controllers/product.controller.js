@@ -20,7 +20,7 @@ export default class ProductsController{
     }
 
     addNewProducts(req, res){
-        const {name, desc, price, imageUrl} = req.body;
+        const {name, desc, price, imageURL} = req.body;
         /* 
             This code voilet one reason for Change principle and not loosely coupled for 
             Loosely coupled and we need to Seprate it in a Middleware for Only this post 
@@ -47,7 +47,7 @@ export default class ProductsController{
             return res.render('new-product',{errorMassages : errors,title : 'Add New Product'});
         }
         */
-        ProductModel.addProduct(name,desc,price,imageUrl);
+        ProductModel.addProduct(name,desc,price,imageURL);
         /*
             After Adding New Data Again Fetch the Products and Render it On Browser
         */
@@ -88,6 +88,7 @@ export default class ProductsController{
 
     deleteProduct(req, res){
         let id = req.params.id;
+        console.log(id);
         let productFound = ProductModel.getById(id);
         if(productFound == -1){
             return res.status(401).send('Product Not Found');
