@@ -19,7 +19,7 @@
             <td scope="col"><%= product.price %></td>
             <td><img src="<%= product.imageURL %>"/></td>
             <td><a href="/update-product/<%= product.id %>" class="btn btn-warning mt-3">Update</a> </td>
-            <td><a href="/delete-product/<%= product.id %>" class="btn btn-danger mt-3">Delete</a></td>
+            <td><button class="btn btn-danger mt-3" onclick='deleteProduct("<%= product.id %>")'>Delete</button></td>
           </tr>
           <% }) %>
         </tbody>
