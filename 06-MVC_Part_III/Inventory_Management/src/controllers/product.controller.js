@@ -20,7 +20,9 @@ export default class ProductsController {
   }
 
   addNewProducts(req, res) {
-    const { name, desc, price, imageURL } = req.body;
+    const { name, desc, price} = req.body;                          //*Extract three values from body
+    console.log(req.file);
+    const imageURL = path.join("images",req.file.filename);         //*Extract Image name from file Object
     ProductModel.addProduct(name, desc, price, imageURL);
     products = ProductModel.getProducts();
     res.render("products", {

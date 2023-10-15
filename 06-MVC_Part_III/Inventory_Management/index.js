@@ -34,8 +34,9 @@ server.post("/delete-product/:id", products.deleteProduct);
 /* uploadFile is Object where single stores the uploaded image URL of User*/
 server.post(
   "/",
-  validate,
+  /* for Validation first we Need to Receive the file and After Receiving Validation Process Completed */
   uploadFile.single("imageURL"),
+  validate,
   products.addNewProducts
 );
 
