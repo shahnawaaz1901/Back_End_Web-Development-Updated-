@@ -2,7 +2,6 @@
 import { body, validationResult } from "express-validator";
 
 const validateRequest = async (req, res, next) => {
-  console.log(req.body);
   //2.Create rules
   const rules = [
     body("name").notEmpty().withMessage("Name is required"),
@@ -10,10 +9,18 @@ const validateRequest = async (req, res, next) => {
       .isFloat({ gt: 0 })
       .withMessage(
         "Price should be a positive value"
-      ) /*,      Comment the Validation of URL for Some time soon will be validate
-    body('imageURL')
-      .isURL()
-      .withMessage('URL is Invalid'),*/,
+      ),
+      /*  No Inbuilt Validator Exist to Validate the Image But We Using 
+          Express Validator We Can Create Custom Validator.
+          Custom Validator takes two Arguments value and req object
+      */
+    body('imageURL').custom((value, {req}) => {
+      if(!req.file){    // If req.file not exist then we enter in if Condition
+        throw new Error("Image is required !");
+      }
+      return true;
+    })
+      
   ];
 
   //3.Run Every Rule on Request for Error.Validation can be asynchronous Operation that's why async await
