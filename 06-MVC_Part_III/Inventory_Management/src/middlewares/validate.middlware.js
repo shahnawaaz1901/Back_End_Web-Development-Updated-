@@ -5,21 +5,19 @@ const validateRequest = async (req, res, next) => {
   console.log(req.body);
   //2.Create rules
   const rules = [
-    body('name')
-      .notEmpty()
-      .withMessage('Name is required'),
-    body('price')
+    body("name").notEmpty().withMessage("Name is required"),
+    body("price")
       .isFloat({ gt: 0 })
       .withMessage(
-        'Price should be a positive value'
-      ),
+        "Price should be a positive value"
+      ) /*,      Comment the Validation of URL for Some time soon will be validate
     body('imageURL')
       .isURL()
-      .withMessage('URL is Invalid'),
+      .withMessage('URL is Invalid'),*/,
   ];
 
   //3.Run Every Rule on Request for Error.Validation can be asynchronous Operation that's why async await
-  await Promise.all(rules.map((rule) => rule.run(req)));          // Run Rule for Request Which is Received
+  await Promise.all(rules.map((rule) => rule.run(req))); // Run Rule for Request Which is Received
 
   //4.Check Error is Found or Not for request
   let errors = validationResult(req).array();

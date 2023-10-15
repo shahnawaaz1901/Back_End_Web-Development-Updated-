@@ -1,5 +1,5 @@
 import multer from "multer";
-import path from 'path'
+import path from "path";
 /*
  For Configure the Multure :
  * We Need to Specify Two Things : 
@@ -11,18 +11,18 @@ import path from 'path'
 /* In Configure we Need to Specify two things in Object destination and filename */
 /* Both Filename and Destination is function takes three Arguments request, file and Callback respectively */
 const storageConfig = multer.diskStorage({
+  /* Destination Defines location where User Upload File is Stores */
+  destination: (req, file, cb) => {
+    cb(err, path.resolve("public", "images"));
+  },
 
-    /* Destination Defines location where User Upload File is Stores */
-    destination: (req, file, cb) => {
-        cb(err,path.resolve('public','images'));
-    },
-    
-    /* Filename Defines Name of the file which used to store file with that name */
-    filename: (req, file, cb) => {
-        /* file.originalname is original name of file in client local machine */
-        const name = Date.now() + '-' + file.originalname;
-        cb(err,name);
-    }
-})
+  /* Filename Defines Name of the file which used to store file with that name */
+  filename: (req, file, cb) => {
+    /* file.originalname is original name of file in client local machine */
+    const name = Date.now() + "-" + file.originalname;
+    cb(err, name);
+  },
+});
 
-export const uploadFile = multer({storage : storageConfig});
+const uploadFile = multer({ storage: storageConfig });
+export default uploadFile;

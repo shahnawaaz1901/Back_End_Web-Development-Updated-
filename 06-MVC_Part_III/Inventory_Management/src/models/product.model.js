@@ -12,26 +12,34 @@ export default class ProductModel {
   static getProducts() {
     return products;
   }
-  
+
   // *? Add New Product in the Product Array
-  static addProduct(name,description, price, imageURL ){
-    let newProduct = new ProductModel(products.length + 1,name, description, price,  imageURL);
+  static addProduct(name, description, price, imageURL) {
+    let newProduct = new ProductModel(
+      products.length + 1,
+      name,
+      description,
+      price,
+      imageURL
+    );
     products.push(newProduct);
   }
 
   // *? Get the Product By Id
-  static getById(id){
-    return products.findIndex((everyProduct)=> everyProduct.id == id);
+  static getById(id) {
+    return products.findIndex((everyProduct) => everyProduct.id == id);
   }
 
-  static update(productObject){
-    const productIndex = this.getProducts().findIndex((p)=> productObject.id == p.id);
+  static update(productObject) {
+    const productIndex = this.getProducts().findIndex(
+      (p) => productObject.id == p.id
+    );
     products[productIndex] = productObject;
   }
 
-  static delete(id){
-    const productIndex = products.findIndex((p)=> p.id == id);
-    products.splice(productIndex,1);
+  static delete(id) {
+    const productIndex = products.findIndex((p) => p.id == id);
+    products.splice(productIndex, 1);
   }
 }
 

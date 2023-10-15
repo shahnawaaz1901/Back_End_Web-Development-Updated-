@@ -3,7 +3,7 @@ import path from "path";
 import ProductsController from "./src/controllers/product.controller.js";
 import expressEjsLayouts from "express-ejs-layouts";
 import validate from "./src/middlewares/validate.middlware.js";
-import { uploadFile } from "./src/middlewares/file-upload.middleware.js";
+import uploadFile from "./src/middlewares/file-upload.middleware.js";
 import multer from "multer";
 
 const server = express();
@@ -32,8 +32,12 @@ server.get("/update-product/:id", products.getUpdateProductView);
 server.post("/update-product", products.postUpdateProduct);
 server.post("/delete-product/:id", products.deleteProduct);
 /* uploadFile is Object where single stores the uploaded image URL of User*/
-server.post("/", validate, uploadFile.single('imageURL'), products.addNewProducts);
-
+server.post(
+  "/",
+  validate,
+  uploadFile.single("imageURL"),
+  products.addNewProducts
+);
 
 // *Listen the Server at PORT 3200
 server.listen(3200, function (err) {
