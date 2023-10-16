@@ -5,6 +5,7 @@ import UserController from "./src/controllers/user.controller.js";
 import expressEjsLayouts from "express-ejs-layouts";
 import validate from "./src/middlewares/validate.middlware.js";
 import uploadFile from "./src/middlewares/file-upload.middleware.js";
+import session from "express-session";
 
 const server = express();
 // **MiddleWares**
@@ -16,11 +17,19 @@ server.set("views", path.join("src", "views"));
 server.use(express.static(path.join("src", "views")));
 server.use(express.static("public"));
 
+//? Use Sessioons
+server.use(session({
+  secret : 'SecretKey',
+  resave : false,
+  saveUninitialized : true,
+  cookie: { secure:false }      //*if secure is true then it means used https protocol otherwise use http in false condition
+}))
+
+
 //? Use Layouts
 server.use(expressEjsLayouts);
 
 //? urlEncoded as Middleware to decode the data which browser sent from the user
-server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
 //* For Use a function which is Inside in Class we Need to Create Object of that Class

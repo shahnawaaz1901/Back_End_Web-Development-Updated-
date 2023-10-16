@@ -27,19 +27,18 @@ export default class UserController {
 
   userLogin(req, res) {
     const { email, password } = req.body;
-    console.log(email, password);
     let validUser = UserModel.isValidUser(email, password);
     if (!validUser) {
       console.log("Inside validUser Undefined !!");
-      res.render("login", {
+      return res.render("login", {
         title: "login",
         errorMessages: "Invalid Credentials..",
       });
-    }else{
-        res.render("products", {
-            title: "Products",
-            products : ProductModel.getProducts()
-        });
     }
+    req.session.userEmail = email;        //*Send sessionId to the Client in the form of Cookie
+    res.render("products", {
+        title: "Products",
+        products : ProductModel.getProducts()
+    });
   }
 }
