@@ -9,15 +9,15 @@ export default class UserModel{
 
     static addUser(name, email, password){
         usersDetails.push(new UserModel(usersDetails.length + 1,name, email, password));
+        console.log(usersDetails);
     }
 
     static isValidUser(email, password){
-        console.log(email, password);
         let result = usersDetails.find((user) => console.log(user));
-        console.log(usersDetails);
-        console.log("inside Valid User Function", result);
+        console.log("Inside isValidUser Function !!");
         return result;
     }
 }
 
 var usersDetails = [];
+usersDetails.push(new UserModel(usersDetails.length + 1,"Shahnawaaz Ansari","shaan.ansari1901@gmail.com", "A5FFC976"))

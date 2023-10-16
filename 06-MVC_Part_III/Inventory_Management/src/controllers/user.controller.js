@@ -16,7 +16,6 @@ export default class UserController {
   }
 
   newUserRagistration(req, res) {
-    console.log(req.body);
     if (req.body.password != req.body.confirmPassword) {
       return res.send("Password Should be Matched !!");
     }
@@ -29,8 +28,8 @@ export default class UserController {
   }
 
   userLogin(req, res) {
-    console.log(req.body);
     const { email, password } = req.body;
+    console.log(email, password);
     let validUser = UserModel.isValidUser(email, password);
     if (!validUser) {
       res.render("login", {

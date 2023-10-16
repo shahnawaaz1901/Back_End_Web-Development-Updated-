@@ -1,11 +1,10 @@
 import express from "express";
 import path from "path";
 import ProductsController from "./src/controllers/product.controller.js";
+import UserController from "./src/controllers/user.controller.js";
 import expressEjsLayouts from "express-ejs-layouts";
 import validate from "./src/middlewares/validate.middlware.js";
 import uploadFile from "./src/middlewares/file-upload.middleware.js";
-import UserController from "./src/controllers/user.controller.js";
-import multer from "multer";
 
 const server = express();
 // **MiddleWares**
@@ -21,6 +20,7 @@ server.use(express.static("public"));
 server.use(expressEjsLayouts);
 
 //? urlEncoded as Middleware to decode the data which browser sent from the user
+server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
 //* For Use a function which is Inside in Class we Need to Create Object of that Class
@@ -29,8 +29,8 @@ let users = new UserController();
 //* Setup the Routers
 server.get("/ragister",users.getRagister);
 server.get("/login",users.getLogin);
-server.post("/ragister",users.newUserRagistration);
 server.post("/login",users.userLogin);
+server.post("/ragister",users.newUserRagistration);
 server.get("/", products.getProduct);
 server.get("/new-product", products.getAddProductForm);
 server.get("/update-product/:id", products.getUpdateProductView);
