@@ -6,6 +6,7 @@ import expressEjsLayouts from "express-ejs-layouts";
 import validate from "./src/middlewares/validate.middlware.js";
 import uploadFile from "./src/middlewares/file-upload.middleware.js";
 import session from "express-session";
+import { auth } from "./src/middlewares/auth.middleware.js";
 
 const server = express();
 // **MiddleWares**
@@ -40,11 +41,12 @@ server.get("/ragister",users.getRagister);
 server.get("/login",users.getLogin);
 server.post("/login",users.userLogin);
 server.post("/ragister",users.newUserRagistration);
-server.get("/", products.getProduct);
-server.get("/new-product", products.getAddProductForm);
-server.get("/update-product/:id", products.getUpdateProductView);
-server.post("/update-product", products.postUpdateProduct);
-server.post("/delete-product/:id", products.deleteProduct);
+//*Add middleware to verify that user is loggedin or Not
+server.get("/", auth, products.getProduct);
+server.get("/new-product",auth, products.getAddProductForm);
+server.get("/update-product/:id",auth, products.getUpdateProductView);
+server.post("/update-product",auth, products.postUpdateProduct);
+server.post("/delete-product/:id",auth, products.deleteProduct);
 /* uploadFile is Object where single stores the uploaded image URL of User*/
 server.post(
   "/",
