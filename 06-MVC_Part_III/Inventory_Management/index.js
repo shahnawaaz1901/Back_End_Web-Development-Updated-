@@ -28,6 +28,9 @@ let products = new ProductsController();
 let users = new UserController();
 //* Setup the Routers
 server.get("/ragister",users.getRagister);
+server.get("/login",users.getLogin);
+server.post("/ragister",users.newUserRagistration);
+server.post("/login",users.userLogin);
 server.get("/", products.getProduct);
 server.get("/new-product", products.getAddProductForm);
 server.get("/update-product/:id", products.getUpdateProductView);
