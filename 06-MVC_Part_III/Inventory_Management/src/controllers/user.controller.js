@@ -16,9 +16,7 @@ export default class UserController {
   }
 
   newUserRagistration(req, res) {
-    if (req.body.password != req.body.confirmPassword) {
-      return res.send("Password Should be Matched !!");
-    }
+    console.log(req.body);
     const { name, email, password } = req.body;
     UserModel.addUser(name, email, password);
     res.render("login", {
@@ -32,12 +30,13 @@ export default class UserController {
     console.log(email, password);
     let validUser = UserModel.isValidUser(email, password);
     if (!validUser) {
+      console.log("Inside validUser Undefined !!");
       res.render("login", {
         title: "login",
         errorMessages: "Invalid Credentials..",
       });
     }else{
-        res.render("/", {
+        res.render("products", {
             title: "Products",
             products : ProductModel.getProducts()
         });
