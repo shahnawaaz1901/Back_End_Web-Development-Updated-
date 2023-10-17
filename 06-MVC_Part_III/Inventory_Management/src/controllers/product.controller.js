@@ -9,6 +9,7 @@ export default class ProductsController {
     res.render("products", {
       title: "Products Page",
       products, // Send the products array along with file
+      userEmail : req.session.userEmail
     });
   }
 
@@ -16,6 +17,7 @@ export default class ProductsController {
     res.render("new-product", {
       title: "Add New Product",
       errorMassages: null,
+      userEmail : req.session.userEmail
     });
   }
 
@@ -28,6 +30,7 @@ export default class ProductsController {
     res.render("products", {
       title: "Products",
       products,
+      userEmail : req.session.userEmail
     });
   }
 
@@ -41,6 +44,7 @@ export default class ProductsController {
         title: "Update Product",
         product: productArray[productIndex],
         errorMassages: null,
+        userEmail : req.session.userEmail
       });
     }
     // *!If Product Not Found
@@ -54,6 +58,7 @@ export default class ProductsController {
     res.render("products", {
       title: "Products",
       products: ProductModel.getProducts(),
+      userEmail : req.session.userEmail
     });
   }
 
@@ -68,6 +73,7 @@ export default class ProductsController {
     res.render("products", {
       products: ProductModel.getProducts(),
       title: "Products",
+      userEmail : req.session.userEmail
     });
   }
 }

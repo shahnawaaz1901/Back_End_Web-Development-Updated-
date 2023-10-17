@@ -41,12 +41,14 @@ server.get("/ragister",users.getRagister);
 server.get("/login",users.getLogin);
 server.post("/login",users.userLogin);
 server.post("/ragister",users.newUserRagistration);
+server.get("/logout",users.userLogOut);
 //*Add middleware to verify that user is loggedin or Not
 server.get("/", auth, products.getProduct);
 server.get("/new-product",auth, products.getAddProductForm);
 server.get("/update-product/:id",auth, products.getUpdateProductView);
 server.post("/update-product",auth, products.postUpdateProduct);
 server.post("/delete-product/:id",auth, products.deleteProduct);
+
 /* uploadFile is Object where single stores the uploaded image URL of User*/
 server.post(
   "/",

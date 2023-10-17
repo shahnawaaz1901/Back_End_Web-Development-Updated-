@@ -38,7 +38,21 @@ export default class UserController {
     req.session.userEmail = email;        //*Send sessionId to the Client in the form of Cookie
     res.render("products", {
         title: "Products",
-        products : ProductModel.getProducts()
+        products : ProductModel.getProducts(),
+        userEmail : req.session.userEmail,
     });
   }
+
+  userLogOut(req, res){
+    //* On Logout We Need to Destroy Session
+    req.session.destroy((err)=>{
+      if(err){
+        console.log(err);
+        return;
+      }
+      res.redirect('/');
+    })
+  }
+
+
 }

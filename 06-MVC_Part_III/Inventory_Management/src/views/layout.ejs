@@ -41,16 +41,25 @@
             </li>
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/new-product"
-                >New Products</a>
+                >New Products</a
+              >
             </li>
+            <% if(locals.userEmail){%>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/login"
-              >Login</a>
+              <a class="nav-link active" aria-current="page" href="/logout"
+                >Logout</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/ragister"
-                >Ragister</a>
-            </li>
+            <%}else{%>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/login"
+                  >Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/ragister"
+                  >Ragister</a
+                >
+              </li>
+              <%}%>
           </ul>
         </div>
       </div>
