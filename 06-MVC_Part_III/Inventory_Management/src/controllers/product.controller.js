@@ -54,7 +54,16 @@ export default class ProductsController {
   }
 
   postUpdateProduct(req, res) {
-    ProductModel.update(req.body);
+    const {name, description, price} = req.body;
+    const imageURL = path.join("images",req.file.filename);
+    const updateProduct = {
+      id:req.body.id,
+      name,
+      description,
+      price,
+      imageURL
+    }
+    ProductModel.update(updateProduct);
     res.render("products", {
       title: "Products",
       products: ProductModel.getProducts(),
