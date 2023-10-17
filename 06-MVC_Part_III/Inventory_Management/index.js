@@ -7,6 +7,8 @@ import validate from "./src/middlewares/validate.middlware.js";
 import uploadFile from "./src/middlewares/file-upload.middleware.js";
 import session from "express-session";
 import { auth } from "./src/middlewares/auth.middleware.js";
+import cookieParser from "cookie-parser";
+import { lastVisit } from "./src/middlewares/last-visit.middleware.js";
 
 const server = express();
 // **MiddleWares**
@@ -25,6 +27,10 @@ server.use(session({
   saveUninitialized : true,
   cookie: { secure:false }      //*if secure is true then it means used https protocol otherwise use http in false condition
 }))
+
+//?Use Cookie Parser
+server.use(cookieParser());
+server.use(lastVisit);
 
 
 //? Use Layouts
