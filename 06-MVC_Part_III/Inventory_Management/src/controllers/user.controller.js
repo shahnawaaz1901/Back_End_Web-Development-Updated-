@@ -50,6 +50,7 @@ export default class UserController {
         console.log(err);
         return;
       }
+      res.clearCookie('lastVisit');
       res.redirect('/');
     })
   }
