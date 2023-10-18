@@ -14,7 +14,7 @@
   </head>
   <body>
     <nav
-      class="navbar navbar-expand-lg bg-transparent border-bottom border-body shadow-lg"
+      class="navbar navbar-expand-lg bg-transparent border-bottom"
       data-bs-theme="dark"
     >
       <div class="container-fluid">
@@ -48,15 +48,23 @@
               >
                 Recruiter
               </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/login">Login</a></li>
-                <li><a class="dropdown-item" href="/ragister">Ragister</a></li>
+              <ul class="dropdown-menu bg-light">
+                <li>
+                  <a class="dropdown-item text-dark border-bottom" href="/login"
+                    >Login</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item text-dark" href="/ragister"
+                    >Ragister</a
+                  >
+                </li>
               </ul>
             </li>
           </ul>
           <form class="d-flex" role="search">
             <input
-              class="form-control me-2"
+              class="form-control me-2 bg-transparent"
               type="search"
               placeholder="Search"
               aria-label="Search"
@@ -71,9 +79,104 @@
     <body class="container-fluid">
       <div class="row">
         <div class="col-7 p75px ms-4 text-space">
-          <h1 class="heading">A comprehensive platform for reliable</h1>
-          <h2 class="text-light">Job Opportunity and Internships.</h2>
-          <h4 class="text-light">Get Discovered Get Hired</h4>
+          <h1 class="light-pink">A comprehensive platform for reliable</h1>
+          <h2 class="text-light mt-4">Job Opportunity and Internships.</h2>
+          <h5 class="text-light mt-3">Get Discovered Get Hired.</h5>
+          <div class="buttons mt-3">
+            <a href="/jobs"
+              ><button
+                type="button"
+                class="btn btn-primary btn-lg bg-light-pink p-2 ps-3 pe-3 m-3"
+              >
+                I'm A Job Seeker
+              </button></a
+            >
+            <button
+              type="button"
+              class="btn btn-primary btn-lg bg-light-pink p-2 ps-3 pe-3"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              I'm A Recruiter
+            </button>
+            <!-- Modal -->
+            <div
+              class="modal fade"
+              id="exampleModal"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                      Experience Easily !!
+                    </h1>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row g-3 align-items-center">
+                      <div class="col-auto">
+                        <label for="name" class="col-form-label">Name : </label>
+                      </div>
+                      <div class="col-auto">
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          class="form-control"
+                          aria-describedby="passwordHelpInline"
+                        />
+                      </div>
+                      <div class="col-auto">
+                        <label for="email" class="col-form-label"
+                          >Email :
+                        </label>
+                      </div>
+                      <div class="col-auto">
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          class="form-control"
+                          aria-describedby="passwordHelpInline"
+                        />
+                      </div>
+                      <div class="col-auto">
+                        <label for="inputPassword6" class="col-form-label"
+                          >Password</label
+                        >
+                      </div>
+                      <div class="col-auto">
+                        <input
+                          type="password"
+                          id="inputPassword6"
+                          class="form-control"
+                          aria-describedby="passwordHelpInline"
+                        />
+                      </div>
+                    </div>
+                    <button type="button" class="btn btn-primary bg-light-pink mt-4">
+                      Ragister
+                    </button>
+                  </div>
+                  <div class="modal-footer">
+                    <span>Already Ragistered.?</span>
+                    <a href="/login">
+                      <button class="btn btn-outline-success" type="submit">
+                      Login
+                    </button></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="col-4">
           <figure class="figure-img">

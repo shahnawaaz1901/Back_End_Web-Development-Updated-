@@ -1,17 +1,29 @@
+:root{
+    --lightPink : rgb(255,44,144);
+}
 body{
     background-color: rgb(24,22,66);
     font-family: sans-serif;
     font-weight: 100 !important;
 }
 
-.heading{
-    color: rgb(255,44,144);
+.light-pink{
+    color:var(--lightPink);
+}
+
+.bg-light-pink{
+    background-color: var(--lightPink) !important;
 }
 
 .p75px{
-    padding: 150px 100px;
+    padding: 130px 90px;
 }
 
 .text-space{
     letter-spacing: 2px !important;
+}
+
+.dropdown-item:hover{
+    color: black !important;
+    background-color: white !important;
 }
