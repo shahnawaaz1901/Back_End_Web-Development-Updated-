@@ -25,6 +25,7 @@ const jobController = new JobController();
 const userController = new UserController();
 //* Setup Routers
 app.get("/",jobController.getHomePage);
+app.get("/jobs",jobController.getJobPage);
 app.get("/login",userController.getLogin);
 app.listen(3200,function(err){
     if(err){
