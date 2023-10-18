@@ -1,3 +1,17 @@
 body{
     background-color: rgb(24,22,66);
+    font-family: sans-serif;
+    font-weight: 100 !important;
+}
+
+.heading{
+    color: rgb(255,44,144);
+}
+
+.p75px{
+    padding: 150px 100px;
+}
+
+.text-space{
+    letter-spacing: 2px !important;
 }
