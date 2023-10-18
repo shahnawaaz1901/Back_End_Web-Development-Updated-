@@ -1,19 +1,24 @@
-//*Import Modules
+//* Import Modules
 import express from "express";
 import JobController from "./src/controllers/job.controller.js";
 import ejs from "ejs";
 import path from "path"
-//*Run the Server
+
+//* Run the Server
 const app = express();
 
-//*SetUp View Engine
+//* SetUp View Engine
 app.set("view engine","ejs");
 app.set("views",path.join("src","views"));
 
+//* Exposed Static Files
+app.use(express.static("public"));
 
-//*Create Instance
+
+//* Create Instance
 const jobController = new JobController();
-//*Setup Routers
+
+//* Setup Routers
 app.get("/",jobController.getHomePage);
 app.listen(3200,function(err){
     if(err){
