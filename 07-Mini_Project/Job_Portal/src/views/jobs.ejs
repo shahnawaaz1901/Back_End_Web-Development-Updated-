@@ -1,57 +1,44 @@
-<link rel="stylesheet" href="/css/jobs.css">
+<link rel="stylesheet" href="/css/jobs.css" />
 <main class="container">
-    <div class="row pt-3">
-        <div class="col-sm-4 mb-3 mb-sm-0 ">
-          <div class="card bg-transparent border-white">
-            <div class="card-header m-3 border border-success rounded text-white">
-              <span class="hiring-trend">Actively Hiring &nbsp;</span>
-              <span class="trend-icon text-success"><i class="fa-solid fa-arrow-trend-up"></i></span>
+  <% if(jobs.length > 0){%>
+  <div class="row pt-3">
+    <% for(let job of jobs){ %>
+    <div class="col-sm-6 col-md-4 mb-3">
+      <div class="card bg-transparent border-white">
+        <div class="card-header m-3 border border-success rounded text-white">
+          <span class="hiring-trend">Actively Hiring &nbsp;</span>
+          <span class="trend-icon text-success"
+            ><i class="fa-solid fa-arrow-trend-up"></i
+          ></span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title text-warning"><%= job.companyName %></h5>
+          <div class="card-text">
+            <div class="job-type">
+              <span class="type text-white"><%= job.jobType %></span>
+              <span class="post text-info"><%= job.post %></span>
             </div>
-            <div class="card-body">
-              <h5 class="card-title text-warning">Coding Ninjas</h5>
-              <div class="card-text">
-                <div class="job-type">
-                  <span class="type text-white">Tech</span>
-                  <span class="post text-info">SDE</span>
-                </div>
-                <div class="job-location text-white mt-3">
-                  <span><i class="fa-solid fa-location-dot">&nbsp;</i></span>
-                  <span>Gurgao HR IND Remote</span>
-                </div>
-                <div class="job-salary text-white">
-                  <span><i class="fa-solid fa-indian-rupee-sign">&nbsp;</i></span>
-                  <span>14 - 20 LPA</span>
-                </div>
-                <div class="skills mt-2 mb-2">
-                  <button type="button" class="btn btn-outline-info m-1">Angular</button>
-                  <button type="button" class="btn btn-outline-info m-1">React</button>
-                  <button type="button" class="btn btn-outline-info m-1">Node.Js</button>
-                  <button type="button" class="btn btn-outline-info m-1">ExpressJS</button>
-                  <button type="button" class="btn btn-outline-info m-1">MongoDB</button>
-                  <button type="button" class="btn btn-outline-info m-1">AWS</button>
-                </div>
-              </div>
-              <a href="#" class="btn btn-outline-success col-12">View Details</a>
+            <div class="job-location text-white mt-3">
+              <span><i class="fa-solid fa-location-dot">&nbsp;</i></span>
+              <span><%= job.location %></span>
             </div>
+            <div class="job-salary text-white">
+              <span><i class="fa-solid fa-indian-rupee-sign">&nbsp;</i></span>
+              <span><%= job.salaryRange %></span>
+            </div>
+            <div class="skills mt-2 mb-2">
+              <% for(let skill of job.skills){%>
+              <button type="button" class="btn btn-outline-info m-1">
+                <%= skill %>
+              </button>
+              <%}%>
+            </div>
+            <a href="/job/<%=job.id%>" class="btn btn-outline-success col-12">View Details</a>
           </div>
         </div>
-        <div class="col-sm-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-          </div>
       </div>
+    </div>
+    <%}%>
+  </div>
+  <%}%>
 </main>

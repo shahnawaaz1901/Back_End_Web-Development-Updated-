@@ -20,14 +20,14 @@ export default class JobModel {
     this.deadline = _deadline;
     this.numOpenings = _numOpenings;
   }
-  getJobData() {
+  static getJobData() {
     return jobDetails;
   }
 }
 
 var jobDetails = [
   new JobModel(
-    jobDetails.length + 1,
+    1,
     "Coding Ninjas",
     "Tech",
     "SDE",
@@ -38,7 +38,7 @@ var jobDetails = [
     5
   ),
   new JobModel(
-    jobDetails.length + 1,
+    2,
     "Go Digit",
     "Tech",
     "Angular Developer",
