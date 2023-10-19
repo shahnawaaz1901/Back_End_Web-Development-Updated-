@@ -1,9 +1,16 @@
 :root{
     --lightPink : rgb(255,44,144);
+    --darkBlue : rgb(24,22,66);
 }
+
 body{
-    background-color: rgb(24,22,66);
+    overflow-x: hidden;
     font-family: sans-serif;
+    background-color: var(--darkBlue);
+}
+
+header{
+    background-color: var(--darkBlue);
     font-weight: 100 !important;
 }
 
