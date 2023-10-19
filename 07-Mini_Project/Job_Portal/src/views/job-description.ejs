@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="css/job-description.css">
+<% if(job){%>
+<main class="container border border-secondary-subtle rounded mt-2">
+    <h1 class="job-description-header text-center">
+        <span class="job-post text-danger"><%= job.post %></span>
+        <span class="text-primary">Opportunity in </span>
+        <span class="job-location text-success"><%= job.location %></span>
+        <span class="text-primary">at</span><br/>
+        <span class="company text-info"><%= job.companyName %></span>
+    </h1>
+    <div class="main-description">
+        <h4 class="company-name m-3"><%= job.companyName %></h4>
+        <div class="job-type m-3">
+            <span class="type"><%= job.jobType %></span>
+            <span class="post"><%= job.post %> </span>
+        </div>
+        
+    </div>
+</main>
+<%}%>

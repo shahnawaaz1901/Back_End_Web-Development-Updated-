@@ -11,4 +11,13 @@ export default class JobController {
         jobs,
     });
   }
+
+  getJobDescription(req, res){
+    const id = req.params.id;
+    const jobData = JobModel.getJobById(id);
+    res.render('job-description',{
+      title : 'Job Description',
+      job : jobData,
+    })
+  }
 }

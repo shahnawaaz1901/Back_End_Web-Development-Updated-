@@ -23,6 +23,11 @@ export default class JobModel {
   static getJobData() {
     return jobDetails;
   }
+
+  static getJobById(id){
+    const jobData = jobDetails.find((job)=> job.id == id);
+    return jobData;
+  }
 }
 
 var jobDetails = [
