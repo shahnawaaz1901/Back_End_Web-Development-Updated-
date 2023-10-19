@@ -5,6 +5,7 @@ import UserController from "./src/controllers/user.controller.js";
 import expressEjsLayouts from "express-ejs-layouts";
 import ejs from "ejs";
 import path from "path"
+import exp from "constants";
 
 //* Run the Server
 const app = express();
@@ -18,7 +19,6 @@ app.use(expressEjsLayouts);
 
 //* Exposed Static Files
 app.use(express.static("public"));
-
 
 //* Create Instance
 const jobController = new JobController();

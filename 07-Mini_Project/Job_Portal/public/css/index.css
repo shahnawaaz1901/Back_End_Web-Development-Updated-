@@ -10,8 +10,8 @@ body{
 }
 
 header{
-    background-color: var(--darkBlue);
     font-weight: 100 !important;
+    background-color: var(--darkBlue);
 }
 
 .light-pink{

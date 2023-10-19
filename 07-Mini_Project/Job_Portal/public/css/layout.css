@@ -1,0 +1,7 @@
+:root{
+    --darkBlue : rgb(24,22,66);
+}
+
+header{
+    background-color: var(--darkBlue);
+}
