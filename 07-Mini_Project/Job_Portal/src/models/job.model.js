@@ -8,7 +8,8 @@ export default class JobModel {
     _salaryRange,
     _skills,
     _deadline,
-    _numOpenings
+    _numOpenings,
+    _jobPostDate
   ) {
     this.id = _id;
     this.companyName = _companyName;
@@ -19,13 +20,15 @@ export default class JobModel {
     this.skills = _skills;
     this.deadline = _deadline;
     this.numOpenings = _numOpenings;
+    this.numApplicants = 1;
+    this.jobPostDate = _jobPostDate;
   }
   static getJobData() {
     return jobDetails;
   }
 
-  static getJobById(id){
-    const jobData = jobDetails.find((job)=> job.id == id);
+  static getJobById(id) {
+    const jobData = jobDetails.find((job) => job.id == id);
     return jobData;
   }
 }
@@ -38,7 +41,7 @@ var jobDetails = [
     "SDE",
     "Gurgao HR IND Remote",
     "14 - 20 LPA",
-    ["Angular", "React", "Node.Js", "ExpressJs", "MongoDB", "AWS"],
+    ["React", "Node.Js","JS","SQL","MongoDB","Express", "AWS"],
     "30-October-2023",
     5
   ),
@@ -52,5 +55,14 @@ var jobDetails = [
     ["Angular", "JS", "SQL", "MongoDB", "Express", "AWS"],
     "12-November-2023",
     6
-  ),
+  ),new JobModel(
+    3,
+    "Juspay",
+    "Tech",
+    "SDE",
+    "Bangalore IND",
+    "6 - 10 LPA",
+    ["React","Node.Js","JS","SQL","MongoDB",
+  "Express"," AWS"]
+  )
 ];
