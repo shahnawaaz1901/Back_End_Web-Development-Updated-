@@ -9,7 +9,8 @@ export default class JobModel {
     _skills,
     _deadline,
     _numOpenings,
-    _jobPostDate
+    _jobPostDate,
+    _jobPostTime
   ) {
     this.id = _id;
     this.companyName = _companyName;
@@ -22,6 +23,7 @@ export default class JobModel {
     this.numOpenings = _numOpenings;
     this.numApplicants = 1;
     this.jobPostDate = _jobPostDate;
+    this.jobPostTime = _jobPostTime;
   }
   static getJobData() {
     return jobDetails;
@@ -41,9 +43,11 @@ var jobDetails = [
     "SDE",
     "Gurgao HR IND Remote",
     "14 - 20 LPA",
-    ["React", "Node.Js","JS","SQL","MongoDB","Express", "AWS"],
+    ["React", "Node.Js", "JS", "SQL", "MongoDB", "Express", "AWS"],
     "30-October-2023",
-    5
+    5,
+    new Date().toLocaleDateString(),
+    new Date().toLocaleTimeString(),
   ),
   new JobModel(
     2,
@@ -54,15 +58,21 @@ var jobDetails = [
     "6 - 10 LPA",
     ["Angular", "JS", "SQL", "MongoDB", "Express", "AWS"],
     "12-November-2023",
-    6
-  ),new JobModel(
+    6,
+    new Date().toLocaleDateString(),
+    new Date().toLocaleTimeString(),
+  ),
+  new JobModel(
     3,
     "Juspay",
     "Tech",
     "SDE",
     "Bangalore IND",
     "6 - 10 LPA",
-    ["React","Node.Js","JS","SQL","MongoDB",
-  "Express"," AWS"]
-  )
+    ["React", "Node.Js", "JS", "SQL", "MongoDB", "Express", " AWS"],
+    "12-November-2023",
+    5,
+    new Date().toLocaleDateString(),
+    new Date().toLocaleTimeString(),
+  ),
 ];

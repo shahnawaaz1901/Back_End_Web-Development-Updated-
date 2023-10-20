@@ -1,54 +1,116 @@
-<link rel="stylesheet" href="css/job-description.css">
+<link rel="stylesheet" href="css/job-description.css" />
 <% if(job){%>
-<main class="container border border-secondary-subtle rounded mt-2">
-    <h1 class="job-description-header text-center">
-        <span class="job-post text-danger"><%= job.post %></span>
-        <span class="text-primary">Opportunity in </span>
-        <span class="job-location text-success"><%= job.location %></span>
-        <span class="text-primary">at</span><br/>
-        <span class="company text-info"><%= job.companyName %></span>
-    </h1>
-    <div class="main-description">
-        <h4 class="company-name m-3"><%= job.companyName %></h4>
-        <div class="job-type m-3">
-            <span class="type"><%= job.jobType %></span>
-            <span class="post text-success"><%= job.post %> </span>
-        </div>
-        <div class="more-details mt-4 mb-2">
-            <div class="ms-4 mb-2">
-                <span><i class="fa-solid fa-map-location-dot"></i></span>
-                <span> <%= job.location %></span>
-            </div>
-            <div class="ms-4 mb-2">
-                <span><i class="fa-solid fa-indian-rupee-sign"></i></span>
-                <span> <%= job.salaryRange %></span>
-            </div>
-            <div class="ms-4 mb-2">
-                <span><i class="fa-solid fa-signal"></i></span>
-                <span>Number of Openings </span>
-                <span> <%= job.numOpenings %></span>
-            </div>
-            <div class="ms-4 mb-2">
-                <span><i class="fa-solid fa-hourglass-start"></i></span>
-                <span> Apply By </span>
-                <span> <%= job.deadline %></span>
-            </div>
-            <div class="ms-4 mb-2 text-danger">
-                <span><i class="fa-solid fa-users"></i></span>
-                <span>Applicants</span>
-                <span><%= job.numApplicants %></span>
-            </div>
-        </div>
-        <div class="skills ms-4 mt-3">
-            <% for(let skill of job.skills) {%>
-                <button class="btn btn-outline-info" type="submit">
-                    <%= skill %>
-                </button>
-            <%}%>
-        </div>
+<main class="container border border-secondary-subtle rounded mt-2 mb-2">
+  <h1 class="job-description-header text-center">
+    <span class="job-post text-danger"><%= job.post %></span>
+    <span class="text-primary">Opportunity in </span>
+    <span class="job-location text-success"><%= job.location %></span>
+    <span class="text-primary">at</span><br />
+    <span class="company text-info"><%= job.companyName %></span>
+  </h1>
+  <div class="main-description">
+    <h4 class="company-name m-3"><%= job.companyName %></h4>
+    <div class="job-type m-3">
+      <span class="type"><%= job.jobType %></span>
+      <span class="post text-success"><%= job.post %> </span>
     </div>
-    <div class="jobAppBtn ms-4 mt-4">
-        <button type="button" class="btn btn-primary btn-lg">Apply Button</button>
+    <div class="more-details mt-4 mb-2">
+      <div class="ms-4 mb-2">
+        <span><i class="fa-solid fa-map-location-dot"></i></span>
+        <span> <%= job.location %></span>
+      </div>
+      <div class="ms-4 mb-2">
+        <span><i class="fa-solid fa-indian-rupee-sign"></i></span>
+        <span> <%= job.salaryRange %></span>
+      </div>
+      <div class="ms-4 mb-2">
+        <span><i class="fa-solid fa-signal"></i></span>
+        <span>Number of Openings </span>
+        <span> <%= job.numOpenings %></span>
+      </div>
+      <div class="ms-4 mb-2">
+        <span><i class="fa-solid fa-hourglass-start"></i></span>
+        <span> Apply By </span>
+        <span> <%= job.deadline %></span>
+      </div>
+      <div class="ms-4 mb-2">
+        <a
+          href="/applicants/<%=job.id%>"
+          class="text-danger text-decoration-none"
+        >
+          <span><i class="fa-solid fa-users"></i></span>
+          <span>Applicants</span>
+          <span><%= job.numApplicants %></span>
+        </a>
+      </div>
     </div>
+    <div class="skills ms-4 mt-3">
+      <% for(let skill of job.skills) {%>
+      <button class="btn btn-outline-info" type="submit"><%= skill %></button>
+      <%}%>
+    </div>
+  </div>
+  <div class="jobAppBtn ms-4 mt-4">
+    <button
+      type="button"
+      class="btn btn-primary btn-lg"
+      data-bs-toggle="modal"
+      data-bs-target="#jobApplySection"
+    >
+      Apply Button
+    </button>
+  </div>
+
+  <div class="jobPostBtn mt-3 mb-3">
+    <button type="button" class="btn btn-success">
+      <span> Posted : </span>
+      <span><%= job.jobPostDate %></span>
+      <span><%= job.jobPostTime%></span>
+    </button>
+  </div>
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="jobApplySection"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1
+            class="modal-title fs-5 text-start text-success"
+            id="exampleModalLabel"
+          >
+            Easily Apply
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="container border border-top rounded">
+            <div class="row">
+              <form action="">
+                <div class="col-3">Name :</div>
+                <div class="col-9">
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Eg... Ashu Ansari"
+                    required
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
 <%}%>
