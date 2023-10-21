@@ -5,7 +5,8 @@ import UserController from "./src/controllers/user.controller.js";
 import expressEjsLayouts from "express-ejs-layouts";
 import ejs from "ejs";
 import path from "path"
-import exp from "constants";
+import multer from "multer";
+import upload from "./src/middlewares/file-upload.js";
 
 //* Run the Server
 const app = express();
@@ -23,11 +24,13 @@ app.use(express.static("public"));
 //* Create Instance
 const jobController = new JobController();
 const userController = new UserController();
+
 //* Setup Routers
 app.get("/",jobController.getHomePage);
 app.get("/jobs",jobController.getJobPage);
 app.get("/job/:id",jobController.getJobDescription);
 app.get("/login",userController.getLogin);
+app.post("apply-job",upload.single('resume'), jobController.applyJob);
 app.listen(3200,function(err){
     if(err){
         console.log(`Error : ${err}`);

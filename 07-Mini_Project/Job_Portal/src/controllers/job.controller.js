@@ -20,4 +20,8 @@ export default class JobController {
       job : jobData,
     })
   }
+
+  applyJob(req, res){
+
+  }
 }
