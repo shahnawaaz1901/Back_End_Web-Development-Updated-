@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/css/index.css" />
 <main>
   <div class="row">
     <div class="col-7 p75px ms-4 text-space">
@@ -22,6 +22,7 @@
         >
           I'm A Recruiter
         </button>
+
         <!-- Modal -->
         <div
           class="modal fade"
@@ -44,58 +45,48 @@
                 ></button>
               </div>
               <div class="modal-body">
-                <div class="row g-3 align-items-center">
-                  <div class="col-auto">
-                    <label for="name" class="col-form-label">Name : </label>
+                <form action="/ragister" method="post">
+                  <div class="row g-3 mt-2 align-items-center">
+                    <div class="col-3">
+                      <label for="name" class="col-form-label">Name</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" id="name" name="name" class="form-control" />
+                    </div>
                   </div>
-                  <div class="col-auto">
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      class="form-control"
-                      aria-describedby="passwordHelpInline"
-                    />
+                  <div class="row g-3 mt-2 align-items-center">
+                    <div class="col-3">
+                      <label for="email" class="col-form-label">Email</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="email" id="email" name="email" class="form-control" />
+                    </div>
                   </div>
-                  <div class="col-auto">
-                    <label for="email" class="col-form-label">Email :</label>
+                  <div class="row g-3 mt-2 align-items-center">
+                    <div class="col-3">
+                      <label for="password" class="col-form-label"
+                        >Password</label
+                      >
+                    </div>
+                    <div class="col-9">
+                      <input
+                        type="password"
+                        id="password"
+                        class="form-control"
+                        name="password"
+                      />
+                    </div>
                   </div>
-                  <div class="col-auto">
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      class="form-control"
-                      aria-describedby="passwordHelpInline"
-                    />
-                  </div>
-                  <div class="col-auto">
-                    <label for="inputPassword6" class="col-form-label"
-                      >Password :
-                    </label>
-                  </div>
-                  <div class="col-auto">
-                    <input
-                      type="password"
-                      id="inputPassword6"
-                      class="form-control"
-                      aria-describedby="passwordHelpInline"
-                    />
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  class="btn btn-primary bg-light-pink mt-4"
-                >
-                  Ragister
-                </button>
+                </form>
               </div>
               <div class="modal-footer">
-                <span>Already Ragistered.?</span>
-                <a href="/login">
-                  <button class="btn btn-outline-success" type="submit">
-                    Login
-                  </button></a
+                <span>Already Ragistered..?</span>
+                <span
+                  ><a href="/login"
+                    ><button type="button" class="btn btn-outline-success">
+                      Login
+                    </button></a
+                  ></span
                 >
               </div>
             </div>

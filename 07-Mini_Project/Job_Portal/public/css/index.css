@@ -29,8 +29,3 @@ header{
 .text-space{
     letter-spacing: 2px !important;
 }
-
-.dropdown-item:hover{
-    color: black !important;
-    background-color: white !important;
-}
