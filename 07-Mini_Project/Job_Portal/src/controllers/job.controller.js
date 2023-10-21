@@ -1,4 +1,5 @@
 import JobModel from "../models/job.model.js";
+import path from 'path'
 export default class JobController {
   getHomePage(req, res) {
     res.render("index", { title: "Easy - A Job Portal" });
@@ -22,6 +23,7 @@ export default class JobController {
   }
 
   applyJob(req, res){
-
+    const {name, email, contact} = req.body;
+    const resume = path.join("public","data") + req.file.filename;
   }
 }

@@ -30,7 +30,7 @@ app.get("/",jobController.getHomePage);
 app.get("/jobs",jobController.getJobPage);
 app.get("/job/:id",jobController.getJobDescription);
 app.get("/login",userController.getLogin);
-app.post("apply-job",upload.single('resume'), jobController.applyJob);
+app.post("/apply-job",upload.single('resume'), jobController.applyJob);
 app.listen(3200,function(err){
     if(err){
         console.log(`Error : ${err}`);
