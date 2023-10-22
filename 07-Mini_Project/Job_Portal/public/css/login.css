@@ -1,0 +1,11 @@
+:root{
+    --lightPink : rgb(255,44,144);
+}
+
+.light-pink{
+    color:var(--lightPink);
+}
+
+.bg-light-pink{
+    background-color: var(--lightPink) !important;
+}
