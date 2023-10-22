@@ -2,7 +2,7 @@ export default class UserModel{
     constructor(_name, _email, _password){
         this.name = _name;
         this.email = _email;
-        this._password = _password;
+        this.password = _password;
     }
 
     static addNewUser(user){

@@ -14,12 +14,12 @@ export default class UserController {
   loginUser(req, res) {
     const result = authenticateUser(req.body);
     if (result) {
-        res.redirect('/');
-    }else{
-        res.render('login',{
-            title : 'Login',
-            error : 'Invalid Credentials !!'
-        })
+      res.redirect("/");
+    } else {
+      res.render("login", {
+        title: "Login",
+        error: "Invalid Credentials !!",
+      });
     }
   }
 }

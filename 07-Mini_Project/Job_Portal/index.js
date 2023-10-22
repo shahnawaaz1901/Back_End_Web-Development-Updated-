@@ -8,6 +8,7 @@ import path from "path"
 import multer from "multer";
 import upload from "./src/middlewares/file-upload.js";
 import ApplicantController from "./src/controllers/applicant.controller.js";
+import bodyParser from "body-parser";
 
 //* Run the Server
 const app = express();
@@ -18,6 +19,9 @@ app.set("views",path.join("src","views"));
 
 //* SetUp Layouts
 app.use(expressEjsLayouts);
+
+//* Use Body Parser
+app.use(bodyParser.urlencoded({extended : true}))
 
 //* Exposed Static Files
 app.use(express.static("public"));
@@ -32,8 +36,8 @@ app.get("/",jobController.getHomePage);
 app.get("/jobs",jobController.getJobPage);
 app.get("/job/:id",jobController.getJobDescription);
 app.get("/login",userController.getLogin);
-app.post("/apply-job",upload.single('resume'), applicantController.addNewApplicant);
 app.post("/ragister",userController.ragisterUser);
+app.post("/apply-job",upload.single('resume'), applicantController.addNewApplicant);
 app.listen(3200,function(err){
     if(err){
         console.log(`Error : ${err}`);
