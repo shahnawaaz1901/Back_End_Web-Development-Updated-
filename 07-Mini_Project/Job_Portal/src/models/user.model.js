@@ -16,4 +16,4 @@ export default class UserModel{
     }
 }
 
-var userDetails = [];
+var userDetails = [new UserModel("Test User","test@ashu.com","test@123")];
