@@ -8,7 +8,6 @@ export default class ApplicantsModel{
 
     static addApplicantInfo(name, email, contact, resume){
         applicantsInformation.push(new ApplicantsModel(name, email, contact, resume));
-        console.log(applicantsInformation);
     }
 
     static getApplicantsInfo(){
