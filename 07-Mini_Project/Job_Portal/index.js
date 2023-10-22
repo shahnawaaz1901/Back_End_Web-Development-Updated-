@@ -7,6 +7,7 @@ import ejs from "ejs";
 import path from "path"
 import multer from "multer";
 import upload from "./src/middlewares/file-upload.js";
+import ApplicantController from "./src/controllers/applicant.controller.js";
 
 //* Run the Server
 const app = express();
@@ -24,13 +25,14 @@ app.use(express.static("public"));
 //* Create Instance
 const jobController = new JobController();
 const userController = new UserController();
+const applicantController = new ApplicantController();
 
 //* Setup Routers
 app.get("/",jobController.getHomePage);
 app.get("/jobs",jobController.getJobPage);
 app.get("/job/:id",jobController.getJobDescription);
 app.get("/login",userController.getLogin);
-app.post("/apply-job",upload.single('resume'), jobController.applyJob);
+app.post("/apply-job",upload.single('resume'), applicantController.addNewApplicant);
 app.listen(3200,function(err){
     if(err){
         console.log(`Error : ${err}`);
