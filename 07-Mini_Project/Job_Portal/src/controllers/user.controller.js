@@ -8,6 +8,8 @@ export default class UserController {
 
   ragisterUser(req, res) {
     UserModel.addNewUser(req.body);
+    const {email} = req.body;
+    sendNotification(email, "New User");
     res.redirect("/login");
   }
 
