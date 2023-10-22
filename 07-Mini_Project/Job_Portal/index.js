@@ -22,7 +22,7 @@ app.use(expressEjsLayouts);
 //* Exposed Static Files
 app.use(express.static("public"));
 
-//* Create Instance
+//* Create Instance of Controllers
 const jobController = new JobController();
 const userController = new UserController();
 const applicantController = new ApplicantController();
@@ -33,6 +33,7 @@ app.get("/jobs",jobController.getJobPage);
 app.get("/job/:id",jobController.getJobDescription);
 app.get("/login",userController.getLogin);
 app.post("/apply-job",upload.single('resume'), applicantController.addNewApplicant);
+app.post("/ragister",userController.ragisterUser);
 app.listen(3200,function(err){
     if(err){
         console.log(`Error : ${err}`);
