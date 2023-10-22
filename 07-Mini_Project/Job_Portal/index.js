@@ -5,10 +5,11 @@ import UserController from "./src/controllers/user.controller.js";
 import expressEjsLayouts from "express-ejs-layouts";
 import ejs from "ejs";
 import path from "path"
-import multer from "multer";
-import upload from "./src/middlewares/file-upload.js";
+import upload from "./src/middlewares/file-upload.middleware.js";
 import ApplicantController from "./src/controllers/applicant.controller.js";
 import bodyParser from "body-parser";
+import auth from "./src/middlewares/auth.middleware.js";
+import session from "express-session";
 
 //* Run the Server
 const app = express();
@@ -22,6 +23,14 @@ app.use(expressEjsLayouts);
 
 //* Use Body Parser
 app.use(bodyParser.urlencoded({extended : true}))
+
+//* Use Express Sessions
+app.use(session({
+    secret : 'SecretKey',
+    resave : false,
+    saveUninitialized : true,
+    cookie : {secure : false}
+}))
 
 //* Exposed Static Files
 app.use(express.static("public"));
@@ -38,6 +47,7 @@ app.get("/job/:id",jobController.getJobDescription);
 app.get("/login",userController.getLogin);
 app.post("/ragister",userController.ragisterUser);
 app.post("/apply-job",upload.single('resume'), applicantController.addNewApplicant);
+app.post("/postJob",)
 app.listen(3200,function(err){
     if(err){
         console.log(`Error : ${err}`);
