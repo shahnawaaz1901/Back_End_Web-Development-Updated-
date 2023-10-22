@@ -1,4 +1,4 @@
-export default class Applicants{
+export default class ApplicantsModel{
     constructor(_name, _email, _contact,_resume){
         this.name = _name; 
         this.email = _emaill
@@ -8,6 +8,10 @@ export default class Applicants{
 
     static addApplicantInfo(name, email, contact, resume){
         applicantsInformation.push(new Applicants(name, email, contact, resume));
+    }
+
+    static getApplicantsInfo(){
+        return applicantsInformation;
     }
 }
 

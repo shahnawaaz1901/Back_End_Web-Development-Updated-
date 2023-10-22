@@ -21,9 +21,4 @@ export default class JobController {
       job : jobData,
     })
   }
-
-  applyJob(req, res){
-    const {name, email, contact} = req.body;
-    const resume = path.join("public","data") + req.file.filename;
-  }
 }
