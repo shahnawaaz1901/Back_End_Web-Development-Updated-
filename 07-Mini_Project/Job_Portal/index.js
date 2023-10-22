@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({extended : true}))
 //* Exposed Static Files
 app.use(express.static("public"));
 
-//* Create Instance of Controllers
+//* Create Instance of Controllersc
 const jobController = new JobController();
 const userController = new UserController();
 const applicantController = new ApplicantController();
