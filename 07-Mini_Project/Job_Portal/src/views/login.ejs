@@ -1,6 +1,11 @@
 <link rel="stylesheet" href="/css/login.css" />
 <main class="container mt-5">
   <div class="col-8 m-auto ps-1 pt-1 rounded bg-dark">
+    <%if(error){%>
+      <li class="alert alert-danger">
+        <%= error %>
+      </li>
+    <%}%>
     <div class="login-content bg-white rounded shadow">
       <div class="text-center bg-white pt-3 mb-3">
         <h1>Login</h1>

@@ -11,7 +11,7 @@ const sendNotification = (email, reason) => {
   let mailText;
   if (reason == "newUser") {
     mailSubject = "Welcome to Easily";
-    mailText = "Welcome to Easily Family Now You Can ";
+    mailText = "Welcome to Easily Job Portal Family. We are helping you to find the Best Talents of Our Country";
   } else if (reason == "login-alert") {
     mailSubject = "Security Alert";
     mailText = `You Was Loggedin on ${Date().toString}`;
@@ -22,6 +22,7 @@ const sendNotification = (email, reason) => {
 
   const mailOptions = {
     from: "shaan.ansari1901@gmail.com",
+    name : "Shahnawaaz Ansari",
     to: email,
     subject: mailSubject,
     text: mailText,

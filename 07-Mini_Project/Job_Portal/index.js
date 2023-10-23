@@ -22,7 +22,7 @@ app.set("views",path.join("src","views"));
 app.use(expressEjsLayouts);
 
 //* Use Body Parser
-app.use(bodyParser.urlencoded({extended : true}))
+app.use(express.urlencoded({extended : true}))
 
 //* Use Express Sessions
 app.use(session({
@@ -44,6 +44,7 @@ const applicantController = new ApplicantController();
 app.get("/",jobController.getHomePage);
 app.get("/jobs",jobController.getJobPage);
 app.get("/job/:id",jobController.getJobDescription);
+app.post("/login",userController.loginUser);
 app.get("/login",userController.getLogin);
 app.post("/ragister",userController.ragisterUser);
 app.post("/apply-job",upload.single('resume'), applicantController.addNewApplicant);
