@@ -6,7 +6,6 @@ import expressEjsLayouts from "express-ejs-layouts";
 import ejs from "ejs";
 import path from "path"
 import upload from "./src/middlewares/file-upload.middleware.js";
-import ApplicantController from "./src/controllers/applicant.controller.js";
 import bodyParser from "body-parser";
 import auth from "./src/middlewares/auth.middleware.js";
 import session from "express-session";
@@ -40,7 +39,6 @@ app.use(express.static("public"));
 //* Create Instance of Controllersc
 const jobController = new JobController();
 const userController = new UserController();
-const applicantController = new ApplicantController();
 
 //* Setup Routers
 app.get("/",jobController.getHomePage);
@@ -49,7 +47,7 @@ app.get("/job/:id",jobController.getJobDescription);
 app.post("/login",userController.loginUser);
 app.get("/login",userController.getLogin);
 app.post("/ragister",userController.ragisterUser);
-app.post("/apply-job",upload.single('resume'), applicantController.addNewApplicant);
+// app.post("/apply-job",upload.single('resume'), applicantController.addNewApplicant);
 app.get("/postJob",auth)
 app.listen(3200,function(err){
     if(err){

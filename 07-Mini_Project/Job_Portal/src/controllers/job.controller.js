@@ -7,11 +7,12 @@ export default class JobController {
   }
 
   getJobPage(req, res) {
-    let jobs = JobModel.getJobData();
-    res.render("jobs", {
-        title: "Easy - Jobs Section",
-        jobs,
-    });
+    res.render('applicants');
+    // let jobs = JobModel.getJobData();
+    // res.render("jobs", {
+    //     title: "Easy - Jobs Section",
+    //     jobs,
+    // });
   }
 
   getJobDescription(req, res){
