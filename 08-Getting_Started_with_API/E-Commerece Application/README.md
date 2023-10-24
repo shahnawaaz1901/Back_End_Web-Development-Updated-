@@ -1,4 +1,9 @@
 Information Regarding E-Commerce Application
+
+--Folder Structure--
+For More Readable Code we Devide Our 4 Modules into the folders inside 
+the "src" Folder and Each folder Contains their controllers and models
+
 -- Objective --
 
 1. Product Management
