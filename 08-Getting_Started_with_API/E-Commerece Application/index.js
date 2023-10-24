@@ -2,6 +2,7 @@
 import express from "express";
 import ProductRouter from "./src/features/products/product.router.js";
 import bodyParser from "body-parser";
+import upload from "./src/middlewares/file-upload.js";
 
 //* Start the Server
 const app = express();

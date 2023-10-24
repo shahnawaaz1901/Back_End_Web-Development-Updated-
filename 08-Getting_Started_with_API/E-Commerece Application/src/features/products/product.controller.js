@@ -1,4 +1,5 @@
 import ProductModel from "./product.model.js";
+import path from 'path';
 export default class ProductController {
   //* Get All Products
   getProducts(req, res) {
@@ -9,8 +10,17 @@ export default class ProductController {
   //* Add New Product
   addProduct(req, res) {
     console.log(req.body);
-    console.log("This is a Post Request !!");
-    res.send("Your Post Request is Received !! Very ThankYou");
+    const { name, price, sizes } = req.body;
+    const imageURL = req.file.filename;
+    const newProduct = {
+        name,
+        price : parseFloat(price),
+        sizes : sizes.split(','),
+        imageURL,
+    }
+    ProductModel.addProduct(newProduct);
+    res.send(ProductModel.getAll());
+    // res.send("Your Post Request is Received !! Very ThankYou");
   }
 
   //* Get Product by ID

@@ -12,6 +12,10 @@ export default class ProductModel {
   static getAll() {
     return products;
   }
+
+  static addProduct(product){
+    products.push(products.length + 1, product.name, "New Product",product.price,product.imageURL,`Category ${products.length + 1}`,product.sizes);
+  }
 }
 
 var products = [
