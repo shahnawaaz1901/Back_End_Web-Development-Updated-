@@ -1,3 +1,12 @@
+class ApplicantModel {
+  constructor(_name, _email, _contact, _resume) {
+    this.name = _name;
+    this.email = _email;
+    this.contact = _contact;
+    this.resume = _resume;
+  }
+}
+
 export default class JobModel {
   constructor(
     _id,
@@ -21,7 +30,7 @@ export default class JobModel {
     this.skills = _skills;
     this.deadline = _deadline;
     this.numOpenings = _numOpenings;
-    this.numApplicants = 1;
+    this.applicants = [];
     this.jobPostDate = _jobPostDate;
     this.jobPostTime = _jobPostTime;
   }
@@ -32,6 +41,14 @@ export default class JobModel {
   static getJobById(id) {
     const jobData = jobDetails.find((job) => job.id == id);
     return jobData;
+  }
+
+  static addApplicants(applicantDetail) {
+    for(let everyJob of jobDetails){
+      if(everyJob.id == applicantDetail.id){
+        everyJob.applicants.push(new ApplicantModel(applicantDetail.name, applicantDetail.email, applicantDetail.contact, applicantDetail.resume));
+      }
+    }
   }
 }
 
@@ -45,9 +62,9 @@ var jobDetails = [
     "14 - 20 LPA",
     ["React", "Node.Js", "JS", "SQL", "MongoDB", "Express", "AWS"],
     "30-October-2023",
-    5,
+    6,
     new Date().toLocaleDateString(),
-    new Date().toLocaleTimeString(),
+    new Date().toLocaleTimeString()
   ),
   new JobModel(
     2,
@@ -58,9 +75,9 @@ var jobDetails = [
     "6 - 10 LPA",
     ["Angular", "JS", "SQL", "MongoDB", "Express", "AWS"],
     "12-November-2023",
-    6,
+    5,
     new Date().toLocaleDateString(),
-    new Date().toLocaleTimeString(),
+    new Date().toLocaleTimeString()
   ),
   new JobModel(
     3,
@@ -73,6 +90,6 @@ var jobDetails = [
     "12-November-2023",
     5,
     new Date().toLocaleDateString(),
-    new Date().toLocaleTimeString(),
+    new Date().toLocaleTimeString()
   ),
 ];

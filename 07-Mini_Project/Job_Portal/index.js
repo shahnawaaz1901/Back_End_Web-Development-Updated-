@@ -23,6 +23,8 @@ app.use(expressEjsLayouts);
 
 //* Use Body Parser
 app.use(express.urlencoded({extended : true}))
+// app.use(bodyParser.urlencoded({extended : true}));
+app.use(express.json());
 
 //* Use Express Sessions
 app.use(session({

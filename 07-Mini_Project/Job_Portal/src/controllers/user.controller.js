@@ -17,6 +17,7 @@ export default class UserController {
   }
 
   loginUser(req, res) {
+    console.log("inside the login User Functions :")
     console.log(req.body);
     const result = UserModel.authenticateUser(req.body);
     if (result) {
