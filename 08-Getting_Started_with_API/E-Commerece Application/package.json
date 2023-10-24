@@ -1,0 +1,16 @@
+{
+  "name": "e-commerece-application",
+  "version": "1.0.0",
+  "description": "An E commerce Application API",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "Shahnawaaz Ansari",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
