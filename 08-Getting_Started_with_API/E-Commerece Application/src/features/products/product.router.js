@@ -1,6 +1,8 @@
 import express from 'express';
 import ProductController from './product.controller.js';
-const router = express.Router();
+
+// *Create Router Product
+const ProductRouter = express.Router();
 
 //*Create Instance of Product Controller
 const productController = new ProductController();
@@ -15,8 +17,8 @@ const productController = new ProductController();
     Here We Write the Request type instead of writing use it means our 
     request route is Ends Here and Now Request is Go for Controller
 */
-router.get("/",productController.getProducts);
-router.post("/add-product",productController.addProduct);
+ProductRouter.get("/",productController.getProducts);
+ProductRouter.post("/add-product",productController.addProduct);
 
-
-export default router;
+//* Export Product Router
+export default ProductRouter;

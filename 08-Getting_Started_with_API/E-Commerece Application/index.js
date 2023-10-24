@@ -1,6 +1,6 @@
 //* Import Modules
 import express from "express";
-import * as ProductRouter from "./src/features/products/product.router.js";
+import ProductRouter from "./src/features/products/product.router.js";
 
 //* Start the Server
 const app = express();
