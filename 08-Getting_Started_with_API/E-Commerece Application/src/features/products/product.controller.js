@@ -7,7 +7,11 @@ export default class ProductController {
   }
 
   //* Add New Product
-  addProduct(req, res) {}
+  addProduct(req, res) {
+    console.log(req.body);
+    console.log("This is a Post Request !!");
+    res.send("Your Post Request is Received !! Very ThankYou");
+  }
 
   //* Get Product by ID
   getProductById(req, res) {}

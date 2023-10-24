@@ -1,6 +1,7 @@
 //* Import Modules
 import express from "express";
 import ProductRouter from "./src/features/products/product.router.js";
+import bodyParser from "body-parser";
 
 //* Start the Server
 const app = express();
@@ -26,6 +27,8 @@ const app = express();
     is Pass through this route. Now We Transfer All Request For /api/products to 
     productrouter.
 */
+/* Body Parser Use to Get Data on req.body  */
+app.use(bodyParser.json());
 
 //? Its Good practice to write the /api first when we Create Route for API
 app.use("/api/products", ProductRouter);
