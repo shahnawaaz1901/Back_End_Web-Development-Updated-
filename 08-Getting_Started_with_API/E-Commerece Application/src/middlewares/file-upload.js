@@ -10,7 +10,9 @@ const diskStorage = multer.diskStorage({
         },
 
         filename : (req, file, cb)=>{
-            const name = "abcd" +  file.originalname;
+            console.log(new Date().toISOString());
+            const name = new Date().toISOString().replace(/:/g,'_') +  file.originalname;
+            console.log(name);
             cb(null, name);
         }
     }
