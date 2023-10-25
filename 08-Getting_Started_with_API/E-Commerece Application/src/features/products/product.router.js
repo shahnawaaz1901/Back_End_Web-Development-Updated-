@@ -24,6 +24,7 @@ ProductRouter.post(
   upload.single("imageURL"),
   productController.addProduct
 );
+ProductRouter.get("/:id",productController.getOneProduct);
 
 //* Export Product Router
 export default ProductRouter;

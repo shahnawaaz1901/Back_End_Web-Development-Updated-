@@ -24,7 +24,15 @@ export default class ProductController {
   }
 
   //* Get Product by ID
-  getProductById(req, res) {}
+  getOneProduct(req, res) {
+    const id = req.params.id;
+    const product = ProductModel.getProductById(id);
+    if(!product){
+      res.status(404).send("Product not Found !!");
+    }else{
+      res.status(200).send(product);
+    }
+  }
 
   //* Rate the Product
   rateProduct(req, res) {}
