@@ -13,13 +13,27 @@ export default class ProductModel {
     return products;
   }
 
-  static addProduct(product){
-    products.push(products.length + 1, product.name, "New Product",product.price,product.imageURL,`Category ${products.length + 1}`,product.sizes);
+  static addProduct(product) {
+    products.push(
+      products.length + 1,
+      product.name,
+      "New Product",
+      product.price,
+      product.imageURL,
+      `Category ${products.length + 1}`,
+      product.sizes
+    );
   }
 
-  static getProductById(id){
-    const product = products.find((pro)=> pro.id == id);
+  static getProductById(id) {
+    const product = products.find((pro) => pro.id == id);
     return product;
+  }
+
+  static filter(minPrice, maxPrice, category) {
+    console.log("inside the filter function")
+    const filterData = products.filter((product)=> { return (product.price >= minPrice && product.price <= maxPrice && product.category == category)});
+    return filterData;
   }
 }
 
@@ -30,8 +44,8 @@ var products = [
     "Description for Product 1",
     2400,
     "https://m.media-amazon.com/images/I/51-nXsSRfZL._SX328_BO1,204,203,200_.jpg",
-    "Category 1",
-    ["S","M","L","XL"]
+    "Category1",
+    ["S", "M", "L", "XL"]
   ),
   new ProductModel(
     2,
@@ -39,8 +53,8 @@ var products = [
     "Description for Product 2",
     3566,
     "https://m.media-amazon.com/images/I/51xwGSNX-EL._SX356_BO1,204,203,200_.jpg",
-    "Category 2",
-    ["S","M","L","XL"]
+    "Category2",
+    ["S", "M", "L", "XL"]
   ),
   new ProductModel(
     3,
@@ -48,7 +62,7 @@ var products = [
     "Description for Product 1",
     6454,
     "https://m.media-amazon.com/images/I/31PBdo581fL._SX317_BO1,204,203,200_.jpg",
-    "Category 3",
-    ["S","M","L","XL"]
+    "Category3",
+    ["S", "M", "L", "XL"]
   ),
 ];

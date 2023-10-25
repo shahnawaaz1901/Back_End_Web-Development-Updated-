@@ -25,6 +25,13 @@ ProductRouter.post(
   productController.addProduct
 );
 ProductRouter.get("/:id",productController.getOneProduct);
+/* 
+  For filter Instead of Making Post Request We Can Use query parameters which is
+  Almost Same as root parameters query parameters URL looks like :
+
+  localhost:3200/api/products/filter?minPrice=15&maxPrice=20&category=Category1
+*/
+ProductRouter.get("/filter",productController.filterProducts);
 
 //* Export Product Router
 export default ProductRouter;

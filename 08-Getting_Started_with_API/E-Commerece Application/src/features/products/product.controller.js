@@ -34,6 +34,19 @@ export default class ProductController {
     }
   }
 
+  //* Filter Products
+  filterProducts(req, res){
+    //* All Query Parameters data is inside the request.query Object
+    console.log(req.query);
+    const {minPrice, maxPrice, category} = req.query;
+    const result = ProductModel.filter(minPrice, maxPrice, category);
+    if(!result){
+      res.status(404).send("Sorry No Products Found !!");
+    }else{
+      res.status(200).send(result);
+    }
+  }
+
   //* Rate the Product
   rateProduct(req, res) {}
 }
