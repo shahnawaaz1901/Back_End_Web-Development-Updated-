@@ -9,3 +9,5 @@ Get Items to Cart
 Remove Items to Cart
 
 // User Controller
+SignUp  - By(Name, Email, Password, Type of User(Customer or Seller))
+SignIn  - By(Email, Password)
