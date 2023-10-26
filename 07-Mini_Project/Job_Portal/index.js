@@ -47,7 +47,7 @@ app.get("/jobs",jobController.getJobPage);
 app.get("/job/:id",jobController.getJobDescription);
 app.get("/login",userController.getLogin);
 app.post("/ragister",userController.ragisterUser);
-// app.post("/apply-job",upload.single('resume'), applicantController.addNewApplicant);
+app.post("/apply-job",upload.single('resume'), jobController.addJobApplicant);
 app.get("/postJob",auth)
 app.listen(3200,function(err){
     if(err){

@@ -23,5 +23,7 @@ export default class JobController {
     });
   }
 
-  addJobApplicant(req, res) {}
+  addJobApplicant(req, res) {
+    console.log(req.body);
+  }
 }

@@ -21,7 +21,7 @@ export default class UserController {
     if (result) {
       req.session.userEmail = req.body.email;
       console.log(res.session.userEmail);
-      res.redirect("/jobs");
+      res.redirect("/jobs",{result});
     } else {
       res.render("login", {
         title: "Login",
