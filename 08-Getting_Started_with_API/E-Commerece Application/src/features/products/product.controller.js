@@ -9,7 +9,6 @@ export default class ProductController {
 
   //* Add New Product
   addProduct(req, res) {
-    console.log(req.body);
     const { name, price, sizes } = req.body;
     const imageURL = req.file.filename;
     const newProduct = {

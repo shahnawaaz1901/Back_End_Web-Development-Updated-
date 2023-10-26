@@ -20,11 +20,10 @@ const productController = new ProductController();
 ProductRouter.get("/", productController.getProducts);
 ProductRouter.post(
   "/add-product",
-    //   We Can Also upload.array() which is Used to Upload multiple files
+    //   We Can Also Use upload.array() which is Used to Upload multiple files
   upload.single("imageURL"),
   productController.addProduct
 );
-ProductRouter.get("/:id",productController.getOneProduct);
 /* 
   For filter Instead of Making Post Request We Can Use query parameters which is
   Almost Same as root parameters query parameters URL looks like :
@@ -32,6 +31,8 @@ ProductRouter.get("/:id",productController.getOneProduct);
   localhost:3200/api/products/filter?minPrice=15&maxPrice=20&category=Category1
 */
 ProductRouter.get("/filter",productController.filterProducts);
+/* Always Request Parameters Router is bottom at Router Position */
+ProductRouter.get("/:id",productController.getOneProduct);
 
 //* Export Product Router
 export default ProductRouter;
