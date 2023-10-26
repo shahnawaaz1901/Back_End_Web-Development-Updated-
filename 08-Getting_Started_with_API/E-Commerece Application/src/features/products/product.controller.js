@@ -37,7 +37,6 @@ export default class ProductController {
   //* Filter Products
   filterProducts(req, res){
     //* All Query Parameters data is inside the request.query Object
-    console.log(req.query);
     const {minPrice, maxPrice, category} = req.query;
     const result = ProductModel.filter(minPrice, maxPrice, category);
     if(!result){
