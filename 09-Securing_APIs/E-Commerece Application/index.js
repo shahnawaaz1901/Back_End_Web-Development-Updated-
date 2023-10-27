@@ -3,7 +3,7 @@ import express from "express";
 import productRouter from "./src/features/products/product.router.js";
 import userRouter from "./src/features/user/user.router.js"
 import bodyParser from "body-parser";
-import upload from "./src/middlewares/file-upload.js";
+import basicAuthorizer from "./src/middlewares/basicAuth.middleware.js";
 
 //* Start the Server
 const app = express();
@@ -12,7 +12,8 @@ const app = express();
 app.use(bodyParser.json());
 
 //* Its Good practice to write the /api first when we Create Route for API
-app.use("/api/products", productRouter);
+//* We Only Need to Add Authentication For Access the Products
+app.use("/api/products", basicAuthorizer,productRouter);            
 app.use("/api/users",userRouter);
 
 //* Default Route

@@ -21,6 +21,10 @@ export default class UserModel {
     );
     return result;
   }
+
+  static getAllUserDetails(){
+    return userDetails;
+  }
 }
 
 var userDetails = [
