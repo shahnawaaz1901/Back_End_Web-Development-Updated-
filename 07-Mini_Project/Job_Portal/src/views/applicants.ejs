@@ -9,12 +9,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="table-active">
-                <td>1</td>
-                <td>Shahnawaaz Ansari</td>
-                <td>+91-9119145616</td>
-                <td><a href="/"><button class="btn btn-primary">View</button></a></td>
-            </tr>
+            <%let index = 1;%>
+            <%for(let everyApplicant of applicants){%>
+                <tr class="table-active">
+                    <td><%=index++%></td>
+                    <td><%= everyApplicant.name %></td>
+                    <td>+91-<%= everyApplicant.contact %></td>
+                    <td><a href="/"><button class="btn btn-primary">View</button></a></td>
+                </tr>
+            <%}%>
         </tbody>
     </table>
 </main>

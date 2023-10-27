@@ -44,11 +44,12 @@ const userController = new UserController();
 app.post("/login",userController.loginUser);
 app.get("/",jobController.getHomePage);
 app.get("/jobs",jobController.getJobPage);
+app.get("/job/applicants/:id", jobController.getJobApplicants);
 app.get("/job/:id",jobController.getJobDescription);
 app.get("/login",userController.getLogin);
 app.post("/ragister",userController.ragisterUser);
 app.post("/apply-job",upload.single('resume'), jobController.addJobApplicant);
-app.get("/postJob",auth)
+// app.get("/postJob",auth)
 app.listen(3200,function(err){
     if(err){
         console.log(`Error : ${err}`);

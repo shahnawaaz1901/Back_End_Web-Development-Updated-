@@ -35,12 +35,12 @@
       </div>
       <div class="ms-4 mb-2">
         <a
-          href="/applicants/<%=job.id%>"
+          href="/job/applicants/<%=job.id%>"
           class="text-danger text-decoration-none"
         >
           <span><i class="fa-solid fa-users"></i></span>
           <span>Applicants</span>
-          <span><%= job.numApplicants %></span>
+          <span><%= job.applicants.length %></span>
         </a>
       </div>
     </div>

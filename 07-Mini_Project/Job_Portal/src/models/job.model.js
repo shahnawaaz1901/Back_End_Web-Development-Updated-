@@ -47,6 +47,7 @@ export default class JobModel {
     for(let everyJob of jobDetails){
       if(everyJob.id == applicantDetail.id){
         everyJob.applicants.push(new ApplicantModel(applicantDetail.name, applicantDetail.email, applicantDetail.contact, applicantDetail.resume));
+        break;
       }
     }
   }
