@@ -4,6 +4,7 @@ import productRouter from "./src/features/products/product.router.js";
 import userRouter from "./src/features/user/user.router.js"
 import bodyParser from "body-parser";
 import basicAuthorizer from "./src/middlewares/basicAuth.middleware.js";
+import jwtAuth from "./src/middlewares/jwt.middleware.js";
 
 //* Start the Server
 const app = express();
@@ -13,7 +14,7 @@ app.use(bodyParser.json());
 
 //* Its Good practice to write the /api first when we Create Route for API
 //* We Only Need to Add Authentication For Access the Products
-app.use("/api/products", basicAuthorizer,productRouter);            
+app.use("/api/products",jwtAuth,productRouter);            
 app.use("/api/users",userRouter);
 
 //* Default Route
