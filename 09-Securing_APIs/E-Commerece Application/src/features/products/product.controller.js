@@ -1,5 +1,6 @@
 import ProductModel from "./product.model.js";
 import path from 'path';
+
 export default class ProductController {
   //* Get All Products
   getProducts(req, res) {

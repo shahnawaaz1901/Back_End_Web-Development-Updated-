@@ -1,4 +1,5 @@
-import UserModel from "./user.model.js";
+import UserModel from "./user.model.js"
+import jwt from "jsonwebtoken";
 export default class UserController{
 
     //* SignUp
@@ -15,7 +16,13 @@ export default class UserController{
         if(!result){
             res.status(400).send("Invalid Credentials , Please Try Again!!");
         }else{
-            res.status(200).send("SignIn Successfully !!");
+            // 1. Generate the Token
+            //* Never Store User Password in Payload
+            //* First Argument is Payload HEader is set by default Which is Algorihtm and Token Type
+            //* Always Write expire token option to expire the token after perticular time
+            const token = jwt.sign({userId : result.id, email : result.email},"2PLVo2mvL3BGWhcSlfbL",{expiresIn : "1h"});
+            // 2. Send token along with response
+            res.status(200).send(token);
         }
     }
 }
