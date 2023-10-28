@@ -44,4 +44,8 @@ export default class JobController {
       applicants : job.applicants
     })
   }
+
+  getPostJobPage(req, res){
+    res.render('post-job');
+  }
 }
