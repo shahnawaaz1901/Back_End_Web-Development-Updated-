@@ -1,17 +1,37 @@
 <main class="container mt-5">
-  <div class="col-10 ps-1 pt-1 bg-dark rounded m-auto">
+  <div class="col-10 ps-1 pt-1 bg-dark rounded m-auto mb-5">
     <div class="bg-white shadow pt-3 pb-4">
       <h1 class="text-center mb-4">Post a New Job</h1>
       <form action="/postJob" method="post" class="col-11 m-auto">
+        <div class="mt-3">
+          <label for="company-name" class="form-label ps-1"
+            >Enter Company Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="company-name"
+            placeholder="Company Name"
+            name="company-name"
+          />
+        </div>
         <div class="job-type">
-          <select class="form-select mt-3" aria-label="Default select example" name="job-type">
+          <select
+            class="form-select mt-3"
+            aria-label="Default select example"
+            name="job-type"
+          >
             <option selected disabled>Select Job Type</option>
             <option value="1">Tech</option>
             <option value="2">Non-Tech</option>
           </select>
         </div>
         <div class="job-desingnation">
-          <select class="form-select mt-3" aria-label="Default select example" name="job-desingnation">
+          <select
+            class="form-select mt-3"
+            aria-label="Default select example"
+            name="job-desingnation"
+          >
             <option selected disabled>Select Job Desingnation</option>
             <option value="1">HR</option>
             <option value="2">SDE</option>
@@ -25,8 +45,67 @@
           </select>
         </div>
         <div class="mt-3">
-          <label for="job-location" class="form-label ps-1">Enter Job Location</label>
-          <input type="text" class="form-control" id="job-location" placeholder="Eg.. Delhi, Noida" name="job-location">
+          <label for="job-location" class="form-label ps-1"
+            >Enter Job Location</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="job-location"
+            placeholder="Eg.. Delhi, Noida"
+            name="job-location"
+          />
+        </div>
+        <div class="mt-3">
+          <label for="job-salary" class="form-label ps-1"
+            >Enter Job Salary</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="job-salary"
+            placeholder="Enter Salary"
+            name="job-salary"
+          />
+        </div>
+        <div class="mt-3">
+          <label for="total-positions" class="form-label ps-1"
+            >Total Positions</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="total-positions"
+            placeholder="Number of Positions"
+            name="total-positions"
+          />
+        </div>
+        <div class="mt-3 row">
+          <div class="col-6">
+            <select
+              class="form-select"
+              multiple
+              aria-label="Multiple select example"
+            >
+              <option selected disabled>Select Require Skills</option>
+              <option value="1">React</option>
+              <option value="2">Node.Js</option>
+              <option value="3">Angular</option>
+              <option value="4">MongoDB</option>
+              <option value="5">Express</option>
+              <option value="6">SQL</option>
+              <option value="7">Java</option>
+              <option value="8">SpringBoot</option>
+              <option value="9">C++</option>
+              <option value="10">Data Structures & Algorithm</option>
+            </select>
+          </div>
+          <div class="mt-3 col-6 row">
+            <div class="col-4">Applied By</div>
+            <div class="col-8">
+              <input type="date" name="date" class="form-control" required />
+            </div>
+          </div>
         </div>
       </form>
     </div>
