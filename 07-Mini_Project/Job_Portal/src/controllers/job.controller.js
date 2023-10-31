@@ -50,6 +50,8 @@ export default class JobController {
   }
 
   postJob(req, res){
-    console.log(req.body);
+    const jobData = req.body;
+    console.log(jobData);
+    JobModel.addJob(jobData);
   }
 }

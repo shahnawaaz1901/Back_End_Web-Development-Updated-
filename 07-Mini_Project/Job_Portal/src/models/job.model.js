@@ -31,8 +31,8 @@ export default class JobModel {
     this.deadline = _deadline;
     this.numOpenings = _numOpenings;
     this.applicants = [];
-    this.jobPostDate = _jobPostDate;
-    this.jobPostTime = _jobPostTime;
+    this.jobPostDate = new Date().toLocaleDateString();
+    this.jobPostTime = new Date().toLocaleTimeString();
   }
   static getJobData() {
     return jobDetails;
@@ -44,12 +44,35 @@ export default class JobModel {
   }
 
   static addApplicants(applicantDetail) {
-    for(let everyJob of jobDetails){
-      if(everyJob.id == applicantDetail.id){
-        everyJob.applicants.push(new ApplicantModel(applicantDetail.name, applicantDetail.email, applicantDetail.contact, applicantDetail.resume));
+    for (let everyJob of jobDetails) {
+      if (everyJob.id == applicantDetail.id) {
+        everyJob.applicants.push(
+          new ApplicantModel(
+            applicantDetail.name,
+            applicantDetail.email,
+            applicantDetail.contact,
+            applicantDetail.resume
+          )
+        );
         break;
       }
     }
+  }
+
+  static addJob(jobDetail) {
+    jobDetails.push(
+      new JobModel(
+        jobDetails.length + 1,
+        jobDetail.companyName,
+        jobDetail.jobType,
+        jobDetail.jobDesingnation,
+        jobDetail.jobLocation,
+        jobDetail.jobSalary,
+        jobDetail.skills,
+        jobDetail.date,
+        jobDetail.totalPositions,
+      )
+    );
   }
 }
 
