@@ -48,5 +48,16 @@ export default class ProductController {
   }
 
   //* Rate the Product
-  rateProduct(req, res) {}
+  rateProduct(req, res) {
+    const {userId, productId, rating} = req.query;
+    //* If some Error Occurs then value of our error variable is filled with error
+    const error = ProductModel.rateProduct(userId, productId, rating);
+
+    //*If Error Occurs
+    if(error){
+      res.status(400).send(error);
+    }else{
+      res.status(200).send("Prodcut Rated Successfully !!");
+    }
+  }
 }

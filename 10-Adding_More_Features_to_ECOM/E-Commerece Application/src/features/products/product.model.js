@@ -1,3 +1,4 @@
+import UserModel from "../user/user.model.js";
 export default class ProductModel {
   constructor(_id, _name, _description, _price, _imageURL, _category, _sizes) {
     this.id = _id;
@@ -39,6 +40,45 @@ export default class ProductModel {
       );
     });
     return filterData;
+  }
+
+  static rateProduct(userId, productId, rating) {
+    const userResult = UserModel.getAllUserDetails().find((user)=> user.id == userId);
+    if(!userResult){
+      return "User not Found !!";
+    }
+
+    const productResult = this.getAll().find((p)=> p.id == productId);
+    if(!productResult){
+      return "Product Not Found !!";
+    } 
+
+    //* If Ratings not Given By the User
+    if(!productResult.ratings){
+      productResult.ratings = [];
+      productResult.ratings.push({
+        userId : userId,
+        rating : rating,
+      })
+    }
+    //* If Ratings Already Exist
+    else{
+      const userRatingsIndex = productResult.ratings.findIndex((p)=> p.userId == userId);
+      if(userRatingsIndex >= 0){
+        productResult.ratings[userRatingsIndex] = {
+          userId : userId,
+          rating : rating
+        }
+      }
+      //* If Rating Not Exist
+      else{
+        productResult.ratings.push({
+          userId : userId,
+          rating : rating,
+        })
+      }
+    }
+
   }
 }
 
