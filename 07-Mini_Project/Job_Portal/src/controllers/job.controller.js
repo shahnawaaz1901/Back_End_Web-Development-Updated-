@@ -48,4 +48,8 @@ export default class JobController {
   getPostJobPage(req, res){
     res.render('post-job');
   }
+
+  postJob(req, res){
+    console.log(req.body);
+  }
 }

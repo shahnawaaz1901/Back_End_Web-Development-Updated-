@@ -22,8 +22,8 @@
             name="job-type"
           >
             <option selected disabled>Select Job Type</option>
-            <option value="1">Tech</option>
-            <option value="2">Non-Tech</option>
+            <option value="Tech">Tech</option>
+            <option value="Non-Tech">Non-Tech</option>
           </select>
         </div>
         <div class="job-desingnation">
@@ -33,15 +33,15 @@
             name="job-desingnation"
           >
             <option selected disabled>Select Job Desingnation</option>
-            <option value="1">HR</option>
-            <option value="2">SDE</option>
-            <option value="3">DevOps</option>
-            <option value="4">MERN Developer</option>
-            <option value="5">MEAN Developer</option>
-            <option value="6">JAVA Developer</option>
-            <option value="7">Front End Developer</option>
-            <option value="8">Back End Developer</option>
-            <option value="9">Full Stack Web Developer</option>
+            <option value="HR">HR</option>
+            <option value="SDE">SDE</option>
+            <option value="DevOps">DevOps</option>
+            <option value="MERN Developer">MERN Developer</option>
+            <option value="MEAN Developer">MEAN Developer</option>
+            <option value="JAVA Developer">JAVA Developer</option>
+            <option value="FrontEnd Developer">Front End Developer</option>
+            <option value="BackEnd Developer">Back End Developer</option>
+            <option value="Full Stack Web Developer">Full Stack Web Developer</option>
           </select>
         </div>
         <div class="mt-3">
@@ -86,18 +86,19 @@
               class="form-select"
               multiple
               aria-label="Multiple select example"
+              name = "skills"
             >
               <option selected disabled>Select Require Skills</option>
-              <option value="1">React</option>
-              <option value="2">Node.Js</option>
-              <option value="3">Angular</option>
-              <option value="4">MongoDB</option>
-              <option value="5">Express</option>
-              <option value="6">SQL</option>
-              <option value="7">Java</option>
-              <option value="8">SpringBoot</option>
-              <option value="9">C++</option>
-              <option value="10">Data Structures & Algorithm</option>
+              <option value="React">React</option>
+              <option value="Node.Js">Node.Js</option>
+              <option value="Angular">Angular</option>
+              <option value="MongoDB">MongoDB</option>
+              <option value="Express">Express</option>
+              <option value="SQL">SQL</option>
+              <option value="Java">Java</option>
+              <option value="SpringBoot">SpringBoot</option>
+              <option value="C++">C++</option>
+              <option value="Data Structures & Algo">Data Structures & Algorithm</option>
             </select>
           </div>
           <div class="mt-3 col-6 row">
@@ -106,6 +107,9 @@
               <input type="date" name="date" class="form-control" required />
             </div>
           </div>
+        </div>
+        <div class="mt-3 text-center">
+          <button class="btn btn-success col-6">Add job</button>
         </div>
       </form>
     </div>
