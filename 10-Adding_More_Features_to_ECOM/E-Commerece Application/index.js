@@ -5,12 +5,17 @@ import userRouter from "./src/features/user/user.router.js"
 import bodyParser from "body-parser";
 import basicAuthorizer from "./src/middlewares/basicAuth.middleware.js";
 import jwtAuth from "./src/middlewares/jwt.middleware.js";
+import cookieParser from "cookie-parser";
 
 //* Start the Server
 const app = express();
 
+//* SetUp Cookie Parser
+app.use(cookieParser());
+
 //* Body Parser Use to Get Data on req.body
 app.use(bodyParser.json());
+
 
 app.use("/api/products",jwtAuth,productRouter);            
 app.use("/api/users",userRouter);

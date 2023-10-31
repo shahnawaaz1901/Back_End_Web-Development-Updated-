@@ -78,6 +78,7 @@ export default class ProductModel {
         })
       }
     }
+    console.log(this.getAll());
 
   }
 }
