@@ -51,6 +51,7 @@ app.post("/ragister",userController.ragisterUser);
 app.post("/apply-job",upload.single('resume'), jobController.addJobApplicant);
 app.get("/postJob",jobController.getPostJobPage);
 app.post("/postJob",jobController.postJob);
+app.get("/update-job/:id", jobController.updateJob);
 app.listen(3200,function(err){
     if(err){
         console.log(`Error : ${err}`);

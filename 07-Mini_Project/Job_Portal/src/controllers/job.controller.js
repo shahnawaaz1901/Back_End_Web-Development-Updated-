@@ -51,7 +51,6 @@ export default class JobController {
 
   postJob(req, res){
     const jobData = req.body;
-    console.log(jobData);
     JobModel.addJob(jobData);
     res.redirect('/jobs');
   }

@@ -18,9 +18,10 @@ export default class UserController {
 
   loginUser(req, res) {
     const result = UserModel.authenticateUser(req.body);
+    console.log(result);
     if (result) {
-      req.session.userEmail = req.body.email;
-      console.log(res.session.userEmail);
+      // req.session.userName = result.name;
+      // console.log(res.session.userName);
       res.redirect("/jobs",{result});
     } else {
       res.render("login", {
