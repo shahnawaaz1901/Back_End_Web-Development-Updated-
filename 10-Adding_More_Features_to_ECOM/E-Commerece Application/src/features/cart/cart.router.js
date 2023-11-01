@@ -10,6 +10,6 @@ const cartController = new CartController();
 
 //* Add Product to the Cart
 cartRouter.post("/addToCart",cartController.addToCart);
-
+cartRouter.get("/",cartController.getCartItems);
 //* Export Router
 export default cartRouter;

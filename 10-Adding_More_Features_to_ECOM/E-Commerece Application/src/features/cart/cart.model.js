@@ -10,6 +10,11 @@ export default class CartModel {
     cartItems.push(new CartModel(cartItems.length + 1, productId, userId, quantity));
     return cartItems;
   }
+
+  static getAllCartItemsOfUser(userId){
+    const result = cartItems.filter((c)=> c.userId == userId);
+    return result;
+  }
 }
 
 var cartItems = [];

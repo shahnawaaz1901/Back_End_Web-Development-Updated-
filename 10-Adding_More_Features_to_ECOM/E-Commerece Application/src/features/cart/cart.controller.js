@@ -13,5 +13,9 @@ export default class CartController {
     res.status(201).send("Item Added Successfully !!");
   }
 
+  getCartItems(req, res){
+    const userId = req.userId;
+    return res.status(200).send(CartModel.getAllCartItemsOfUser(userId));
+  }
   removeFromCart(req, res) {}
 }
