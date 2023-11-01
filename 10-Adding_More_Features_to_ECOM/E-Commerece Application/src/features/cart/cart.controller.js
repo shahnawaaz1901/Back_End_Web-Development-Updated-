@@ -8,8 +8,9 @@ export default class CartController {
 
     */
     const userId = req.userId;
-    CartModel.addItemsToCart(productId, userId, quantity);
-    req.status(201).send("Item Added Successfully !!");
+    const result = CartModel.addItemsToCart(productId, userId, quantity);
+    console.log(result);
+    res.status(201).send("Item Added Successfully !!");
   }
 
   removeFromCart(req, res) {}

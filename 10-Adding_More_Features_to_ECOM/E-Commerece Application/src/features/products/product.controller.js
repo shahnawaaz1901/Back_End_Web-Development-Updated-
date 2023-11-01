@@ -49,8 +49,8 @@ export default class ProductController {
 
   //* Rate the Product
   rateProduct(req, res) {
-    console.log(req.query);
-    const {userId, productId, rating} = req.query;
+    const {productId, rating} = req.query;
+    const userId = req.userId;
     //* If some Error Occurs then value of our error variable is filled with error
     const error = ProductModel.rateProduct(userId, productId, rating);
 
