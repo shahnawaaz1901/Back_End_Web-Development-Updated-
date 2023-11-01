@@ -18,8 +18,8 @@ export default class CartModel {
     return result;
   }
 
-  static deleteItemFromCart(cartItemId) {
-    const itemIndex = cartItems.findIndex((c)=> c.id == cartItemId);
+  static deleteItemFromCart(cartItemId, userId) {
+    const itemIndex = cartItems.findIndex((c)=> c.id == cartItemId && c.userId == userId);
     if(itemIndex == -1){
         return "Item not Found";
     }else{

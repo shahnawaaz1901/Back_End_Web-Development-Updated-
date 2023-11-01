@@ -11,6 +11,6 @@ const cartController = new CartController();
 //* Add Product to the Cart
 cartRouter.post("/addToCart",cartController.addToCart);
 cartRouter.get("/",cartController.getCartItems);
-cartRouter.post("/remove/:itemId", cartController.removeFromCart);
+cartRouter.delete("/remove/:itemId", cartController.removeFromCart);
 //* Export Router
 export default cartRouter;
