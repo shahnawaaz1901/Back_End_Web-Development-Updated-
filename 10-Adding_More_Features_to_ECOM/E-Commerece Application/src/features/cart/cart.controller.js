@@ -17,5 +17,14 @@ export default class CartController {
     const userId = req.userId;
     return res.status(200).send(CartModel.getAllCartItemsOfUser(userId));
   }
-  removeFromCart(req, res) {}
+  removeFromCart(req, res) {
+    const {itemId} = req.params;
+    const result = CartModel.removeFromCart(itemId);
+    if(result){
+        res.status(404).send(result);
+    }else{
+        res.status(200).send("Item Remove Successfully from Cart !!");
+    }
+
+  }
 }

@@ -6,14 +6,25 @@ export default class CartModel {
     this.id = _id;
   }
 
-  static addItemsToCart(productId, userId, quantity){
-    cartItems.push(new CartModel(cartItems.length + 1, productId, userId, quantity));
+  static addItemsToCart(productId, userId, quantity) {
+    cartItems.push(
+      new CartModel(cartItems.length + 1, productId, userId, quantity)
+    );
     return cartItems;
   }
 
-  static getAllCartItemsOfUser(userId){
-    const result = cartItems.filter((c)=> c.userId == userId);
+  static getAllCartItemsOfUser(userId) {
+    const result = cartItems.filter((c) => c.userId == userId);
     return result;
+  }
+
+  static deleteItemFromCart(cartItemId) {
+    const itemIndex = cartItems.findIndex((c)=> c.id == cartItemId);
+    if(itemIndex == -1){
+        return "Item not Found";
+    }else{
+        cartItems.splice(itemIndex, 1);
+    }
   }
 }
 
