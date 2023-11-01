@@ -24,34 +24,36 @@ export default class JobController {
   }
 
   addJobApplicant(req, res) {
-    const {id, name, email, contact} = req.body;
-    const resume = path.join("public","data",req.file.filename);
+    const { id, name, email, contact } = req.body;
+    const resume = path.join("public", "data", req.file.filename);
     const obj = {
       id,
       name,
       email,
       contact,
       resume,
-    }
+    };
     JobModel.addApplicants(obj);
-    res.redirect('back');
+    res.redirect("back");
   }
 
-  getJobApplicants(req, res){
+  getJobApplicants(req, res) {
     const id = req.params.id;
     const job = JobModel.getJobById(id);
-    res.render('applicants',{
-      applicants : job.applicants
-    })
+    res.render("applicants", {
+      applicants: job.applicants,
+    });
   }
 
-  getPostJobPage(req, res){
-    res.render('post-job');
+  getPostJobPage(req, res) {
+    res.render("post-job");
   }
 
-  postJob(req, res){
+  postJob(req, res) {
     const jobData = req.body;
     JobModel.addJob(jobData);
-    res.redirect('/jobs');
+    res.redirect("/jobs");
   }
+
+  updateJob(req, res) {}
 }
