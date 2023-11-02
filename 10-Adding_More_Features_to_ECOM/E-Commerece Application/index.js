@@ -1,12 +1,22 @@
 //* Import Modules
 import express from "express";
+import swagger from "swagger-ui-express";
+import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
+
 import productRouter from "./src/features/products/product.router.js";
 import userRouter from "./src/features/user/user.router.js";
 import cartRouter from "./src/features/cart/cart.router.js";
-import bodyParser from "body-parser";
 // import basicAuthorizer from "./src/middlewares/basicAuth.middleware.js";   //* Replace with jwt
 import jwtAuth from "./src/middlewares/jwt.middleware.js";
-import cookieParser from "cookie-parser";
+
+/* 
+  If we directly import normally any json file then it thrown an error 
+  because import function imports the javascript mdoule so we need to tell
+  explicitly that this is a json object by writing an assert keyword and add
+  an object and put type value is json in that object
+*/
+import apiDocs from "./swagger.json" assert {type : 'json'};
 
 //* Start the Server
 const app = express();
@@ -17,7 +27,11 @@ app.use(cookieParser());
 //* Body Parser Use to Get Data on req.body
 app.use(bodyParser.json());
 
-
+/* 
+  Swagger.serve create interface documentation and and swagger.setup pass json for 
+  render on the screen
+*/
+app.use("/api-docs", swagger.serve, swagger.setup(apiDocs))
 app.use("/api/products",jwtAuth,productRouter);            
 app.use("/api/users",userRouter);
 app.use("/api/cart", jwtAuth, cartRouter);

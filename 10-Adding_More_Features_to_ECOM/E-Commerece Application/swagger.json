@@ -1,0 +1,44 @@
+{
+    "swagger" : "2.0",
+    "info" : {
+        "version" : "1.0.0",
+        "description" : "API for E Commerce Application",
+        "title" : "E Commerce API"
+    },
+    "host" : "localhost3200",
+    "paths" : {
+        "api/users/signin" : {
+            "post" : {
+                "summary" : "login",
+                "description" : "user login to get token",
+                "parameters" : [
+                    {
+                        "in" : "body",
+                        "name" : "body",
+                        "description" : "user credentials",
+                        "schema" : {
+                            "type" : "object",
+                            "properties" : {
+                                "email" : {
+                                    "type" : "string"
+                                },
+                                "password" : {
+                                    "type" : "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "OK"
+                    },
+                    "400" : {
+                        "description" : "Invalid Credentials , Please Try Again!!"
+                    }
+                }
+            }
+        }
+        
+    }
+}
