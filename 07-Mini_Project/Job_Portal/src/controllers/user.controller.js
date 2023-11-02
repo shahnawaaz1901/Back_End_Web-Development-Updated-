@@ -1,11 +1,11 @@
 import session from "express-session";
 import UserModel from "../models/user.model.js";
-import  sendNotification from "../../nodemailer.js"
+import sendNotification from "../../nodemailer.js";
 export default class UserController {
   getLogin(req, res) {
     res.render("login", {
       title: "Login",
-      error : null
+      error: null,
     });
   }
 
@@ -19,9 +19,8 @@ export default class UserController {
   loginUser(req, res) {
     const result = UserModel.authenticateUser(req.body);
     if (result) {
-      req.session.userEmail = req.body.email;
-      console.log(res.session.userEmail);
-      res.redirect("/jobs",{result});
+      req.session.name = result.name;
+      res.render("index", { name: result.name, title: "Easy - A Job Portal" });
     } else {
       res.render("login", {
         title: "Login",

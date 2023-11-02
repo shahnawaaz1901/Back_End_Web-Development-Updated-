@@ -3,7 +3,7 @@ import path from "path";
 
 export default class JobController {
   getHomePage(req, res) {
-    res.render("index", { title: "Easy - A Job Portal" });
+    res.render("index", { title: "Easy - A Job Portal" , name : null});
   }
 
   getJobPage(req, res) {
