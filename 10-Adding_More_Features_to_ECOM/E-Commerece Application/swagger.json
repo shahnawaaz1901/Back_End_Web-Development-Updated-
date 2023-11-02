@@ -5,9 +5,9 @@
         "description" : "API for E Commerce Application",
         "title" : "E Commerce API"
     },
-    "host" : "localhost3200",
+    "host" : "localhost:3200",
     "paths" : {
-        "api/users/signin" : {
+        "/api/users/login" : {
             "post" : {
                 "summary" : "login",
                 "description" : "user login to get token",
