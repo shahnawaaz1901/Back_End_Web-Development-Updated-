@@ -1,23 +1,24 @@
 <main class="container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Contact</th>
-                <th scope="col">Resume</th>
-            </tr>
-        </thead>
-        <tbody>
-            <%let index = 1;%>
-            <%for(let everyApplicant of applicants){%>
-                <tr class="table-active">
-                    <td><%=index++%></td>
-                    <td><%= everyApplicant.name %></td>
-                    <td>+91-<%= everyApplicant.contact %></td>
-                    <td><a href="/"><button class="btn btn-primary">View</button></a></td>
-                </tr>
-            <%}%>
-        </tbody>
-    </table>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Contact</th>
+        <th scope="col">Resume</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%let index = 1;%> <%for(let everyApplicant of applicants){%>
+      <tr class="table-active">
+        <td><%=index++%></td>
+        <td><%= everyApplicant.name %></td>
+        <td>+91-<%= everyApplicant.contact %></td>
+        <td>
+          <a href="/"><button class="btn btn-primary">View</button></a>
+        </td>
+      </tr>
+      <%}%>
+    </tbody>
+  </table>
 </main>

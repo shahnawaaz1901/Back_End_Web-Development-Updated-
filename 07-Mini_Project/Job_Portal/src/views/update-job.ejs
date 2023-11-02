@@ -1,0 +1,121 @@
+<main class="container mt-5">
+    <div class="col-10 ps-1 pt-1 bg-dark rounded m-auto mb-5">
+      <div class="bg-white shadow pt-3 pb-4">
+        <h1 class="text-center mb-4">Post a New Job</h1>
+        <form action="/postJob" method="post" class="col-11 m-auto">
+          <div class="mt-3">
+            <input type="hidden" name="id" id="id" value="<%%>">
+            <label for="company-name" class="form-label ps-1"
+              >Enter Company Name</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="company-name"
+              placeholder="Company Name"
+              name="companyName"
+            />
+          </div>
+          <div class="job-type">
+            <select
+              class="form-select mt-3"
+              aria-label="Default select example"
+              name="jobType"
+            >
+              <option selected disabled>Select Job Type</option>
+              <option value="Tech">Tech</option>
+              <option value="Non-Tech">Non-Tech</option>
+            </select>
+          </div>
+          <div class="job-desingnation">
+            <select
+              class="form-select mt-3"
+              aria-label="Default select example"
+              name="jobDesingnation"
+            >
+              <option selected disabled>Select Job Desingnation</option>
+              <option value="HR">HR</option>
+              <option value="SDE">SDE</option>
+              <option value="DevOps">DevOps</option>
+              <option value="MERN Developer">MERN Developer</option>
+              <option value="MEAN Developer">MEAN Developer</option>
+              <option value="JAVA Developer">JAVA Developer</option>
+              <option value="FrontEnd Developer">Front End Developer</option>
+              <option value="BackEnd Developer">Back End Developer</option>
+              <option value="Full Stack Web Developer">Full Stack Web Developer</option>
+            </select>
+          </div>
+          <div class="mt-3">
+            <label for="job-location" class="form-label ps-1"
+              >Enter Job Location</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="job-location"
+              placeholder="Eg.. Delhi, Noida"
+              name="jobLocation"
+            />
+          </div>
+          <div class="mt-3">
+            <label for="job-salary" class="form-label ps-1"
+              >Enter Job Salary</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="job-salary"
+              placeholder="Enter Salary"
+              name="jobSalary"
+            />
+          </div>
+          <div class="mt-3">
+            <label for="total-positions" class="form-label ps-1"
+              >Total Positions</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="total-positions"
+              placeholder="Number of Positions"
+              name="totalPositions"
+            />
+          </div>
+          <div class="mt-3 row">
+            <div class="col-6">
+              <select
+                class="form-select"
+                multiple
+                aria-label="Multiple select example"
+                name = "skills"
+              >
+                <option selected disabled>Select Require Skills</option>
+                <option value="React" >React</option>
+                <option value="Node.Js">Node.Js</option>
+                <option value="Angular">Angular</option>
+                <option value="AWS">AWS</option>
+                <option value="JS">JS</option>
+                <option value="MongoDB">MongoDB</option>
+                <option value="Express">Express</option>
+                <option value="SQL">SQL</option>
+                <option value="Java">Java</option>
+                <option value="SpringBoot">SpringBoot</option>
+                <option value="C++">C++</option>
+                <option value="Data Structures & Algo">Data Structures & Algorithm</option>
+              </select>
+            </div>
+            <div class="mt-3 col-6 row">
+              <div class="col-4">Applied By</div>
+              <div class="col-8">
+                <input type="date" value="" name="date" class="form-control" required />
+              </div>
+            </div>
+          </div>
+          <div class="mt-3 text-center">
+            <button class="btn btn-success col-6">Update Job</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  

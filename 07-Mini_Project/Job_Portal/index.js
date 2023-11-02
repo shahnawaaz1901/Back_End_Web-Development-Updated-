@@ -21,8 +21,6 @@ app.set("views",path.join("src","views"));
 app.use(expressEjsLayouts);
 
 //* Use Body Parser
-// app.use(express.urlencoded({extended : true}))
-app.use(express.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
 //* Use Express Sessions
