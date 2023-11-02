@@ -6,9 +6,17 @@
         "title" : "E Commerce API"
     },
     "host" : "localhost:3200",
+    "securityDefinitions" : {
+        "JWT" : {
+            "in" : "header",
+            "name" : "Authorization",
+            "type" : "APIkey"
+        }
+    },
     "paths" : {
         "/api/users/login" : {
             "post" : {
+                "tags" : ["Users"],
                 "summary" : "login",
                 "description" : "user login to get token",
                 "parameters" : [
@@ -35,6 +43,27 @@
                     },
                     "400" : {
                         "description" : "Invalid Credentials , Please Try Again!!"
+                    }
+                }
+            }
+        },
+        "/api/products/" : {
+            "get" : {
+                "tags" : ["Products"],
+                "summary" : "get Products",
+                "description" : "For Get the All Products",
+                
+                "security" : [
+                    {
+                        "JWT" : {}
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "OK"
+                    },
+                    "401" : {
+                        "description" : "UnAuthorize Access"
                     }
                 }
             }
