@@ -1,5 +1,5 @@
 /* 
-    CORS : CORS Stand for Cross Origin Requests.This Means When We Run the Server
+    CORS : CORS Stand for Cross Origin Resource Sharing .This Means When We Run the Server
         on a PORT if we Our Client Which Runs UI on Different PORT and if that 
         Client sends request to the Server then that Client Not Able to fetch the
         data and an error is Occur. This is the CORS Policy Which Means Cross 
