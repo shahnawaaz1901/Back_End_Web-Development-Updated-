@@ -56,7 +56,10 @@ app.get("/", function (req, res) {
   this middleware always executes on Any Request. 
 */
 app.use((req, res)=>{
-  req.status(404).send("API Which You Looking for Is Not Exist .. :-(")
+  res.status(404).send({
+    status : "failure",
+    massage : "API Which You Looking for Is Not Exist, Please Visit Our API Documentation on http://localhost:3200/api-docs/ for More Details"
+  })
 })
 
 //* Listen the Server on Port 3200
