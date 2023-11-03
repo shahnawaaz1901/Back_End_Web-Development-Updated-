@@ -3,14 +3,16 @@ import path from "path";
 
 export default class JobController {
   getHomePage(req, res) {
-    res.render("index", { title: "Easy - A Job Portal", name: null });
+    res.render("index", { title: "Easy - A Job Portal", name: req.session.name });
   }
 
   getJobPage(req, res) {
     let jobs = JobModel.getJobData();
     res.render("jobs", {
       title: "Easy - Jobs Section",
+      name : req.session.name,
       jobs,
+      
     });
   }
 
@@ -20,6 +22,7 @@ export default class JobController {
     res.render("job-description", {
       title: "Job Description",
       job: jobData,
+      name : req.session.name
     });
   }
 
@@ -34,7 +37,7 @@ export default class JobController {
       resume,
     };
     JobModel.addApplicants(obj);
-    res.redirect("back");
+    res.render("jobs",{name : req.session.name, });
   }
 
   getJobApplicants(req, res) {
@@ -42,17 +45,18 @@ export default class JobController {
     const job = JobModel.getJobById(id);
     res.render("applicants", {
       applicants: job.applicants,
+      name : req.session.name
     });
   }
 
   getPostJobPage(req, res) {
-    res.render("post-job");
+    res.render("post-job", {name : req.session.name});
   }
 
   postJob(req, res) {
     const jobData = req.body;
     JobModel.addJob(jobData);
-    res.redirect("/jobs");
+    res.render("jobs", {name : req.session.name});
   }
 
   updateJob(req, res) {

@@ -51,15 +51,24 @@
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Recruiter
+                  <% if(locals.name){%> <%= locals.name %> <%}else{%> Recruiter
+                  <%}%>
                 </a>
                 <ul class="dropdown-menu bg-light">
                   <li>
+                    <%if(locals.name){%>
+                    <a
+                      class="dropdown-item text-dark border-bottom"
+                      href="/logout"
+                      >Logout</a
+                    >
+                    <%}else{%>
                     <a
                       class="dropdown-item text-dark border-bottom"
                       href="/login"
                       >Login</a
                     >
+                    <%}%>
                   </li>
                   <li>
                     <a

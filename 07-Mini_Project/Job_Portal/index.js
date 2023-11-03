@@ -21,6 +21,9 @@ app.set("views",path.join("src","views"));
 app.use(expressEjsLayouts);
 
 //* Use Body Parser
+//* parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }))
+/* Extend True Means You Dont Want Prototype of Object Want Only Object */
 app.use(bodyParser.json());
 
 //* Use Express Sessions

@@ -1,5 +1,8 @@
 import nodemailer from "nodemailer";
 const sendNotification = (email, reason) => {
+  if(!email){
+    return;
+  }
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
