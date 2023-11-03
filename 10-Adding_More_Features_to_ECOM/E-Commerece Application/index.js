@@ -25,6 +25,7 @@ const app = express();
 app.use(cookieParser());
 
 //* Body Parser Use to Get Data on req.body
+app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
 /* 
