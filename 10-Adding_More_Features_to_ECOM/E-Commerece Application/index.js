@@ -36,11 +36,28 @@ app.use("/api-docs", swagger.serve, swagger.setup(apiDocs))
 app.use("/api/products",jwtAuth,productRouter);            
 app.use("/api/users",userRouter);
 app.use("/api/cart", jwtAuth, cartRouter);
-
 //* Default Route
 app.get("/", function (req, res) {
   res.send("Welcome to API Application !!");
 });
+/* 
+  If User Search for an API which Not Exist Then Our Express Server Send the Default 
+  Response Can't Get But How Can We Tell the User that Resource which User Looking for
+  is Not Exist . We Need to Add Middleware At the Bottom of All Routes that Resource
+  Which user looking for is not Exist 
+*/
+//* Handle 404 Error
+
+/* 
+  We Write this Middleware Because this middlware not have any paths that's why this
+  middleware is always executes if user request routes not matched with above routes
+  and we can Understand this concept with middleware functions which we use like cookie
+  parses bodyParser sessions this all middlewares not depend on any routes that's why 
+  this middleware always executes on Any Request. 
+*/
+app.use((req, res)=>{
+  req.status(404).send("API Which You Looking for Is Not Exist .. :-(")
+})
 
 //* Listen the Server on Port 3200
 app.listen(3200, function (err) {
