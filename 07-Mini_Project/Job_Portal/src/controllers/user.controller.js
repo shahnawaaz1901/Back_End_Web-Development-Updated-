@@ -28,4 +28,12 @@ export default class UserController {
       });
     }
   }
+
+  logOut(req, res){
+    const name = req.session.name;
+    req.session.destroy(()=>{
+      console.log(`Session is Ended for ${name}!!`);
+      res.redirect("/");
+    })
+  }
 }
