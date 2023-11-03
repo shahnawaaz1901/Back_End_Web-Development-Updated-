@@ -3,6 +3,7 @@ import express from "express";
 import swagger from "swagger-ui-express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+import cors from 'cors';
 
 import productRouter from "./src/features/products/product.router.js";
 import userRouter from "./src/features/user/user.router.js";
@@ -20,20 +21,19 @@ import apiDocs from "./swagger.json" assert { type: "json" };
 
 //* Start the Server
 const app = express();
-
+/* Instead of Implement Explicitly We Can implement By npm package
 app.use((req, res, next) => {
-  /* 
+   
     For Allow Our Server to Serve response to Different Origin We Need to set
     response header access-control-allow-origin to that perticular origin link
     which we want to allow to access the data after the API Call Which is Done
     By the Client Side.
-  */
-  /* 
+   
     We Always need to Speicify Access Controll to the Response Object no the 
     Req Object because it's the Server responsibiliy for response it's not 
     Client responsibility thats why we Only need to specify access control to
     the response Object 
-  */
+  
 
   //* Response header for all Origins withOut restrictions
   //* res.header("Access-Allow-Control-Origin", "*");
@@ -41,32 +41,42 @@ app.use((req, res, next) => {
   //* Response Header for a specific Different Origin
   res.header("Access-Control-Allow-Origin", "http://localhost:3200");
     
-  /*
+  
     We Also need to configure what all type of headers client can send as part of
     CORS policy 
-  */
+  
   app.use("Access-Control-Allow-Header","content-type, authorization");
 
-  /*
+  
     Along with this we Also Need to Specify that what kind of http methods allows
     to the Client to make API Call to the Server default value for the request
     method type is '*' which means All type of Request Methods Allow to Client
-  */
+  
   app.use("Access-Control-Allow-Method","*");
-  /*
-    Preflight : Preflight is the verification request that ensures does server
+
+  Preflight : Preflight is the verification request that ensures does server
             needs to response this request. Why Browser sent the preFlight Request
             because we have pass a header which is authorization header for 
             secure our APIs. In preFlight request browser sent request to the server
             which http request method is options which we Not Specified We Specify
             Only get and Post Request method that's why we need to sent a response 
             to the browser with ok massage  
-  */
   if(req.method == "OPTIONS"){
     res.sendStatus(200);
   }
   next();
 });
+*/
+
+/* 
+  If we Not Pass Anything in cors then it allows to all origin and all headers
+  to make request to the server if we want to change something then we need to
+  pass an object by simplifying the values which we want to change from default
+  all to specific. preFlight Request default taken care by the cors package
+*/
+app.use(cors({
+  origin : "http://localhost:5500"
+}));
 
 //* SetUp Cookie Parser
 app.use(cookieParser());
