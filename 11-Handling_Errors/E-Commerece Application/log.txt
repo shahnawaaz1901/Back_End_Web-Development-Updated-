@@ -1,0 +1,1 @@
+{"level":"info","message":"/api/products/ {\"email\":\"admin@ecom.in\",\"password\":\"admin@1234\"}","service":"request-logging"}
