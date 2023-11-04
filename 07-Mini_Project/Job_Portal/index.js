@@ -52,7 +52,7 @@ app.post("/ragister",userController.ragisterUser);
 app.post("/apply-job",upload.single('resume'), jobController.addJobApplicant);
 app.get("/postJob",jobController.getPostJobPage);
 app.post("/postJob",jobController.postJob);
-app.get("/update-job/:id", jobController.updateJob);
+app.get("/update/:id", jobController.updateJob);
 app.get("/logout",userController.logOut);
 
 app.listen(3200,function(err){

@@ -60,6 +60,12 @@ export default class JobController {
   }
 
   updateJob(req, res) {
-    const { id } = req.body;
+    const { id } = req.params;
+    const job = JobModel.getJobById(id);
+    if(job){
+      res.render("update-job",{name : req.session.name, job,title : "Update Job | Easily"})
+    }else{
+      res.send("Job Not Found !!");
+    }
   }
 }
