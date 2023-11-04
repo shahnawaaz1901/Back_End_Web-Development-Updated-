@@ -3,16 +3,18 @@ import path from "path";
 
 export default class JobController {
   getHomePage(req, res) {
-    res.render("index", { title: "Job Portal | Easily", name: req.session.name });
+    res.render("index", {
+      title: "Job Portal | Easily",
+      name: req.session.name,
+    });
   }
 
   getJobPage(req, res) {
     let jobs = JobModel.getJobData();
     res.render("jobs", {
       title: "Jobs | Easily",
-      name : req.session.name,
+      name: req.session.name,
       jobs,
-      
     });
   }
 
@@ -22,7 +24,7 @@ export default class JobController {
     res.render("job-description", {
       title: "Job Description | Easily",
       job: jobData,
-      name : req.session.name
+      name: req.session.name,
     });
   }
 
@@ -37,34 +39,43 @@ export default class JobController {
       resume,
     };
     JobModel.addApplicants(obj);
-    res.render("jobs",{name : req.session.name, });
+    res.render("jobs", { name: req.session.name });
   }
 
   getJobApplicants(req, res) {
     const id = req.params.id;
     const job = JobModel.getJobById(id);
     res.render("applicants", {
+      title : "Applicant Details | Easily",
       applicants: job.applicants,
-      name : req.session.name
+      name: req.session.name,
     });
   }
 
   getPostJobPage(req, res) {
-    res.render("post-job", {name : req.session.name, title : "Post Job | Easily"});
+    res.render("post-job", {
+      title: "Post Job | Easily",
+      name: req.session.name,
+    });
   }
 
   postJob(req, res) {
     const jobData = req.body;
     JobModel.addJob(jobData);
-    res.render("jobs", {name : req.session.name});
+    const jobs = JobModel.getJobData();
+    res.render("jobs", { name: req.session.name , jobs});
   }
 
   updateJob(req, res) {
     const { id } = req.params;
     const job = JobModel.getJobById(id);
-    if(job){
-      res.render("update-job",{name : req.session.name, job,title : "Update Job | Easily"})
-    }else{
+    if (job) {
+      res.render("update-job", {
+        title: "Update Job | Easily",
+        name: req.session.name,
+        job,
+      });
+    } else {
       res.send("Job Not Found !!");
     }
   }
