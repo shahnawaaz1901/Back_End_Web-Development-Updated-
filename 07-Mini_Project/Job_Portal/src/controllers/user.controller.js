@@ -37,7 +37,3 @@ export default class UserController {
     })
   }
 }
-/*
-  Edit Icon <i class="fa-regular fa-pen-to-square"></i>
-  Delete Icon <i class="fa-solid fa-trash-can"></i>
-*/
