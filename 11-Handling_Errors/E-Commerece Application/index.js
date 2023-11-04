@@ -11,6 +11,7 @@ import cartRouter from "./src/features/cart/cart.router.js";
 import jwtAuth from "./src/middlewares/jwt.middleware.js";
 
 import apiDocs from "./swagger.json" assert { type: "json" };
+import logMiddleware from "./src/middlewares/logger.middleware.js";
 
 //* Start the Server
 const app = express();
@@ -25,6 +26,8 @@ app.use(cookieParser());
 //* Body Parser Use to Get Data on req.body
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use(logMiddleware);
 
 app.use("/api-docs", swagger.serve, swagger.setup(apiDocs));
 app.use("/api/products", jwtAuth, productRouter);
