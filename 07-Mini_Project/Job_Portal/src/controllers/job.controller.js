@@ -3,13 +3,13 @@ import path from "path";
 
 export default class JobController {
   getHomePage(req, res) {
-    res.render("index", { title: "Easy - A Job Portal", name: req.session.name });
+    res.render("index", { title: "Job Portal | Easily", name: req.session.name });
   }
 
   getJobPage(req, res) {
     let jobs = JobModel.getJobData();
     res.render("jobs", {
-      title: "Easy - Jobs Section",
+      title: "Jobs | Easily",
       name : req.session.name,
       jobs,
       
@@ -20,7 +20,7 @@ export default class JobController {
     const id = req.params.id;
     const jobData = JobModel.getJobById(id);
     res.render("job-description", {
-      title: "Job Description",
+      title: "Job Description | Easily",
       job: jobData,
       name : req.session.name
     });
@@ -50,7 +50,7 @@ export default class JobController {
   }
 
   getPostJobPage(req, res) {
-    res.render("post-job", {name : req.session.name});
+    res.render("post-job", {name : req.session.name, title : "Post Job | Easily"});
   }
 
   postJob(req, res) {

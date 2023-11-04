@@ -4,7 +4,7 @@ import sendNotification from "../../nodemailer.js";
 export default class UserController {
   getLogin(req, res) {
     res.render("login", {
-      title: "Login",
+      title: "Recruiter Login | Easily",
       error: null,
     });
   }
@@ -20,7 +20,7 @@ export default class UserController {
     const result = UserModel.authenticateUser(req.body);
     if (result) {
       req.session.name = result.name;
-      res.render("index", { name: result.name, title: "Easy - A Job Portal" });
+      res.render("index", { name: result.name, title: "Job Portal | Easily" });
     } else {
       res.render("login", {
         title: "Login",
@@ -37,3 +37,7 @@ export default class UserController {
     })
   }
 }
+/*
+  Edit Icon <i class="fa-regular fa-pen-to-square"></i>
+  Delete Icon <i class="fa-solid fa-trash-can"></i>
+*/
