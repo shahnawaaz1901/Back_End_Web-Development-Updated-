@@ -5,7 +5,7 @@ import express from "express";
 import swagger from "swagger-ui-express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
-import cors from 'cors';
+import cors from "cors";
 
 //? Internal Modules
 import productRouter from "./src/features/products/product.router.js";
@@ -20,9 +20,11 @@ import logMiddleware from "./src/middlewares/logger.middleware.js";
 //* Start the Server
 const app = express();
 
-app.use(cors({
-  origin : "http://localhost:5500"
-}));
+app.use(
+  cors({
+    origin: "http://localhost:5500",
+  })
+);
 
 //* SetUp Cookie Parser
 app.use(cookieParser());
@@ -40,6 +42,12 @@ app.use("/api/cart", jwtAuth, cartRouter);
 //* Default Route
 app.get("/", function (req, res) {
   res.send("Welcome to API Application !!");
+});
+
+//* Add 
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.status(503).send("Something Went Wrong ! Please Try Again Later ..");
 });
 
 app.use((req, res) => {

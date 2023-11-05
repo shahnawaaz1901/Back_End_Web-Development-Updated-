@@ -53,11 +53,19 @@ export default class ProductController {
       so that we need to call rate product function into the try catch so that
       out rate product product function thrown an error our server not stopped
     */
+    /*
     try {
       ProductModel.rateProduct(userId, productId, rating);
     } catch (error) {
       return res.status(400).send(error.message);
     }
+    return res.status(200).send("Product Rated Successfully !!");
+    */
+    /* 
+      Because we Use Application Level Error Handler We Dont need here to handle 
+      the Error in try catch  
+    */
+    ProductModel.rateProduct(userId, productId, rating);
     return res.status(200).send("Product Rated Successfully !!");
   }
 }

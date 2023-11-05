@@ -69,6 +69,11 @@ const logMiddleware = async (req, res, next) => {
         Because winston package not require await keyword
         await logger(logData);
      */
+    /* 
+      We Need to specify at function calling that which level of error we want to 
+      handle, because we need only info level so that we need to pass info level
+      error
+    */
     logger.info(logData);
   }
   next();

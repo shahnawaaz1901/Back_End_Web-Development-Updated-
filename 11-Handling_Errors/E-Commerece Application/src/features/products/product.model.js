@@ -49,11 +49,13 @@ export default class ProductModel {
       or product not found this error is caught by the try catch block so 
       that our server handle the proper handling
     */
+    //* User Define Error
     if(!userResult){
       throw new Error("User not Found !!");
     }
 
     const productResult = this.getAll().find((p)=> p.id == productId);
+    //* User Define Error
     if(!productResult){
       /* 
         Error Which we Pass Inside the Error Contructor is Received in error
