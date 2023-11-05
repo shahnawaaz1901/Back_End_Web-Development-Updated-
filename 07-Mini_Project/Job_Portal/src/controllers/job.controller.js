@@ -61,12 +61,13 @@ export default class JobController {
 
   postJob(req, res) {
     const jobData = req.body;
+    console.log(req.body)
     JobModel.addJob(jobData);
     const jobs = JobModel.getJobData();
     res.render("jobs", { name: req.session.name , jobs});
   }
 
-  updateJob(req, res) {
+  getUpdateJobPage(req, res) {
     const { id } = req.params;
     const job = JobModel.getJobById(id);
     if (job) {
@@ -78,5 +79,9 @@ export default class JobController {
     } else {
       res.send("Job Not Found !!");
     }
+  }
+
+  postUpdateJob(req, res){
+    
   }
 }

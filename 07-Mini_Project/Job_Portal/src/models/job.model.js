@@ -70,10 +70,12 @@ export default class JobModel {
         jobDetail.jobSalary,
         jobDetail.skills,
         jobDetail.date,
-        jobDetail.totalPositions,
+        jobDetail.totalPositions
       )
     );
   }
+
+  static updateJob(updatedJob) {}
 }
 
 var jobDetails = [
@@ -85,7 +87,7 @@ var jobDetails = [
     "Gurgao HR IND Remote",
     "14 - 20 LPA",
     ["React", "Node.Js", "JS", "SQL", "MongoDB", "Express", "AWS"],
-    "30-October-2023",
+    "2023-10-30",
     6,
     new Date().toLocaleDateString(),
     new Date().toLocaleTimeString()
@@ -98,7 +100,7 @@ var jobDetails = [
     "Pune IND On-Site",
     "6 - 10 LPA",
     ["Angular", "JS", "SQL", "MongoDB", "Express", "AWS"],
-    "12-November-2023",
+    "2023-11-12",
     5,
     new Date().toLocaleDateString(),
     new Date().toLocaleTimeString()
@@ -111,7 +113,7 @@ var jobDetails = [
     "Bangalore IND",
     "6 - 10 LPA",
     ["React", "Node.Js", "JS", "SQL", "MongoDB", "Express", " AWS"],
-    "12-November-2023",
+    "2023-11-30",
     5,
     new Date().toLocaleDateString(),
     new Date().toLocaleTimeString()
