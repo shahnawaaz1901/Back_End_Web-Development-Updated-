@@ -1,1 +1,12 @@
 {"level":"info","message":"/api/products/ {\"email\":\"admin@ecom.in\",\"password\":\"admin@1234\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/rate?userId=4&productId=2&rating=3 {\"email\":\"admin@ecom.in\",\"password\":\"admin@1234\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/rateProduct?userId=4&productId=2&rating=3 {\"email\":\"admin@ecom.in\",\"password\":\"admin@1234\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/rateProduct?productId=1&rating=4 {\"email\":\"admin@ecom.in\",\"password\":\"admin@1234\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/rateProduct?productId=10&rating=4 {\"email\":\"admin@ecom.in\",\"password\":\"admin@1234\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/rateProduct?productId=1&rating=4 {\"email\":\"admin@ecom.in\",\"password\":\"admin@1234\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/rateProduct?productId=3&rating=4 {\"email\":\"admin@ecom.in\",\"password\":\"admin@1234\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/rateProduct?productId=4&rating=4 {\"email\":\"admin@ecom.in\",\"password\":\"admin@1234\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/rateProduct?productId=3&rating=4 {\"email\":\"admin@ecom.in\",\"password\":\"admin@1234\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/rateProduct?productId=4&rating=4 {\"email\":\"admin@ecom.in\",\"password\":\"admin@1234\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/rateProduct?productId=4&rating=4 {\"email\":\"admin@ecom.in\",\"password\":\"admin@1234\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/rateProduct?productId=3&rating=4 {\"email\":\"admin@ecom.in\",\"password\":\"admin@1234\"}","service":"request-logging"}

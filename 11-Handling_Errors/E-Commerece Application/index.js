@@ -1,15 +1,19 @@
 //* Import Modules
+
+//? Packages or Third Party Modules
 import express from "express";
 import swagger from "swagger-ui-express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors from 'cors';
 
+//? Internal Modules
 import productRouter from "./src/features/products/product.router.js";
 import userRouter from "./src/features/user/user.router.js";
 import cartRouter from "./src/features/cart/cart.router.js";
 import jwtAuth from "./src/middlewares/jwt.middleware.js";
 
+//? Documentation and Error Handler
 import apiDocs from "./swagger.json" assert { type: "json" };
 import logMiddleware from "./src/middlewares/logger.middleware.js";
 

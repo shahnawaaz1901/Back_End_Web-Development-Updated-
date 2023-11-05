@@ -44,13 +44,23 @@ export default class ProductModel {
 
   static rateProduct(userId, productId, rating) {
     const userResult = UserModel.getAllUserDetails().find((user)=> user.id == userId);
+    /* 
+      For Proper Error Handling We Need to throw an error if user not found 
+      or product not found this error is caught by the try catch block so 
+      that our server handle the proper handling
+    */
     if(!userResult){
-      return "User not Found !!";
+      throw new Error("User not Found !!");
     }
 
     const productResult = this.getAll().find((p)=> p.id == productId);
     if(!productResult){
-      return "Product Not Found !!";
+      /* 
+        Error Which we Pass Inside the Error Contructor is Received in error
+        object of catch where our error received in massage because that object
+        contains three things name, massage and stack 
+      */
+      throw new Error("Product Not Found !!");
     } 
 
     //* If Ratings not Given By the User
@@ -61,7 +71,7 @@ export default class ProductModel {
         rating : rating,
       })
     }
-    //* If Ratings Already Exist
+    //* If Ratings Already Exist Check if User Which Want to Rate, Rated the Product Previously
     else{
       const userRatingsIndex = productResult.ratings.findIndex((p)=> p.userId == userId);
       if(userRatingsIndex >= 0){
@@ -78,8 +88,6 @@ export default class ProductModel {
         })
       }
     }
-    console.log(this.getAll());
-
   }
 }
 
