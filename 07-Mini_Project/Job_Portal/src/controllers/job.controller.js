@@ -89,4 +89,8 @@ export default class JobController {
       jobs,
     });
   }
+
+  deleteJob(req, res){
+    console.log("Click Event is Occure")
+  }
 }

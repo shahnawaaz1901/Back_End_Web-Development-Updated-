@@ -55,6 +55,7 @@ app.post("/postJob",jobController.postJob);
 app.get("/update/:id", jobController.getUpdateJobPage);
 app.post("/update",jobController.postUpdateJob);
 app.get("/logout",userController.logOut);
+app.post("/delete/:id",jobController.deleteJob);
 
 app.listen(3200,function(err){
     if(err){

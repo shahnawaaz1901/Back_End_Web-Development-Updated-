@@ -1,6 +1,6 @@
-var aTag = document.getElementsByTagName("a");
-for (let everyTag of aTag) {
-  everyTag.addEventListener("click", (e) => {
-    console.log((e.target.parentElement).parentElement.getAttribute("href"));
-  });
+function deleteJob(id){
+  const result = confirm();
+  if(result){
+    fetch(`http://localhost:3200/delete/${id}`)
+  }
 }
