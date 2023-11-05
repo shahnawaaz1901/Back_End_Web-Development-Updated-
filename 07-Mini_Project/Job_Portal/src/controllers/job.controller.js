@@ -61,7 +61,6 @@ export default class JobController {
 
   postJob(req, res) {
     const jobData = req.body;
-    console.log(req.body)
     JobModel.addJob(jobData);
     const jobs = JobModel.getJobData();
     res.render("jobs", { name: req.session.name , jobs});
@@ -82,6 +81,12 @@ export default class JobController {
   }
 
   postUpdateJob(req, res){
-    
+    JobModel.updateJob(req.body);
+    const jobs = JobModel.getJobData();
+    res.render("jobs", {
+      title: "Jobs | Easily",
+      name: req.session.name,
+      jobs,
+    });
   }
 }

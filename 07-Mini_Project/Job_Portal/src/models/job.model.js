@@ -75,7 +75,25 @@ export default class JobModel {
     );
   }
 
-  static updateJob(updatedJob) {}
+  static updateJob(updatedJob) {
+    const jobIndex = jobDetails.findIndex((j) => j.id == updatedJob.id);
+    if (jobIndex == -1) {
+      return;
+    }
+    jobDetails[jobIndex] = new JobModel(
+      updatedJob.id,
+      updatedJob.companyName,
+      updatedJob.jobType,
+      updatedJob.jobDesingnation,
+      updatedJob.jobLocation,
+      updatedJob.jobSalary,
+      updatedJob.skills,
+      updatedJob.date,
+      updatedJob.totalPositions,
+      new Date().toLocaleDateString(),
+      new Date().toLocaleTimeString()
+    );
+  }
 }
 
 var jobDetails = [
