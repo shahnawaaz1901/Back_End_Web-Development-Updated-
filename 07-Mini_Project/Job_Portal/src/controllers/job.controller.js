@@ -46,7 +46,7 @@ export default class JobController {
     const id = req.params.id;
     const job = JobModel.getJobById(id);
     res.render("applicants", {
-      title : "Applicant Details | Easily",
+      title: "Applicant Details | Easily",
       applicants: job.applicants,
       name: req.session.name,
     });
@@ -63,7 +63,7 @@ export default class JobController {
     const jobData = req.body;
     JobModel.addJob(jobData);
     const jobs = JobModel.getJobData();
-    res.render("jobs", { name: req.session.name , jobs});
+    res.render("jobs", { name: req.session.name, jobs });
   }
 
   getUpdateJobPage(req, res) {
@@ -80,7 +80,7 @@ export default class JobController {
     }
   }
 
-  postUpdateJob(req, res){
+  postUpdateJob(req, res) {
     JobModel.updateJob(req.body);
     const jobs = JobModel.getJobData();
     res.render("jobs", {
@@ -90,7 +90,13 @@ export default class JobController {
     });
   }
 
-  deleteJob(req, res){
-    console.log("Click Event is Occure")
+  deleteJob(req, res) {
+    const { id } = req.query;
+    JobModel.removeJob(id);
+    res.render("jobs", {
+      title: "Jobs | Easily",
+      name: req.session.name,
+      jobs,
+    });
   }
 }

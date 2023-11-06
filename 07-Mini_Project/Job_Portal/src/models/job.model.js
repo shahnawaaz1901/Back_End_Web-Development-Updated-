@@ -94,6 +94,14 @@ export default class JobModel {
       new Date().toLocaleTimeString()
     );
   }
+
+  removeJob(id) {
+    const index = jobDetails.findIndex((j) => j.id == id);
+    if (index == -1) {
+      return;
+    }
+    jobDetails.splice(index, 1);
+  }
 }
 
 var jobDetails = [
