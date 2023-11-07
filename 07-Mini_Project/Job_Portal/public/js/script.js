@@ -1,7 +1,7 @@
 function deleteJob(id) {
   const result = confirm("Are You Sure you Want to Delete this Job..??");
   if (result) {
-    fetch(`/delete-Job/${id}`,{
+    fetch(`/jobs/delete-Job/${id}`,{
       method : 'POST'
     })
       .then((response) => {

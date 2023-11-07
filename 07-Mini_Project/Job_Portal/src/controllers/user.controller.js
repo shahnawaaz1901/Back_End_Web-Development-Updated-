@@ -13,7 +13,7 @@ export default class UserController {
     UserModel.addNewUser(req.body);
     const { email } = req.body;
     sendNotification(email, "newUser");
-    res.redirect("/login");
+    res.redirect("/users/login");
   }
 
   loginUser(req, res) {
