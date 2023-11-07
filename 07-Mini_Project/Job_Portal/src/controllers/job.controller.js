@@ -39,7 +39,7 @@ export default class JobController {
       resume,
     };
     JobModel.addApplicants(obj);
-    res.render("jobs", { name: req.session.name });
+    res.render("jobs", { name: req.session.name, jobs : JobModel.getJobData() });
   }
 
   getJobApplicants(req, res) {

@@ -45,17 +45,17 @@ const userController = new UserController();
 app.post("/login",userController.loginUser);
 app.get("/",jobController.getHomePage);
 app.get("/jobs",jobController.getJobPage);
-app.get("/job/applicants/:id", jobController.getJobApplicants);
+app.get("/job/applicants/:id",auth, jobController.getJobApplicants);
 app.get("/job/:id",jobController.getJobDescription);
 app.get("/login",userController.getLogin);
 app.post("/ragister",userController.ragisterUser);
 app.post("/apply-job",upload.single('resume'), jobController.addJobApplicant);
-app.get("/postJob",jobController.getPostJobPage);
-app.post("/postJob",jobController.postJob);
-app.get("/update/:id", jobController.getUpdateJobPage);
-app.post("/update",jobController.postUpdateJob);
+app.get("/postJob",auth,jobController.getPostJobPage);
+app.post("/postJob",auth,jobController.postJob);
+app.get("/update/:id",auth, jobController.getUpdateJobPage);
+app.post("/update",auth, jobController.postUpdateJob);
 app.get("/logout",userController.logOut);
-app.post("/delete-Job/:id",jobController.deleteJob);
+app.post("/delete-Job/:id",auth, jobController.deleteJob);
 
 app.listen(3200,function(err){
     if(err){
