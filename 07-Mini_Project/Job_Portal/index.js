@@ -9,6 +9,8 @@ import upload from "./src/middlewares/file-upload.middleware.js";
 import bodyParser from "body-parser";
 import auth from "./src/middlewares/auth.middleware.js";
 import session from "express-session";
+import jobRouter from "./src/routers/job.router.js";
+import userRouter from "./src/routers/user.router.js";
 
 //* Run the Server
 const app = express();
@@ -39,23 +41,11 @@ app.use(express.static(path.resolve("public")));
 
 //* Create Instance of Controllersc
 const jobController = new JobController();
-const userController = new UserController();
 
 //* Setup Routers
-app.post("/login",userController.loginUser);
 app.get("/",jobController.getHomePage);
-app.get("/jobs",jobController.getJobPage);
-app.get("/job/applicants/:id",auth, jobController.getJobApplicants);
-app.get("/job/:id",jobController.getJobDescription);
-app.get("/login",userController.getLogin);
-app.post("/ragister",userController.ragisterUser);
-app.post("/apply-job",upload.single('resume'), jobController.addJobApplicant);
-app.get("/postJob",auth,jobController.getPostJobPage);
-app.post("/postJob",auth,jobController.postJob);
-app.get("/update/:id",auth, jobController.getUpdateJobPage);
-app.post("/update",auth, jobController.postUpdateJob);
-app.get("/logout",userController.logOut);
-app.post("/delete-Job/:id",auth, jobController.deleteJob);
+app.use("/users/",userRouter);
+app.use("/jobs/",jobRouter);
 
 app.listen(3200,function(err){
     if(err){
