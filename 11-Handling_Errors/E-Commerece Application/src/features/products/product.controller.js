@@ -26,22 +26,14 @@ export default class ProductController {
   getOneProduct(req, res) {
     const id = req.params.id;
     const product = ProductModel.getProductById(id);
-    if (!product) {
-      res.status(404).send("Product not Found !!");
-    } else {
-      res.status(200).send(product);
-    }
+    res.status(200).send(product);
   }
 
   //* Filter Products
   filterProducts(req, res) {
     const { minPrice, maxPrice, category } = req.query;
     const result = ProductModel.filter(minPrice, maxPrice, category);
-    if (!result) {
-      res.status(404).send("Sorry No Products Found !!");
-    } else {
-      res.status(200).send(result);
-    }
+    res.status(200).send(result);
   }
 
   //* Rate the Product
@@ -64,6 +56,15 @@ export default class ProductController {
     /* 
       Because we Use Application Level Error Handler We Dont need here to handle 
       the Error in try catch  
+    */
+    /* 
+      We Can Also Use this Method Also Using try Catch on Every Controller Function 
+      try {
+        ProductModel.rateProduct(userId, productId, rating);
+        return res.status(200).send("Product Rated Successfully !!");
+      } catch (error) {
+        next(error)         //* If this next function call along with error then it directy call Our Application Level Error Handler 
+      }
     */
     ProductModel.rateProduct(userId, productId, rating);
     return res.status(200).send("Product Rated Successfully !!");

@@ -1,3 +1,4 @@
+import ApplicationError from "../errorHandler/application.error.js";
 import UserModel from "../user/user.model.js";
 export default class ProductModel {
   constructor(_id, _name, _description, _price, _imageURL, _category, _sizes) {
@@ -28,6 +29,9 @@ export default class ProductModel {
 
   static getProductById(id) {
     const product = products.find((pro) => pro.id == id);
+    if(!product){
+      throw new ApplicationError("Product Not Found Along with this Id",404);
+    }
     return product;
   }
 
@@ -39,6 +43,9 @@ export default class ProductModel {
         (!category || product.category == category)
       );
     });
+    if(!filterData){
+      throw new ApplicationError("Sorry No Products Found !!",404);
+    }
     return filterData;
   }
 
@@ -51,7 +58,13 @@ export default class ProductModel {
     */
     //* User Define Error
     if(!userResult){
-      throw new Error("User not Found !!");
+      throw new ApplicationError("User Not Found !!", 404);
+      /*
+        throw new Error("User not Found !!")
+        Instead of Send Directly Error We Need to Send the Custom Error with the
+        help of our custom class which Also Contains the error status code along
+        with error message 
+      */
     }
 
     const productResult = this.getAll().find((p)=> p.id == productId);
@@ -62,7 +75,7 @@ export default class ProductModel {
         object of catch where our error received in massage because that object
         contains three things name, massage and stack 
       */
-      throw new Error("Product Not Found !!");
+      throw new ApplicationError("Product Not Found !!", 404);
     } 
 
     //* If Ratings not Given By the User

@@ -15,6 +15,7 @@ import jwtAuth from "./src/middlewares/jwt.middleware.js";
 
 //? Documentation and Error Handler
 import apiDocs from "./swagger.json" assert { type: "json" };
+import ApplicationError from "./src/features/errorHandler/application.error.js";
 import logMiddleware from "./src/middlewares/logger.middleware.js";
 
 //* Start the Server
@@ -44,21 +45,36 @@ app.get("/", function (req, res) {
   res.send("Welcome to API Application !!");
 });
 
-//* Add Error Handler to the Application Level 
+//* Add Error Handler to the Application Level
 /* 
   Server Codes 400 is used for bad request and in server errors we use the 500 status
   codes request which is used for server errors like server crash server problems 
 */
 app.use((err, req, res, next) => {
-  console.log(err);
   /* 
     If We Directly Send this Massage to the Customer then it means that this is a 
     server side error so we need to customize this error because if user made mistake
     on invalid login credentials or any other type of error our error handler sent
     server side error everytime so we need to customize our error handler for different
-    kind of error   
+    kind of error
   */
-  res.status(503).send("Something Went Wrong ! Please Try Again Later ..");
+  /*
+    500 mean internal server error this error is occure from the server side so we 
+    need to change the error code to 500 because 503 error which represent the service
+    is unavailable 
+  */
+  /* 
+    Instead of Sending Fix Response to the Client For Every Request We Need to Send 
+    the actual error using our application level class which contains both message
+    and status code. So We First need to check that user define error is occure or
+    not if User define error is not occure then we send the server side error by 
+    send the message something went wrong and status code 500 along with the message
+  */
+  if(err instanceof ApplicationError){              //* Check if Error Occure on Controllers or Model
+    return res.status(err.errorStatusCode).send(err.message);
+  }
+  
+  return res.status(500).send("Something Went Wrong ! Please Try Again Later ..");
 });
 
 app.use((req, res) => {
