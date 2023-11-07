@@ -11,3 +11,19 @@ Remove Items on Cart    -Done-
 // User Controller
 SignUp  - By(Name, Email, Password, Type of User(Customer or Seller))       -Done-
 SignIn  - By(Email, Password)                                               -Done-
+
+
+//Summmary of Project
+Folder Structure                                    Create Seprate Folders for Routes, Controllers and Models for Every Feature and Middleware Also
+Route Configuration                                 Use Express Routes to create separated route Configuration
+Creating APIs                                       Send Data for Different Kind Request
+Different API Methods                               Get, Post method and preFlight Also for Send Data to Cross Origin Requests
+Middlewares                                         Create Middlewares For Authentication(Basic and JWT), File Upload and for Logging File
+Route Parameters                                    Send Single Property Inside an Object Along with URL
+Query Parameters                                    Send Multiple Properties Inside Object Along with URL
+Testing api using POSTman                           Test BackEnd Applications withOut Creating Any UI or Front End
+Securing API using jwt token                        Secure APIs with the Most Popular Authentication Basic which Create By us and JWT which is Package authenticate By Tokens Generation
+Documenting API using Swagger                       Use Swagger for API Documentation and All Detail about Our APIs this wil Helps Other Developers to UnderStand Our API . 
+CORS                                                Learn CORS Policy for Access Our API to the All or Specific persons with the Help of CORS Package of Node.JS 
+Logging                                             Implement Middleware for Track Our Applications Unknown Errors and Bugs.
+Error Handling                                      Implement Error Handler at Application level to Prevent Server Crashes or Any Kind of Issues.
