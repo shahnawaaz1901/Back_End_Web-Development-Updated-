@@ -91,8 +91,9 @@ export default class JobController {
   }
 
   deleteJob(req, res) {
-    const { id } = req.query;
+    const { id } = req.params;
     JobModel.removeJob(id);
+    const jobs = JobModel.getJobData();
     res.render("jobs", {
       title: "Jobs | Easily",
       name: req.session.name,

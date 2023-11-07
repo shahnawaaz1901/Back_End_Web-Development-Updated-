@@ -35,7 +35,7 @@ app.use(session({
 }))
 
 //* Exposed Static Files
-app.use(express.static("public"));
+app.use(express.static(path.resolve("public")));
 
 //* Create Instance of Controllersc
 const jobController = new JobController();
@@ -55,7 +55,7 @@ app.post("/postJob",jobController.postJob);
 app.get("/update/:id", jobController.getUpdateJobPage);
 app.post("/update",jobController.postUpdateJob);
 app.get("/logout",userController.logOut);
-app.post("/delete/:id",jobController.deleteJob);
+app.post("/delete-Job/:id",jobController.deleteJob);
 
 app.listen(3200,function(err){
     if(err){

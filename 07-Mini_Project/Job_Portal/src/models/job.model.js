@@ -95,7 +95,7 @@ export default class JobModel {
     );
   }
 
-  removeJob(id) {
+  static removeJob(id) {
     const index = jobDetails.findIndex((j) => j.id == id);
     if (index == -1) {
       return;
