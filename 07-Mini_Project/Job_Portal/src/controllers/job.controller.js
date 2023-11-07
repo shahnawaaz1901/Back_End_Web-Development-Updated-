@@ -30,6 +30,7 @@ export default class JobController {
 
   addJobApplicant(req, res) {
     const { id, name, email, contact } = req.body;
+    console.log(req.body);
     const resume = path.join("public", "data", req.file.filename);
     const obj = {
       id,
