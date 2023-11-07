@@ -44,9 +44,20 @@ app.get("/", function (req, res) {
   res.send("Welcome to API Application !!");
 });
 
-//* Add 
+//* Add Error Handler to the Application Level 
+/* 
+  Server Codes 400 is used for bad request and in server errors we use the 500 status
+  codes request which is used for server errors like server crash server problems 
+*/
 app.use((err, req, res, next) => {
   console.log(err);
+  /* 
+    If We Directly Send this Massage to the Customer then it means that this is a 
+    server side error so we need to customize this error because if user made mistake
+    on invalid login credentials or any other type of error our error handler sent
+    server side error everytime so we need to customize our error handler for different
+    kind of error   
+  */
   res.status(503).send("Something Went Wrong ! Please Try Again Later ..");
 });
 
