@@ -22,7 +22,9 @@ export default class JobController {
   getJobDescription(req, res) {
     const id = req.params.id;
     const jobData = JobModel.getJobById(id);
+    // res.writeHead(200,{'content-type':'text/css'});
     res.render("job-description", {
+      'content-type':'text/css',
       title: "Job Description | Easily",
       job: jobData,
       name: req.session.name,
