@@ -14,6 +14,7 @@ export default class JobController {
     res.render("jobs", {
       title: "Jobs | Easily",
       name: req.session.name,
+      message: "No Jobs Available",
       jobs,
     });
   }
@@ -40,7 +41,7 @@ export default class JobController {
       resume,
     };
     JobModel.addApplicants(obj);
-    res.render("jobs", { name: req.session.name, jobs : JobModel.getJobData() });
+    res.render("jobs", { name: req.session.name, jobs: JobModel.getJobData() });
   }
 
   getJobApplicants(req, res) {
@@ -88,6 +89,18 @@ export default class JobController {
       title: "Jobs | Easily",
       name: req.session.name,
       jobs,
+    });
+  }
+
+  searchJob(req, res) {
+    console.log(req.body);
+    const word = req.body.searchKeyword;
+    const searchResult = JobModel.search(word);
+    res.render("jobs", {
+      title: "Search Result | Easily",
+      name: req.session.name,
+      jobs: searchResult,
+      message: "No Job Found !!",
     });
   }
 

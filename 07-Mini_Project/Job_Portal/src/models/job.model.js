@@ -95,6 +95,13 @@ export default class JobModel {
     );
   }
 
+  static search(word) {
+    const result = jobDetails.filter(
+      (j) => j.companyName == word || j.post == word || j.jobType == word
+    );
+    return result;
+  }
+
   static removeJob(id) {
     const index = jobDetails.findIndex((j) => j.id == id);
     if (index == -1) {

@@ -14,6 +14,7 @@ jobRouter.get("/postJob", auth, jobController.getPostJobPage);
 jobRouter.post("/apply-job",upload.single('resume'), jobController.addJobApplicant);
 jobRouter.post("/postJob", auth, jobController.postJob);
 jobRouter.post("/delete-Job/:id",auth, jobController.deleteJob);
+jobRouter.post("/search",jobController.searchJob);
 jobRouter.get("/:id", jobController.getJobDescription);
 
 export default jobRouter;
