@@ -31,7 +31,6 @@ export default class JobController {
 
   addJobApplicant(req, res) {
     const { id, name, email, contact } = req.body;
-    console.log(req.body);
     const resume = path.join("public", "data", req.file.filename);
     const obj = {
       id,
@@ -93,7 +92,6 @@ export default class JobController {
   }
 
   searchJob(req, res) {
-    console.log(req.body);
     const word = req.body.searchKeyword;
     const searchResult = JobModel.search(word);
     res.render("jobs", {

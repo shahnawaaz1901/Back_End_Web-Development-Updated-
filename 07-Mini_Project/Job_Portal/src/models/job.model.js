@@ -97,7 +97,7 @@ export default class JobModel {
 
   static search(word) {
     const result = jobDetails.filter(
-      (j) => j.companyName == word || j.post == word || j.jobType == word
+      (j) => j.companyName == word || j.post == word || j.jobType == word || j.location == word
     );
     return result;
   }
