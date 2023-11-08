@@ -23,9 +23,15 @@ header{
 }
 
 .p75px{
-    padding: 130px 90px;
+    padding: 90px;
 }
 
 .text-space{
     letter-spacing: 2px !important;
+}
+
+@media screen and (max-width:600px){
+    .p75px{
+        padding: 60px 30px;
+    }
 }
