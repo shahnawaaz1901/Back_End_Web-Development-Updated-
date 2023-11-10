@@ -26,7 +26,7 @@ MongoDB Multiple Inserts
 How you can insert multiple records into the 'transactions' collection of the 'iPay' database using MongoDB.?
 
 1.
-use iPay
+use iPay                            //* Correct
 db.transactions.insertMany([{transactionId : "002", userId : "U101", ammout : 500},{transactionId : "001", userId : "U100", ammout : 1000}])
 
 2.
