@@ -9,10 +9,15 @@ import postsRouter from './src/features/posts/posts.router.js';
 import likesRouter from './src/features/likes/likes.router.js';
 import commentsRouter from './src/features/comments/comments.router.js';
 
-//* Start the Server
+//* Start the Server */
 const server = express();
 
-//* Setting Up Routes
+//* Setting Up Middlewares */
+//? For Populating req.body in POST Request
+server.use(express.urlencoded({extended : false}));
+server.use(express.json());
+
+//* Setting Up Routes */
 server.use('/api/users',usersRouter);
 server.use('/api/posts',postsRouter);
 server.use('/api/likes',likesRouter);
