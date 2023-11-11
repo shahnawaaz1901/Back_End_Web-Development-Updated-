@@ -1,0 +1,17 @@
+/* 
+    In Real World Application Our Server and Our Database has two Different 
+    Application because Our Server Code is on Like on Cloud Like AWS and Our
+    Database is MongoDB so we need to Connect both with each other to work
+    NodeJs application with Database.
+    
+    We Install MongoDB like a server so we Need to Connect NodeJs to that server
+    In this case Node.Js behaves Like a Client and MongoDB behave likes a server
+    to that Client. We Install MongoDB server on Our Computer But thats not Complete
+    the Connection for Connect Both we Need to install MongoDB inside the our Node.JS
+    Application like a packages so that we use that package to connect mongoDB server
+    With Our Node.JS application We can also called that package as driver of MongoDB
+    
+    as We Mention that our NodeJs Application works like a Client and that package
+    or we can say driver helps us to Connect to MongoDB server
+    
+*/
