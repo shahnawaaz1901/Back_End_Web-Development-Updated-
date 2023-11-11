@@ -17,6 +17,7 @@ import jwtAuth from "./src/middlewares/jwt.middleware.js";
 import apiDocs from "./swagger.json" assert { type: "json" };
 import ApplicationError from "./src/features/errorHandler/application.error.js";
 import logMiddleware from "./src/middlewares/logger.middleware.js";
+import connectToMongoDB from "./src/config/mongodb.js";
 
 //* Start the Server
 const app = express();
@@ -91,5 +92,12 @@ app.listen(3200, function (err) {
     console.log(`Error While Run the Server : ${err}`);
     return;
   }
+  /* 
+    Because we Need to Connect the Database when Our server is started so 
+    that after start the server Our listen function called so that we need 
+    to call Our MongoDB connection function when Our Server is Started 
+    Successfully !! 
+  */
   console.log(`Server is up and Run on Port 3200`);
+  connectToMongoDB();
 });
