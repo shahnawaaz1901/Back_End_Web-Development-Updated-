@@ -19,6 +19,8 @@ export default class UserController {
   loginUser(req, res) {
     const result = UserModel.authenticateUser(req.body);
     if (result) {
+      const { email } = req.body;
+      sendNotification(email, "login");
       req.session.name = result.name;
       res.render("index", { name: result.name, title: "Job Portal | Easily" });
     } else {
@@ -29,11 +31,11 @@ export default class UserController {
     }
   }
 
-  logOut(req, res){
+  logOut(req, res) {
     const name = req.session.name;
-    req.session.destroy(()=>{
+    req.session.destroy(() => {
       console.log(`Session is Ended for ${name}!!`);
       res.redirect("/");
-    })
+    });
   }
 }

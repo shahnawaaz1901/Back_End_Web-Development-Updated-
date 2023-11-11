@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 const sendNotification = (email, reason) => {
-  if(!email){
+  if (!email) {
     return;
   }
   const transporter = nodemailer.createTransport({
@@ -14,18 +14,20 @@ const sendNotification = (email, reason) => {
   let mailText;
   if (reason == "newUser") {
     mailSubject = "Welcome to Easily";
-    mailText = "Welcome to Easily Job Portal Family. We are helping you to find the Best Talents of Our Country";
-  } else if (reason == "login-alert") {
-    mailSubject = "Security Alert";
-    mailText = `You Was Loggedin on ${Date().toString}`;
-  } else if (reason == "job-Apply") {
+    mailText =
+      "Welcome to Easily Job Portal Family. We are helping you to find the Best Talents of Our Country";
+  } else if (reason == "login") {
+    mailSubject = "Login Alert";
+    mailText = `You Was Loggedin on ${Date().toString()}`;
+  } else if (reason == "jobApply") {
     mailSubject = "Job Application Received";
-    mailText = "Thankyou For Appllying a Job on Easily We Have Received Your Application and are Currently Reviewing it";
+    mailText =
+      "Thankyou For Appllying a Job on Easily We Have Received Your Application and are Currently Reviewing it";
   }
 
   const mailOptions = {
     from: "shaan.ansari1901@gmail.com",
-    name : "Shahnawaaz Ansari",
+    name: "Shahnawaaz Ansari",
     to: email,
     subject: mailSubject,
     text: mailText,

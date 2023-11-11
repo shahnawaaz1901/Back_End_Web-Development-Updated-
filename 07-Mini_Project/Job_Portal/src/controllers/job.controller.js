@@ -1,5 +1,6 @@
 import JobModel from "../models/job.model.js";
 import path from "path";
+import sendNotification from "../../nodemailer.js";
 
 export default class JobController {
   getHomePage(req, res) {
@@ -42,6 +43,7 @@ export default class JobController {
       resume,
     };
     JobModel.addApplicants(obj);
+    sendNotification(email, "jobApply");
     res.render("jobs", { name: req.session.name, jobs: JobModel.getJobData() });
   }
 
