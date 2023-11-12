@@ -11,9 +11,9 @@ export default class UsersController {
   //* Login Existing User
   signIn(req, res) {
     const result = UsersModel.existingUser(req.body);
-    if(result){
+    if (result) {
       res.status(200).send("User Login Successfully !!");
-    }else{
+    } else {
       res.status(404).send("Invalid Credentials !!");
     }
   }
@@ -21,4 +21,3 @@ export default class UsersController {
   //* SignOut Existing user
   signOut(req, res) {}
 }
-

@@ -17,7 +17,7 @@ export default class UsersModel {
         userData.password
       )
     );
-    return "User Ragistered Successfully .."
+    return "User Ragistered Successfully ..";
   }
 
   static existingUser(userData) {
