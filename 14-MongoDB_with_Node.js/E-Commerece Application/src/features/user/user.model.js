@@ -8,7 +8,6 @@ import { getDB } from "../../config/mongodb.js";
 export default class UserModel {
   //* Constructor
   constructor(_name, _email, _password, _typeOfUser) {
-    this._id;
     this.name = _name;
     this.email = _email;
     this.password = _password;
@@ -54,40 +53,25 @@ export default class UserModel {
       .catch((err) => console.log(err));
   }
   */
-  //* Because this is Asynchronous and we async await instead of then catch
-  static async signUp(name, email, password, typeOfUser) {
-    //* Create the New User Using UserModel
-    const newUser = new UserModel(name, email, password, typeOfUser);
-    //* Always Do Database Related operation inside the try catch for proper error handling
-    try {
-      
-      //1. Get DB
-      const db = getDB();
-      
-      //2. Get Collection
-      const collection = db.collection("users");
-      
-      //3. Insert in the Document
-      await collection.insertOne(newUser);
-      return newUser;
-    } catch (error) {
-      console.log('Error While Inserting Data into the Database !!')
-    }
-  }
-  //* Authenticate User
-  static signIn(email, password) {
-    const result = userDetails.find(
-      (user) => user.email == email && user.password == password
-    );
-    return result;
-  }
+  /* 
+          In Our this module user.model.js we do two things but its not correct 
+          because if we work on big project every module do only One thing in this 
+          module we do two things we use class for creating an object and as well 
+          as we put data inside the database in this module this is not right approach, 
+          this approach works in small application but its hard to maintain code 
+          in major application, for this we need to create a module called repository
+          in which we do all database related operations. Advantage of this is Sepration
+          of Concerns means we seprate the workload into the different Modules. for this
+          we need to create a file name users.repository.js in which we do all things
+        */
 
-  //* Get All User Data
+  //* not Required because we use Database
+  /* Get All User Data
   static getAllUserDetails() {
     return userDetails;
-  }
+  }*/
 }
-
+/* Not Required because we use Database
 var userDetails = [
   {
     id: 1,
@@ -97,3 +81,4 @@ var userDetails = [
     typeOfUser: "admin",
   },
 ];
+ */
