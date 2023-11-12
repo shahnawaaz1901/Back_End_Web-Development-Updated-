@@ -4,14 +4,30 @@ export default class UsersModel {
     this.name = _name;
     this.email = _email;
     this.phone = _phone;
-    this.passwrord = _password;
+    this.password = _password;
   }
 
   static newUser(userData) {
-    
+    usersData.push(
+      new UsersModel(
+        usersData.length + 1,
+        userData.name,
+        userData.email,
+        userData.phone,
+        userData.password
+      )
+    );
+    return "User Ragistered Successfully .."
   }
 
-  static existingUser(userData) {}
+  static existingUser(userData) {
+    const result = usersData.find(
+      (u) =>
+        (u.email == userData.email || u.phone == userData.phone) &&
+        u.password == userData.password
+    );
+    return result;
+  }
 }
 
 var usersData = [];
