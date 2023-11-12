@@ -17,7 +17,7 @@ import jwtAuth from "./src/middlewares/jwt.middleware.js";
 import apiDocs from "./swagger.json" assert { type: "json" };
 import ApplicationError from "./src/features/errorHandler/application.error.js";
 import logMiddleware from "./src/middlewares/logger.middleware.js";
-import connectToMongoDB from "./src/config/mongodb.js";
+import { connectToMongoDB } from "./src/config/mongodb.js";
 
 //* Start the Server
 const app = express();
@@ -71,11 +71,14 @@ app.use((err, req, res, next) => {
     not if User define error is not occure then we send the server side error by 
     send the message something went wrong and status code 500 along with the message
   */
-  if(err instanceof ApplicationError){              //* Check if Error Occure on Controllers or Model
+  if (err instanceof ApplicationError) {
+    //* Check if Error Occure on Controllers or Model
     return res.status(err.errorStatusCode).send(err.message);
   }
-  
-  return res.status(500).send("Something Went Wrong ! Please Try Again Later ..");
+
+  return res
+    .status(500)
+    .send("Something Went Wrong ! Please Try Again Later ..");
 });
 
 app.use((req, res) => {

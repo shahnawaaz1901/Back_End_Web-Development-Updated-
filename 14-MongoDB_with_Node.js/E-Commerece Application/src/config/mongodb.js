@@ -25,22 +25,47 @@ const url = "mongodb://127.0.0.1:27017/ecomDB"; //* This is Complete URL Contain
 */
 
 //* For Connect to mongoDB
-
-const connectToMongoDB = () => {
+let client;
+export const connectToMongoDB = () => {
   /* 
         MongoClient Class connect function returns to us a promise because 
         this is a asynchronous function 
     */
   MongoClient.connect(url)
-  
-    .then((client) =>
-      console.log(`Mongo DB is Connected Successfully !! : ${client}`)
+
+    .then(
+      /* 
+        If Database is Connected Successfully then we get an Object 
+        which contains properties of Database 
+      */
+      (clientInstance) => {
+        client = clientInstance;
+        console.log(`Mongo DB is Connected Successfully !! `);
+      }
     )
     .catch((err) =>
       console.log(`Error while Connecting with Database : ${err}`)
     );
 };
 
-//* Export function to use in Our main index file
+//* Export database for doing user related operation
+/* 
+  If we want any database related operation then first we need to call our 
+  getDB function then remain task will be done 
+*/
+export const getDB = () => {
+  /* 
+    We Store the clientInstance in Client Variable. Clien Instance Contain 
+    multiple Properties including the db, which helps us to do database related
+    operations. when we return client.db function this function takes an argument
+    in string which is the name of database, because we already provide the name
+    in the url then we dont need to provide name of database here. If we not provide
+    database name in url then its mandatory that we provide name in db function 
+  */
+  
+  return client.db();
+};
 
-export default connectToMongoDB;
+//* Export function to use in Our main index file
+/* Because We Export Multiple functions then we need to remove default keyword and directly export at the function expression*/
+// export default connectToMongoDB;
