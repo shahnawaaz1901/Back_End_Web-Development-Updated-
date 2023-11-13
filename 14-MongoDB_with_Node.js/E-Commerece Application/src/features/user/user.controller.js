@@ -37,10 +37,10 @@ export default class UserController {
       the hashPassword so that when we provide the salt number keep in mind .   
     */
     const newUser = new UserModel(
-      name, 
-      email, 
-      //* password, instead of Create Object in Plain password using the hashpassword 
-      hashPassword,             //* HashPassword Instead of Plain text Password
+      name,
+      email,
+      //* password, instead of Create Object in Plain password using the hashpassword
+      hashPassword, //* HashPassword Instead of Plain text Password
       typeOfUser
     );
     const user = await this.userRepository.signUp(newUser);
@@ -49,17 +49,39 @@ export default class UserController {
 
   //* SignIn
   async signIn(req, res) {
+    /* 
+      for Signing Verify the userEmail First so that after verification with userEmail
+      we Compare that userEmail Object hashPassword with the plain password which user
+      provided at the time of Login, So instead of direct signIn we need to first search
+      user for the email
+    */
     try {
       const { email, password } = req.body;
-      const result = await this.userRepository.signIn(email, password);
-      const token = jwt.sign(
-        { userId: result._id, email: result.email }, //* Pass Object id and email
-        "2PLVo2mvL3BGWhcSlfbL",
-        { expiresIn: "1h" }
-      );
-      res.cookie("token", token).status(200).send(token);
+      /* Instead of FindOut username and password in Database 
+        const result = await this.userRepository.signIn(email, password); 
+      */
+      //* Find the UserObject with the email address which user Provides
+      const user = await this.userRepository.findByEmail(email);
+      if (!user) {
+        return res.status(400).send("Invalid Credentials , Please Try Again!!");
+      } else {
+        //* if w reach else means user if found by email now compare the password
+        const result = await bcrypt.compare(password, user.password);
+        if (result) {
+          //* Password is Match
+          const token = jwt.sign(
+            { userId: result._id, email: result.email }, //* Pass Object id and email
+            "2PLVo2mvL3BGWhcSlfbL",
+            { expiresIn: "1h" }
+          );
+          return res.cookie("token", token).status(200).send(token);
+        } else {
+          return res.status(404).send("Please Enter a Valid Password !!");
+        }
+      }
     } catch (error) {
-      res.status(400).send("Invalid Credentials , Please Try Again!!");
+      console.log(error);
+      return res.status(500).send("Something Went Wrong !!");
     }
   }
 }

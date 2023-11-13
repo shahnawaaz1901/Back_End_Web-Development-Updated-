@@ -24,7 +24,8 @@ export default class UserRepository {
     }
   }
 
-  //* Authenticate User
+  /* Instead of Authenticate and Verify Details we need to find Out the Object  
+  Authenticate User
   async signIn(email, password) {
     try {
         //1. Get DB
@@ -39,5 +40,15 @@ export default class UserRepository {
         throw new ApplicationError("Error While SignIn !!", 503);
     }
   }
+  */
+  async findByEmail(email) {
+    //1. Get the Database
+    const db = getDB();
 
+    //2. Get the Collection
+    const collection = db.collection("users");
+
+    //3. Find the UserObject with the email
+    return await collection.findOne({ email });
+  }
 }
