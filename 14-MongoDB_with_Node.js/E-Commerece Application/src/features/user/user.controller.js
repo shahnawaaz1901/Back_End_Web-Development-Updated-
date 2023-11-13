@@ -71,7 +71,7 @@ export default class UserController {
           //* Password is Match
           const token = jwt.sign(
             { userId: result._id, email: result.email }, //* Pass Object id and email
-            "2PLVo2mvL3BGWhcSlfbL",
+            process.env.JWT_Secret,
             { expiresIn: "1h" }
           );
           return res.cookie("token", token).status(200).send(token);

@@ -1,6 +1,14 @@
 //* import MongoClient Class from mongodb
 import { MongoClient } from "mongodb";
-
+/*
+We Need to Access environment variable in every file so that every file
+can access the environment variables for this we need to config env file
+in every file instead of this we can config the env file at the top in
+the our main file 
+import dotenv from "dotenv";
+//* config the file to load variables in process.env object
+dotenv.config();
+*/
 /* 
     Client needs to Know which database url we Trying to Connect in Our case 
     url is localhost but in real world application url will be cloud based database
@@ -15,7 +23,25 @@ import { MongoClient } from "mongodb";
 */
 //* Actual URL After adding Database Name is :
 //* In Some Cases url name localhost thrown errors so we need to pass actual ip instead of localhost */
+/* Instead of hardCoded Data 
 const url = "mongodb://127.0.0.1:27017/ecomDB"; //* This is Complete URL Contains database type which is mongoDb and next is which is the URL of Database and which database we want to connect
+*/
+/* process.env is an Object which contains all the variable from the environment */
+// const url = process.env.DB_URL;
+/* 
+  This url might be work on the Our Computer and Might Not Work in Other Computer 
+  or the Cloud based platform so we need to change this hard Coded data according 
+  to the environment means if the environment is local then use the localhost link
+  and if the url is provided by the other computer or cloud then use that url.
+
+  Some Hard Coded Configuration file we Can change to the environment file so that
+  values can be changed according to the environment this helps us to run our code
+  on other systems and Clouds.
+
+  We Can Done this with the help of a library called "dotenv" which helps us to do
+  modify the values according to the system environment. dotenv helps us to load
+  environment files from a .env file to process.env file 
+*/
 
 /* 
     In Cloud based Databases along with these three things we also need to specify the
@@ -31,8 +57,9 @@ export const connectToMongoDB = () => {
         MongoClient Class connect function returns to us a promise because 
         this is a asynchronous function 
     */
-  MongoClient.connect(url)
-
+   /* Instead of use Variable Directly Pass the Enviroment Variable to Connect with the url */
+  // MongoClient.connect(url)
+  MongoClient.connect(process.env.DB_URL)
     .then(
       /* 
         If Database is Connected Successfully then we get an Object 

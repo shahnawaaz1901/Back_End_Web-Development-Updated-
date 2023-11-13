@@ -1,4 +1,11 @@
 //* Import Modules
+//? Import Environment File and Config that at Top so that Every module can access the enviroment file
+/* Instead of Writing and config at the top separate the both statement into another js file and import it at the top same as module 
+import dotenv from 'dotenv';
+dotenv.config();
+*/
+//* We Can Store the file and Config and import that file at the top
+import "./env.js";
 
 //? Packages or Third Party Modules
 import express from "express";
@@ -22,6 +29,14 @@ import { connectToMongoDB } from "./src/config/mongodb.js";
 //* Start the Server
 const app = express();
 
+//* Load the environment variables in Application
+/* 
+  Configuration allow us to use environment variables in Our file  
+  But We Need to config our dotenv file at the top because before we import or loaded the connectToDB function that's why we got an error 
+  That's why config the file into the database file
+  dotenv.config();
+*/
+//* SetUp the CORS Configuration
 app.use(
   cors({
     origin: "http://localhost:5500",
