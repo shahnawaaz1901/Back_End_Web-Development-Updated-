@@ -5,7 +5,7 @@ const userController = new UserController();
 const userRouter = express.Router();
 
 //* Pass Request to login Controller
-userRouter.post("/login", (req, res) => {
+userRouter.post("/signin", (req, res) => {
     //* Because if we pass instead of calling then value of this is undefined
   userController.signIn(req, res);
 });

@@ -43,15 +43,13 @@ export default class ProductController {
       const result = await this.productRepository.getOne(id);
       res.status(200).send(result);
     } catch (error) {
-      console.log(error);
       throw new ApplicationError("Something Went Wrong", 500);
     }
   }
 
   //* Filter Products
-  filterProducts(req, res) {
-    const { minPrice, maxPrice, category } = req.query;
-    const result = ProductModel.filter(minPrice, maxPrice, category);
+  async filterProducts(req, res) {
+    const result = await this.productRepository.filter(req.query);
     res.status(200).send(result);
   }
 
