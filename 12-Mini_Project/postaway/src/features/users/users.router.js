@@ -4,8 +4,8 @@ import UsersController from "./users.controller.js";
 const usersRouter = express.Router();
 const usersController = new UsersController();
 
-usersRouter.use("/ragister").post(usersController.signUp);
-usersRouter.use("/login").post(usersController.signIn);
-usersRouter.use("/logout").get(usersController.signOut);
+usersRouter.post("/ragister",usersController.signUp);
+usersRouter.post("/login",usersController.signIn);
+usersRouter.get("/logout",usersController.signOut);
 
 export default usersRouter;
