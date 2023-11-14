@@ -1,8 +1,7 @@
 import ApplicationError from "../errorHandler/application.error.js";
 import UserModel from "../user/user.model.js";
 export default class ProductModel {
-  constructor(_id, _name, _description, _price, _imageURL, _category, _sizes) {
-    this.id = _id;
+  constructor(_name, _description, _price, _imageURL, _category, _sizes) {
     this.name = _name;
     this.description = _description;
     this.imageURL = _imageURL;
@@ -19,7 +18,7 @@ export default class ProductModel {
     products.push(
       products.length + 1,
       product.name,
-      "New Product",
+      
       product.price,
       product.imageURL,
       `Category ${products.length + 1}`,
@@ -29,8 +28,8 @@ export default class ProductModel {
 
   static getProductById(id) {
     const product = products.find((pro) => pro.id == id);
-    if(!product){
-      throw new ApplicationError("Product Not Found Along with this Id",404);
+    if (!product) {
+      throw new ApplicationError("Product Not Found Along with this Id", 404);
     }
     return product;
   }
@@ -43,21 +42,23 @@ export default class ProductModel {
         (!category || product.category == category)
       );
     });
-    if(!filterData){
-      throw new ApplicationError("Sorry No Products Found !!",404);
+    if (!filterData) {
+      throw new ApplicationError("Sorry No Products Found !!", 404);
     }
     return filterData;
   }
 
   static rateProduct(userId, productId, rating) {
-    const userResult = UserModel.getAllUserDetails().find((user)=> user.id == userId);
+    const userResult = UserModel.getAllUserDetails().find(
+      (user) => user.id == userId
+    );
     /* 
       For Proper Error Handling We Need to throw an error if user not found 
       or product not found this error is caught by the try catch block so 
       that our server handle the proper handling
     */
     //* User Define Error
-    if(!userResult){
+    if (!userResult) {
       throw new ApplicationError("User Not Found !!", 404);
       /*
         throw new Error("User not Found !!")
@@ -67,40 +68,42 @@ export default class ProductModel {
       */
     }
 
-    const productResult = this.getAll().find((p)=> p.id == productId);
+    const productResult = this.getAll().find((p) => p.id == productId);
     //* User Define Error
-    if(!productResult){
+    if (!productResult) {
       /* 
         Error Which we Pass Inside the Error Contructor is Received in error
         object of catch where our error received in massage because that object
         contains three things name, massage and stack 
       */
       throw new ApplicationError("Product Not Found !!", 404);
-    } 
+    }
 
     //* If Ratings not Given By the User
-    if(!productResult.ratings){
+    if (!productResult.ratings) {
       productResult.ratings = [];
       productResult.ratings.push({
-        userId : userId,
-        rating : rating,
-      })
+        userId: userId,
+        rating: rating,
+      });
     }
     //* If Ratings Already Exist Check if User Which Want to Rate, Rated the Product Previously
-    else{
-      const userRatingsIndex = productResult.ratings.findIndex((p)=> p.userId == userId);
-      if(userRatingsIndex >= 0){
+    else {
+      const userRatingsIndex = productResult.ratings.findIndex(
+        (p) => p.userId == userId
+      );
+      if (userRatingsIndex >= 0) {
         productResult.ratings[userRatingsIndex] = {
-          userId : userId,
-          rating : rating
-        }
+          userId: userId,
+          rating: rating,
+        };
       }
       //* If Rating Not Exist
-      else{
+      else {
         productResult.ratings.push({
-          userId : userId,
-          rating : rating,
-        })
+          userId: userId,
+          rating: rating,
+        });
       }
     }
   }

@@ -1,7 +1,11 @@
+import ApplicationError from "../errorHandler/application.error.js";
 import ProductModel from "./product.model.js";
-import path from "path";
+import ProductRepository from "./product.repository.js";
 
 export default class ProductController {
+  constructor() {
+    this.productRepository = new ProductRepository();
+  }
   //* Get All Products
   getProducts(req, res) {
     const product = ProductModel.getAll();
@@ -9,17 +13,23 @@ export default class ProductController {
   }
 
   //* Add New Product
-  addProduct(req, res) {
-    const { name, price, sizes } = req.body;
-    const imageURL = req.file.filename;
-    const newProduct = {
-      name,
-      price: parseFloat(price),
-      sizes: sizes.split(","),
-      imageURL,
-    };
-    ProductModel.addProduct(newProduct);
-    res.send(ProductModel.getAll());
+  async addProduct(req, res) {
+    try {
+      const { name, price, sizes } = req.body;
+      const newProduct = new ProductModel(
+        name,
+        "New Product Description",
+        parseFloat(price),
+        req.file.filename,
+        "Category 1",
+        sizes.split(",")
+      );
+
+      const product = await this.productRepository.addProduct(newProduct);
+      res.status(201).send(product);
+    } catch (error) {
+      throw new ApplicationError("Something went Wrong", 500);
+    }
   }
 
   //* Get Product by ID
