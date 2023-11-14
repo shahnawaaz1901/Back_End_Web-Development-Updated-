@@ -70,7 +70,7 @@ export default class UserController {
         if (result) {
           //* Password is Match
           const token = jwt.sign(
-            { userId: result._id, email: result.email }, //* Pass Object id and email
+            { userId: user._id, email: user.email }, //* Pass Object id and email
             process.env.JWT_Secret,
             { expiresIn: "1h" }
           );

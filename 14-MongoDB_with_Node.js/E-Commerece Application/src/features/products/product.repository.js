@@ -89,7 +89,7 @@ export default class ProductRepository {
       let filterConditions = {};
       //* gte means greater then equal to
       if (minPrice) {
-        filterConditions.price = { $gte: parseFloat(minPrice) }; 
+        filterConditions.price = { $gte: parseFloat(minPrice) };
       }
       //* lte means less then equal to
       if (maxPrice) {
@@ -101,7 +101,10 @@ export default class ProductRepository {
           So Instead of Writing Directly maxPrice We Need to Write Some Extra 
           Information so that we values of price not Overriden 
         */
-        filterConditions.price = {...filterConditions.price, $lte : parseFloat(maxPrice)};
+        filterConditions.price = {
+          ...filterConditions.price,
+          $lte: parseFloat(maxPrice),
+        };
       }
       if (category) {
         filterConditions.category = category;
@@ -114,6 +117,32 @@ export default class ProductRepository {
       return filterData;
     } catch (error) {
       throw new ApplicationError("Something went Wrong", 500);
+    }
+  }
+
+  async rate(userObject) {
+    try {
+      const { userId, productId, rating } = userObject;
+      const db = getDB();
+      const collection = db.collection(this.collection);
+      /* 
+        For Insert a Rating Array we need to Use $push keyword which is basically 
+        used to insert the array in the Object or update the Value of Object, Here 
+        we use the push keyword to push array data in the Object 
+      */
+      await collection.updateOne(
+        { _id: new ObjectId(productId) },
+        {
+          $push: {
+            ratings: {
+              userId,
+              rating,
+            },
+          },
+        }
+      );
+    } catch (error) {
+      throw new ApplicationError("Something went Wrong ", 500);
     }
   }
 }

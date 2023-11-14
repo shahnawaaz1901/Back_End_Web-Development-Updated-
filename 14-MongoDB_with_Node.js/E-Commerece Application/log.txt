@@ -64,3 +64,16 @@
 {"level":"info","message":"/api/products/filter?minPrice=2000 {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"A5FFC976\"}","service":"request-logging"}
 {"level":"info","message":"/api/products/filter?minPrice=3000 {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"A5FFC976\"}","service":"request-logging"}
 {"level":"info","message":"/api/products/filter?minPrice=3000&maxPrice=4000 {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"A5FFC976\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/filter?minPrice=3000&maxPrice=4000 {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"A5FFC976\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/singin {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"A5FFC976\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signin {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"A5FFC976\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/filter?minPrice=3000&maxPrice=4000 {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"A5FFC976\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/filter?minPrice=3000&maxPrice=2000 {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"A5FFC976\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/filter?minPrice=1000&maxPrice=2000 {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"A5FFC976\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/filter?minPrice=1000&maxPrice=2400 {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"A5FFC976\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/ {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"A5FFC976\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/rateProduct?productId=65537848c76657da8a0a8ac6&rating=4 {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"A5FFC976\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/signin {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"A5FFC976\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signin {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"A5FFC976\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signin {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"A5FFC976\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/rateProduct?productId=65537848c76657da8a0a8ac6&rating=4 {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"A5FFC976\"}","service":"request-logging"}

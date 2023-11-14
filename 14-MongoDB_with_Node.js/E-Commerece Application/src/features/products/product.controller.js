@@ -54,9 +54,13 @@ export default class ProductController {
   }
 
   //* Rate the Product
-  rateProduct(req, res) {
+  async rateProduct(req, res) {
     const { productId, rating } = req.query;
-    const userId = req.userId;
+    const userObject = {
+      productId,
+      rating,
+      userId: req.userId,
+    };
     /* 
       Instead of send an error string our rate product function throw an error
       so that we need to call rate product function into the try catch so that
@@ -83,7 +87,7 @@ export default class ProductController {
         next(error)         //* If this next function call along with error then it directy call Our Application Level Error Handler 
       }
     */
-    ProductModel.rateProduct(userId, productId, rating);
+    await this.productRepository.rate(userObject);
     return res.status(200).send("Product Rated Successfully !!");
   }
 }
