@@ -22,6 +22,10 @@ app.set("views",path.join("src","views"));
 //* SetUp Layouts
 app.use(expressEjsLayouts);
 
+//* For Extract the Static Files from EJS
+app.set("layout extractStyles", true);
+app.set("layout extractScripts", true)
+
 //* Use Body Parser
 //* parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
