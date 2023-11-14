@@ -10,30 +10,6 @@ export default class ProductModel {
     this.sizes = _sizes;
   }
 
-  static getAll() {
-    return products;
-  }
-
-  static addProduct(product) {
-    products.push(
-      products.length + 1,
-      product.name,
-      
-      product.price,
-      product.imageURL,
-      `Category ${products.length + 1}`,
-      product.sizes
-    );
-  }
-
-  static getProductById(id) {
-    const product = products.find((pro) => pro.id == id);
-    if (!product) {
-      throw new ApplicationError("Product Not Found Along with this Id", 404);
-    }
-    return product;
-  }
-
   static filter(minPrice, maxPrice, category) {
     const filterData = products.filter((product) => {
       return (

@@ -7,9 +7,13 @@ export default class ProductController {
     this.productRepository = new ProductRepository();
   }
   //* Get All Products
-  getProducts(req, res) {
-    const product = ProductModel.getAll();
-    res.status(200).send(product);
+  async getProducts(req, res) {
+    try {
+      const result = await this.productRepository.getAll();
+      res.status(200).send(result);
+    } catch (error) {
+      throw new ApplicationError("Something went Wrong", 500);
+    }
   }
 
   //* Add New Product
@@ -25,7 +29,7 @@ export default class ProductController {
         sizes.split(",")
       );
 
-      const product = await this.productRepository.addProduct(newProduct);
+      const product = await this.productRepository.add(newProduct);
       res.status(201).send(product);
     } catch (error) {
       throw new ApplicationError("Something went Wrong", 500);
@@ -33,10 +37,15 @@ export default class ProductController {
   }
 
   //* Get Product by ID
-  getOneProduct(req, res) {
-    const id = req.params.id;
-    const product = ProductModel.getProductById(id);
-    res.status(200).send(product);
+  async getOneProduct(req, res) {
+    try {
+      const id = req.params.id;
+      const result = await this.productRepository.getOne(id);
+      res.status(200).send(result);
+    } catch (error) {
+      console.log(error);
+      throw new ApplicationError("Something Went Wrong", 500);
+    }
   }
 
   //* Filter Products

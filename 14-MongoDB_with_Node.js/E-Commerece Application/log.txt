@@ -28,3 +28,18 @@
 {"level":"info","message":"/api/users/signUp {\"name\":\"Toshiba Ansari\",\"email\":\"toshiba@gmail.com\",\"password\":\"toshi@1234\",\"typeOfUser\":\"Customer\"}","service":"request-logging"}
 {"level":"info","message":"/api/users/ragister {\"name\":\"Toshiba Ansari\",\"email\":\"toshiba@gmail.com\",\"password\":\"toshi@1234\",\"typeOfUser\":\"Customer\"}","service":"request-logging"}
 {"level":"info","message":"/api/products/add-product {}","service":"request-logging"}
+{"level":"info","message":"/api/products/ {}","service":"request-logging"}
+{"level":"info","message":"/api/products/ {}","service":"request-logging"}
+{"level":"info","message":"/api/products/ {}","service":"request-logging"}
+{"level":"info","message":"/api/products/ {}","service":"request-logging"}
+{"level":"info","message":"/api/products/ {}","service":"request-logging"}
+{"level":"info","message":"/api/products/ {}","service":"request-logging"}
+{"level":"info","message":"/api/products/add-product {}","service":"request-logging"}
+{"level":"info","message":"/api/products/ {}","service":"request-logging"}
+{"level":"info","message":"/api/products/ {}","service":"request-logging"}
+{"level":"info","message":"/api/products/ {\"name\":\"Product 1\",\"price\":2400,\"sizes\":[\"S\",\"M\",\"L\",\"XL\"]}","service":"request-logging"}
+{"level":"info","message":"/api/products/65536b8f27b0f4deeeddb0c2 {\"name\":\"Product 1\",\"price\":2400,\"sizes\":[\"S\",\"M\",\"L\",\"XL\"]}","service":"request-logging"}
+{"level":"info","message":"/api/products/65536b8f27b0f4deeeddb0c2 {\"name\":\"Product 1\",\"price\":2400,\"sizes\":[\"S\",\"M\",\"L\",\"XL\"]}","service":"request-logging"}
+{"level":"info","message":"/api/products/65536b8f27b0f4deeeddb0c2 {\"name\":\"Product 1\",\"price\":2400,\"sizes\":[\"S\",\"M\",\"L\",\"XL\"]}","service":"request-logging"}
+{"level":"info","message":"/api/products/65536b8f27b0f4deeeddb0c2 {\"name\":\"Product 1\",\"price\":2400,\"sizes\":[\"S\",\"M\",\"L\",\"XL\"]}","service":"request-logging"}
+{"level":"info","message":"/api/products/65536b8f27b0f4deeeddb0c2 {\"name\":\"Product 1\",\"price\":2400,\"sizes\":[\"S\",\"M\",\"L\",\"XL\"]}","service":"request-logging"}

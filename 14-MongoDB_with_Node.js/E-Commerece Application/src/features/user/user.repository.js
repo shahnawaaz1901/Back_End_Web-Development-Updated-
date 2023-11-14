@@ -2,6 +2,9 @@ import { getDB } from "../../config/mongodb.js";
 import ApplicationError from "../errorHandler/application.error.js";
 
 export default class UserRepository {
+  constructor() {
+    this.collection = "users";
+  }
   //* Because this is Asynchronous and we async await instead of then catch
   /* 
     Always inside the repository we only receive one argument in object 
@@ -14,7 +17,7 @@ export default class UserRepository {
       const db = getDB();
 
       //2. Get Collection
-      const collection = db.collection("users");
+      const collection = db.collection(this.collection);
 
       //3. Insert in the Document
       await collection.insertOne(newUser);
@@ -46,7 +49,7 @@ export default class UserRepository {
     const db = getDB();
 
     //2. Get the Collection
-    const collection = db.collection("users");
+    const collection = db.collection(this.collection);
 
     //3. Find the UserObject with the email
     return await collection.findOne({ email });
