@@ -28,6 +28,10 @@ export default class UsersModel {
     );
     return result;
   }
+
+  static getAllUsers() {
+    return usersData;
+  }
 }
 
 var usersData = [];
