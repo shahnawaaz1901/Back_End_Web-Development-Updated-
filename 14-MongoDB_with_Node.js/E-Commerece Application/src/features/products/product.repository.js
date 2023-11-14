@@ -135,7 +135,7 @@ export default class ProductRepository {
         {
           $push: {
             ratings: {
-              userId,
+              userId : new ObjectId(userId),
               rating,
             },
           },
