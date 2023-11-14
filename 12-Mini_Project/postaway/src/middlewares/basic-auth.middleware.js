@@ -6,7 +6,7 @@ const auth = (req, res, next) => {
 
   if (!authHeader) {
     //* If Header Not Present
-    res.status(400).send("UnAuthorize Access !!");
+    res.status(401).send("UnAuthorize Access !!");
   }
 
   //* If Header is Present then base64 Encoded format contains Basic Keyword so remove the keyword
