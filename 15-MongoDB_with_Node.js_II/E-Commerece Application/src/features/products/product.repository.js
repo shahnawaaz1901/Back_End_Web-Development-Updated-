@@ -96,7 +96,6 @@ export default class ProductRepository {
 
   async rate(userObject) {
     try {
-      console.log(userObject);
       const { userId, productId, rating } = userObject;
       const db = getDB();
       const collection = db.collection(this.collection);
@@ -111,17 +110,24 @@ export default class ProductRepository {
         for that object after that create rating object for that user and after 
         that push the rating object to the ratings array.
       */
-      //*1. Find the Product
+      /* 
+      Instead of first find the Product and inside the product find the ratings array
+      and find the userId in the ratings array and after that update the user rating
+      we can first remove the existing user in the ratings array using pull operator
+      after that insert the new entry this can be done in 2 steps into first remove
+      and second is insert new Rating
+      
+      1. Find the Product
       const product = await collection.findOne({
         _id: new ObjectId(productId),
       });
 
       //*2. Find the Rating
-      /* 
+       
         Quesion mark is null check if product or ratings not found then dont do
         next operation it prevents error which is occur for access null properties
-      */
-      const existRating = product?.ratings?.find((r) => r.userId == userId);
+
+        const existRating = product?.ratings?.find((r) => r.userId == userId);
       if (existRating) {
         //* 3. Update the Existing Rating
         await collection.updateOne(
@@ -149,7 +155,31 @@ export default class ProductRepository {
             },
           }
         );
-      }
+      }*/
+      //* Simpler Approach for the Update or Add the New Rating
+      // Step 1 Remove the Existing Entry for the User
+      await collection.updateOne(
+        { _id: new ObjectId(productId) },
+        {
+          $pull: {
+            //* Pull remove the data from the product which satisfy the Condition just write after the pull operator
+            ratings: { userId: new ObjectId(userId) },
+          },
+        }
+      );
+
+      // Step 2 Add the New Entry for the User
+      await collection.updateOne(
+        { _id: new ObjectId(productId) },
+        {
+          $push: {
+            ratings: {
+              userId: new ObjectId(userId),
+              rating,
+            },
+          },
+        }
+      );
     } catch (error) {
       console.log(error);
       throw new ApplicationError("Something went Wrong ", 500);
