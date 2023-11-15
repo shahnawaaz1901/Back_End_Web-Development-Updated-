@@ -1,6 +1,7 @@
+let id = 1;
 export default class UsersModel {
-  constructor(_id, _name, _email, _phone, _password) {
-    this.id = _id;
+  constructor(_name, _email, _phone, _password) {
+    this.id = id++;
     this.name = _name;
     this.email = _email;
     this.phone = _phone;
@@ -10,7 +11,6 @@ export default class UsersModel {
   static newUser(userData) {
     usersData.push(
       new UsersModel(
-        usersData.length + 1,
         userData.name,
         userData.email,
         userData.phone,
@@ -34,4 +34,11 @@ export default class UsersModel {
   }
 }
 
-var usersData = [];
+var usersData = [
+  new UsersModel(
+    "Shahnawaaz Ansari",
+    "shaan.ansari1901@gmail.com",
+    "9119145616",
+    "A5FFC976"
+  ),
+];

@@ -1,4 +1,3 @@
-import UsersController from "../features/users/users.controller.js";
 import UsersModel from "../features/users/users.model.js";
 
 const auth = (req, res, next) => {
