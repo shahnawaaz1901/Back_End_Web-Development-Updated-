@@ -1,0 +1,17 @@
+{"level":"info","message":"/api/users/signin {\"phone\":\"9119145616\",\"password\":\"A5FFC976\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signin {\"phone\":\"9119145616\",\"password\":\"A5FFC976\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signin {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"A5FFC976\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signin {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"A5FFC976\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signin {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"A5FFC976\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signin {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"A5FFC976\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/ {}","service":"request-logging"}
+{"level":"info","message":"/api/products/ {}","service":"request-logging"}
+{"level":"info","message":"/api/users/signin {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"A5FFC976\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/rateProduct {\"productId\":\"65537a08d1707d90e0a2eba9\",\"rating\":\"5\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/rateProduct {\"productId\":\"65537a08d1707d90e0a2eba9\",\"rating\":\"5\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/rateProduct {\"productId\":\"65537a08d1707d90e0a2eba9\",\"rating\":\"5\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/rateProduct {\"productId\":\"65537848c76657da8a0a8ac6\",\"rating\":\"5\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/rateProduct {\"productId\":\"65537848c76657da8a0a8ac6\",\"rating\":\"5\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/rateProduct {\"productId\":\"65537848c76657da8a0a8ac6\",\"rating\":\"10\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/rateProduct {\"productId\":\"65537848c76657da8a0a8ac6\",\"rating\":\"50\"}","service":"request-logging"}
+{"level":"info","message":"/api/products/rateProduct {\"productId\":\"65537848c76657da8a0a8ac6\",\"rating\":\"4.6\"}","service":"request-logging"}
