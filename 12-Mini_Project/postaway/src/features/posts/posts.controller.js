@@ -33,5 +33,12 @@ export default class PostsController {
     res.status(200).send(updatedPost);
   }
 
-  deletePost(req, res) {}
+  deletePost(req, res) {
+    const { id } = req.params;
+    const result = PostsModel.delete(id);
+    if(!result){
+      return res.status(400).send("Post Not Found");
+    }
+    return res.status(200).send(result);
+  }
 }

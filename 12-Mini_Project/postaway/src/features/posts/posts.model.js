@@ -25,8 +25,8 @@ export default class PostsModel {
   }
 
   static update(id, postDesc, postLocation, postURL) {
-    const findIndex = postsData.findIndex((p) => p.id == id);
-    if (findIndex == -1) {
+    const index = postsData.findIndex((p) => p.id == id);
+    if (index == -1) {
       return;
     }
     let updatedPost = {};
@@ -43,11 +43,19 @@ export default class PostsModel {
       updatedPost.postURL = postURL;
     }
 
-    const update = Object.assign(postsData[findIndex], updatedPost);
+    const update = Object.assign(postsData[index], updatedPost);
     return update;
   }
 
-  static delete() {}
+  static delete(id) {
+    const index = postsData.findIndex((p) => p.id == id);
+    if (index == -1) {
+      return;
+    }
+
+    postsData.splice(index, 1);
+    return this.getAll();
+  }
 }
 
 var postsData = [];
