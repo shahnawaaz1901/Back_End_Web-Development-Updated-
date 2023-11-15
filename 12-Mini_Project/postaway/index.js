@@ -9,6 +9,7 @@ import postsRouter from "./src/features/posts/posts.router.js";
 import likesRouter from "./src/features/likes/likes.router.js";
 import commentsRouter from "./src/features/comments/comments.router.js";
 import auth from "./src/middlewares/basic-auth.middleware.js";
+import jwtAuth from "./src/middlewares/jwt-auth.middleware.js";
 
 //* Start the Server */
 const server = express();
@@ -20,9 +21,9 @@ server.use(express.json());
 
 //* Setting Up Routes */
 server.use("/api/users", usersRouter);
-server.use("/api/posts", auth, postsRouter);
-server.use("/api/likes", auth, likesRouter);
-server.use("/api/comments", auth, commentsRouter);
+server.use("/api/posts", jwtAuth, postsRouter);
+server.use("/api/likes", jwtAuth, likesRouter);
+server.use("/api/comments", jwtAuth, commentsRouter);
 
 //* Listen the Server
 server.listen(3200, (err) => {

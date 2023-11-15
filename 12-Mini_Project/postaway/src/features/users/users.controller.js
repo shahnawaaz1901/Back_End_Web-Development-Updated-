@@ -1,5 +1,6 @@
 //* Create User Class So that We Dont Need to Export All Functions We Can Just Export the Class to use the functions
 import UsersModel from "./users.model.js";
+import jwt from "jsonwebtoken";
 
 export default class UsersController {
   //* Add new User
@@ -12,7 +13,15 @@ export default class UsersController {
   signIn(req, res) {
     const result = UsersModel.existingUser(req.body);
     if (result) {
-      res.status(200).send("User Login Successfully !!");
+      console.log(result);
+      const token = jwt.sign(
+        { id: result.id, email: result.email },
+        "z9Vtqt5k2LFzUTEttfY8",
+        {
+          expiresIn: "1h",
+        }
+      );
+      res.status(200).send(token);
     } else {
       res.status(404).send("Invalid Credentials !!");
     }
