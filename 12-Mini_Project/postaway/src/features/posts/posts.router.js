@@ -8,7 +8,7 @@ const postsController = new PostsController();
 postsRouter.post("/", upload.single("postURL"), postsController.createPost);
 postsRouter.get("/", postsController.getAllPosts);
 postsRouter.get("/:postId", postsController.getOnePost);
-postsRouter.put("/:postId", postsController.updatePost);
+postsRouter.put("/:postId", upload.single("postURL"), postsController.updatePost);
 postsRouter.delete("/:postId", postsController.deletePost);
 
 export default postsRouter;

@@ -14,7 +14,6 @@ export default class PostsModel {
   static new(postDesc, postLocation, postURL, userId) {
     const post = new PostsModel(postURL, postDesc, postLocation, userId);
     postsData.push(post);
-    console.log(postsData);
     return post;
   }
 
@@ -22,12 +21,14 @@ export default class PostsModel {
     return postsData.filter((p) => p.userId == userId);
   }
 
-  static getOne(id, userId) {
-    return postsData.find((p) => p.id == id && p.userId == userId);
+  static getOne(postId, userId) {
+    return postsData.find((p) => p.id == postId && p.userId == userId);
   }
 
-  static update(id, postDesc, postLocation, postURL, userId) {
-    const index = postsData.findIndex((p) => p.id == id && p.userId == userId);
+  static update(postId, postDesc, postLocation, postURL, userId) {
+    const index = postsData.findIndex(
+      (p) => p.id == postId && p.userId == userId
+    );
     if (index == -1) {
       return;
     }
