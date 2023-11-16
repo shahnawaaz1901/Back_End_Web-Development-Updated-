@@ -1,4 +1,3 @@
-import { ObjectId } from "mongodb";
 import { getDB } from "../../config/mongodb.js";
 import ApplicationError from "../errorHandler/application.error.js";
 export default class CartRepository {
@@ -9,6 +8,8 @@ export default class CartRepository {
     try {
       const db = getDB();
       const collection = db.collection(this.collection);
+      //* For Get the Id
+      const id = await this.getNextCounter(db);
       /* 
         Instead of Directly Added Items into the Cart we Need to first Check
         If item is exist on cart for that user or not. If item not added prev
@@ -30,6 +31,10 @@ export default class CartRepository {
           userId: productObject.userId,
         },
         {
+          //* Means id is Only Given if Document is Created id is not given if document is updated
+          $setOnInsert: {
+            _id: id,
+          },
           //* Increment Operator use to Increment or Decrement the Value of Quantity in Our Cart
           $inc: {
             quantity: productObject.quantity,
@@ -62,5 +67,34 @@ export default class CartRepository {
     } catch (error) {
       throw new ApplicationError("Something went Wrong", 500);
     }
+  }
+
+  //* Create getNextCounter Function To get the id for the for the Cart and
+  async getNextCounter(db) {
+    const resultDoc = await db.collection("counters").findOneAndUpdate(
+      {
+        _id: "cartItemId", //* Filter
+      },
+      {
+        $inc: {
+          //* Increment the Value for nextId
+          value: 1,
+        },
+      },
+      //* For Return the Existing Document We Need pass an Object Defining returnDocument Value "after"
+      {
+        returnDocument: "after",
+      }
+      /* For Return the Updated Value of Document 
+      {
+        returnNewDocument : true
+      }
+      */
+    );
+    /* 
+      We Want the Document before the update so that we get the document after 
+      that we return the value for give the Id 
+    */
+    return resultDoc.value;
   }
 }
