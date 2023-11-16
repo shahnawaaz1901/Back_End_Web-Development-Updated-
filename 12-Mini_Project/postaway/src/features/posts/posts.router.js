@@ -5,7 +5,7 @@ import upload from "../../middlewares/file-upload.middleware.js";
 const postsRouter = express.Router();
 const postsController = new PostsController();
 
-postsRouter.post("/", upload.single("imageURL"), postsController.createPost);
+postsRouter.post("/", upload.single("postURL"), postsController.createPost);
 postsRouter.get("/", postsController.getAllPosts);
 postsRouter.get("/:postId", postsController.getOnePost);
 postsRouter.put("/:postId", postsController.updatePost);

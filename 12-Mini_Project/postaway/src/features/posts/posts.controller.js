@@ -4,28 +4,35 @@ export default class PostsController {
   createPost(req, res) {
     const { postDesc, postLocation } = req.body;
     const postURL = req.file.filename;
-    const newPost = PostsModel.new(postDesc, postLocation, postURL);
+    const newPost = PostsModel.new(postDesc, postLocation, postURL, req.userId);
     return res.status(201).send(newPost);
   }
 
   //* Retrieve All Posts
   getAllPosts(req, res) {
-    return res.status(200).send(PostsModel.getAll());
+    return res.status(200).send(PostsModel.getAll(req.userId));
   }
 
+  //* Get Post For Specific Id
   getOnePost(req, res) {
-    const result = PostsModel.getOne(req.params.id);
+    const result = PostsModel.getOne(req.params.postId, req.userId);
     if (!result) {
       return res.status(400).send("Posts Not Found");
     }
     return res.status(200).send(result);
   }
 
+  //* Update the Post
   updatePost(req, res) {
-    const id = req.params.id;
+    const { postId } = req.params;
     const { postDesc, postLocation } = req.body;
     const postURL = req.file.filename;
-    const updatedPost = PostsModel.update(id, postDesc, postLocation, postURL);
+    const updatedPost = PostsModel.update(
+      postId,
+      postDesc,
+      postLocation,
+      postURL
+    );
     if (!updatedPost) {
       return res.status(400).send("Post Not Found !!");
     }
@@ -33,10 +40,11 @@ export default class PostsController {
     res.status(200).send(updatedPost);
   }
 
+  //* Delete the Post
   deletePost(req, res) {
-    const { id } = req.params;
-    const result = PostsModel.delete(id);
-    if(!result){
+    const { postId } = req.params;
+    const result = PostsModel.delete(postId, req.userId);
+    if (!result) {
       return res.status(400).send("Post Not Found");
     }
     return res.status(200).send(result);
