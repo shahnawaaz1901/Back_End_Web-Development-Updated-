@@ -1,6 +1,6 @@
 //* Import Nessesory Modules
-import express from 'express';
-import CartController from './cart.controller.js';
+import express from "express";
+import CartController from "./cart.controller.js";
 
 //* Initialize Express Router
 const cartRouter = express.Router();
@@ -9,8 +9,14 @@ const cartRouter = express.Router();
 const cartController = new CartController();
 
 //* Add Product to the Cart
-cartRouter.post("/addToCart",cartController.addToCart);
-cartRouter.get("/",cartController.getCartItems);
-cartRouter.delete("/remove/:itemId", cartController.removeFromCart);
+cartRouter.post("/addToCart", (req, res) => {
+  cartController.addToCart(req, res);
+});
+cartRouter.get("/", (req, res) => {
+  cartController.getCartItems(req, res);
+});
+cartRouter.delete("/remove/:productId", (req, res) => {
+  cartController.removeFromCart(req, res);
+});
 //* Export Router
 export default cartRouter;
