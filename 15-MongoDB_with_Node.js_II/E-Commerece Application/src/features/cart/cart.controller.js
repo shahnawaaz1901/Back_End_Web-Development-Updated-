@@ -7,6 +7,16 @@ export default class CartController {
     this.cartRepository = new CartRepository();
   }
   async addToCart(req, res) {
+    /* 
+      In Our Application Adding to Cart Feature has Poblem Like We
+      faced earlier in Our add new rating. If Our Same User Update 
+      the Quantity of Same Product then instead of replace existing
+      quantity Our application added a new Object in Our Database 
+      which Contains the Quantity of the product for the user. This
+      is Bad Situation where Instead of Update the Quantity of the
+      product for a specific user we add new Object with new Quantity
+      this occurs Problem in Our App. So we Need to Fix the Problem
+    */
     try {
       const { productId, quantity } = req.body;
       const userId = req.userId;
