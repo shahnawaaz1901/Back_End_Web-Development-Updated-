@@ -15,7 +15,10 @@ export default class LikesController {
   removeLikeToPost(req, res) {
     const postId = req.params.userId;
     const userId = req.userId;
-    LikesModel.remove(postId, userId);
-    res.status(200).send("Likes Remove Successfully !!");
+    const result = LikesModel.remove(postId, userId);
+    if (!result) {
+      return res.status(404).send("Post Not Found !!");
+    }
+    res.status(200).send(result);
   }
 }
