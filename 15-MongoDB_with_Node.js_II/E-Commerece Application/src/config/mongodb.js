@@ -8,6 +8,12 @@ export const connectToMongoDB = () => {
       client = clientInstance;
       console.log(`Mongo DB is Connected Successfully !! `);
       createCounter(client.db());
+      /* 
+        We Want to give the Indexing when Our MongoDB server is Connected 
+        so that we need to call the indexing function after our Mongo DB 
+        is Connected 
+      */
+      createIndexes(client.db());
     })
     .catch((err) =>
       console.log(`Error while Connecting with Database : ${err}`)
@@ -53,3 +59,45 @@ const createCounter = async (db) => {
   insert the document we need to perform extra work by creating the index for the
   document so we can say our write operations become comparatively slower then before
 */
+
+/*
+  By Default MongoDB gives the indexing for the document in the form of _id, Which
+  makes the query faster because we search a document in database by the id which's
+  index 
+*/
+
+const createIndexes = async (db) => {
+  //! Note : All the Attributes in Object which we pass in createIndex function should be present in the document
+  // price is the attribute name which we want to use in Indexing
+  try {
+    //* Because we give Only One Field then this is called Single field Indexes
+    await db.collection("products").createIndex({ price: 1 });
+    console.log("Indexes is Created !!");
+
+    /* 
+      For Creating the Compounding Indexes we need to Specify More then One 
+      Field in which One can be Acsending and Another can be in Descending or 
+      Both Are Same. We can also gives Multiple Indexing for the One Collection
+    */
+
+    await db.collection("products").createIndex({ name: 1, category: -1 });
+    /*
+      In Above we give compound Indexing because we specify more then one attribute
+      in Our createIndex function. name is in Acesending Order and Category in the
+      descending Order.
+    */
+
+    /* 
+        In Large Application where Our database have multiple collection we can 
+        give the indexing in the form of text. Usually a Product Description is
+        longer so we can give the indexing in the form of text
+      */
+    await db.collection("products").createIndex({ description: "text" });
+  } catch (error) {
+    console.log(error);
+  }
+  /*
+    Value of 1 specify that we want to give the indexing in acsending Order
+    value of -1 specify that we want to give the indexing in descending Order
+  */
+};
