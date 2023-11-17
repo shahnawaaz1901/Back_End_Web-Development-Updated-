@@ -12,7 +12,11 @@ export default class LikesModel {
     if (!allPosts[postIndex].likes) {
       allPosts[postIndex].likes = [];
     }
-
+    for (let every of allPosts[postIndex].likes) {
+      if (every.userId == userId) {
+        return allPosts[postIndex];
+      }
+    }
     allPosts[postIndex].likes.push({ userId });
     return allPosts[postIndex];
   }
