@@ -18,19 +18,30 @@ export default class LikesModel {
   }
 
   static remove(postId, userId) {
+    console.log("Inside the Removen function")
     let allPosts = PostsModel.getAll(userId);
     const postIndex = allPosts.findIndex(
       (f) => postId == f.id && userId == f.userId
     );
+    console.log("Before postIndex Condition");
     if (postIndex == -1) {
+      console.log("Inside the postIndex");
       return;
     }
-
+    console.log("After postIndex Condition");
+    // console.log(allPosts[postIndex]);
     if (!allPosts[postIndex].likes) {
-      return;
+      allPosts[postIndex].likes = [];
+    }
+    console.log("After Likes Array Creation");
+    const userIndex = allPosts[postIndex].likes.findIndex((u) => {
+      u.userId == userId;
+    });
+    console.log("After the Iterate the array " + userIndex);
+    for (let every of allPosts[postIndex].likes) {
+      console.log(every, "In Loop");
     }
 
-    const userIndex = allPosts[postIndex].likes((u) => u.userId == userId);
     if (userIndex == -1) {
       return;
     }
