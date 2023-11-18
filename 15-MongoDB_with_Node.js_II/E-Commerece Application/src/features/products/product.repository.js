@@ -102,7 +102,7 @@ export default class ProductRepository {
       /* Because categories is array expression in string so if we convert it into the JSON then it'll replace categories to array from string */
       if (categories.length) {
         filterConditions = {
-          //* We Use the or oprator so we search based categories or we search on filterConditions because OR Operator Checks All the conditions 
+          //* We Use the or oprator so we search based categories or we search on filterConditions because OR Operator Checks All the conditions
           $or: [{ category: { $in: categories } }, filterConditions],
         };
       }
@@ -159,7 +159,36 @@ export default class ProductRepository {
         ],
       };
       */
-      const filterData = await collection.find(filterConditions).toArray();
+      /* 
+        Fro Modifying Received document in Database we need to use projection Operator
+        Projection Operator works byDefault in two ways one is Inclusion and Another One
+        is Exclusion. We need to Sepcify fields in project function which we want to get
+        and set the value of field is 1 so that we want to include the field in that document
+        if we Not Specify the _id then id is bydefault sent if We dont want the id then
+        we need to exlude the _id field by specifying the value to 0.
+      */
+      const filterData = await collection
+        .find(filterConditions)
+        .project({
+          _id: 0,
+          name: 1,
+          price: 1,
+          // _id : 0                              //* If Dont Want to Send the Id
+          /* 
+            slice keyword number is the document which we want to receive for in Our case 
+            we want only 1 Document from ratings array so that we specify $slice value to 1
+            if field which we want to slice is not present then it not return anything about
+            that field
+          */
+          ratings: { $slice: 1 },
+          /* 
+            if We want to get the Last Document of the Field then we need to specify value -1
+            to return the last document in that fields Array
+
+            ratings : {$slice : -1}
+          */
+        })
+        .toArray();
       return filterData;
     } catch (error) {
       console.log(error);
