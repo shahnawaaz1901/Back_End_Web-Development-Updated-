@@ -49,19 +49,37 @@ export default class ProductController {
 
   //* Filter Products
   async filterProducts(req, res) {
-    const result = await this.productRepository.filter(req.query);
-    res.status(200).send(result);
+    try {
+      const result = await this.productRepository.filter(req.query);
+      res.status(200).send(result);
+    } catch (error) {
+      throw new ApplicationError("Somthing Went Wrong ", 500);
+    }
   }
 
   //* Rate the Product
   async rateProduct(req, res) {
-    const { productId, rating } = req.body;
-    const userObject = {
-      productId,
-      rating,
-      userId: req.userId,
-    };
-    await this.productRepository.rate(userObject);
-    return res.status(200).send("Product Rated Successfully !!");
+    try {
+      const { productId, rating } = req.body;
+      const userObject = {
+        productId,
+        rating,
+        userId: req.userId,
+      };
+      await this.productRepository.rate(userObject);
+      return res.status(200).send("Product Rated Successfully !!");
+    } catch (error) {
+      throw new ApplicationError("Something Went Wrong", 500);
+    }
+  }
+
+  async getAveragePrice(req, res) {
+    try {
+      const result = await this.productRepository.avg();
+      res.status(200).send(result);
+    } catch (error) {
+      console.log(error);
+      throw new ApplicationError("Something Went Wrong", 500);
+    }
   }
 }

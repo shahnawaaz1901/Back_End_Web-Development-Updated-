@@ -287,4 +287,56 @@ export default class ProductRepository {
       throw new ApplicationError("Something went Wrong ", 500);
     }
   }
+
+  /* 
+    Aggregation Pipeline takes the request perform some action on from the 
+    database and gives us an insight
+  */
+
+  /* 
+    In our case we can get insight like avarage price and average rating this
+    we'll do by the aggregation pipeline. Below we so same thing for we perform
+    some action and get the average price for every category we can do this for 
+    other field as well
+  */
+  async avg() {
+    try {
+      const db = getDB();
+      /* 
+        When Ever we want the some insight in a Collection from Database then we
+        can use the find function but it's recommend to use the aggregate pipeline
+        to get the insight based on some field. Because we dont want to change something
+        in database instead of database we want to see avg price on returning side so
+        we need to do operations on return side. We Need to call the aggregate function
+        on the collection and perform some operation in that function 
+      */
+      /* 
+        Aggregation Pipeline not Moodify the document until passs the merge and out 
+        operator . Aggregate function takes array of different Stages . Stages are used
+        to filter Out the data 
+      */
+      return await db
+        .collection(this.collection)
+        .aggregate([
+          // Stage 1 : Get Average Price per Category
+          /* 
+          Here we use the group operator, group operator seprates the document into the 
+          groups according to a group key which we specify as operator in the group operator 
+        */ {
+            $group: {
+              _id: "$category",
+              averagePrice: {
+                // Store the All Category Average Price
+                //* avg Operator return average of the Numeric Values Excluding the Non-Numeric Values
+                $avg: "$price", //* Specify the field by using the dollar before and put it in string which we want to average
+              },
+            },
+          },
+        ])
+        .toArray();
+    } catch (error) {
+      console.log(error);
+      throw new ApplicationError("Something Went Wrong", 500);
+    }
+  }
 }

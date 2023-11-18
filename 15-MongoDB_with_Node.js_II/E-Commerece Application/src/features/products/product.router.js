@@ -16,13 +16,16 @@ productRouter.post("/add-product", upload.single("imageURL"), (req, res) => {
   productController.addProduct(req, res);
 });
 
-
 productRouter.get("/filter", (req, res) => {
   productController.filterProducts(req, res);
 });
 
 productRouter.post("/rateProduct", (req, res) => {
   productController.rateProduct(req, res);
+});
+
+productRouter.get("/averagePrice", (req, res) => {
+  productController.getAveragePrice(req, res);
 });
 
 //* Always Write params argument at the Bottom
