@@ -96,3 +96,4 @@
 {"level":"info","message":"/api/products/averagePrice {}","service":"request-logging"}
 {"level":"info","message":"/api/products/averagePrice {}","service":"request-logging"}
 {"level":"info","message":"/api/products/averagePrice {}","service":"request-logging"}
+{"level":"info","message":"/api/products/averagePrice {}","service":"request-logging"}
