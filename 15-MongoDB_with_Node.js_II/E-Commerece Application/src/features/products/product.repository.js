@@ -67,12 +67,21 @@ export default class ProductRepository {
   }
 
   async filter(filterConditions) {
-    const { minPrice, maxPrice, category } = filterConditions;
+    // let { minPrice, maxPrice, category } = filterConditions;
+    let { minPrice, maxPrice, categories } = filterConditions;
+
+    /* 
+      MongoDB also provide us logical operator Like AND, OR, XOR. Internally
+      When we use Pass multiple Conditions in the FindFunction MongoDB already
+      used AND Operator Internally. This Operator We Can Also Use Explicitly By
+      use the keyword "$and" and pass the array of conditions so that mongodb
+      Only gives us result which matches the all conditions of Array. 
+    */
     try {
       const db = getDB();
       const collection = db.collection(this.collection);
       let filterConditions = {};
-      //* gte means greater then equal to
+      // * gte means greater then equal to
       if (minPrice) {
         filterConditions.price = { $gte: parseFloat(minPrice) };
       }
@@ -83,13 +92,77 @@ export default class ProductRepository {
           $lte: parseFloat(maxPrice),
         };
       }
-      if (category) {
-        filterConditions.category = category;
+      /* 
+        Suppose that if We Want to Search for the product for Multiple Categories
+        how Can we search product for the Multiple categories, We Can do by using
+        the operator $in which take array of categories or fileds of Multiple Items 
+      */
+      categories = JSON.parse(categories.replace(/'/g, '"'));
+      /* replace function use to replace the occurence g specify that we want to replace all the occurance  */
+      /* Because categories is array expression in string so if we convert it into the JSON then it'll replace categories to array from string */
+      if (categories.length) {
+        filterConditions = {
+          //* We Use the or oprator so we search based categories or we search on filterConditions because OR Operator Checks All the conditions 
+          $or: [{ category: { $in: categories } }, filterConditions],
+        };
+      }
+      /*
+        Use of AND Operator in MONGO DB
+        Supppose we Received Fix Two Argument minPrice and category from the User 
+        and We Need to Find Out the product in database by using the coditions. But
+        how can we use Logical Operator explicitly. Lets try :
+
+        //* We Received Two Argument One is minPrice and Another One is category
+        const conditions = {$and : [{price : {$gte : {parseFloat(miPrice)}}},{category : category}]}
+
+        We Can use Logical Same it is in Other Conditions 
+      */
+      /*  We Can Implement the And operator like this : 
+      But For use this filter object we need that user is give us all the three conditions
+      That's Why we use previous filter where we check if user is given all conditions to
+      us or Not
+      
+
+      We Can Use Minimum and Maximum Number Value if minPrice and maxPrice Not Given By the User
+      if (!minPrice) {
+        minPrice = Number.MIN_VALUE;
       }
 
+      if (!maxPrice) {
+        maxPrice = Number.MAX_VALUE;
+      }
+
+      Problem Occure in category if category is Not Define by the user then if We 
+      give empty string then we couldn't findOut the products because it search for 
+      empty string in category which is not available in Our database so Product Not 
+      Found in this case
+      if (!category) {
+        category = "";
+      }
+
+      console.log(minPrice, maxPrice, category);
+      const filter = {
+        $and: [
+          {
+            category: category,
+          },
+          {
+            price: {
+              $gte: parseFloat(minPrice),
+            },
+          },
+          {
+            price: {
+              $lte: parseFloat(maxPrice),
+            },
+          },
+        ],
+      };
+      */
       const filterData = await collection.find(filterConditions).toArray();
       return filterData;
     } catch (error) {
+      console.log(error);
       throw new ApplicationError("Something went Wrong", 500);
     }
   }
