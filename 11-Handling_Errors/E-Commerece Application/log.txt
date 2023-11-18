@@ -22,3 +22,5 @@
 {"level":"info","message":"/api/products/rateProduct?productId=10&rating=5 {\"email\":\"admin@ecom.in\",\"password\":\"admin@1234\"}","service":"request-logging"}
 {"level":"info","message":"/api/products/1 {\"email\":\"admin@ecom.in\",\"password\":\"admin@1234\"}","service":"request-logging"}
 {"level":"info","message":"/api/products/10 {\"email\":\"admin@ecom.in\",\"password\":\"admin@1234\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signIn {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"A5FFC976\"}","service":"request-logging"}
+{"level":"info","message":"/api/cart/ {}","service":"request-logging"}

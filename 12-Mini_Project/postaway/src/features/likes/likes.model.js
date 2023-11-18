@@ -1,5 +1,12 @@
+let id = 1;
 import PostsModel from "../posts/posts.model.js";
 export default class LikesModel {
+  constructor(userId, postId) {
+    this.id = id++;
+    this.postId = postId;
+    this.userId = userId;
+  }
+
   static add(postId, userId) {
     let allPosts = PostsModel.getAll(userId);
     const postIndex = allPosts.findIndex(
@@ -17,7 +24,7 @@ export default class LikesModel {
         return allPosts[postIndex];
       }
     }
-    allPosts[postIndex].likes.push({ userId });
+    allPosts[postIndex].likes.push(new LikesModel(userId, postId));
     return allPosts[postIndex];
   }
 
