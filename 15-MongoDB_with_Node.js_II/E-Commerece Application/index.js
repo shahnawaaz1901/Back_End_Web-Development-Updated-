@@ -13,6 +13,7 @@ import cors from "cors";
 import productRouter from "./src/features/products/product.router.js";
 import userRouter from "./src/features/user/user.router.js";
 import cartRouter from "./src/features/cart/cart.router.js";
+import orderRouter from "./src/features/order/order.router.js";
 import jwtAuth from "./src/middlewares/jwt.middleware.js";
 
 //? Documentation and Error Handler
@@ -44,6 +45,7 @@ app.use("/api-docs", swagger.serve, swagger.setup(apiDocs));
 app.use("/api/products", jwtAuth, productRouter);
 app.use("/api/users", userRouter);
 app.use("/api/cart", jwtAuth, cartRouter);
+app.use("/api/orders", orderRouter);
 //* Default Route
 app.get("/", function (req, res) {
   res.send("Welcome to API Application !!");
@@ -75,7 +77,7 @@ app.listen(3200, function (err) {
     console.log(`Error While Run the Server : ${err}`);
     return;
   }
-  
+
   console.log(`Server is up and Run on Port 3200`);
   connectToMongoDB();
 });
