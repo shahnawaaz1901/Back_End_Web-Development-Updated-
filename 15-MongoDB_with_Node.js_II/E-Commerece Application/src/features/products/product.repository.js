@@ -360,6 +360,58 @@ export default class ProductRepository {
           },
         },
       ]);
-    } catch (error) {}
+    } catch (error) {
+      throw new ApplicationError("Something Went Wrong", 500);
+    }
+  }
+
+  async countOfRating() {
+    try {
+      const db = getDB();
+      const collection = db.collection(this.collection);
+      return await collection.aggregate([
+        {
+          // Stage 1 : Project Name of the Product and Count of ratings
+          /* 
+            We use Project because we find the maximum number of ratings document
+            but in document we send only nessesory document like name of the product
+            and Number of Ratings in of that Product along with we also want to send
+            id because if somebody want the product after looking the maximum number
+            of rating that's why we keep the id of the product
+          */
+          $project: {
+            name: 1,
+            /* 
+              Sometime ratings array is not available in the product document so instead 
+              of direct passing the size we need to first check after the checking if the 
+              array is present then we use the size operator, for this we need to add an
+              if else condition in the if ratings array is present then check the size and
+              if ratings array undefined or null then we specify the size of array to 0.
+              for conditions we use the operator "$cond", "$isArray" is the operator. "$size"
+              operator return the size of array
+            */
+            $cond: {
+              if: { $isArray: "$ratings" },
+              then: {
+                /* Returns the size of ratings array */
+                countOfRating: { $size: "$ratings" },
+              },
+              else: 0,
+            },
+          },
+        },
+        {
+          // Stage 2 : Sort the Collection Which We Receive After Stage 1 in Acesending and Descending Order
+          /* value of countOfRating if 1 then we want to sort in ascending Order otherwise in -1 we want to sort within descending Order */
+          $sort: { countOfRating: -1 }, // Because we want to Sort Based On countOfRatings and want that highest Raating is On Top
+        },
+        {
+          // Stage 3 : We want to Return Only One Which is Highest so we put limit
+          $limit: 1, // We Want Only One Document which is highest countOfRating
+        },
+      ]);
+    } catch (error) {
+      throw new ApplicationError("Something Went Wrong", 500);
+    }
   }
 }
