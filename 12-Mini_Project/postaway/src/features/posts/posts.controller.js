@@ -5,7 +5,7 @@ export default class PostsController {
     const { postDesc, postLocation } = req.body;
     let postURL;
     if (req.file) {
-      postURL = req.file.filename;
+      postURL = req.file.path;
     }
 
     const newPost = PostsModel.new(postDesc, postLocation, postURL, req.userId);

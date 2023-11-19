@@ -34,18 +34,17 @@ export default class LikesModel {
       (f) => postId == f.id && userId == f.userId
     );
     if (postIndex == -1) {
-      console.log("Inside the postIndex");
-      return;
+      return "Post Not Found !!";
     }
     // console.log(allPosts[postIndex]);
     if (!allPosts[postIndex].likes) {
-      return;
+      return "User Not Like This Post !!";
     }
 
     const likeArray = allPosts[postIndex].likes;
     const userIndex = likeArray.findIndex((l) => l.userId == userId);
     if (userIndex == -1) {
-      return;
+      return "User Not Like This Post !!";
     }
     likeArray.splice(userIndex, 1);
     return allPosts[postIndex];
