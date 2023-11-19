@@ -3,7 +3,11 @@ export default class PostsController {
   //* Create New Post
   createPost(req, res) {
     const { postDesc, postLocation } = req.body;
-    const postURL = req.file.filename;
+    let postURL;
+    if (req.file) {
+      postURL = req.file.filename;
+    }
+
     const newPost = PostsModel.new(postDesc, postLocation, postURL, req.userId);
     return res.status(201).send(newPost);
   }
@@ -27,7 +31,6 @@ export default class PostsController {
     const { postId } = req.params;
     const { postDesc, postLocation } = req.body;
     const postURL = req.file.filename;
-    console.log(postId, postDesc, postLocation, postURL);
     const updatedPost = PostsModel.update(
       postId,
       postDesc,
