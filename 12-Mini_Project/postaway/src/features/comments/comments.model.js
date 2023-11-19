@@ -10,16 +10,14 @@ export default class CommentsModel {
 
   static addComment(userId, postId, comment) {
     const allPosts = PostsModel.getAll(userId);
-    console.log(allPosts);
     const post = allPosts.find((p) => p.id == postId);
     if (!post) {
-      console.log("Inside Post not Found");
-      return;
+      return "Post Not Found !!";
     }
-    if (!post.comments) {
-      post.comment = [];
+    if (post.comments == undefined) {
+      post.comments = [];
     }
-    post.comment.push(new CommentsModel(userId, postId, comment));
+    post.comments.push(new CommentsModel(userId, postId, comment));
     return post;
   }
 
