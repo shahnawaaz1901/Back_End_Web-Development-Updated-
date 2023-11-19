@@ -28,6 +28,10 @@ productRouter.get("/averagePrice", (req, res) => {
   productController.getAveragePrice(req, res);
 });
 
+productRouter.get("/averageRating", (req, res) => {
+  productController.getAverageRatings(req, res);
+});
+
 //* Always Write params argument at the Bottom
 productRouter.get("/:id", (req, res) => {
   productController.getOneProduct(req, res);

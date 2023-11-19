@@ -75,11 +75,21 @@ export default class ProductController {
 
   async getAveragePrice(req, res) {
     try {
-      const result = await this.productRepository.avg();
+      const result = await this.productRepository.avgPrice();
       res.status(200).send(result);
     } catch (error) {
       console.log(error);
       throw new ApplicationError("Something Went Wrong", 500);
+    }
+  }
+
+  async getAverageRatings(req, res) {
+    try {
+      const result = await this.productRepository.avgRatings();
+      return res.status(200).send(result);
+    } catch (error) {
+      console.log(error);
+      throw new ApplicationError("Something Went Wrong ", 500);
     }
   }
 }

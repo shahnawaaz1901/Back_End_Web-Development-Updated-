@@ -299,7 +299,7 @@ export default class ProductRepository {
     some action and get the average price for every category we can do this for 
     other field as well
   */
-  async avg() {
+  async avgPrice() {
     try {
       const db = getDB();
       /* 
@@ -338,5 +338,28 @@ export default class ProductRepository {
       console.log(error);
       throw new ApplicationError("Something Went Wrong", 500);
     }
+  }
+
+  async avgRatings() {
+    try {
+      const db = getDB();
+      const collection = db.collection(this.collection);
+      return await collection.aggregate([
+        // Stage 1 : unwind the ratings array into the Object
+        {
+          $unwind: "$ratings",
+        },
+
+        //Stage 2 : Group the Rating for Each Product
+        {
+          $group: {
+            _id: "$ratings",
+            averageRatings: {
+              $avg: "$ratings.rating",
+            },
+          },
+        },
+      ]);
+    } catch (error) {}
   }
 }
