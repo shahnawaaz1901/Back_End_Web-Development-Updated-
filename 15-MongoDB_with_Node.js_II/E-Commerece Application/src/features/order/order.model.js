@@ -2,6 +2,6 @@ export default class OrderModel {
   constructor(_userId, _amount) {
     this.userId = _userId;
     this.amount = _amount;
-    this.time = new Date().toDateString() + " " + new Date().toTimeString();
+    this.time = new Date();
   }
 }

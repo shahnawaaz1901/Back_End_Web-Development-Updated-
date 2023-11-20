@@ -20,6 +20,11 @@ export const connectToMongoDB = () => {
     );
 };
 
+// Return the Whole mongoDB client not just the Database
+export const getClient = () => {
+  return client;
+};
+
 export const getDB = () => {
   return client.db();
 };

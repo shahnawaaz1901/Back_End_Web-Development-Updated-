@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { getDB } from "../../config/mongodb.js";
 import ApplicationError from "../errorHandler/application.error.js";
 export default class CartRepository {
@@ -27,8 +28,9 @@ export default class CartRepository {
       collection.updateOne(
         {
           //* Filter
-          productId: productObject.productId,
-          userId: productObject.userId,
+          // We Need to Give MongoDB ObjectId form for product id so we can easily findOut the product from cart to product collection
+          productId: new ObjectId(productObject.productId),
+          userId: new ObjectId(productObject.userId),
         },
         {
           //* Means id is Only Given if Document is Created id is not given if document is updated

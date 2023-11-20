@@ -45,7 +45,7 @@ app.use("/api-docs", swagger.serve, swagger.setup(apiDocs));
 app.use("/api/products", jwtAuth, productRouter);
 app.use("/api/users", userRouter);
 app.use("/api/cart", jwtAuth, cartRouter);
-app.use("/api/orders", orderRouter);
+app.use("/api/orders", jwtAuth, orderRouter);
 
 //* Default Route
 app.get("/", function (req, res) {
