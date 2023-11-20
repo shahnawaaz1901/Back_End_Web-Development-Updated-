@@ -22,10 +22,10 @@ export default class OrderRepository {
   }
 
   async placeOrder(userId) {
+    const db = getDB();
+    const client = getClient();
+    const session = client.startSession();
     try {
-      const db = getDB();
-      const client = getClient();
-      const session = client.startSession();
       /* 
         Transaction feature of MongoDB Only Allows to Replica set Users, MongoDB
         made for high Scalable Applications so that We can run multiple replica
@@ -35,6 +35,7 @@ export default class OrderRepository {
         Currently Our MongoDB run on Standalone set so we need to change it into
         the replica set
       */
+      // Start the Transaction at the Start of function
       session.startTransaction();
       //1. Get the Cart Items and Calculate the Ammount
       const items = await this.totalAmount(userId, session);
@@ -73,8 +74,18 @@ export default class OrderRepository {
       await db
         .collection("cartItems")
         .deleteMany({ userId: new ObjectId(userId) }, { session });
+
+      // record data for every transaction into the database
+      session.commitTransaction();
+
+      // End the Session Which We Start at the time of Start of the function
+      session.endSession();
     } catch (error) {
+      // We Need to Abort the transaction if Any Occurs
+      await session.abortTransaction();
+      session.endSession();
       console.log(error);
+      throw new ApplicationError("Something Went wrong", 500);
     }
   }
 
