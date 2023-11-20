@@ -46,6 +46,7 @@ app.use("/api/products", jwtAuth, productRouter);
 app.use("/api/users", userRouter);
 app.use("/api/cart", jwtAuth, cartRouter);
 app.use("/api/orders", orderRouter);
+
 //* Default Route
 app.get("/", function (req, res) {
   res.send("Welcome to API Application !!");

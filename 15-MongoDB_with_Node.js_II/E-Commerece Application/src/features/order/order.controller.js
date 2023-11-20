@@ -6,6 +6,13 @@ export default class OrderController {
   }
 
   async placeOrder(req, res) {
-    const userId = req.userId;
+    try {
+      const userId = req.userId;
+      await this.orderRepository.placeOrder(userId);
+      res.status(201).send("Order is Created !!");
+    } catch (error) {
+      console.log(error);
+      res.status(500).send("Something Went Wrong !!");
+    }
   }
 }
