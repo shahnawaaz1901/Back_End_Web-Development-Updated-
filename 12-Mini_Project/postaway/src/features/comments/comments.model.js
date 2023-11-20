@@ -50,5 +50,24 @@ export default class CommentsModel {
     return post;
   }
 
-  static removeComment(postId, userId, commentId) {}
+  static deleteComment(postId, userId, commentId) {
+    const allPosts = PostsModel.getAll(userId);
+    const post = allPosts.find((p) => p.id == postId);
+
+    if (!post) {
+      return "Post Not Found !";
+    }
+
+    if (!post.comments) {
+      return "Comment Not Found !";
+    }
+
+    const commentIndex = post.comments.findIndex((c) => c.id == commentId);
+    if (commentIndex == -1) {
+      return "Comment Not Found !";
+    }
+
+    post.comments.splice(commentIndex, 1);
+    return post;
+  }
 }

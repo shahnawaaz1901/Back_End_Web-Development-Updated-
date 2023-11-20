@@ -30,5 +30,14 @@ export default class CommentsController {
     }
   }
 
-  remove(req, res) {}
+  delete(req, res) {
+    const userId = req.userId;
+    const { postId, commentId } = req.query;
+    const result = CommentsModel.deleteComment(userId, postId, commentId);
+    if (result instanceof PostsModel) {
+      res.status(200).send(result);
+    } else {
+      res.status(404).send(result);
+    }
+  }
 }
