@@ -24,7 +24,6 @@ export default class UserRepository {
     }
   }
 
-
   async findByEmail(email) {
     //1. Get the Database
     const db = getDB();
@@ -33,6 +32,8 @@ export default class UserRepository {
     const collection = db.collection(this.collection);
 
     //3. Find the UserObject with the email
+    const data = await collection.find().toArray();
+    console.log(data);
     return await collection.findOne({ email });
   }
 }

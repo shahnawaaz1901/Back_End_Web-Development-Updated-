@@ -81,8 +81,8 @@ export default class OrderRepository {
       // End the Session Which We Start at the time of Start of the function
       session.endSession();
     } catch (error) {
-      // We Need to Abort the transaction if Any Occurs
-      await session.abortTransaction();
+      // We Need to Abort the transaction if Any Occurs because if any error occurs before the line 79 then session and transaction never stopped
+      await session.abortTransaction(); // abortTransaction cancel the Transaction and Rolledback the changes
       session.endSession();
       console.log(error);
       throw new ApplicationError("Something Went wrong", 500);
