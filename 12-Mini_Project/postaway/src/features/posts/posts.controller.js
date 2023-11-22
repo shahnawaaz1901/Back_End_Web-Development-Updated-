@@ -30,12 +30,10 @@ export default class PostsController {
   updatePost(req, res) {
     const { postId } = req.params;
     const { postDesc, postLocation } = req.body;
-    const postURL = req.file.filename;
     const updatedPost = PostsModel.update(
       postId,
       postDesc,
       postLocation,
-      postURL,
       req.userId
     );
     if (!updatedPost) {

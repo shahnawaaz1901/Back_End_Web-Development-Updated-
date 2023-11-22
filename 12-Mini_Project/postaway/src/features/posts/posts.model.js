@@ -9,6 +9,7 @@ export default class PostsModel {
     this.postLocation = _postLocation;
     this.postDate = new Date().toLocaleDateString();
     this.postTime = new Date().toLocaleTimeString();
+    this.update = false;
   }
 
   static new(postDesc, postLocation, postURL, userId) {
@@ -25,7 +26,7 @@ export default class PostsModel {
     return postsData.find((p) => p.id == postId && p.userId == userId);
   }
 
-  static update(postId, postDesc, postLocation, postURL, userId) {
+  static update(postId, postDesc, postLocation, userId) {
     const index = postsData.findIndex(
       (p) => p.id == postId && p.userId == userId
     );
@@ -42,10 +43,10 @@ export default class PostsModel {
       updatedPost.postLocation = postLocation;
     }
 
-    if (postURL) {
-      updatedPost.postURL = postURL;
+    updatedPost.update = {
+      date : new Date().toLocaleDateString(),
+      time : new Date().toLocaleTimeString()
     }
-    updatedPost.userId = userId;
     const update = Object.assign(postsData[index], updatedPost);
     return update;
   }
