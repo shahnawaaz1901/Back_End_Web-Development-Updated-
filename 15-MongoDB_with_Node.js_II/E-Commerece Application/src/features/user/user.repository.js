@@ -33,7 +33,9 @@ export default class UserRepository {
 
     //3. Find the UserObject with the email
     const data = await collection.find().toArray();
+    console.log("Before Print the Data !!");
     console.log(data);
+    console.log("After Print the Data !!");
     return await collection.findOne({ email });
   }
 }
