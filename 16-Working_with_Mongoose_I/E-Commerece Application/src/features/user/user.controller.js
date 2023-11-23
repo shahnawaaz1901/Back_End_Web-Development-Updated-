@@ -1,7 +1,8 @@
 import UserModel from "./user.model.js";
 import jwt from "jsonwebtoken";
-import UserRepository from "./user.repository.js";
+// import UserRepository from "./user.repository.js";
 import bcrypt from "bcrypt";
+import UserRepository from "./user.repository.mongoose.js";
 export default class UserController {
   constructor() {
     //* Create userRepository Instance While Creating an Instance
