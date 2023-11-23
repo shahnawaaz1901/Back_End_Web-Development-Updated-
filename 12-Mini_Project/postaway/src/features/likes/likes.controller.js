@@ -20,4 +20,10 @@ export default class LikesController {
     }
     res.status(404).send(result);
   }
+
+  getAllLikes(req, res) {
+    const userId = req.userId;
+    const result = LikesModel.getAll(userId);
+    res.status(200).send(result);
+  }
 }

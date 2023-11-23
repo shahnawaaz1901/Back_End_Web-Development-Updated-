@@ -26,14 +26,11 @@ server.use("/api/posts", jwtAuth, postsRouter);
 server.use("/api/likes", jwtAuth, likesRouter);
 server.use("/api/comments", jwtAuth, commentsRouter);
 
-server.use((err, req, res) => {
-  console.log(err);
-  if (err instanceof ApplicationError) {
-    return res.status(err.statusCode).send(err.message);
-  }
-
-  return res.status(500).send("Something Went Wrong !!");
+//* Default Route
+server.use((req, res) => {
+  res.status(404).send("Please Read Our Docs !!");
 });
+
 //* Listen the Server
 server.listen(3200, (err) => {
   if (err) {

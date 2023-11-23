@@ -1,4 +1,5 @@
 //* Create User Class So that We Dont Need to Export All Functions We Can Just Export the Class to use the functions
+import notificationAlert from "../alert/notification.alert.js";
 import UsersModel from "./users.model.js";
 import jwt from "jsonwebtoken";
 
@@ -6,6 +7,7 @@ export default class UsersController {
   //* Add new User
   signUp(req, res) {
     const result = UsersModel.newUser(req.body);
+    notificationAlert(req.body.email, "new");
     res.status(201).send(result);
   }
 
@@ -13,7 +15,7 @@ export default class UsersController {
   signIn(req, res) {
     const result = UsersModel.existingUser(req.body);
     if (result) {
-      console.log(result);
+      notificationAlert(req.body.email, "existing");
       const token = jwt.sign(
         { id: result.id, email: result.email },
         "z9Vtqt5k2LFzUTEttfY8",
