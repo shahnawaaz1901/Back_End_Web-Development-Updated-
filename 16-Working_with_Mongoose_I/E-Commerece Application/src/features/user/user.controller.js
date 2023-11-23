@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 // import UserRepository from "./user.repository.js";
 import bcrypt from "bcrypt";
 import UserRepository from "./user.repository.mongoose.js";
+import ApplicationError from "../errorHandler/application.error.js";
 export default class UserController {
   constructor() {
     //* Create userRepository Instance While Creating an Instance
@@ -11,18 +12,23 @@ export default class UserController {
 
   //* SignUp
   async signUp(req, res) {
-    const { name, email, password, typeOfUser } = req.body;
-    const hashPassword = await bcrypt.hash(password, 12);
+    try {
+      const { name, email, password, typeOfUser } = req.body;
+      const hashPassword = await bcrypt.hash(password, 12);
 
-    const newUser = new UserModel(
-      name,
-      email,
-      //* password, instead of Create Object in Plain password using the hashpassword
-      hashPassword, //* HashPassword Instead of Plain text Password
-      typeOfUser
-    );
-    const user = await this.userRepository.signUp(newUser);
-    res.status(201).send(user);
+      const newUser = new UserModel(
+        name,
+        email,
+        //* password, instead of Create Object in Plain password using the hashpassword
+        hashPassword, //* HashPassword Instead of Plain text Password
+        typeOfUser
+      );
+      const user = await this.userRepository.signUp(newUser);
+      res.status(201).send(user);
+    } catch (error) {
+      console.log(error);
+      throw new ApplicationError("Something went wrong", 500);
+    }
   }
 
   //* SignIn
@@ -52,6 +58,19 @@ export default class UserController {
     } catch (error) {
       console.log(error);
       return res.status(500).send("Something Went Wrong !!");
+    }
+  }
+
+  async resetPassword(req, res) {
+    try {
+      const { newPassword } = req.body;
+      const hashPassword = await bcrypt.hash(newPassword, 12);
+      const userId = req.userId;
+      await this.userRepository.reset(userId, hashPassword);
+      res.status(201).send("Password Reset Successfully !!");
+    } catch (error) {
+      console.log(error);
+      throw new ApplicationError("Something Went Wrong", 500);
     }
   }
 }

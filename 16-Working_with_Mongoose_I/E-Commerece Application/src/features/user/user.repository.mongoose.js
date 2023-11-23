@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { userSchema } from "./user.schema.js";
 import ApplicationError from "../errorHandler/application.error.js";
+import { ObjectId } from "mongodb";
 
 /* 
     Model Functionn takes two argument first name of the collection 
@@ -40,6 +41,21 @@ export default class UserRepository {
     } catch (error) {
       console.log(error);
       throw new ApplicationError("Something Went Wrong", 500);
+    }
+  }
+
+  async reset(userId, newPassword) {
+    try {
+      const user = await UserModel.findById(userId);
+      user.password = newPassword;
+      /* 
+            save function updates the document if its exist otherwise create new 
+            document into the databas 
+        */
+      await user.save();
+    } catch (error) {
+      console.log(error);
+      throw new ApplicationError("Someting Went Wrong ", 500);
     }
   }
 }
