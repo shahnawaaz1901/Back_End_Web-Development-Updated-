@@ -14,6 +14,7 @@ export default class LikesController {
   removeLikeToPost(req, res) {
     const { postId } = req.params;
     const userId = req.userId;
+    console.log(postId, userId);
     const result = LikesModel.remove(postId, userId);
     if (result instanceof LikesModel) {
       return res.status(200).send(result);
@@ -21,9 +22,4 @@ export default class LikesController {
     res.status(404).send(result);
   }
 
-  getAllLikes(req, res) {
-    const userId = req.userId;
-    const result = LikesModel.getAll(userId);
-    res.status(200).send(result);
-  }
 }

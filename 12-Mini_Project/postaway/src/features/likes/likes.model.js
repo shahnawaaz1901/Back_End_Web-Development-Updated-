@@ -34,7 +34,7 @@ export default class LikesModel {
       (f) => postId == f.id && userId == f.userId
     );
     if (postIndex == -1) {
-      return "Post Not Found !!";
+      return "Post Not Found or User Not Like this Post !!";
     }
     // console.log(allPosts[postIndex]);
     if (!allPosts[postIndex].likes) {
