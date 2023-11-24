@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import UserRepository from "./user.repository.mongoose.js";
 import ApplicationError from "../errorHandler/application.error.js";
+import mongoose from "mongoose";
 export default class UserController {
   constructor() {
     //* Create userRepository Instance While Creating an Instance
@@ -19,15 +20,19 @@ export default class UserController {
       const newUser = new UserModel(
         name,
         email,
-        //* password, instead of Create Object in Plain password using the hashpassword
-        hashPassword, //* HashPassword Instead of Plain text Password
+        password, //instead of Create Object in Plain password using the hashpassword
+        // hashPassword, //* HashPassword Instead of Plain text Password
         typeOfUser
       );
       const user = await this.userRepository.signUp(newUser);
       res.status(201).send(user);
     } catch (error) {
-      console.log(error);
-      throw new ApplicationError("Something went wrong", 500);
+      if (error instanceof mongoose.Error.ValidationError) {
+        console.log("Inside");
+        return res.status(400).send("Validation failed");
+      }
+
+      res.status(error.errorStatusCode).send(error.message);
     }
   }
 

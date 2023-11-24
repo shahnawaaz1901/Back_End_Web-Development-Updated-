@@ -19,7 +19,11 @@ export default class UserRepository {
       return newUser; // Return the Data
     } catch (error) {
       console.log(error);
-      throw new ApplicationError("Something went Wrong", 500);
+      if (error instanceof mongoose.Error.ValidationError) {
+        throw error;
+      } else {
+        throw new ApplicationError("Something Went Wrong with Database", 500);
+      }
     }
   }
   async signin(email, password) {
