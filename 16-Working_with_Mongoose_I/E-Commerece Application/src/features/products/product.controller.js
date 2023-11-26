@@ -69,7 +69,7 @@ export default class ProductController {
       await this.productRepository.rate(userObject);
       return res.status(200).send("Product Rated Successfully !!");
     } catch (error) {
-      throw new ApplicationError("Something Went Wrong", 500);
+      res.status(500).send("Something went Wrong");
     }
   }
 

@@ -1,6 +1,17 @@
 import { ObjectId } from "mongodb";
 import { getDB } from "../../config/mongodb.js";
 import ApplicationError from "../errorHandler/application.error.js";
+import mongoose, { mongo } from "mongoose";
+import { productSchema } from "./product.schema.js";
+import { reviewSchema } from "./product.review.schema.js";
+
+//* Create Product and Review Model using mongoose
+/* 
+  Model take two argument one is collection name and another one is shcema 
+  which we use to give the structure of document into the collection
+*/
+const ProductModel = mongoose.model("products", productSchema);
+const ReviewModel = mongoose.model("review", reviewSchema);
 
 export default class ProductRepository {
   constructor() {
@@ -170,10 +181,34 @@ export default class ProductRepository {
 
   async rate(userObject) {
     try {
+      /* Code using Mongoose */
+      // find the Product
+      const productToUpdate = await ProductModel.findById(userObject.productId);
+      if (!productToUpdate) {
+        throw new Error("Product not Found");
+      }
+
+      // Check if Review Exist for this user Or Not
+      const userReview = await ReviewModel.findOne({
+        product: new ObjectId(userObject.productId),
+        user: new ObjectId(userObject.userId),
+      });
+
+      if (userReview) {
+        (userReview.rating = userObject.rating), await userReview.save();
+      } else {
+        const newReview = new ReviewModel({
+          product: new ObjectId(userObject.productId),
+          user: new ObjectId(userObject.userId),
+          rating: userObject.rating,
+        });
+        await newReview.save();
+      }
+      /* Older Code using direct mongodb
       const { userId, productId, rating } = userObject;
       const db = getDB();
       const collection = db.collection(this.collection);
-      // Step 1 Remove the Existing Entry for the User
+      Step 1 Remove the Existing Entry for the User
       await collection.updateOne(
         { _id: new ObjectId(productId) },
         {
@@ -184,7 +219,7 @@ export default class ProductRepository {
         }
       );
 
-      // Step 2 Add the New Entry for the User
+      Step 2 Add the New Entry for the User
       await collection.updateOne(
         { _id: new ObjectId(productId) },
         {
@@ -195,7 +230,7 @@ export default class ProductRepository {
             },
           },
         }
-      );
+      );*/
     } catch (error) {
       console.log(error);
       throw new ApplicationError("Something went Wrong ", 500);

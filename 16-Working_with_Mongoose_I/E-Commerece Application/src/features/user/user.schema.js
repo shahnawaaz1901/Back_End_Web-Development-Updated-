@@ -34,9 +34,10 @@ export const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
+    /*
     validate: {
       validator: function (value) {
-        /* 
+        
           We specify custom validator given expression means that the 
           password contains special characters first but after end of 
           the square and normal bracket. In the next square bracket it
@@ -45,16 +46,16 @@ export const userSchema = new mongoose.Schema({
           and max length of the password. and test function takes value 
           in the argument which is password entered by the user. test 
           function runs the user given password with the expression.
-        */
+        
         return /^(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/.test(value);
       },
-      /*
+      
         message attribute takes string which will shown if regular expression 
         failes in validation then this message displayed  
-      */
-      message:
+        message:
         "Password Should be 8 to 12 Character and have special character ",
-    },
+      },
+      */
   },
   /* 
         We have two type of account first is for user and another one is for seller
