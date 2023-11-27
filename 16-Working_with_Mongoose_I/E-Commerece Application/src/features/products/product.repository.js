@@ -4,6 +4,7 @@ import ApplicationError from "../errorHandler/application.error.js";
 import mongoose, { mongo } from "mongoose";
 import { productSchema } from "./product.schema.js";
 import { reviewSchema } from "./product.review.schema.js";
+import { categorySchema } from "./category.schema.js";
 
 //* Create Product and Review Model using mongoose
 /* 
@@ -12,6 +13,7 @@ import { reviewSchema } from "./product.review.schema.js";
 */
 const ProductModel = mongoose.model("products", productSchema);
 const ReviewModel = mongoose.model("review", reviewSchema);
+const CategoryModel = mongoose.model("category", categorySchema);
 
 export default class ProductRepository {
   constructor() {
@@ -20,10 +22,19 @@ export default class ProductRepository {
 
   async add(product) {
     try {
+      //1. Add the Product
+      const productData = new ProductModel(product);
+      const saveProduct = await productData.save();
+
+      //2. Update the Categories
+      saveProduct.category.push();
+      return productData;
+      /*
       const db = getDB();
       const collection = db.collection(this.collection);
       await collection.insertOne(product);
       return product;
+      */
     } catch (error) {
       console.log(error);
       throw new ApplicationError("Somethin Went Wrong", 500);
