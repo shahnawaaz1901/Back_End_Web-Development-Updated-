@@ -25,7 +25,7 @@ export default class JobController {
     const jobData = JobModel.getJobById(id);
     // res.writeHead(200,{'content-type':'text/css'});
     res.render("job-description", {
-      'content-type':'text/css',
+      "content-type": "text/css",
       title: "Job Description | Easily",
       job: jobData,
       name: req.session.name,
@@ -34,7 +34,7 @@ export default class JobController {
 
   addJobApplicant(req, res) {
     const { id, name, email, contact } = req.body;
-    const resume = path.join("public", "data", req.file.filename);
+    const resume = req.file.filename;
     const obj = {
       id,
       name,
