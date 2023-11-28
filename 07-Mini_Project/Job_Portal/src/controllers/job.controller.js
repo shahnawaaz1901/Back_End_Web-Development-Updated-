@@ -44,7 +44,11 @@ export default class JobController {
     };
     JobModel.addApplicants(obj);
     sendNotification(email, "jobApply");
-    res.render("jobs", { name: req.session.name, jobs: JobModel.getJobData() });
+    res.render("jobs", {
+      title: "Job Description | Easily",
+      name: req.session.name,
+      jobs: JobModel.getJobData(),
+    });
   }
 
   getJobApplicants(req, res) {

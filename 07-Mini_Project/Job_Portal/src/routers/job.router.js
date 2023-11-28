@@ -8,13 +8,17 @@ const jobController = new JobController();
 
 jobRouter.get("/", jobController.getJobPage);
 jobRouter.get("/applicants/:id", auth, jobController.getJobApplicants);
-jobRouter.post("/update",auth, jobController.postUpdateJob);
+jobRouter.post("/update", auth, jobController.postUpdateJob);
 jobRouter.get("/update/:id", auth, jobController.getUpdateJobPage);
 jobRouter.get("/postJob", auth, jobController.getPostJobPage);
-jobRouter.post("/apply-job",upload.single('resume'), jobController.addJobApplicant);
+jobRouter.post(
+  "/apply-job",
+  upload.single("resume"),
+  jobController.addJobApplicant
+);
 jobRouter.post("/postJob", auth, jobController.postJob);
-jobRouter.post("/delete-Job/:id",auth, jobController.deleteJob);
-jobRouter.post("/search",jobController.searchJob);
+jobRouter.post("/delete-Job/:id", auth, jobController.deleteJob);
+jobRouter.post("/search", jobController.searchJob);
 jobRouter.get("/:id", jobController.getJobDescription);
 
 export default jobRouter;
