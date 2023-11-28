@@ -50,21 +50,53 @@ app.use(express.static(path.resolve("public")));
 const jobController = new JobController();
 
 //* Setup Routers
-app.get("/test/:filename", (req, res) => {
-  //res.send('success');
-  const address = req.params.filename;
-  console.log(address);
-  var file = fs.createReadStream(`./public/data/${address}`);
-  var stat = fs.statSync(`./public/data/${address}`);
-  res.setHeader("Content-Length", stat.size);
-  res.setHeader("Content-Type", "application/pdf");
-  res.setHeader("Content-Disposition", `attachment; filename=${address}`);
-//   res.status(201).send(file);
-  file.pipe(res);
-});
+
 app.get("/", jobController.getHomePage);
 app.use("/users/", userRouter);
 app.use("/jobs/", jobRouter);
+app.get("/getResume/:resume", (req, res) => {
+  /* Not use this Method Because it may leaks the internal that where we store the files
+  *Get the name of Resume
+  
+  const { resume } = req.params;
+
+  *Create path using public Folder
+  
+  const filePath = path.join("public","data",resume);
+  res.download(filePath);
+*/
+  // *Get the name of Resume
+
+  const { resume } = req.params;
+
+  // *Create path using public Folder
+
+  const filePath = path.join("public", "data", resume);
+  const fileExist = fs.existsSync(filePath);
+  if (fileExist) {
+    // Read the file 
+    const file = fs.createReadStream(filePath);
+    // statSync function use to get the size of content
+    const stat = fs.statSync(filePath);
+    // writeHead function takes status code and the headerss
+    res.writeHead(200, {
+      "Content-Type": "application/pdf",
+      "Content-Length": stat.size,
+      /* 
+        filename attribute decide which name we use to send the file to the user 
+      */
+      "Content-Disposition": `attachment; filename=${resume}`,
+    });
+    /* 
+      Pipe function takes argument of destination where we want to send the file
+      in Our Case we want to send the file at user send so we pass the response
+      object because we want to send file as response
+    */
+    file.pipe(res);
+  } else {
+    res.status(404).send("not found !!");
+  }
+});
 
 app.listen(3200, function (err) {
   if (err) {
