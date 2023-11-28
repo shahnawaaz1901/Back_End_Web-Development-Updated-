@@ -14,7 +14,7 @@ export const productSchema = new mongoose.Schema({
   rating: [
     // array contains an object to store the user Id wo define object
     {
-      // For Storing the userId
+      // For Storing the document id of Review Collection
       type: mongoose.Types.ObjectId,
       ref: "reviews",
     },

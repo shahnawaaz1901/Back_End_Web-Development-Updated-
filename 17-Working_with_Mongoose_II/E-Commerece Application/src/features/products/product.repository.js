@@ -47,6 +47,7 @@ export default class ProductRepository {
       const collection = db.collection(this.collection);
       return await collection.find().toArray();
     } catch (error) {
+      console.log(error);
       throw new ApplicationError("Something Went Wrong", 500);
     }
   }
@@ -205,9 +206,11 @@ export default class ProductRepository {
         user: new ObjectId(userObject.userId),
       });
 
+      // If User rated already then update Rating
       if (userReview) {
         (userReview.rating = userObject.rating), await userReview.save();
       } else {
+        // Create new Rating
         const newReview = new ReviewModel({
           product: new ObjectId(userObject.productId),
           user: new ObjectId(userObject.userId),
