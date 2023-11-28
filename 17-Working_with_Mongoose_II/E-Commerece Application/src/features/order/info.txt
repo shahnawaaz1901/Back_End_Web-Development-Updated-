@@ -1,0 +1,10 @@
+Place the Ordered
+
+1. Get Cart Items of the User
+2. Create a record for the Order
+3. Reduce the Stock(Products Quantity) On database (Reduce Remaining Quantity in Database)
+4. Clear the Cart.
+
+5. Payment Gateway for Payment Deduction
+6. Inform To Seller to Start the Preparation of the Products
+7. Inform to Courier Partner to PickUp the Item from Seller End and Deliver at Customer End
