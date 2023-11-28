@@ -43,9 +43,11 @@ export default class ProductRepository {
 
   async getAll() {
     try {
-      const db = getDB();
-      const collection = db.collection(this.collection);
-      return await collection.find().toArray();
+      const products = await ProductModel.find().toArray();
+      // const db = getDB();
+      // const collection = db.collection(this.collection);
+      // await collection.find().toArray();
+      return products;
     } catch (error) {
       console.log(error);
       throw new ApplicationError("Something Went Wrong", 500);
@@ -54,11 +56,12 @@ export default class ProductRepository {
 
   async getOne(id) {
     try {
-      const db = getDB();
-      const collection = db.collection(this.collection);
-      return await collection.findOne({
-        _id: new ObjectId(id),
-      }); /* Create ObjectId Object using new keyword */
+      return await ProductModel.findById(id);
+      // const db = getDB();
+      // const collection = db.collection(this.collection);
+      // return await collection.findOne({
+      //   _id: new ObjectId(id),
+      // }); /* Create ObjectId Object using new keyword */
     } catch (error) {
       console.log(error);
       throw new ApplicationError(
