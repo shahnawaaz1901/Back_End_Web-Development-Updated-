@@ -22,6 +22,7 @@ import ApplicationError from "./src/features/errorHandler/application.error.js";
 import logMiddleware from "./src/middlewares/logger.middleware.js";
 import { connectToMongoDB } from "./src/config/mongodb.js";
 import { connenctUsingMongoose } from "./src/config/mogoose.js";
+import likeRouter from "./src/features/Like/like.router.js";
 
 //* Start the Server
 const app = express();
@@ -47,6 +48,7 @@ app.use("/api/products", jwtAuth, productRouter);
 app.use("/api/users", userRouter);
 app.use("/api/cart", jwtAuth, cartRouter);
 app.use("/api/orders", jwtAuth, orderRouter);
+app.use("/api/likes", jwtAuth, likeRouter);
 
 //* Default Route
 app.get("/", function (req, res) {

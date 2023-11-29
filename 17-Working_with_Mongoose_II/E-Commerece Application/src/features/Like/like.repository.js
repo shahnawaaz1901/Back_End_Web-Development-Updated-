@@ -1,7 +1,7 @@
 import mongoose, { mongo } from "mongoose";
 import { likeSchema } from "./like.schema.js";
 import { ObjectId } from "mongodb";
-import ApplicationError from "../errorHandler/application.error";
+import ApplicationError from "../errorHandler/application.error.js";
 
 const LikeModel = mongoose.model("likes", likeSchema);
 
