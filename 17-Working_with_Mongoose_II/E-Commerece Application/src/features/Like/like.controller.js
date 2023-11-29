@@ -10,8 +10,9 @@ export default class LikeController {
     try {
       const { userId } = req;
       const { itemId, type } = req.body;
-      if (type != "Product" || type != "Category") {
-        res.status(400).send("Like Type is Invalid ");
+      console.log(userId, itemId, type);
+      if (type != "Product" && type != "Category") {
+        return res.status(400).send("Like Type is Invalid ");
       }
 
       if (type == "Product") {
