@@ -22,13 +22,36 @@ export default class ProductRepository {
 
   async add(product) {
     try {
-      //1. Add the Product
-      const productData = new ProductModel(product);
-      const saveProduct = await productData.save();
+      //* 1. Add the Product
+      const productData = new ProductModel(product); // Create Instance of Model
 
-      //2. Update the Categories
-      saveProduct.category.push();
-      return productData;
+      const saveProduct = await productData.save(); // Push the Product Inside database
+
+      //2. Update the Categories into the Product
+      /* 
+        We Are go to Every Category and in every category add the Product Id and 
+        and reffer to that product 
+      */
+      console.log(saveProduct);
+      await CategoryModel.updateMany(
+        {
+          /* 
+            in Operator working with the array where in operator goes for every element of the 
+            productData.categories because in product Schema we added the categories in the form
+            of Object Id so we go to that category id and add the product to that category object,
+            because one product can have multiple categories then we need to update the all the 
+            categories which product belongs
+          */
+          /* 
+            We can understand like this that in operator iterate over the array like for of loop 
+          */
+          _id: { $in: productData.categories }, // Filter
+        },
+        {
+          $push: { products: new ObjectId(saveProduct._id) },
+        }
+      );
+      return saveProduct;
       /*
       const db = getDB();
       const collection = db.collection(this.collection);

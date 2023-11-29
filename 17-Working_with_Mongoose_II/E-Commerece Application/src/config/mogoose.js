@@ -22,6 +22,10 @@ export const connenctUsingMongoose = async () => {
   }
 };
 
+/* 
+  When Our database is Connected we store some data into the database it's called 
+  seeding some initial Data into the database
+*/
 async function addCategories() {
   const CategoryModel = mongoose.model("category", categorySchema);
   const categories = await CategoryModel.find();
