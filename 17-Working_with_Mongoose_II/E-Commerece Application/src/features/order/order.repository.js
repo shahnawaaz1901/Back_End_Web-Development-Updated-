@@ -13,12 +13,12 @@ export default class OrderRepository {
   }
 
   async placeOrder(userId) {
-    const db = getDB();
     const client = getClient();
     const session = client.startSession();
     try {
-
+      
       // Start the Transaction at the Start of function
+      const db = getDB();
       session.startTransaction();
       //1. Get the Cart Items and Calculate the Ammount
       const items = await this.totalAmount(userId, session);
@@ -79,7 +79,7 @@ export default class OrderRepository {
             {
               // If We Store userId in MongoDB Object format then we need to convert it into MongoDB Object
               // Like this $match : {userId : new ObjectId(userId)}
-              $match: { userId }, // Retreive the All Product for the User
+              $match: { userId : new ObjectId(userId) }, // Retreive the All Product for the User
             },
 
             // 2. Get the Products from the Products Collection Based on Product Id

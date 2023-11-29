@@ -1,4 +1,3 @@
-import OrderModel from "./order.model.js";
 import OrderRepository from "./order.repository.js";
 export default class OrderController {
   constructor() {
