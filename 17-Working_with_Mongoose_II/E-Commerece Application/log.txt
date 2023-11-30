@@ -237,3 +237,4 @@
 {"level":"info","message":"/api/likes/?itemId=6567406531231853b220f80c&type=Product {}","service":"request-logging"}
 {"level":"info","message":"/api/likes/?itemId=6567406531231853b220f80c&type=Product {}","service":"request-logging"}
 {"level":"info","message":"/api/likes/?itemId=6567406531231853b220f80c&type=Product {}","service":"request-logging"}
+{"level":"info","message":"/api/likes/?itemId=6567406531231853b220f80c&type=Product {}","service":"request-logging"}
