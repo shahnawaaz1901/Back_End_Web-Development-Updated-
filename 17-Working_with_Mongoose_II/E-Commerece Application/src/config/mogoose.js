@@ -23,8 +23,13 @@ export const connenctUsingMongoose = async () => {
 };
 
 /* 
-  When Our database is Connected we store some data into the database it's called 
-  seeding some initial Data into the database
+  When Our database is Connected we store some data into the database it's 
+  called seeding some initial Data into the database. By Default mongoose 
+  have its own feature that if we specify collection name in capital letter
+  then is converts it to small letter and when ever we specify the value of
+  collection it automatically adds the "s" or "ies" which defines that multiple
+  documents is exist or we can understand if we use the collection name in
+  singular form then it convert actual name of collection in plural form 
 */
 async function addCategories() {
   const CategoryModel = mongoose.model("Category", categorySchema);

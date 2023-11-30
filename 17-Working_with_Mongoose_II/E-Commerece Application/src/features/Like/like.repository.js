@@ -39,13 +39,30 @@ export default class LikeRepository {
       });
       await newLike.save();
     } catch (error) {
-      console.log("Inside",error);
+      console.log("Inside", error);
       throw new ApplicationError("Something Went Wrong with Database", 500);
     }
   }
 
   async getLikeItem(id, type) {
-    console.log(id, type);
-    return await LikeModel.find({ likeable: new ObjectId(id), on_model: type }).populate("user").populate("likeable")
+    /* 
+      populate function populate attribute with its actual document. What the
+      mean by the actual document in cart or like repository instead of storing
+      the whole user or product document we store just object id and specify the
+      collection value in ref in which object id belongs to.
+      WhatEver attribute value we provide in populate function it goes to that
+      attribute value after that goes to the collection which attribute value
+      belongs to and gives us the whole document
+    */
+    return await LikeModel.find({ likeable: new ObjectId(id), on_model: type })
+      /* 
+        We Directly Write user because user have direct reference to User Collection
+        But in likeable we specify that goes to that attribute and we need to specify
+        another attibute model which takes the collection name which that id belongs
+        to because we use the refPath attribute instead of ref so that we need to 
+        specify the path to poin to that collection which we want to point
+      */
+      .populate("user")
+      .populate({ path: "likeable", model: type });
   }
 }
