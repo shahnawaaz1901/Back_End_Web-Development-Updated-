@@ -29,4 +29,25 @@ export const likeSchema = new mongoose.Schema({
     enum: ["Product", "Category"],
     required: true,
   },
-});
+})
+  /* 
+    Middleware of pre is written after the schema is created it takes one 
+    is operation and next is callback which takes one argument which is 
+    next function which we use to call the next middleware in the pipeline
+    pre function is called before a specific operation which we pass is 
+    going to execute
+*/
+  .pre("save", (next) => {
+    console.log("Inside the Pre function !");
+    next();
+  })
+  /* 
+    Post function is called after the specific operation which we pass is 
+    completed, and is takes one callback along with the operation name which
+    takes one argument which is the document which we use to do the operation
+    because save is the document middleware function so it takes the document
+*/
+  .post("save", (doc) => {
+    console.log("Inside the Post function !");
+    console.log(doc);
+  });
