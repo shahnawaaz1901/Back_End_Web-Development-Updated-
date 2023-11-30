@@ -4,7 +4,7 @@ export const likeSchema = new mongoose.Schema({
   /* Storing useId which like the Product or Category */
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "users",
+    ref: "User",
     required: true,
   },
   /* 
@@ -26,7 +26,7 @@ export const likeSchema = new mongoose.Schema({
   },
   on_model: {
     type: String,
-    enum: ["products", "categories"],
+    enum: ["Product", "Category"],
     required: true,
   },
 });

@@ -11,9 +11,9 @@ import { categorySchema } from "./category.schema.js";
   Model take two argument one is collection name and another one is shcema 
   which we use to give the structure of document into the collection
 */
-const ProductModel = mongoose.model("products", productSchema);
-const ReviewModel = mongoose.model("review", reviewSchema);
-const CategoryModel = mongoose.model("category", categorySchema);
+const ProductModel = mongoose.model("Product", productSchema);
+const ReviewModel = mongoose.model("Review", reviewSchema);
+const CategoryModel = mongoose.model("Category", categorySchema);
 
 export default class ProductRepository {
   constructor() {

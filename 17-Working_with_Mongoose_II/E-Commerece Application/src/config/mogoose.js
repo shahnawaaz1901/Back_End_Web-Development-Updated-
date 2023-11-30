@@ -27,7 +27,7 @@ export const connenctUsingMongoose = async () => {
   seeding some initial Data into the database
 */
 async function addCategories() {
-  const CategoryModel = mongoose.model("category", categorySchema);
+  const CategoryModel = mongoose.model("Category", categorySchema);
   const categories = await CategoryModel.find();
   if (!categories || !categories.length) {
     await CategoryModel.insertMany([

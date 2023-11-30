@@ -18,7 +18,7 @@ export const productSchema = new mongoose.Schema({
     {
       // For Storing the document id of Review Collection
       type: mongoose.Types.ObjectId,
-      ref: "reviews",
+      ref: "Review",
     },
   ],
   /* 
@@ -29,7 +29,7 @@ export const productSchema = new mongoose.Schema({
   categories: [
     {
       type: mongoose.Types.ObjectId,
-      ref: "category",
+      ref: "Category",
     },
   ],
 });

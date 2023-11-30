@@ -10,7 +10,6 @@ export default class LikeController {
     try {
       const { userId } = req;
       const { itemId, type } = req.body;
-      console.log(userId, itemId, type);
       /* 
         If user gives us incorrect type so we need to check before call 
         the repository 
@@ -28,6 +27,19 @@ export default class LikeController {
     } catch (error) {
       console.log(error);
       res.status(500).send("Something Went Wrong");
+    }
+  }
+
+  async getLikes(req, res) {
+    try {
+      console.log(req.query)
+      const { itemId, type } = req.query;
+      console.log(itemId, type)
+      const likeData = await this.likeRepository.getLikeItem(itemId, type);
+      res.status(200).send(likeData);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send("Something went Wrong While Connecting to Database")
     }
   }
 }

@@ -20,11 +20,11 @@ export const cartSchema = new Schema({
         to that collection 
     */
     type: mongoose.Schema.Types.ObjectId,
-    ref: "products",
+    ref: "Product",
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "users",
+    ref: "User",
   },
   quantity: Number,
 });

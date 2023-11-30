@@ -20,7 +20,7 @@ export default class LikeRepository {
           which we can say combine keyword for both
         */
         likeable: new ObjectId(productId),
-        on_model: "products",
+        on_model: "Product",
       });
       await newLike.save();
     } catch (error) {
@@ -35,12 +35,17 @@ export default class LikeRepository {
       const newLike = new LikeModel({
         user: new ObjectId(userId),
         likeable: new ObjectId(categoryId),
-        on_model: "categories",         //on_model points to the collection, so we need to write correct collection name
+        on_model: "Category", //on_model points to the collection, so we need to write correct collection name
       });
       await newLike.save();
     } catch (error) {
-      console.log(error);
+      console.log("Inside",error);
       throw new ApplicationError("Something Went Wrong with Database", 500);
     }
+  }
+
+  async getLikeItem(id, type) {
+    console.log(id, type);
+    return await LikeModel.find({ likeable: new ObjectId(id), on_model: type }).populate("user").populate("likeable")
   }
 }

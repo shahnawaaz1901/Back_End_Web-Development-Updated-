@@ -8,7 +8,7 @@ import { ObjectId } from "mongodb";
     and next is the Schema, we can create schema here or we can import 
     the schema
 */
-const UserModel = mongoose.model("users", userSchema);
+const UserModel = mongoose.model("User", userSchema);
 export default class UserRepository {
   //* Member Functions
   async signUp(user) {

@@ -200,3 +200,40 @@
 {"level":"info","message":"/api/products/rateProduct {\"productId\":\"65688a04305eeb36ad4c1b30\",\"rating\":5,\"comment\":\"Ek Number Product bhai\"}","service":"request-logging"}
 {"level":"info","message":"/api/products/rateProduct {\"productId\":\"65688a04305eeb36ad4c1b30\",\"rating\":5,\"comment\":\"Ek Number Product bhai\"}","service":"request-logging"}
 {"level":"info","message":"/api/products/rateProduct {\"productId\":\"65688a04305eeb36ad4c1b30\",\"rating\":5,\"comment\":\"Ek Number Product bhai\"}","service":"request-logging"}
+{"level":"info","message":"/api/likes {\"itemId\":\"6564954da441ba38a1e0e8d7\",\"type\":\"Category\"}","service":"request-logging"}
+{"level":"info","message":"/api/likes {\"itemId\":\"6564954da441ba38a1e0e8d7\",\"type\":\"Category\"}","service":"request-logging"}
+{"level":"info","message":"/api/users/signIn {\"email\":\"shaan.ansari1901@gmail.com\",\"password\":\"Ashu@1234\"}","service":"request-logging"}
+{"level":"info","message":"/api/likes {\"itemId\":\"6564954da441ba38a1e0e8d7\",\"type\":\"Category\"}","service":"request-logging"}
+{"level":"info","message":"/api/likes {\"itemId\":\"6567406531231853b220f80c\",\"type\":\"Product\"}","service":"request-logging"}
+{"level":"info","message":"/api/likes {\"itemId\":\"6567406531231853b220f80c\",\"type\":\"Product\"}","service":"request-logging"}
+{"level":"info","message":"/api/likes {\"itemId\":\"6567406531231853b220f80c\",\"type\":\"Product\"}","service":"request-logging"}
+{"level":"info","message":"/api/likes {\"itemId\":\"6567406531231853b220f80c\",\"type\":\"Product\"}","service":"request-logging"}
+{"level":"info","message":"/api/likes {\"itemId\":\"6567406531231853b220f80c\",\"type\":\"Product\"}","service":"request-logging"}
+{"level":"info","message":"/api/likes?itemId=6567406531231853b220f80c&type=Product {\"itemId\":\"6567406531231853b220f80c\",\"type\":\"Product\"}","service":"request-logging"}
+{"level":"info","message":"/api/likes?itemId=6567406531231853b220f80c&type=Product {\"itemId\":\"6567406531231853b220f80c\",\"type\":\"Product\"}","service":"request-logging"}
+{"level":"info","message":"/api/likes?itemId=6567406531231853b220f80c&type=Product {\"itemId\":\"6567406531231853b220f80c\",\"type\":\"Product\"}","service":"request-logging"}
+{"level":"info","message":"/api/likes?itemId=6564954da441ba38a1e0e8d7&type=categories {}","service":"request-logging"}
+{"level":"info","message":"/api/likes?itemId=6564954da441ba38a1e0e8d7&type=categories {}","service":"request-logging"}
+{"level":"info","message":"/api/likes?itemId=6564954da441ba38a1e0e8d7&type=Category {}","service":"request-logging"}
+{"level":"info","message":"/api/likes?itemId=6564954da441ba38a1e0e8d7&type=categories {}","service":"request-logging"}
+{"level":"info","message":"/api/likes?itemId=6564954da441ba38a1e0e8d7&type=categories {}","service":"request-logging"}
+{"level":"info","message":"/api/likes?itemId=6564954da441ba38a1e0e8d7&type=categories {}","service":"request-logging"}
+{"level":"info","message":"/api/likes?itemId=6564954da441ba38a1e0e8d7&type=categories {}","service":"request-logging"}
+{"level":"info","message":"/api/likes?itemId=6564954da441ba38a1e0e8d7&type=categories {}","service":"request-logging"}
+{"level":"info","message":"/api/likes?itemId=6564954da441ba38a1e0e8d7&type=categories {}","service":"request-logging"}
+{"level":"info","message":"/api/likes {\"itemId\":\"6567406531231853b220f80c\",\"type\":\"Product\"}","service":"request-logging"}
+{"level":"info","message":"/api/likes {\"itemId\":\"65688a04305eeb36ad4c1b30\",\"type\":\"Product\"}","service":"request-logging"}
+{"level":"info","message":"/api/likes {\"itemId\":\"6564954da441ba38a1e0e8d6\",\"type\":\"Category\"}","service":"request-logging"}
+{"level":"info","message":"/api/likes?itemId=6567406531231853b220f80c&type=Product {}","service":"request-logging"}
+{"level":"info","message":"/api/likes?itemId=6567406531231853b220f80c&type=Product {}","service":"request-logging"}
+{"level":"info","message":"/api/likes/?itemId=6567406531231853b220f80c&type=Product {}","service":"request-logging"}
+{"level":"info","message":"/api/likes/?itemId=6567406531231853b220f80c&type=Product {}","service":"request-logging"}
+{"level":"info","message":"/api/likes/?itemId=6567406531231853b220f80c&type=Product {}","service":"request-logging"}
+{"level":"info","message":"/api/likes/?itemId=6567406531231853b220f80c&type=Product {}","service":"request-logging"}
+{"level":"info","message":"/api/likes/?itemId=6567406531231853b220f80c&type=Products {}","service":"request-logging"}
+{"level":"info","message":"/api/likes/?itemId=6567406531231853b220f80c&type=Products {}","service":"request-logging"}
+{"level":"info","message":"/api/likes/?itemId=6567406531231853b220f80c&type=Product {}","service":"request-logging"}
+{"level":"info","message":"/api/likes/?itemId=6567406531231853b220f80c&type=Products {}","service":"request-logging"}
+{"level":"info","message":"/api/likes/?itemId=6567406531231853b220f80c&type=Product {}","service":"request-logging"}
+{"level":"info","message":"/api/likes/?itemId=6567406531231853b220f80c&type=Product {}","service":"request-logging"}
+{"level":"info","message":"/api/likes/?itemId=6567406531231853b220f80c&type=Product {}","service":"request-logging"}
