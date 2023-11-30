@@ -14,15 +14,19 @@ import productRouter from "./src/features/products/product.router.js";
 import userRouter from "./src/features/user/user.router.js";
 import cartRouter from "./src/features/cart/cart.router.js";
 import orderRouter from "./src/features/order/order.router.js";
+import likeRouter from "./src/features/Like/like.router.js";
 import jwtAuth from "./src/middlewares/jwt.middleware.js";
 
-//? Documentation and Error Handler
+//? Documentation 
 import apiDocs from "./swagger.json" assert { type: "json" };
+
+//? Error Handler
 import ApplicationError from "./src/features/errorHandler/application.error.js";
 import logMiddleware from "./src/middlewares/logger.middleware.js";
+
+//? Database
 import { connectToMongoDB } from "./src/config/mongodb.js";
 import { connenctUsingMongoose } from "./src/config/mogoose.js";
-import likeRouter from "./src/features/Like/like.router.js";
 
 //* Start the Server
 const app = express();

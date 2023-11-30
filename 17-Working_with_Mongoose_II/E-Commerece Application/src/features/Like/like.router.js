@@ -7,5 +7,5 @@ const likeController = new LikeController();
 likeRouter.post("/", (req, res) => {
   likeController.likeItem(req, res);
 });
-// likeRouter.
+
 export default likeRouter;

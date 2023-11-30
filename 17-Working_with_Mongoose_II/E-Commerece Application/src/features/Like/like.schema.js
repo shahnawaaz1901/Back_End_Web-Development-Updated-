@@ -1,14 +1,13 @@
-
 import mongoose, { mongo } from "mongoose";
 
 export const likeSchema = new mongoose.Schema({
-    /* Storing useId which like the Product or Category */
-    user : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : "users",
-        required : true,
-    },
-    /* 
+  /* Storing useId which like the Product or Category */
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "users",
+    required: true,
+  },
+  /* 
         We can't Directly Specify the Product and Category attribute because 
         if user Like the Product then we need to reffer the to the product
         collection or if user like the category then we need to reffer to 
@@ -20,14 +19,14 @@ export const likeSchema = new mongoose.Schema({
         which is enum which decide in which collection we want to store the document
         and the collection name is string so that we specify the type which is string
     */
-    likeable : {
-        type : mongoose.Schema.Types.ObjectId,
-        required : true,
-        refPath : "on_model"
-    },
-    on_model : {
-        type : String,
-        enum : ["Products","Category"]
-    },
-
-})
+  likeable: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    refPath: "on_model", // on_model is string which we need to create as seprate attribute
+  },
+  on_model: {
+    type: String,
+    enum: ["products", "categories"],
+    required: true,
+  },
+});

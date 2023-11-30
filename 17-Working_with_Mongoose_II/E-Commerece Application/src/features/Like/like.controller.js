@@ -11,6 +11,10 @@ export default class LikeController {
       const { userId } = req;
       const { itemId, type } = req.body;
       console.log(userId, itemId, type);
+      /* 
+        If user gives us incorrect type so we need to check before call 
+        the repository 
+      */
       if (type != "Product" && type != "Category") {
         return res.status(400).send("Like Type is Invalid ");
       }
