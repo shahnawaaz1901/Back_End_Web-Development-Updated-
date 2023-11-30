@@ -234,15 +234,22 @@ export default class ProductRepository {
 
       // If User rated already then update Rating
       if (userReview) {
-        (userReview.rating = userObject.rating), await userReview.save();
+        userReview.rating = userObject.rating;
+        if (userObject.comment) {
+          userReview.comment = userObject.comment;
+        }
+        await userReview.save();
       } else {
         // Create new Rating
         const newReview = new ReviewModel({
           product: new ObjectId(userObject.productId),
           user: new ObjectId(userObject.userId),
           rating: userObject.rating,
+          comment: userObject.comment,
         });
         await newReview.save();
+        productToUpdate.rating.push(newReview._id);
+        await productToUpdate.save();
       }
       /* Older Code using direct mongodb
       const { userId, productId, rating } = userObject;

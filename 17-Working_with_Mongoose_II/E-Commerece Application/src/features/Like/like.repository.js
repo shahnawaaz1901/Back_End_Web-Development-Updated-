@@ -35,7 +35,7 @@ export default class LikeRepository {
       const newLike = new LikeModel({
         user: new ObjectId(userId),
         likeable: new ObjectId(categoryId),
-        on_model: "categories",
+        on_model: "categories",         //on_model points to the collection, so we need to write correct collection name
       });
       await newLike.save();
     } catch (error) {

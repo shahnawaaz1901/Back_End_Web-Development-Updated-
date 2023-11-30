@@ -26,7 +26,7 @@ export default class ProductController {
       console.log(categories);
       const newProduct = {
         name,
-        image : imageURL,
+        image: imageURL,
         description,
         price: parseFloat(price),
         stock,
@@ -65,11 +65,12 @@ export default class ProductController {
   //* Rate the Product
   async rateProduct(req, res) {
     try {
-      const { productId, rating } = req.body;
+      const { productId, rating, comment } = req.body;
       const userObject = {
         productId,
         rating,
         userId: req.userId,
+        comment,
       };
       await this.productRepository.rate(userObject);
       return res.status(200).send("Product Rated Successfully !!");
