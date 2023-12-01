@@ -32,11 +32,11 @@ export default class LikeController {
 
   async getLikes(req, res) {
     try {
-      console.log(req.query)
       const { itemId, type } = req.query;
       console.log(itemId, type)
       const likeData = await this.likeRepository.getLikeItem(itemId, type);
-      res.status(200).send(likeData);
+      console.log(likeData);
+      return res.status(200).send(likeData);
     } catch (error) {
       console.log(error);
       return res.status(500).send("Something went Wrong While Connecting to Database")

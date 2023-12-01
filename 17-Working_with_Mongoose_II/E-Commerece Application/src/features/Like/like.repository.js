@@ -54,15 +54,16 @@ export default class LikeRepository {
       attribute value after that goes to the collection which attribute value
       belongs to and gives us the whole document
     */
-    return await LikeModel.find({ likeable: new ObjectId(id), on_model: type })
-      /* 
+   console.log("Inside");
+    return await LikeModel.find({ likeable: new ObjectId(id)})
+      .populate("user")
+      .populate({ path: "likeable", model: type });
+    /* 
         We Directly Write user because user have direct reference to User Collection
         But in likeable we specify that goes to that attribute and we need to specify
         another attibute model which takes the collection name which that id belongs
         to because we use the refPath attribute instead of ref so that we need to 
         specify the path to poin to that collection which we want to point
       */
-      .populate("user")
-      .populate({ path: "likeable", model: type });
   }
 }

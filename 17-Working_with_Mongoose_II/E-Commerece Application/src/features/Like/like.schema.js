@@ -53,9 +53,12 @@ export const likeSchema = new mongoose.Schema({
   })
   //* Calling before the find function
   .pre("find", (next) => {
-    console.log("Retrieving the Like")
+    console.log("Retrieving the Like");
+    next(); //* If not calling the next function then our after starting the find operation stuck and never ended because it stuck in the
   })
+
   //* Calling After the Find function Completes the Operation
-  .post("find",(doc)=>{
+  .post("find", (doc) => {
     console.log(doc);
-  })
+    console.log("Post finded");
+  });
