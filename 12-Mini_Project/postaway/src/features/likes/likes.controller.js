@@ -2,24 +2,34 @@ import LikesModel from "./likes.model.js";
 
 export default class LikesController {
   addLikeToPost(req, res) {
-    const {postId} = req.params;
+    const { postId } = req.params;
     const userId = req.userId;
     const result = LikesModel.add(postId, userId);
-    if (!result) {
-      return res.status(404).send("Post Not Found !!");
+    if (!result.success) {
+      return res.status(404).send(result.msg);
     }
-    res.status(200).send(result);
+    res.status(200).send(result.msg);
   }
 
   removeLikeToPost(req, res) {
     const { postId } = req.params;
     const userId = req.userId;
-    console.log(postId, userId);
     const result = LikesModel.remove(postId, userId);
-    if (result instanceof LikesModel) {
-      return res.status(200).send(result);
+    if (!result.success) {
+      res.status(404).send(result.msg);
+    } else {
+      res.status(200).send(result.msg);
     }
-    res.status(404).send(result);
   }
 
+  getPostLikes(req, res) {
+    const { postId } = req.params;
+    const userId = req.userId;
+    const result = LikesModel.get(postId, userId);
+    if (!result.success) {
+      return res.status(404).send(result.msg);
+    } else {
+      return res.status(200).send(result.data);
+    }
+  }
 }

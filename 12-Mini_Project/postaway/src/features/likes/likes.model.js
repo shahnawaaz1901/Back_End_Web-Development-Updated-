@@ -14,16 +14,16 @@ export default class LikesModel {
       (f) => postId == f.id && userId == f.userId
     );
     if (postIndex == -1) {
-      return;
+      return { success: false, msg: "Post not found" };
     }
     for (let every of likesData) {
       if (every.userId == userId && every.postId == postId) {
-        return "Already Liked this Post";
+        return { success: true, msg: "Already Liked this Post" };
       }
     }
     const newLike = new LikesModel(userId, postId);
     likesData.push(newLike);
-    return "Like Addded Successfully";
+    return { success: true, msg: "Like Addded Successfully" };
   }
 
   static remove(postId, userId) {
@@ -34,7 +34,7 @@ export default class LikesModel {
       (f) => postId == f.id && userId == f.userId
     );
     if (postIndex == -1) {
-      return "Post Not Found !!";
+      return { success: false, msg: "Post Not Found !!" };
     }
 
     // 2. Check if User Like this Post or Not
@@ -43,11 +43,23 @@ export default class LikesModel {
     );
 
     if (findLikeIndex == -1) {
-      return "User Not like the Post";
+      return { success: false, msg: "User Not like the Post" };
     }
 
     likesData.splice(findLikeIndex, 1);
-    return "Like Remove Successfully";
+    return { success: true, msg: "Like Remove Successfully" };
+  }
+
+  static get(postId, userId) {
+    const allPosts = PostsModel.getAll(userId);
+    const post = allPosts.findIndex((p) => p.id == postId);
+    if (!post) {
+      return {
+        success: false,
+        msg: "Post not found",
+      };
+    }
+    return { success: true, data: likesData.filter((f) => f.postId == postId) };
   }
 }
 

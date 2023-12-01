@@ -6,5 +6,6 @@ const likesController = new LikesController();
 
 likesRouter.post("/addLike/:postId", likesController.addLikeToPost);
 likesRouter.post("/removeLike/:postId", likesController.removeLikeToPost);
+likesRouter.get("/",likesController.getPostLikes);
 
 export default likesRouter;
