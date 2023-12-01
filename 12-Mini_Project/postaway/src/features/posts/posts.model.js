@@ -12,20 +12,24 @@ export default class PostsModel {
     this.update = false;
   }
 
+  //* For New Post
   static new(postDesc, postLocation, postURL, userId) {
     const post = new PostsModel(postURL, postDesc, postLocation, userId);
     postsData.push(post);
     return post;
   }
 
+  //* Get All Post for Specific User
   static getAll(userId) {
     return postsData.filter((p) => p.userId == userId);
   }
 
+  //* Get Specific post for  Specific User
   static getOne(postId, userId) {
     return postsData.find((p) => p.id == postId && p.userId == userId);
   }
 
+  //* Update a Post
   static update(postId, postDesc, postLocation, userId) {
     const index = postsData.findIndex(
       (p) => p.id == postId && p.userId == userId
@@ -44,13 +48,14 @@ export default class PostsModel {
     }
 
     updatedPost.update = {
-      date : new Date().toLocaleDateString(),
-      time : new Date().toLocaleTimeString()
-    }
+      date: new Date().toLocaleDateString(),
+      time: new Date().toLocaleTimeString(),
+    };
     const update = Object.assign(postsData[index], updatedPost);
     return update;
   }
 
+  //* Delete post By Id
   static delete(id) {
     const index = postsData.findIndex((p) => p.id == id);
     if (index == -1) {

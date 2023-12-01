@@ -1,6 +1,9 @@
 import nodemailer from "nodemailer";
 
 const notificationAlert = async (receiverEmail, reasonForAlert) => {
+  if (!receiverEmail) {
+    return;
+  }
   const transposter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -15,8 +18,8 @@ const notificationAlert = async (receiverEmail, reasonForAlert) => {
   };
 
   if (reasonForAlert == "new") {
-    mailObject.subject = "Welcome to Our PostAway API";
-    mailObject.text = "We Welcome you to our Postaway Family.";
+    mailObject.subject = "Welcome";
+    mailObject.text = "We Welcome you to our Postaway API Family.";
   } else {
     mailObject.subject = "Security Alert";
     mailObject.text = `We Have Noticed that You was logged in On : ${new Date().toString()}`;
