@@ -18,14 +18,12 @@ export default class CommentsController {
 
   // Get all Comments of a Post
   get(req, res) {
-    const { userId } = req;
     const { postId } = req.params;
-    const commentForPost = CommentsModel.getComments(postId);
-    if (!commentForPost) {
-      return res.status(400).send("Post Not Found ");
-    } else {
-      return res.status(200).send(commentForPost);
+    if (!postId) {
+      return res.status(404).send("Please enter valid postId");
     }
+    const commentForPost = CommentsModel.getComments(postId);
+    res.status(200).send(commentForPost);
   }
 
   // For Update Comment
@@ -33,6 +31,9 @@ export default class CommentsController {
     const { postId } = req.params;
     const { comment, commentId } = req.body;
     const userId = req.userId;
+    if (!postId || !comment || !commentId) {
+      return res.status(500).send("Something went Wrong");
+    }
     const updatedResult = CommentsModel.updateComment(
       postId,
       userId,
@@ -40,10 +41,10 @@ export default class CommentsController {
       comment
     );
 
-    if (updatedResult instanceof PostsModel) {
-      res.status(200).send(updatedResult);
+    if (!updatedResult) {
+      res.status(404).send("Invalid commentId or postId");
     } else {
-      res.status(404).send(updatedResult);
+      res.status(200).send(updatedResult);
     }
   }
 

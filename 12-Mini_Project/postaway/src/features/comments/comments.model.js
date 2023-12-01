@@ -23,25 +23,18 @@ export default class CommentsModel {
   }
 
   static updateComment(postId, userId, commentId, updatedComment) {
-    if (!updatedComment) {
-      return;
-    }
     const allPosts = PostsModel.getAll(userId);
     const post = allPosts.find((p) => p.id == postId && p.userId == userId);
     if (!post) {
-      return "Post Not Found !";
+      return;
     }
 
-    if (!post.comments) {
-      return "Comment Not Found !";
-    }
-
-    const commentIndex = post.comments.findIndex(
+    const commentIndex = commentsData.findIndex(
       (u) => u.id == commentId && u.userId == userId
     );
 
     if (commentIndex == -1) {
-      return "Comment Not Found !";
+      return;
     }
 
     const updatedDoc = {
@@ -51,10 +44,14 @@ export default class CommentsModel {
         time: new Date().toLocaleTimeString(),
       },
     };
-    Object.assign(post.comments[commentIndex], updatedDoc);
-    return post;
+    Object.assign(commentsData[commentIndex], updatedDoc);
+    return "Comment Updated Successfully";
   }
 
+  static getComments(postId) {
+    return commentsData.filter((f) => f.postId == postId);
+  }
+  
   static deleteComment(userId, postId, commentId) {
     const allPosts = PostsModel.getAll(userId);
     const post = allPosts.find((p) => p.id == postId);
