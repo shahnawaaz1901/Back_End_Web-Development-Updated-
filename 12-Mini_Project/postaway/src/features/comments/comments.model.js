@@ -13,20 +13,25 @@ export default class CommentsModel {
     const allPosts = PostsModel.getAll(userId);
     const post = allPosts.find((p) => p.id == postId);
     if (!post) {
-      return;
+      return {
+        success: false,
+        msg: "Post not found",
+      };
     }
 
     const newComment = new CommentsModel(userId, postId, comment);
     commentsData.push(newComment);
-    console.log(commentsData);
-    return "Comment Successfully";
+    return { success: true, msg: "Comment Successfully" };
   }
 
   static updateComment(postId, userId, commentId, updatedComment) {
     const allPosts = PostsModel.getAll(userId);
-    const post = allPosts.find((p) => p.id == postId && p.userId == userId);
+    const post = allPosts.find((p) => p.id == postId);
     if (!post) {
-      return;
+      return {
+        success: false,
+        msg: "Post not found",
+      };
     }
 
     const commentIndex = commentsData.findIndex(
@@ -34,7 +39,10 @@ export default class CommentsModel {
     );
 
     if (commentIndex == -1) {
-      return;
+      return {
+        success: false,
+        msg: "Comment not found",
+      };
     }
 
     const updatedDoc = {
@@ -45,32 +53,31 @@ export default class CommentsModel {
       },
     };
     Object.assign(commentsData[commentIndex], updatedDoc);
-    return "Comment Updated Successfully";
+    return {
+      success: true,
+      msg: "Comment Updated Successfully",
+    };
   }
 
   static getComments(postId) {
     return commentsData.filter((f) => f.postId == postId);
   }
-  
+
   static deleteComment(userId, postId, commentId) {
     const allPosts = PostsModel.getAll(userId);
     const post = allPosts.find((p) => p.id == postId);
 
     if (!post) {
-      return "Post Not Found !";
+      return { success: false, msg: "Post Not Found !" };
     }
 
-    if (!post.comments) {
-      return "Comment Not Found !";
-    }
-
-    const commentIndex = post.comments.findIndex((c) => c.id == commentId);
+    const commentIndex = commentsData.findIndex((c) => c.id == commentId);
     if (commentIndex == -1) {
-      return "Comment Not Found !";
+      return { success: false, msg: "Comment Not Found !" };
     }
 
-    post.comments.splice(commentIndex, 1);
-    return post;
+    commentsData.splice(commentIndex, 1);
+    return { success: true, msg: "Comment deleted successfully" };
   }
 }
 

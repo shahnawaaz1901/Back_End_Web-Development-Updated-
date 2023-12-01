@@ -9,10 +9,10 @@ export default class CommentsController {
       return;
     }
     const result = CommentsModel.addComment(userId, postId, comment);
-    if (!result) {
-      return res.status(404).send("Post Not Found");
+    if (!result.success) {
+      return res.status(404).send(result.msg);
     } else {
-      res.status(200).send(result);
+      res.status(200).send(result.msg);
     }
   }
 
@@ -40,11 +40,10 @@ export default class CommentsController {
       commentId,
       comment
     );
-
-    if (!updatedResult) {
-      res.status(404).send("Invalid commentId or postId");
+    if (!updatedResult.success) {
+      res.status(404).send(updatedResult.msg);
     } else {
-      res.status(200).send(updatedResult);
+      res.status(200).send(updatedResult.msg);
     }
   }
 
@@ -53,10 +52,10 @@ export default class CommentsController {
     const userId = req.userId;
     const { postId, commentId } = req.query;
     const result = CommentsModel.deleteComment(userId, postId, commentId);
-    if (result instanceof PostsModel) {
-      res.status(200).send(result);
+    if (!result.success) {
+      res.status(404).send(result.msg);
     } else {
-      res.status(404).send(result);
+      res.status(200).send(result.msg);
     }
   }
 }
