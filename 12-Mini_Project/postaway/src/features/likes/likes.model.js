@@ -5,6 +5,7 @@ export default class LikesModel {
     this.id = id++;
     this.postId = postId;
     this.userId = userId;
+    this.time = new Date().toString();
   }
 
   static add(postId, userId) {
@@ -15,38 +16,39 @@ export default class LikesModel {
     if (postIndex == -1) {
       return;
     }
-
-    if (!allPosts[postIndex].likes) {
-      allPosts[postIndex].likes = [];
-    }
-    for (let every of allPosts[postIndex].likes) {
-      if (every.userId == userId) {
-        return allPosts[postIndex];
+    for (let every of likesData) {
+      if (every.userId == userId && every.postId == postId) {
+        return "Already Liked this Post";
       }
     }
-    allPosts[postIndex].likes.push(new LikesModel(userId, postId));
-    return allPosts[postIndex];
+    const newLike = new LikesModel(userId, postId);
+    likesData.push(newLike);
+    return "Like Addded Successfully";
   }
 
   static remove(postId, userId) {
     let allPosts = PostsModel.getAll(userId);
+
+    // 1. Check if Post Exist or Not
     const postIndex = allPosts.findIndex(
       (f) => postId == f.id && userId == f.userId
     );
     if (postIndex == -1) {
-      return "Post Not Found or User Not Like this Post !!";
-    }
-    // console.log(allPosts[postIndex]);
-    if (!allPosts[postIndex].likes) {
-      return "User Not Like This Post !!";
+      return "Post Not Found !!";
     }
 
-    const likeArray = allPosts[postIndex].likes;
-    const userIndex = likeArray.findIndex((l) => l.userId == userId);
-    if (userIndex == -1) {
-      return "User Not Like This Post !!";
+    // 2. Check if User Like this Post or Not
+    const findLikeIndex = likesData.findIndex(
+      (f) => f.postId == postId && f.userId == userId
+    );
+
+    if (findLikeIndex == -1) {
+      return "User Not like the Post";
     }
-    likeArray.splice(userIndex, 1);
-    return allPosts[postIndex];
+
+    likesData.splice(findLikeIndex, 1);
+    return "Like Remove Successfully";
   }
 }
+
+var likesData = [];

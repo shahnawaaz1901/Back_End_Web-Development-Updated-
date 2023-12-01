@@ -2,7 +2,7 @@ import LikesModel from "./likes.model.js";
 
 export default class LikesController {
   addLikeToPost(req, res) {
-    const postId = req.params.postId;
+    const {postId} = req.params;
     const userId = req.userId;
     const result = LikesModel.add(postId, userId);
     if (!result) {
