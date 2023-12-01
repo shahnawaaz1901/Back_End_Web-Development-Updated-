@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 
 const notificationAlert = async (receiverEmail, reasonForAlert) => {
-  if (!receiverEmail) {
+  if (!receiverEmail || !reasonForAlert) {
     return;
   }
   const transposter = nodemailer.createTransport({

@@ -1,8 +1,8 @@
 import PostsModel from "../posts/posts.model.js";
 let id = 1;
 export default class CommentsModel {
-  constructor(_id, _userId, _postId, _comment) {
-    this.id = _id;
+  constructor(_userId, _postId, _comment) {
+    this.id = id++;
     this.userId = _userId;
     this.postId = _postId;
     this.comment = _comment;
@@ -13,13 +13,13 @@ export default class CommentsModel {
     const allPosts = PostsModel.getAll(userId);
     const post = allPosts.find((p) => p.id == postId);
     if (!post) {
-      return "Post Not Found !!";
+      return;
     }
-    if (post.comments == undefined) {
-      post.comments = [];
-    }
-    post.comments.push(new CommentsModel(id++, userId, postId, comment));
-    return post;
+
+    const newComment = new CommentsModel(userId, postId, comment);
+    commentsData.push(newComment);
+    console.log(commentsData);
+    return "Comment Successfully";
   }
 
   static updateComment(postId, userId, commentId, updatedComment) {
@@ -76,3 +76,5 @@ export default class CommentsModel {
     return post;
   }
 }
+
+var commentsData = [];
