@@ -50,4 +50,12 @@ export const likeSchema = new mongoose.Schema({
   .post("save", (doc) => {
     console.log("Inside the Post function !");
     console.log(doc);
-  });
+  })
+  //* Calling before the find function
+  .pre("find", (next) => {
+    console.log("Retrieving the Like")
+  })
+  //* Calling After the Find function Completes the Operation
+  .post("find",(doc)=>{
+    console.log(doc);
+  })
