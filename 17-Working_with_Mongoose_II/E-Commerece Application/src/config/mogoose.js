@@ -2,6 +2,15 @@ import mongoose from "mongoose";
 import "../../env.js";
 import { categorySchema } from "../features/products/category.schema.js";
 
+/* 
+  For Cloud we need to use username and password for along with connection string
+  but in password sometime we use the special character but for connection to cloud
+  we need to convert that special character in to the url encoded format which we can
+  do by using the function "encodeURIComponent" which takes the string of password
+  and return the password in encoded url form like this : 
+
+  const password = encodeURIComponent("A5FFC976@ybl");
+*/
 const url = process.env.DB_URL;
 export const connenctUsingMongoose = async () => {
   /* 
