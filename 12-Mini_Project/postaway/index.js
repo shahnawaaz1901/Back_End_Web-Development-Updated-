@@ -18,10 +18,21 @@ import jwtAuth from "./src/middlewares/jwt-auth.middleware.js";
 /* Error Handling */
 import ApplicationError from "./src/features/error/application.error.js";
 
+/* CORS Policy */
+import cors from "cors";
+
 //* Start the Server */
 const server = express();
 
 //* Setting Up Middlewares */
+
+//? For Cross Origin Request
+server.use(cors({
+  origin : "0.0.0.0",
+  allowedHeaders : "*",
+}))
+
+
 //? For Populating req.body in POST Request
 /* 
   extended : true gives us the prototype of the object along with req.body 
