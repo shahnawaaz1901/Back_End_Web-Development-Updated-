@@ -1,0 +1,78 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Docs for PostAway API",
+    "version": "1.0.0",
+    "description": "PostAway API for Social Media Application"
+  },
+  "host": "localhost:3200",
+  "paths": {
+    "/api/users/signup": {
+      "post": {
+        "summary": "Signup",
+        "description": "Signup on Postaway",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User Personal Information for Create Account",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/users/signin": {
+      "post": {
+        "summary": "Signin",
+        "description": "Signin on Postaway",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User Credentials for Login to Existing Account",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid Credentials !!"
+          }
+        }
+      }
+    }
+  }
+}

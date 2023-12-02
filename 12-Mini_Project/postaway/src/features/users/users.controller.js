@@ -28,7 +28,4 @@ export default class UsersController {
       res.status(404).send("Invalid Credentials !!");
     }
   }
-
-  //* SignOut Existing user
-  signOut(req, res) {}
 }

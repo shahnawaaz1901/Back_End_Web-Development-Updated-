@@ -21,17 +21,27 @@ import ApplicationError from "./src/features/error/application.error.js";
 /* CORS Policy */
 import cors from "cors";
 
+/* API Documentation */
+import swagger from "swagger-ui-express";
+import apiDocs from "./swagger.json" assert { type: "json" };
+/* 
+  assert keyword require to import json file because it indicates that the have'nt
+  import a package or module we import a json file so in type we specify the json
+*/
+
+
 //* Start the Server */
 const server = express();
 
 //* Setting Up Middlewares */
 
 //? For Cross Origin Request
-server.use(cors({
-  origin : "0.0.0.0",
-  allowedHeaders : "*",
-}))
-
+server.use(
+  cors({
+    origin: "0.0.0.0",
+    allowedHeaders: "*",
+  })
+);
 
 //? For Populating req.body in POST Request
 /* 
@@ -42,6 +52,14 @@ server.use(express.urlencoded({ extended: false }));
 server.use(express.json());
 
 //* Setting Up Routes */
+/* 
+  "/apiDocs" is the path swagger.serve server a front end ui to the user and 
+  swagger.setup is a function which takes JSON object where we need to pass
+  our swagger.json file which contain all information regarding our API.
+  So we can say serve build and show the front end to the user and setup function
+  fill the front end with the information of API which we write in JSON file
+*/
+server.use("/apiDocs", swagger.serve, swagger.setup(apiDocs));
 server.use("/api/users", usersRouter);
 server.use("/api/posts", jwtAuth, postsRouter);
 server.use("/api/likes", jwtAuth, likesRouter);
