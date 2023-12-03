@@ -73,6 +73,26 @@
           }
         }
       }
+    },
+    "/api/posts/": {
+      "get": {
+        "summary": "Get Posts",
+        "description": "User Get all Post",
+        "security": [
+          {
+            "JWT": {}
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "UnAuthorize Access"
+          }
+        }
+      }
     }
   }
 }
