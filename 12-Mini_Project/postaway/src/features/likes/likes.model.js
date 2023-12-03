@@ -1,11 +1,12 @@
 let id = 1;
 import PostsModel from "../posts/posts.model.js";
 export default class LikesModel {
-  constructor(userId, postId) {
+  constructor(_userId, _postId, _type) {
     this.id = id++;
-    this.postId = postId;
-    this.userId = userId;
+    this.postId = _postId;
+    this.userId = _userId;
     this.time = new Date().toString();
+    this.type = _type;
   }
 
   static add(postId, userId) {
@@ -21,7 +22,7 @@ export default class LikesModel {
         return { success: true, msg: "Already Liked this Post" };
       }
     }
-    const newLike = new LikesModel(userId, postId);
+    const newLike = new LikesModel(userId, postId, "POST");
     likesData.push(newLike);
     return { success: true, msg: "Like Addded Successfully" };
   }
