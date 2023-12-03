@@ -5,10 +5,14 @@ import upload from "../../middlewares/file-upload.middleware.js";
 const postsRouter = express.Router();
 const postsController = new PostsController();
 
-postsRouter.post("/", upload.single("postURL"), postsController.createPost);
-postsRouter.get("/", postsController.getAllPosts);
-postsRouter.put("/:postId", postsController.updatePost);
-postsRouter.delete("/:postId", postsController.deletePost);
-postsRouter.get("/:postId", postsController.getOnePost);
+postsRouter.post(
+  "/create",
+  upload.single("postURL"),
+  postsController.createPost
+);
+postsRouter.get("/get", postsController.getAllPosts);
+postsRouter.put("/update/:postId", postsController.updatePost);
+postsRouter.delete("/delete/:postId", postsController.deletePost);
+postsRouter.get("/get/:postId", postsController.getOnePost);
 
 export default postsRouter;

@@ -6,9 +6,17 @@
     "description": "PostAway API for Social Media Application"
   },
   "host": "localhost:3200",
+  "securityDefinitions": {
+    "JWT": {
+      "in": "header",
+      "name": "Authorization",
+      "type": "apiKey"
+    }
+  },
   "paths": {
     "/api/users/signup": {
       "post": {
+        "tags": ["Users"],
         "summary": "Signup",
         "description": "Signup on Postaway",
         "parameters": [
@@ -44,6 +52,7 @@
     },
     "/api/users/signin": {
       "post": {
+        "tags": ["Users"],
         "summary": "Signin",
         "description": "Signin on Postaway",
         "parameters": [
@@ -74,8 +83,9 @@
         }
       }
     },
-    "/api/posts/": {
+    "/api/posts/get/": {
       "get": {
+        "tags": ["Posts"],
         "summary": "Get Posts",
         "description": "User Get all Post",
         "security": [
@@ -84,6 +94,51 @@
           }
         ],
 
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "UnAuthorize Access"
+          }
+        }
+      }
+    },
+    "/api/posts/create/": {
+      "post": {
+        "tags": ["Posts"],
+        "summary": "Create Posts",
+        "consumes" : "multipart/form-data",
+        "description": "User Can Create new Post",
+        "security": [
+          {
+            "JWT": {}
+          }
+        ],
+        "parameters" : [
+          {
+            "in" : "body",
+            "name" : "body",
+            "description" : "Post Details",
+            "schema" : {
+              "type" : "object",
+              "properties" : {
+                "postDesc" : {
+                  "type" : "string"
+                },
+                "postLocation" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          {
+            "in" : "formData",
+            "name" : "postURL",
+            "type" : "file",
+            "description" : "Image for Post"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
