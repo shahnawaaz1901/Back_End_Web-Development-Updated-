@@ -6,7 +6,6 @@ export default class LikesModel {
     this.postId = _postId;
     this.userId = _userId;
     this.time = new Date().toString();
-    this.type = _type;
   }
 
   static add(postId, userId) {
@@ -22,7 +21,7 @@ export default class LikesModel {
         return { success: true, msg: "Already Liked this Post" };
       }
     }
-    const newLike = new LikesModel(userId, postId, "POST");
+    const newLike = new LikesModel(userId, postId)
     likesData.push(newLike);
     return { success: true, msg: "Like Addded Successfully" };
   }
