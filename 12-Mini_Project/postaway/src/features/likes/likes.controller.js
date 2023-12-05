@@ -25,6 +25,7 @@ export default class LikesController {
   getPostLikes(req, res) {
     const { postId } = req.params;
     const userId = req.userId;
+    console.log(postId, userId)
     const result = LikesModel.get(postId, userId);
     if (!result.success) {
       return res.status(404).send(result.msg);

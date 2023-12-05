@@ -52,7 +52,8 @@ export default class LikesModel {
 
   static get(postId, userId) {
     const allPosts = PostsModel.getAll(userId);
-    const post = allPosts.findIndex((p) => p.id == postId);
+    console.log(allPosts);
+    const post = allPosts.find((p) => p.id == postId);
     if (!post) {
       return {
         success: false,

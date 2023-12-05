@@ -56,14 +56,14 @@ export default class PostsModel {
   }
 
   //* Delete post By Id
-  static delete(id) {
-    const index = postsData.findIndex((p) => p.id == id);
+  static delete(postId, userId) {
+    const index = postsData.findIndex((p) => p.id == postId);
     if (index == -1) {
       return;
     }
 
     postsData.splice(index, 1);
-    return postsData;
+    return this.getAll(userId);
   }
 }
 
