@@ -4,7 +4,7 @@ const notificationAlert = async (receiverEmail, reasonForAlert) => {
   if (!receiverEmail || !reasonForAlert) {
     return;
   }
-  const transposter = nodemailer.createTransport({
+  const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
       user: "shaan.ansari1901@gmail.com",
@@ -26,7 +26,7 @@ const notificationAlert = async (receiverEmail, reasonForAlert) => {
   }
 
   try {
-    await transposter.sendMail(mailObject);
+    await transporter.sendMail(mailObject);
     console.log("mail sent successfully !!");
   } catch (error) {
     console.log(error);

@@ -1,5 +1,6 @@
 //* Create User Class So that We Dont Need to Export All Functions We Can Just Export the Class to use the functions
 import notificationAlert from "../alert/notification.alert.js";
+import ApplicationError from "../error/application.error.js";
 import UsersModel from "./users.model.js";
 import jwt from "jsonwebtoken";
 
@@ -25,7 +26,8 @@ export default class UsersController {
       );
       res.status(200).send(token);
     } else {
-      res.status(404).send("Invalid Credentials !!");
+      throw new ApplicationError("Invalid Credentials",404);
+      // res.status(404).send("Invalid Credentials !!");
     }
   }
 }

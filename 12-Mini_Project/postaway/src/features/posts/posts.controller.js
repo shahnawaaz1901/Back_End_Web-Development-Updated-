@@ -1,3 +1,4 @@
+import ApplicationError from "../error/application.error.js";
 import PostsModel from "./posts.model.js";
 export default class PostsController {
   //* Create New Post
@@ -6,6 +7,10 @@ export default class PostsController {
     let postURL;
     if (req.file) {
       postURL = req.file.path;
+    }
+
+    if(!postDesc && !postLocation && !req.file){
+      throw new ApplicationError("All Fields Can't be Empty", 406);
     }
 
     const newPost = PostsModel.new(postDesc, postLocation, postURL, req.userId);
@@ -20,16 +25,21 @@ export default class PostsController {
   //* Get Post For Specific Id
   getOnePost(req, res) {
     const result = PostsModel.getOne(req.params.postId, req.userId);
-    if (!result) {
-      return res.status(404).send("Posts Not Found");
+    if (result) {
+      return res.status(200).send(result);
     }
-    return res.status(200).send(result);
+    throw new ApplicationError("Post not found", 404);
   }
 
   //* Update the Post
   updatePost(req, res) {
     const { postId } = req.params;
     const { postDesc, postLocation } = req.body;
+
+    if(!postDesc && !postLocation){
+      throw new ApplicationError("Enter Valid Data for Update",406);
+    }
+
     const updatedPost = PostsModel.update(
       postId,
       postDesc,
@@ -37,7 +47,7 @@ export default class PostsController {
       req.userId
     );
     if (!updatedPost) {
-      return res.status(404).send("Post Not Found !!");
+      throw new ApplicationError("Post not found.",404);
     }
 
     res.status(200).send(updatedPost);
@@ -48,7 +58,7 @@ export default class PostsController {
     const { postId } = req.params;
     const result = PostsModel.delete(postId, req.userId);
     if (!result) {
-      return res.status(404).send("Post Not Found");
+      throw new ApplicationError("Post not found",404);
     }
     return res.status(200).send(result);
   }

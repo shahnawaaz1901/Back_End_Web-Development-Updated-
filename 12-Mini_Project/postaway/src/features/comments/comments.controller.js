@@ -7,7 +7,8 @@ export default class CommentsController {
     const { comment, postId } = req.body;
     const userId = req.userId;
     if (!comment || !postId) {
-      return;
+      //* 406 Status Code means Server Not Accepted this Request
+      throw new ApplicationError("Please Enter Valid Comment", 406);
     }
     const result = CommentsModel.addComment(userId, postId, comment);
     if (!result.success) {
@@ -22,7 +23,7 @@ export default class CommentsController {
   get(req, res) {
     const { postId } = req.params;
     if (!postId) {
-      throw new ApplicationError("Please enter valid postId",404)
+      throw new ApplicationError("Please enter valid postId", 404);
     }
     const commentForPost = CommentsModel.getComments(postId);
     res.status(200).send(commentForPost);
@@ -34,7 +35,7 @@ export default class CommentsController {
     const { comment, commentId } = req.body;
     const userId = req.userId;
     if (!postId || !comment || !commentId) {
-      return res.status(500).send("Something went Wrong");
+      throw new ApplicationError("Something went wrong", 404);
     }
     const updatedResult = CommentsModel.updateComment(
       postId,
@@ -43,7 +44,7 @@ export default class CommentsController {
       comment
     );
     if (!updatedResult.success) {
-      res.status(404).send(updatedResult.msg);
+      throw new ApplicationError(updatedResult.msg, 404);
     } else {
       res.status(200).send(updatedResult.msg);
     }
@@ -55,7 +56,7 @@ export default class CommentsController {
     const { postId, commentId } = req.query;
     const result = CommentsModel.deleteComment(userId, postId, commentId);
     if (!result.success) {
-      res.status(404).send(result.msg);
+      throw new ApplicationError(result.msg, 404);
     } else {
       res.status(200).send(result.msg);
     }
