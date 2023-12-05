@@ -36,6 +36,10 @@ io.on("connect", (socket) => {
     of socket is end
     */
   console.log("Connection is enstablished");
+
+  socket.on("Username", (userName) => {
+    socket.username = userName;
+  });
   /* 
     From Front End when user click send button new-massage event is triggered so here we 
     receive the massage which user want to send so that we can broadcast the massage to the 

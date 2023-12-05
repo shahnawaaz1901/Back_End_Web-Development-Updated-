@@ -1,3 +1,7 @@
+const userName = prompt("Please Enter Your Name ..?");
+
+socket.emit("Username", userName);
+
 const chatBox = document.getElementById("chat-box");
 const msgBox = document.getElementById("massage-box");
 const sendbtn = document.getElementById("send-btn");
@@ -28,7 +32,7 @@ sendbtn.addEventListener("click", () => {
     */
 });
 socket.on("broadcast-massage", (msg) => {
-    console.log("Inside Event Emmitor")
+  console.log("Inside Event Emmitor");
   const newElement = document.createElement("div");
   newElement.innerText = msg;
   chatBox.appendChild(newElement);
