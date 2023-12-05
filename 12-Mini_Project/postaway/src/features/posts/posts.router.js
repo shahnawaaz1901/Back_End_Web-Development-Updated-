@@ -13,6 +13,6 @@ postsRouter.post(
 postsRouter.get("/get", postsController.getAllPosts);
 postsRouter.put("/update/:postId", postsController.updatePost);
 postsRouter.delete("/delete/:postId", postsController.deletePost);
-postsRouter.get("/get/:postId", postsController.getOnePost);
+postsRouter.get("/getOne/:postId", postsController.getOnePost);
 
 export default postsRouter;

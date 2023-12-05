@@ -108,35 +108,35 @@
       "post": {
         "tags": ["Posts"],
         "summary": "Create Posts",
-        "consumes" : "multipart/form-data",
+        "consumes": "multipart/form-data",
         "description": "User Can Create new Post",
         "security": [
           {
             "JWT": {}
           }
         ],
-        "parameters" : [
+        "parameters": [
           {
-            "in" : "body",
-            "name" : "body",
-            "description" : "Post Details",
-            "schema" : {
-              "type" : "object",
-              "properties" : {
-                "postDesc" : {
-                  "type" : "string"
+            "in": "body",
+            "name": "body",
+            "description": "Post Details",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "postDesc": {
+                  "type": "string"
                 },
-                "postLocation" : {
-                  "type" : "string"
+                "postLocation": {
+                  "type": "string"
                 }
               }
             }
           },
           {
-            "in" : "formData",
-            "name" : "postURL",
-            "type" : "file",
-            "description" : "Image for Post"
+            "in": "formData",
+            "name": "postURL",
+            "type": "file",
+            "description": "Image for Post"
           }
         ],
         "responses": {
@@ -145,6 +145,42 @@
           },
           "401": {
             "description": "UnAuthorize Access"
+          }
+        }
+      }
+    },
+    "/api/comments/create": {
+      "post": {
+        "tags": ["Comments"],
+        "summary": "Add Comments",
+        "description": "Create Comment for a Post",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Post Id and Comment to Create new Comment",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "comment": {
+                  "type": "string"
+                },
+                "postId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Comment Added Successfully"
+          },
+          "401": {
+            "description": "UnAuthorize Access"
+          },
+          "404": {
+            "description": "Post not found"
           }
         }
       }
