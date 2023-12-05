@@ -1,3 +1,4 @@
+import ApplicationError from "../error/application.error.js";
 import PostsModel from "../posts/posts.model.js";
 import CommentsModel from "./comments.model.js";
 export default class CommentsController {
@@ -10,7 +11,8 @@ export default class CommentsController {
     }
     const result = CommentsModel.addComment(userId, postId, comment);
     if (!result.success) {
-      return res.status(404).send(result.msg);
+      throw new ApplicationError(result.msg, 404);
+      // return res.status(404).send(result.msg);
     } else {
       res.status(200).send(result.msg);
     }
@@ -20,7 +22,7 @@ export default class CommentsController {
   get(req, res) {
     const { postId } = req.params;
     if (!postId) {
-      return res.status(404).send("Please enter valid postId");
+      throw new ApplicationError("Please enter valid postId",404)
     }
     const commentForPost = CommentsModel.getComments(postId);
     res.status(200).send(commentForPost);

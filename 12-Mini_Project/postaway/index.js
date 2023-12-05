@@ -29,7 +29,6 @@ import apiDocs from "./swagger.json" assert { type: "json" };
   import a package or module we import a json file so in type we specify the json
 */
 
-
 //* Start the Server */
 const server = express();
 
@@ -64,6 +63,15 @@ server.use("/api/users", usersRouter);
 server.use("/api/posts", jwtAuth, postsRouter);
 server.use("/api/likes", jwtAuth, likesRouter);
 server.use("/api/comments", jwtAuth, commentsRouter);
+
+//* Error Handler at Application Level
+server.use((err, req, res, next) => {
+  if(err instanceof ApplicationError){
+    return res.status(err.statusCode).send(err.message);
+  }
+
+  res.status(500).send("Internal Server Error");
+});
 
 //* Default Route
 server.use((req, res) => {
