@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat Application</title>
+  </head>
+  <body>
+    <!--     
+        We Not created this socket.io.js we just create the socket server
+        and this socket.io is library and socket.io.js script file is written
+        in socket.io so we import socket.io library from the server and after
+        that from socket.io loads the socket.io.js file to send the request
+        to the socket server to enstablish the connection. This socket.io library
+        not created by us but the socket.io library provided by our server now
+        question is where this library coming from this library coming from the
+        socket server which we create on our node js application
+     -->
+     <script src="http://localhost:3200/socket.io/socket.io.js"></script>
+
+     <script>
+       // socket code in js.
+       const socket = io.connect("http://localhost:3200")
+     </script>
+  </body>
+</html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat App</title>
+  </head>
+  <body>
+    <script src="http://localhost:3200/socket.io/socket.io.js"></script>
+
+    <script>
+      // socket code in js.
+      const socket = io.connect("http://localhost:3200");
+    </script>
+  </body>
+</html> -->
