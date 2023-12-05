@@ -37,6 +37,30 @@ io.on("connect", (socket) => {
     */
   console.log("Connection is enstablished");
   /* 
+    From Front End when user click send button new-massage event is triggered so here we 
+    receive the massage which user want to send so that we can broadcast the massage to the 
+    every One
+    */
+  socket.on("new-massage", (msg) => {
+    console.log("User Tried to Send Some Massage");
+    /* 
+        Because user sent the massage so that now our work is to broadcast this massage, so 
+        that everyone able to see this massage but how can we broadcast this massage we can
+        broadcast like this
+    */
+    socket.broadcast.emit("broadcast-massage", msg);
+    /* 
+        When ever user send the massage user not say that broadcast this massage to other clients 
+        sever do this automatically whenever user tried to send some massage to the other people 
+    */
+    /* 
+        socket.broadcast.emit emit the event named "broadcast-massage" now our work to again check 
+        for event in front end js side and if the event is occure then render the massage to the front 
+        end 
+    */
+  });
+
+  /* 
     Use socket instance to pass a callback when socket connection is ended (event 
     calls "disconnect"). callback is trigerred when "disconnect" event is emit or
     trigerred
