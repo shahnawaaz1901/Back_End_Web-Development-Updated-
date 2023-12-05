@@ -107,7 +107,7 @@
     "/api/posts/create/": {
       "post": {
         "tags": ["Posts"],
-        "summary": "Create Posts",
+        "summary": "Create Post",
         "consumes": "multipart/form-data",
         "description": "User Can Create new Post",
         "security": [
@@ -149,11 +149,119 @@
         }
       }
     },
+    "/api/posts/getOne/{postId}": {
+      "get": {
+        "tags": ["Posts"],
+        "summary": "Get One Post",
+        "description": "Get A Specific Post",
+        "security": [{ "JWT": {} }],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "description": "PostId Required to Fetch Post",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "UnAuthorize Access"
+          },
+          "404": {
+            "description": "Post not found"
+          }
+        }
+      }
+    },
+    "/api/posts/update/{postId}": {
+      "put": {
+        "tags": ["Posts"],
+        "summary": "Update Post",
+        "description": "Update One Post by PostId",
+        "security": [{ "JWT": {} }],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "description": "PostId Required for Updating a Post",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update Post Description and Post Location",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "postDesc": {
+                  "type": "string"
+                },
+                "postLocation": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "UnAuthorize Access"
+          },
+          "404": {
+            "description": "Post not found"
+          }
+        }
+      }
+    },
+    "/api/posts/delete/{postId}": {
+      "delete": {
+        "tags": ["Posts"],
+        "summary": "Delete Post",
+        "description": "Delete a Post by PostId",
+        "security": [
+          {
+            "JWT": {}
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "description": "Post Id is Required to Delete the Post",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "UnAuthorize Access"
+          },
+          "404": {
+            "description": "Post not found"
+          }
+        }
+      }
+    },
     "/api/comments/create": {
       "post": {
         "tags": ["Comments"],
         "summary": "Add Comments",
         "description": "Create Comment for a Post",
+        "security": [{ "JWT": {} }],
         "parameters": [
           {
             "in": "body",
@@ -175,6 +283,35 @@
         "responses": {
           "201": {
             "description": "Comment Added Successfully"
+          },
+          "401": {
+            "description": "UnAuthorize Access"
+          },
+          "404": {
+            "description": "Post not found"
+          }
+        }
+      }
+    },
+    "/api/comments/getOne/{postId}": {
+      "get": {
+        "tags": ["Comments"],
+        "summary": "Get Comments",
+        "description": "Get All Comments of A Specific Post",
+        "security": [{ "JWT": {} }],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "description": "PostId Required to Fetch All Comments",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           },
           "401": {
             "description": "UnAuthorize Access"
