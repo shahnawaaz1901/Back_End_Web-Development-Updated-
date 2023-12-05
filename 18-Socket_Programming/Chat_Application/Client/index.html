@@ -6,6 +6,13 @@
     <title>Chat Application</title>
   </head>
   <body>
+    <div>
+      <div id="chat-box"></div>
+      <br />
+      <input type="text" name="massage" id="massage-box" required />
+      <button id="send-btn">Send Massage</button>
+    </div>
+
     <!--     
         We Not created this socket.io.js we just create the socket server
         and this socket.io is library and socket.io.js script file is written
@@ -16,12 +23,13 @@
         question is where this library coming from this library coming from the
         socket server which we create on our node js application
      -->
-     <script src="http://localhost:3200/socket.io/socket.io.js"></script>
+    <script src="http://localhost:3200/socket.io/socket.io.js"></script>
 
-     <script>
-       // socket code in js.
-       const socket = io.connect("http://localhost:3200")
-     </script>
+    <script>
+      // Send Request to the Server for connection
+      const socket = io.connect("http://localhost:3200");
+    </script>
+    <script src="./index.js"></script>
   </body>
 </html>
 <!-- <!DOCTYPE html>
