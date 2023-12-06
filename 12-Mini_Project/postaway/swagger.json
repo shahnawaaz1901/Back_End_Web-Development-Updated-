@@ -409,6 +409,105 @@
           }
         }
       }
+    },
+    "/api/likes/{postId}": {
+      "get": {
+        "tags": ["Likes"],
+        "summary": "Get Likes",
+        "description": "Get All Likes for a Specific Post",
+        "security": [
+          {
+            "JWT": {}
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "description": "Post Id is required for fetching Post",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "UnAuthorize Access"
+          },
+          "404": {
+            "description": "Post not found"
+          }
+        }
+      }
+    },
+    "/api/likes/addLike/{postId}": {
+      "post": {
+        "tags": ["Likes"],
+        "summary": "Add Like",
+        "description": "Add Like for a Specific Post",
+        "security": [
+          {
+            "JWT": {}
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "description": "postId required to fetching post",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Like Added Successfully"
+          },
+          "401": {
+            "description": "UnAuthorize Access"
+          },
+          "404": {
+            "description": "Post not found"
+          }
+        }
+      }
+    },
+    "/api/likes/removeLike/{postId}": {
+      "put": {
+        "tags": ["Likes"],
+        "summary": "Remove Like",
+        "description": "Remove Like from a Post",
+        "security": [
+          {
+            "JWT": {}
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "description": "postId required to fetching post",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "UnAuthorize Access"
+          },
+          "404": {
+            "description": "Post not found"
+          }
+        }
+      }
     }
   }
 }
