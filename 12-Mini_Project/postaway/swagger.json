@@ -293,7 +293,7 @@
         }
       }
     },
-    "/api/comments/getOne/{postId}": {
+    "/api/comments/get/{postId}": {
       "get": {
         "tags": ["Comments"],
         "summary": "Get Comments",
@@ -318,6 +318,94 @@
           },
           "404": {
             "description": "Post not found"
+          }
+        }
+      }
+    },
+    "/api/comments/update/{postId}": {
+      "put": {
+        "tags": ["Comments"],
+        "summary": "Update Comment",
+        "description": "Update a Comment By commentId and postId",
+        "security": [
+          {
+            "JWT": {}
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "summary": "postId of Post",
+            "description": "postId required to fetching post",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "summary": "Updated comment data",
+            "description": "Updated Comment along with commentId",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "commentId": {
+                  "type": "string"
+                },
+                "comment": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "UnAuthorize Access"
+          },
+          "404": {
+            "description": "Post not found/Comment not found"
+          }
+        }
+      }
+    },
+    "/api/comments/delete/": {
+      "delete": {
+        "tags": ["Comments"],
+        "summary": "Delete Comment",
+        "description": "Delete Comment by commentId",
+        "security": [{ "JWT": {} }],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "commentId",
+            "description": "commentId required to fetch and delete comment of a specific post",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "postId",
+            "description": "Post Id is required for fetching Post",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "UnAuthorize Access"
+          },
+          "404": {
+            "description": "Post not found/Comment not found"
           }
         }
       }
