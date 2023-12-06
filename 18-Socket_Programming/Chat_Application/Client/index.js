@@ -65,7 +65,8 @@ socket.on("broadcast-massage", (userMsg) => {
 socket.on("load_massage", (massage) => {
   massage.forEach((msg) => {
     const newElement = document.createElement("div");
-    newElement.innerText = msg.username + " : " + msg.massage;
+    newElement.innerText =
+      new Date(msg.timeStamp).toDateString() + " "+ new Date(msg.timeStamp).toTimeString() +" : " + msg.username + " : " + msg.massage;
     chatBox.appendChild(newElement);
   });
 });
