@@ -5,7 +5,7 @@ const createlogger = winston.createLogger({
   format: winston.format.json(),
   defaultMeta: "request-logger",
   transports : [
-    new winston.transports.File({filename : "log.txt", level : "error"}),
+    new winston.transports.File({filename : "error.log", level : "error"}),
     new winston.transports.File({filename : "combined.log"})
   ]
 });
