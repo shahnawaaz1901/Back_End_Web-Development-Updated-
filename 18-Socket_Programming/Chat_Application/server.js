@@ -38,14 +38,30 @@ io.on("connect", (socket) => {
     */
   console.log("Connection is enstablished");
 
-  socket.on("join", (userName) => {
+  socket.on("join", async (userName) => {
     /* Storing username in socket object */
     socket.username = userName;
+    /* 
+      When We take name from the user then its time to render all previous 
+      chats from the database and render it on the front end chat box
+    */
+    /* 
+        We search in the database after searching we sort the data based on 
+        timestamp and after sorting instead of sending directly first we set 
+        limit to 20 documents and send it to client, value of timestamp 1 means 
+        sorting in descending order
+      */
+    try {
+      const msg = await chatModel.find().sort({ timeStamp: 1 }).limit(20);
+      socket.emit("load_massage", msg);
+    } catch (error) {
+      console.log(error);
+    }
   });
   /* 
-    From Front End when user click send button new-massage event is triggered so here we 
-    receive the massage which user want to send so that we can broadcast the massage to the 
-    every One
+    From Front End when user click send button new-massage event is triggered 
+    so here we receive the massage which user want to send so that we can 
+    broadcast the massage to the every One
     */
   socket.on("new-massage", (msg) => {
     console.log("User Tried to Send Some Massage");
@@ -55,12 +71,9 @@ io.on("connect", (socket) => {
         broadcast like this
     */
     const userMassage = new chatModel({
-      username : socket.username,
-      massage : msg,
-      timeStamp : {
-        date : new Date().toDateString(),
-        time : new Date().toTimeString(),
-      }
+      username: socket.username,
+      massage: msg,
+      timeStamp: new Date().toDateString(),
     });
     userMassage.save();
     socket.broadcast.emit("broadcast-massage", userMassage);
@@ -92,5 +105,5 @@ server.listen(3200, (err) => {
     return;
   }
   console.log("Server is Up and Run on Port 3200");
-  connect()
+  connect();
 });

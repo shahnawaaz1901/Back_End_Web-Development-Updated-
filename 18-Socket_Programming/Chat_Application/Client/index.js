@@ -1,6 +1,9 @@
 const userName = prompt("Please Enter Your Name ..?");
 
-//* Emit "join" event which contains userName which is the name of user which user enter on prompt
+/* 
+  Emit "join" event which contains userName which is the name of user 
+  which user enter on prompt 
+*/
 socket.emit("join", userName);
 
 const chatBox = document.getElementById("chat-box");
@@ -10,7 +13,10 @@ const sendbtn = document.getElementById("send-btn");
 //* Create instance using Event constructor to emit the click event on enter
 const event = new Event("click");
 
-//* Add event Listener to Chat box so is user press enter then click event on sendbtn emit automatically
+/* 
+  Add event Listener to Chat box so is user press enter then click event on 
+  sendbtn emit automatically 
+*/
 msgBox.addEventListener("keyup", (e) => {
   if (e.key == "Enter") {
     sendbtn.dispatchEvent(event);
@@ -45,7 +51,7 @@ sendbtn.addEventListener("click", () => {
     Check if broadCast event is occure on backend or not if occures the 
     displayed the massage in the chat box and make that massage available 
     to all the client which connected to our server
-    */
+  */
 });
 
 //* When broadcast-massage event emit from back end now we need to broadcast massage to all connections
@@ -54,4 +60,12 @@ socket.on("broadcast-massage", (userMsg) => {
   const newElement = document.createElement("div");
   newElement.innerText = userMsg.username + " : " + userMsg.massage;
   chatBox.appendChild(newElement);
+});
+
+socket.on("load_massage", (massage) => {
+  massage.forEach((msg) => {
+    const newElement = document.createElement("div");
+    newElement.innerText = msg.username + " : " + msg.massage;
+    chatBox.appendChild(newElement);
+  });
 });
