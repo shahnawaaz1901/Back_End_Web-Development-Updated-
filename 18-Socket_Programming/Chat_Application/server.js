@@ -2,7 +2,8 @@ import express from "express";
 import http from "http";
 import { Server } from "socket.io";
 import cors from "cors";
-
+import { connect } from "./config.js";
+import { chatModel } from "./chat.Schema.js";
 //* 1. Initialize Server
 const app = express();
 
@@ -53,11 +54,16 @@ io.on("connect", (socket) => {
         that everyone able to see this massage but how can we broadcast this massage we can
         broadcast like this
     */
-    const data = {
-      user: socket.username,
-      massage: msg,
-    };
-    socket.broadcast.emit("broadcast-massage", data);
+    const userMassage = new chatModel({
+      username : socket.username,
+      massage : msg,
+      timeStamp : {
+        date : new Date().toDateString(),
+        time : new Date().toTimeString(),
+      }
+    });
+    userMassage.save();
+    socket.broadcast.emit("broadcast-massage", userMassage);
     /* 
         When ever user send the massage user not say that broadcast this massage to other clients 
         sever do this automatically whenever user tried to send some massage to the other people 
@@ -85,6 +91,6 @@ server.listen(3200, (err) => {
     console.log(err);
     return;
   }
-
   console.log("Server is Up and Run on Port 3200");
+  connect()
 });

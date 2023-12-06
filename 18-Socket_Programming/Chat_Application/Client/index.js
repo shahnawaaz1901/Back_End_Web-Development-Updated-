@@ -52,6 +52,6 @@ sendbtn.addEventListener("click", () => {
 socket.on("broadcast-massage", (userMsg) => {
   console.log("Inside Event Emmitor");
   const newElement = document.createElement("div");
-  newElement.innerText = userMsg.user + " : " + userMsg.massage;
+  newElement.innerText = userMsg.username + " : " + userMsg.massage;
   chatBox.appendChild(newElement);
 });
