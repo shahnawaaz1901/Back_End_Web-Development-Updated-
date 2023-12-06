@@ -15,8 +15,9 @@ import commentsRouter from "./src/features/comments/comments.router.js";
 import auth from "./src/middlewares/basic-auth.middleware.js";
 import jwtAuth from "./src/middlewares/jwt-auth.middleware.js";
 
-/* Error Handling */
+/* Error Handling & Logging*/
 import ApplicationError from "./src/features/error/application.error.js";
+import { logger } from "./src/middlewares/winston-logger.middleware.js";
 
 /* CORS Policy */
 import cors from "cors";
@@ -50,6 +51,9 @@ server.use(
 server.use(express.urlencoded({ extended: false }));
 server.use(express.json());
 
+/* Logging Request */
+server.use(logger);
+
 //* Setting Up Routes */
 /* 
   "/apiDocs" is the path swagger.serve server a front end ui to the user and 
@@ -66,7 +70,8 @@ server.use("/api/comments", jwtAuth, commentsRouter);
 
 //* Error Handler at Application Level
 server.use((err, req, res, next) => {
-  if(err instanceof ApplicationError){
+  console.log(err);
+  if (err instanceof ApplicationError) {
     return res.status(err.statusCode).send(err.message);
   }
 
