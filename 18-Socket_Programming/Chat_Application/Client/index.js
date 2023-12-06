@@ -1,17 +1,33 @@
 const userName = prompt("Please Enter Your Name ..?");
 
-socket.emit("Username", userName);
+//* Emit "join" event which contains userName which is the name of user which user enter on prompt
+socket.emit("join", userName);
 
 const chatBox = document.getElementById("chat-box");
 const msgBox = document.getElementById("massage-box");
 const sendbtn = document.getElementById("send-btn");
 
+//* Create instance using Event constructor to emit the click event on enter
+const event = new Event("click");
+
+//* Add event Listener to Chat box so is user press enter then click event on sendbtn emit automatically
+msgBox.addEventListener("keyup", (e) => {
+  if (e.key == "Enter") {
+    sendbtn.dispatchEvent(event);
+  }
+});
+
 sendbtn.addEventListener("click", () => {
   const msg = msgBox.value;
   if (msg) {
     socket.emit("new-massage", msg);
+    /* 
+      If we just emit the new-massage event and not write below four lines
+      then socket will automatically broadcast to others but not broadcast
+      and visible to the user which emit the event  
+    */
     const newElement = document.createElement("div");
-    newElement.innerText = msg;
+    newElement.innerText = userName + " : " + msg;
     chatBox.appendChild(newElement);
     msgBox.value = "";
     /* 
@@ -31,9 +47,11 @@ sendbtn.addEventListener("click", () => {
     to all the client which connected to our server
     */
 });
-socket.on("broadcast-massage", (msg) => {
+
+//* When broadcast-massage event emit from back end now we need to broadcast massage to all connections
+socket.on("broadcast-massage", (userMsg) => {
   console.log("Inside Event Emmitor");
   const newElement = document.createElement("div");
-  newElement.innerText = msg;
+  newElement.innerText = userMsg.user + " : " + userMsg.massage;
   chatBox.appendChild(newElement);
 });

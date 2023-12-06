@@ -37,7 +37,8 @@ io.on("connect", (socket) => {
     */
   console.log("Connection is enstablished");
 
-  socket.on("Username", (userName) => {
+  socket.on("join", (userName) => {
+    /* Storing username in socket object */
     socket.username = userName;
   });
   /* 
@@ -52,7 +53,11 @@ io.on("connect", (socket) => {
         that everyone able to see this massage but how can we broadcast this massage we can
         broadcast like this
     */
-    socket.broadcast.emit("broadcast-massage", msg);
+    const data = {
+      user: socket.username,
+      massage: msg,
+    };
+    socket.broadcast.emit("broadcast-massage", data);
     /* 
         When ever user send the massage user not say that broadcast this massage to other clients 
         sever do this automatically whenever user tried to send some massage to the other people 
