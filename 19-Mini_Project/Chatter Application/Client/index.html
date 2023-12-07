@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css" type="text/css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" type="text/css" />
     <title>Chat Application</title>
-</head>
-<body>
-    
+  </head>
+  <body>
+    <div class="container">
+      <div class="chat-box">
+        <div class="chats"></div>
+        <div class="input-msg">
+          <form>
+            <input type="text" required name="input-msg" id="input-form" />
+            <button type="button" id="input-btn">Send</button>
+          </form>
+        </div>
+      </div>
+      <div class="online-users"></div>
+    </div>
     <script src="http://localhost:3200/socket.io/socket.io.js"></script>
     <script src="./script.js"></script>
-</body>
+  </body>
 </html>
