@@ -1,10 +1,14 @@
-import { ObjectId } from "mongodb";
+import mongoose from "mongoose";
 import { getDB } from "../../config/mongodb.js";
 import ApplicationError from "../errorHandler/application.error.js";
+import { cartSchema } from "./cart.schema.js";
+import CounterSchema from "./counter.schema.js";
+
+const CartModel = mongoose.model("Cart",cartSchema);
+const CounterModel = mongoose.model("Counter",CounterSchema);
+
 export default class CartRepository {
-  constructor() {
-    this.collection = "cartItems";
-  }
+  
   async add(productObject) {
     try {
       const db = getDB();
@@ -39,11 +43,10 @@ export default class CartRepository {
 
   async get(userId) {
     try {
-      const db = getDB();
-      const collection = db.collection(this.collection);
-      return await collection.find({ userId }).toArray();
+      return await CartModel.find({userId : new mongoose.Types.ObjectId(userId)});
     } catch (error) {
-      throw new ApplicationError("Something Went Wrong", 500);
+      console.log(error);
+      throw new ApplicationError("Something Went Wrong with Database", 500);
     }
   }
 
@@ -53,7 +56,7 @@ export default class CartRepository {
       const collection = db.collection(this.collection);
       return await collection.deleteOne(requireObject);
     } catch (error) {
-      throw new ApplicationError("Something went Wrong", 500);
+      throw new ApplicationError("Something went Wrong with Database", 500);
     }
   }
 
