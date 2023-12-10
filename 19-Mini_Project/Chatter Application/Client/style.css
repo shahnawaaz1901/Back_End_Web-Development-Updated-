@@ -54,5 +54,24 @@ body {
     border: none;
     color: white;
     background-color: green;
-    
+}
+
+.userDetails{
+    font-size: 20px;
+    background-color: #eaeaea;
+    color: green;
+    display: flex;
+    padding: 10px;
+}
+
+#online-logo{
+    height: 10px;
+    width: 10px;
+    margin-top: 7px;
+    background-color: green;
+    border-radius: 50%;
+}
+
+#user-name{
+    margin-left: 10px;
 }
