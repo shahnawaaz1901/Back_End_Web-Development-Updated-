@@ -16,6 +16,10 @@ const io = new Server(server, {
 
 io.on("connection",(socket)=>{
     console.log("Connection is Enstablished");
+
+    socket.on("disconnect",()=>{
+        console.log("Connection is Ended !");
+    })
 })
 
 export default server;
