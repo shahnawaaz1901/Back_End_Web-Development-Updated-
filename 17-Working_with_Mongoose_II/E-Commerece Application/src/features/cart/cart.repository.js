@@ -4,17 +4,20 @@ import ApplicationError from "../errorHandler/application.error.js";
 import { cartSchema } from "./cart.schema.js";
 import CounterSchema from "./counter.schema.js";
 
-const CartModel = mongoose.model("Cart",cartSchema);
-const CounterModel = mongoose.model("Counter",CounterSchema);
+const CartModel = mongoose.model("Cart", cartSchema);
+const CounterModel = mongoose.model("Counter", CounterSchema);
 
 export default class CartRepository {
-  
-  async add(productObject) {
+  async add(cartObject) {
     try {
-      const db = getDB();
-      const collection = db.collection(this.collection);
+      const newCartItem = new CartModel({
+        userId: new mongoose.Types.ObjectId(cartObject.userId),
+        productId: new mongoose.Types.ObjectId(cartObject.productId),
+        quantity: cartObject.quantity,
+      });
+      await newCartItem.save()
       //* For Get the Id
-      const id = await this.getNextCounter(db);
+      // const id = await this.getNextCounter(db);
       collection.updateOne(
         {
           //* Filter
@@ -43,7 +46,9 @@ export default class CartRepository {
 
   async get(userId) {
     try {
-      return await CartModel.find({userId : new mongoose.Types.ObjectId(userId)});
+      return await CartModel.find({
+        userId: new mongoose.Types.ObjectId(userId),
+      });
     } catch (error) {
       console.log(error);
       throw new ApplicationError("Something Went Wrong with Database", 500);
@@ -61,27 +66,26 @@ export default class CartRepository {
   }
 
   //* Create getNextCounter Function To get the id for the for the Cart and
-  async getNextCounter(db) {
-    const resultDoc = await db.collection("counters").findOneAndUpdate(
-      {
-        _id: "cartItemId", //* Filter
-      },
-      {
-        $inc: {
-          //* Increment the Value for nextId
-          value: 1,
-        },
-      },
-      //* For Return the Existing Document We Need pass an Object Defining returnDocument Value "after"
-      {
-        returnDocument: "after",
-      }
-
-    );
-    /* 
-      We Want the Document before the update so that we get the document after 
-      that we return the value for give the Id 
-    */
-    return resultDoc.value;
-  }
+  // async getNextCounter(db) {
+  //   const resultDoc = await db.collection("counters").findOneAndUpdate(
+  //     {
+  //       _id: "cartItemId", //* Filter
+  //     },
+  //     {
+  //       $inc: {
+  //         //* Increment the Value for nextId
+  //         value: 1,
+  //       },
+  //     },
+  //     //* For Return the Existing Document We Need pass an Object Defining returnDocument Value "after"
+  //     {
+  //       returnDocument: "after",
+  //     }
+  //   );
+  //   /* 
+  //     We Want the Document before the update so that we get the document after 
+  //     that we return the value for give the Id 
+  //   */
+  //   return resultDoc.value;
+  // }
 }

@@ -7,12 +7,10 @@ export default class CartController {
     this.cartRepository = new CartRepository();
   }
   async addToCart(req, res) {
-
     try {
       const { productId, quantity } = req.body;
       const userId = req.userId;
-      const productObject = new CartModel(productId, userId, quantity);
-      await this.cartRepository.add(productObject);
+      await this.cartRepository.add({ userId, productId, quantity });
       res.status(201).send("Item Added to Cart !!");
     } catch (error) {
       throw new ApplicationError("Something Went Wrong", 500);
