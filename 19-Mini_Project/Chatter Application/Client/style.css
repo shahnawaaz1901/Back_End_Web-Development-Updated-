@@ -16,15 +16,20 @@ body {
   padding: 0px 10px;
   border: 1px solid lightgrey;
   border-radius: 4px;
-  height: 500px;
+  max-height: 700px;
   width: 70%;
   /* border: 1px solid black; */
   box-shadow: 0px 0px 8px 2px lightgrey;
 }
 
+.userDetails{
+  width: 99%;
+  margin: auto;
+}
+
 .chats {
   width: 99%;
-  height: 88%;
+  min-height: 60px;
   margin: auto;
   background-image: url("./28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
   background-position: center;
@@ -32,7 +37,7 @@ body {
 
 .input-msg {
   width: 99%;
-  height: 12%;
+  height: 60px;
   margin: auto;
   text-align: center;
   padding: 0px 10px;
@@ -40,13 +45,17 @@ body {
   box-sizing: border-box;
 }
 
+form{
+  text-align: center;
+}
+
 #input-form {
   margin-top: 8px;
-  width: 85%;
+  width: 80%;
   border: none;
   font-size: 18px;
   background-color: rgb(221, 221, 221);
-  padding: 10px 7px;
+  padding: 10px 20px;
   border-radius: 4px;
 }
 
