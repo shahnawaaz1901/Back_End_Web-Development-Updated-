@@ -24,7 +24,25 @@ body {
 
 .userDetails{
   width: 99%;
+  padding: 10px;
+  font-size: 20px;
   margin: auto;
+  box-sizing: border-box;
+  background-color: #eaeaea;
+  color: green;
+  display: flex;
+}
+
+#online-logo {
+  height: 10px;
+  width: 10px;
+  margin-top: 7px;
+  background-color: green;
+  border-radius: 50%;
+}
+
+#user-name {
+  margin-left: 10px;
 }
 
 .chats {
@@ -70,26 +88,7 @@ form{
 }
 
 #input-btn:hover {
-  background-color: #009732;
-}
-.userDetails {
-  font-size: 20px;
-  background-color: #eaeaea;
-  color: green;
-  display: flex;
-  padding: 10px;
-}
-
-#online-logo {
-  height: 10px;
-  width: 10px;
-  margin-top: 7px;
-  background-color: green;
-  border-radius: 50%;
-}
-
-#user-name {
-  margin-left: 10px;
+  background-color: #009732;  
 }
 
 .online-users {
