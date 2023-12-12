@@ -66,6 +66,62 @@ module.exports = function (grunt) {
         },
       },
     },
+    /* 
+        we ue the cssmin plugin to reduce the size of css file, but in this case 
+        we use more options now we specify the multiple objects iside an array as
+        value of files key. We can give any name instead of cssmin because at the
+        end we register task name along with plugin name
+    */
+    cssmin: {
+      target: {
+        /* 
+                Inside file we can direcly write directory of output as string
+                as key and value of that is source directory array but instead
+                of that we explore more options for more clarification 
+            */
+        files: [
+          {
+            /* 
+                In our uglify code we just write one line for source and destination
+                path but here we write path seprately thats why first we specify expand
+                so that it can manage the path and combined all path field which we
+                provided
+            */
+            expand: true,
+            /* 
+                cwd stands for while executing the task what should be the current 
+                working directory because our folder is inside the src folder named
+                css so we specified the folder details in cwd 
+            */
+            cwd: "src/css",
+            /* 
+                src for source which value is an array because it's possible that we 
+                we want to minimize multiple css files. Like uglify if we want to mini
+                fy all css inside the cwd directory we need to write "*" before the 
+                extension, means all the files inside cwd directory which extension is
+                .css take all file as input. Second argument of src array is used 
+                to exclude the file because we write exclamitory sign means exclude
+                "*" means all files which ends with min.css because if file already
+                minifyed then we dont need to minifyed that file
+            */
+            src: ["*.css", "!*min.css"],
+            /* 
+                dst stands for destination means where we want to store the output file
+                which is minifyed after the doing all the task, because we create a 
+                folder name "dest" and inside the folder another folder named css put
+                the minifyed files into that folder.
+            */
+            dest: "dest/css",
+            /* 
+                ext stands for the extension, means what will be the extension of output
+                file because in minifying we use the .min naming convension so we use
+                the .min.css so that our file is stores by naming the .min.css extension
+            */
+            ext: ".min.css",
+          },
+        ],
+      },
+    },
   });
 
   //* Load Libraries
@@ -80,7 +136,7 @@ module.exports = function (grunt) {
     because if not installed then our function not work properly
     */
   grunt.loadNpmTasks("grunt-contrib-uglify");
-
+  grunt.loadNpmTasks("grunt-contrib-cssmin");
   //* Ragister the task
   /* 
     because sometime we need to perform multiple tasks so we need to specify the 
@@ -90,11 +146,25 @@ module.exports = function (grunt) {
     Remember that array contains acutal keyt value of taks which we specify 
     grunt.initConfig function  
     */
-  grunt.registerTask("default", ["uglify"]);
+  grunt.registerTask("default", ["uglify", "cssmin"]);
 };
 
 /*
     All is SetUp now but question is how can we run a task runner we can
     run a task runner by grunt-cli ( Command line input ) which we installed
     globally.
+*/
+
+/* 
+    Now questions is why we install these plugins by using the --save -dev
+    because we want to install this plugins in dev dependencies form because
+    we want that plugins is not use in the production environment because in
+    the production environment our code will be automatically minifyed  
+*/
+
+/* 
+    When We Run the Task Runner on Command Line using the grunt command we can
+    see that our js file before minifying is 60Bytes and our css was 246 bytes
+    but after minifying and uglifying size of js and css file will be 53 bytes
+    and 186 bytes respectively
 */
