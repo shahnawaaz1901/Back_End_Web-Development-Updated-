@@ -16,7 +16,7 @@ body {
   padding: 0px 10px;
   border: 1px solid lightgrey;
   border-radius: 4px;
-  max-height: 700px;
+  
   width: 70%;
   /* border: 1px solid black; */
   box-shadow: 0px 0px 8px 2px lightgrey;
@@ -48,9 +48,11 @@ body {
 .chats {
   width: 99%;
   min-height: 60px;
+  max-height: 700px;
   margin: auto;
   background-image: url("./28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
   background-position: center;
+  overflow: hidden;
 }
 
 .input-msg {
@@ -121,4 +123,11 @@ form{
     border-radius: 50%;
     background-color: green;
     margin-right:10px;;
+}
+
+.chat{
+  display: flex;
+  border: 1px solid black;
+  height: 400px;
+  width: 400px;
 }
