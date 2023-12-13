@@ -1,0 +1,17 @@
+{
+  "name": "gulp",
+  "version": "1.0.0",
+  "description": "Learn Gulp Task Runner to Compress and Optimize the Size of Image",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Shahnawaaz Ansari",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
+}

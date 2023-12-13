@@ -14,3 +14,14 @@
     images
 
 */  
+
+/*
+    Difference and Similarities Between Gulp and Grunt :
+
+    Gulp and Grunt both are task runners and both provides many plugins to automate
+    repitative things, But way we configure the task is different in both task runners
+    because Grunt works on JSON Objects to configure tasks where Gulp works on more
+    JavaScript function such as callbacks to do the same kind of things.
+    Both do same work but in different way of Configuration
+
+*/
