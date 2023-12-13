@@ -11,9 +11,9 @@ server.use(express.urlencoded({ extended: false }));
 server.use(express.json());
 
 server.use("/api/users", userRouter);
-server.use("/api/friends");
-server.use("/api/posts");
-server.use("/api/likes");
-server.use("/api/comments");
+// server.use("/api/friends");
+// server.use("/api/posts");
+// server.use("/api/likes");
+// server.use("/api/comments");
 
 export default server;

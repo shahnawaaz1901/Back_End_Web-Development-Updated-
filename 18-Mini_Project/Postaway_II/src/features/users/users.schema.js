@@ -1,30 +1,35 @@
 import mongoose, { mongo } from "mongoose";
 
 const userSchema = new mongoose.Schema({
-  name: { type: String, required: true },
+  name: {
+    type: String,
+    required: true
+  },
   phone: {
     type: String,
-    requried: true,
-    unique: true,
+    required: true,
+    unique: true
   },
   email: {
-    match: [/.\+@\+./],
+    // match: [/.+\.@+\.+\./, "Please Enter Valid Email format"],
     required: true,
-    unique: true,
+    unique: true
   },
   age: {
     type: Number,
-    required: true,
+    min: [0, "Age Should be Greater then 0"],
+    max: [100, "Age Should be less then 100"],
+    // required: true,
   },
   gender: {
     type: String,
     enum: ["Male", "Female", "Other"],
-    requried: true,
+    // required: true,
   },
   password: {
     type: String,
-    required: true,
-  },
+    // required: true,
+  }
 });
 
 const UserModel = mongoose.model("User", userSchema);
