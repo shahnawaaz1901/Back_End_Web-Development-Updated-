@@ -11,7 +11,8 @@ const userSchema = new mongoose.Schema({
     unique: true
   },
   email: {
-    // match: [/.+\.@+\.+\./, "Please Enter Valid Email format"],
+    type : String,
+    match: [/.+\@.+\../, "Please Enter Valid Email format"],
     required: true,
     unique: true
   },
@@ -19,16 +20,16 @@ const userSchema = new mongoose.Schema({
     type: Number,
     min: [0, "Age Should be Greater then 0"],
     max: [100, "Age Should be less then 100"],
-    // required: true,
+    required: true,
   },
   gender: {
     type: String,
     enum: ["Male", "Female", "Other"],
-    // required: true,
+    required: true,
   },
   password: {
     type: String,
-    // required: true,
+    required: true,
   }
 });
 

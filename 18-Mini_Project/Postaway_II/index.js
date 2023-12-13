@@ -1,14 +1,15 @@
-import "./env.js"
+import "./env.js";
 import express from "express";
 import auth from "./src/middlewares/jwt.auth.js";
-
+import cookieParser from "cookie-parser";
 import userRouter from "./src/features/users/users.router.js";
-
 
 const server = express();
 
 server.use(express.urlencoded({ extended: false }));
 server.use(express.json());
+
+server.use(cookieParser());
 
 server.use("/api/users", userRouter);
 // server.use("/api/friends");
