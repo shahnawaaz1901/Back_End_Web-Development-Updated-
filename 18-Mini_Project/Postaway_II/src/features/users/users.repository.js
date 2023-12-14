@@ -6,6 +6,7 @@ export default class UserRepository {
   async newUser(userData) {
     try {
       const { password } = userData;
+      console.log(password);
       const hashPassword = await bcrypt.hash(password, 12);
       console.log(hashPassword);
       userData.password = hashPassword;
@@ -14,10 +15,13 @@ export default class UserRepository {
       return newUser;
     } catch (error) {
       console.log(error);
+      throw new Error(error);
     }
   }
 
-  async existingUser() {}
+  async existingUser(userEmail) {
+    return await UserModel.findOne({ email: userEmail });
+  }
 
   logOutUser() {}
 }

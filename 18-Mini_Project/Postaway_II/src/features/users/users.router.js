@@ -13,7 +13,13 @@ userRouter.post("/signUp", (req, res) => {
 userRouter.post("/signIn", (req, res) => {
   userController.signIn(req, res);
 });
-userRouter.post("/signOut", userController.signOut);
-userRouter.post("/singOutAll", userController.signOutAll);
+
+userRouter.post("/signOut", (req, res) => {
+  userController.signOut(req, res);
+});
+
+userRouter.post("/singOutAll", (req, res) => {
+  userController.signOutAll(req, res);
+});
 
 export default userRouter;

@@ -6,7 +6,7 @@ import userRouter from "./src/features/users/users.router.js";
 
 const server = express();
 
-server.use(express.urlencoded({ extended: false }));
+server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 
 server.use(cookieParser());
