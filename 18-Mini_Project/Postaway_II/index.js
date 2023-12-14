@@ -3,13 +3,16 @@ import express from "express";
 import auth from "./src/middlewares/jwt.auth.js";
 import cookieParser from "cookie-parser";
 import userRouter from "./src/features/users/users.router.js";
+import cors from "cors";
 
 const server = express();
 
-server.use(express.urlencoded({ extended: true }));
-server.use(express.json());
+server.use(cors({ origin: "*", methods: ["GET", "POST"] }));
 
 server.use(cookieParser());
+
+server.use(express.urlencoded({ extended: true }));
+server.use(express.json());
 
 server.use("/api/users", userRouter);
 // server.use("/api/friends");
