@@ -23,5 +23,11 @@ export default class UserRepository {
     return await UserModel.findOne({ email: userEmail });
   }
 
-  logOutUser() {}
+  async userExist(email) {
+    try {
+      return await UserModel.findOne({ email });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

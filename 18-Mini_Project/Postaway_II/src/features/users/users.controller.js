@@ -3,6 +3,7 @@ import UserRepository from "./users.repository.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import sendNotification from "../notification/alert.nodemailer.js";
+import sendOtp from "../notification/sendotp.nodemailer.js";
 
 export default class UserController {
   constructor() {
@@ -10,7 +11,7 @@ export default class UserController {
   }
   async signUp(req, res) {
     try {
-      console.log(req.body)
+      console.log(req.body);
       const newUser = await this.userRepository.newUser(req.body);
       return res.status(201).send(newUser);
     } catch (error) {
@@ -49,5 +50,20 @@ export default class UserController {
 
   signOut(req, res) {}
 
-  signOutAll(req, res) {}
+  async forGotPassword(req, red) {
+    try {
+      const { email } = req.query;
+      if (!email) {
+        res.status(404).send("Enter Valid Email");
+      }
+      const userExist = await this.userRepository.userExist(email);
+      if (userExist) {
+        sendOtp(email);
+        res.status(200).send("Otp sent successfully !");
+      }
+      res.status(404).send("Account Not Exist with this Email !");
+    } catch (error) {
+      res.status(500).send("Something went wrong while sending Otp!");
+    }
+  }
 }
