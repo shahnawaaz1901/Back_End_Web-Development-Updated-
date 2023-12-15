@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 import UserRepository from "./users.repository.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import sendNotification from "../notification/alert.nodemailer.js";
-import sendOtp from "../notification/sendotp.nodemailer.js";
+import sendNotification from "../notification/wrongPassword.js";
+import sendOtp from "../notification/otp.js";
 import OTPGenerator from "../verification/otp.verification.js";
 
 export default class UserController {
