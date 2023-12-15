@@ -14,12 +14,7 @@ userRouter.post("/signIn", (req, res) => {
   userController.signIn(req, res);
 });
 
-userRouter.post("/signOut", (req, res) => {
-  userController.signOut(req, res);
+userRouter.get("/sendOtp/:email", (req, res) => {
+  userController.forGotPassword(req, res);
 });
-
-userRouter.post("/singOutAll", (req, res) => {
-  userController.signOutAll(req, res);
-});
-
 export default userRouter;

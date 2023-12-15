@@ -48,8 +48,6 @@ export default class UserController {
     }
   }
 
-  signOut(req, res) {}
-
   async forGotPassword(req, red) {
     try {
       const { email } = req.query;
