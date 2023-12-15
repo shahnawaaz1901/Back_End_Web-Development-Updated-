@@ -20,12 +20,26 @@ export default class UserRepository {
   }
 
   async existingUser(userEmail) {
+    console.log(userEmail);
     return await UserModel.findOne({ email: userEmail });
   }
 
   async userExist(email) {
     try {
       return await UserModel.findOne({ email });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async changePassword(email, newPassword) {
+    try {
+      const hashPassword = await bcrypt.hash(newPassword, 12);
+      const updatedUser = await UserModel.findOneAndUpdate(
+        { email },
+        { password: hashPassword }
+      );
+      return updatedUser;
     } catch (error) {
       console.log(error);
     }

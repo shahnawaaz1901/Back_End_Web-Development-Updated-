@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import OTPGenerator from "../verification/otp.verification";
+import OTPGenerator from "../verification/otp.verification.js";
 
 const sendOtp = async (email) => {
   const transporter = nodemailer.createTransport({

@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import sendNotification from "../notification/alert.nodemailer.js";
 import sendOtp from "../notification/sendotp.nodemailer.js";
+import OTPGenerator from "../verification/otp.verification.js";
 
 export default class UserController {
   constructor() {
@@ -25,10 +26,9 @@ export default class UserController {
 
   async signIn(req, res) {
     try {
-      console.log(req.body);
-      console.log("Inside signin");
       const { email, password } = req.body;
       const result = await this.userRepository.existingUser(email);
+      console.log(result);
       if (result) {
         const isMatch = await bcrypt.compare(password, result.password);
         if (isMatch) {
@@ -48,20 +48,43 @@ export default class UserController {
     }
   }
 
-  async forGotPassword(req, red) {
+  async forgotPassword(req, res) {
     try {
-      const { email } = req.query;
+      const { email } = req.params;
+      console.log(email);
       if (!email) {
-        res.status(404).send("Enter Valid Email");
+        res.status(404).send("Please Enter Email Address");
       }
       const userExist = await this.userRepository.userExist(email);
       if (userExist) {
-        sendOtp(email);
-        res.status(200).send("Otp sent successfully !");
+        await sendOtp(email);
+        return res.status(200).send("Otp sent successfully !");
       }
       res.status(404).send("Account Not Exist with this Email !");
     } catch (error) {
       res.status(500).send("Something went wrong while sending Otp!");
+    }
+  }
+
+  async changePassword(req, res) {
+    try {
+      const { email } = req.params;
+      const { password, otp } = req.body;
+      if (!password || !otp) {
+        return res.status(500).send("Something went Wrong !");
+      }
+      if (OTPGenerator.validateOTP(otp)) {
+        const updatedData = await this.userRepository.changePassword(
+          email,
+          password
+        );
+        console.log(updatedData);
+        return res.status(200).send("Password Updated Successfully !");
+      }
+      return res.status(206).send("OTP is incorrect !!");
+    } catch (error) {
+      console.log(error);
+      res.status(500).send("Error while Changing OTP");
     }
   }
 }

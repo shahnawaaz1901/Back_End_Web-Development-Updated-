@@ -10,6 +10,6 @@ export default class OTPGenerator {
   }
 
   static validateOTP(recOTP) {
-    return recOTP == otp;
+    return recOTP == this.otp;
   }
 }
