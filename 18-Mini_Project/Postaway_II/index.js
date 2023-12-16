@@ -6,6 +6,7 @@ import userRouter from "./src/features/users/users.router.js";
 import cors from "cors";
 import { loggerMiddleware, logger } from "./src/middlewares/winston.logger.js";
 import ApplicationError from "./src/features/error/error.application.js";
+import postRouter from "./src/features/posts/posts.router.js";
 
 const server = express();
 
@@ -24,7 +25,7 @@ server.use(express.json());
 server.use(loggerMiddleware);
 
 server.use("/api/users", userRouter);
-// server.use("/api/friends");
+server.use("/api/friends", auth, postRouter);
 // server.use("/api/posts");
 // server.use("/api/likes");
 // server.use("/api/comments");
