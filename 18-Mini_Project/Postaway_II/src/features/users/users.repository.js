@@ -6,9 +6,7 @@ export default class UserRepository {
   async newUser(userData) {
     try {
       const { password } = userData;
-      console.log(password);
       const hashPassword = await bcrypt.hash(password, 12);
-      console.log(hashPassword);
       userData.password = hashPassword;
       const newUser = new UserModel(userData);
       await newUser.save();

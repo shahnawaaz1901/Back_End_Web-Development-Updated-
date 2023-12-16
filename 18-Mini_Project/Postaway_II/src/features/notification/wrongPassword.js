@@ -1,34 +1,13 @@
-import nodemailer from "nodemailer";
+import sendMail from "./sendmail.nodemailer.js";
 
-const alert = async (mailObject) => {
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "shaan.ansari1901@gmail.com",
-      pass: "vcscjgdxnfcwvhah",
-    },
-  });
-
-  try {
-    await transporter.sendMail(mailObject);
-    console.log("Mail Sent Successfully !");
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const sendNotification = (email, reason) => {
+const wrongPasswordAlert = async (email) => {
   let obj = {
     from: "shaan.ansari1901@gmail.com",
     to: email,
+    subject: "Security Alert",
+    text: `You Have Just Entered Wrong Password On : ${new Date().toString()}`,
   };
-
-  if (reason == "Incorrect_Pass") {
-    obj.subject = "Security Alert";
-    obj.text = `You Have Just Entered Wrong Password On : ${new Date().toString()}`;
-  }
-
-  alert(obj);
+  sendMail(obj);
 };
 
-export default sendNotification;
+export default wrongPasswordAlert;

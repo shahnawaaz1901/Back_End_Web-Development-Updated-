@@ -2,21 +2,20 @@ import mongoose from "mongoose";
 import UserRepository from "./users.repository.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import sendNotification from "../notification/wrongPassword.js";
 import sendOtp from "../notification/otp.js";
 import OTPGenerator from "../verification/otp.verification.js";
+import wrongPasswordAlert from "../notification/wrongPassword.js";
 
 export default class UserController {
   constructor() {
     this.userRepository = new UserRepository();
   }
+
   async signUp(req, res) {
     try {
-      console.log(req.body);
       const newUser = await this.userRepository.newUser(req.body);
       return res.status(201).send(newUser);
     } catch (error) {
-      console.log(error);
       if (error instanceof mongoose.Error) {
         res.status(406).send(error.message);
       }
@@ -28,7 +27,6 @@ export default class UserController {
     try {
       const { email, password } = req.body;
       const result = await this.userRepository.existingUser(email);
-      console.log(result);
       if (result) {
         const isMatch = await bcrypt.compare(password, result.password);
         if (isMatch) {
@@ -39,7 +37,7 @@ export default class UserController {
           res.cookie("JWT_Token", token);
           return res.status(200).send(token);
         }
-        sendNotification(result.email, "Incorrect_Pass");
+        wrongPasswordAlert(result.email);
         return res.status(401).send("Password is Incorrect !");
       }
       return res.status(404).send("Invalid Credentials !");
@@ -48,10 +46,9 @@ export default class UserController {
     }
   }
 
-  async forgotPassword(req, res) {
+  async sendOtp(req, res) {
     try {
       const { email } = req.params;
-      console.log(email);
       if (!email) {
         res.status(404).send("Please Enter Email Address");
       }
@@ -66,7 +63,7 @@ export default class UserController {
     }
   }
 
-  async changePassword(req, res) {
+  async validateAndResetPassword(req, res) {
     try {
       const { email } = req.params;
       const { password, otp } = req.body;
