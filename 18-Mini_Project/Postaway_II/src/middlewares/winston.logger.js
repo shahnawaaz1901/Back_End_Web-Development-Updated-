@@ -2,7 +2,8 @@ import winston from "winston";
 
 export const logger = winston.createLogger({
   level: "info",
-  defaultMeta: { service: "user-request" },
+  format: winston.format.json(),
+  defaultMeta: { service: "user-service" },
   transports: [
     new winston.transports.File({ filename: "combined.log" }),
     new winston.transports.File({ filename: "error.log", level: "error" }),
@@ -16,7 +17,7 @@ export const loggerMiddleware = (req, res, next) => {
       data: req.body,
       time: new Date().toString(),
     };
+    logger.info(logData);
   }
-  logger.info(logData);
   next();
 };

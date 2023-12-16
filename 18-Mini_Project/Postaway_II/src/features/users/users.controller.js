@@ -68,10 +68,12 @@ export default class UserController {
     try {
       const { email } = req.params;
       const { password, otp } = req.body;
-      if (!password || !otp) {
-        return res.status(500).send("Something went Wrong !");
+      if (!password) {
+        return res.status(406).send("Password Can't Be Empty !");
       }
-      if (OTPGenerator.validateOTP(otp, email)) {
+
+      const verified = OTPGenerator.validateOTP(otp, email);
+      if (verified.success) {
         const updatedData = await this.userRepository.changePassword(
           email,
           password
@@ -79,7 +81,7 @@ export default class UserController {
         await updatePasswordAlert(email);
         return res.status(200).send("Password Updated Successfully !");
       }
-      return res.status(206).send("OTP is incorrect !!");
+      return res.status(404).send(verified.msg);
     } catch (error) {
       console.log(error);
       res.status(500).send("Error while Changing OTP");

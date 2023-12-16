@@ -13,6 +13,22 @@ export default class OTPGenerator {
   }
 
   static validateOTP(recOTP, email) {
-    return recOTP == this.otp && email == this.otpForEmail;
+    console.log(recOTP, email);
+    if (email != this.otpForEmail) {
+      return {
+        success: false,
+        msg: "Please Generate OTP first",
+      };
+    }
+    if (recOTP == this.otp && email == this.otpForEmail) {
+      return {
+        success: true,
+        msg: "Verified",
+      };
+    }
+    return {
+      success: false,
+      msg: "Otp is Incorrect",
+    };
   }
 }
