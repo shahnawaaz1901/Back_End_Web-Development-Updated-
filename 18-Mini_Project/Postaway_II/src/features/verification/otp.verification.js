@@ -3,19 +3,16 @@ export default class OTPGenerator {
   static otp;
 
   //* email member so that we can verify that otp is sent for this email
-
   static otpForEmail;
+
   static generateOTP(email) {
     this.otp = Math.floor(Math.random() * 1000000);
-    this.otpFor = email;
-    return this.otp;
-  }
-
-  static getOTP() {
+    this.otpForEmail = email;
+    console.log(this.otp, this.otpForEmail);
     return this.otp;
   }
 
   static validateOTP(recOTP, email) {
-    return recOTP == this.otp && email == this.email;
+    return recOTP == this.otp && email == this.otpForEmail;
   }
 }

@@ -15,10 +15,10 @@ userRouter.post("/signIn", (req, res) => {
 });
 
 userRouter.get("/forgetPassword/sendOtp/:email", (req, res) => {
-  userController.forgotPassword(req, res);
+  userController.sendOtp(req, res);
 });
 
-userRouter.put("/forgotPassword/validateOtp/:email", (req, res) => {
-  userController.changePassword(req, res);
+userRouter.put("/forgetPassword/validateOtp/:email", (req, res) => {
+  userController.validateAndResetPassword(req, res);
 });
 export default userRouter;

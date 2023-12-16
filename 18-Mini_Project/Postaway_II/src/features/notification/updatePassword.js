@@ -1,4 +1,4 @@
-import sendMail from "./sendmail.nodemailer";
+import sendMail from "./sendmail.nodemailer.js";
 
 const updatePasswordAlert = async (email) => {
   const obj = {

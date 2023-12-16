@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import sendOtp from "../notification/otp.js";
 import OTPGenerator from "../verification/otp.verification.js";
 import wrongPasswordAlert from "../notification/wrongPassword.js";
+import updatePasswordAlert from "../notification/updatePassword.js";
 
 export default class UserController {
   constructor() {
@@ -70,12 +71,12 @@ export default class UserController {
       if (!password || !otp) {
         return res.status(500).send("Something went Wrong !");
       }
-      if (OTPGenerator.validateOTP(otp)) {
+      if (OTPGenerator.validateOTP(otp, email)) {
         const updatedData = await this.userRepository.changePassword(
           email,
           password
         );
-        console.log(updatedData);
+        await updatePasswordAlert(email);
         return res.status(200).send("Password Updated Successfully !");
       }
       return res.status(206).send("OTP is incorrect !!");
