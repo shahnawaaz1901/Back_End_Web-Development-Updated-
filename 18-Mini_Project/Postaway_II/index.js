@@ -4,6 +4,7 @@ import auth from "./src/middlewares/jwt.auth.js";
 import cookieParser from "cookie-parser";
 import userRouter from "./src/features/users/users.router.js";
 import cors from "cors";
+import { loggerMiddleware, logger } from "./src/middlewares/winston.logger.js";
 
 const server = express();
 
@@ -13,6 +14,8 @@ server.use(cookieParser());
 
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
+
+server.use(loggerMiddleware);
 
 server.use("/api/users", userRouter);
 // server.use("/api/friends");
