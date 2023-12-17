@@ -6,17 +6,23 @@ export default class PostController {
   }
 
   async createPost(req, res) {
-    console.log(req.file);
-    let name;
+    /* Because if user not upload any image then req.file value is undefined */
     if (req.file) {
-      name = req.file.filename;
+      req.body.imageURL = req.file.filename;
     }
-    const post = await this.postRepository.new({
-      data: req.body,
+
+    if (req.body.tags) {
+      req.body.tags = req.body.tags.split(",");
+    }
+
+    const savedPost = await this.postRepository.new({
       user: req.userId,
-      imageURL: name,
+      caption: req.body.caption,
+      imageURL: req.body.imageURL,
+      location: req.body.location,
+      timeStamp: new Date().toString(),
     });
-    res.status(200).send(post);
+    return res.status(201).send("Data");
   }
 
   getPosts(req, res) {}

@@ -1,7 +1,9 @@
 import PostModel from "./posts.schema.js";
 export default class PostRepository {
   async new(postData) {
-    console.log(postData);
+    const newPost = new PostModel(postData);
+    await newPost.save();
+    return newPost;
   }
 
   async get(userId) {}

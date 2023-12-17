@@ -7,10 +7,16 @@ const postSchema = new mongoose.Schema({
   },
   caption: String,
   imageURL: String,
+  location: String,
   timeStamp: {
     type: String,
     required: true,
   },
+  tags: [
+    {
+      user: mongoose.Schema.Types.ObjectId,
+    },
+  ],
   likes: [
     {
       user: mongoose.Schema.Types.ObjectId,

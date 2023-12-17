@@ -8,7 +8,7 @@ const auth = async (req, res, next) => {
     next();
   } catch (error) {
     console.log(error);
-    res.status(404).send(error.message);
+    res.status(404).send("Please Login to Access");
   }
 };
 

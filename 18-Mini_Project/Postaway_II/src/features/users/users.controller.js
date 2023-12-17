@@ -33,7 +33,7 @@ export default class UserController {
         if (isMatch) {
           const token = jwt.sign(
             { email: result.email, _id: result._id },
-            process.env.SECRETKEY
+            process.env.SECRET_KEY
           );
           res.cookie("JWT_Token", token);
           return res.status(200).send(token);
@@ -43,6 +43,7 @@ export default class UserController {
       }
       return res.status(404).send("Invalid Credentials !");
     } catch (error) {
+      console.log(error);
       res.status(404).send("Something Went Wrong while Logging");
     }
   }
