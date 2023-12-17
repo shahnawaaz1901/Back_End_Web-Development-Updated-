@@ -25,8 +25,8 @@ server.use(express.json());
 server.use(loggerMiddleware);
 
 server.use("/api/users", userRouter);
-server.use("/api/friends", auth, postRouter);
-// server.use("/api/posts");
+server.use("/api/posts", auth, postRouter);
+// server.use("/api/friends", auth, postRouter);
 // server.use("/api/likes");
 // server.use("/api/comments");
 

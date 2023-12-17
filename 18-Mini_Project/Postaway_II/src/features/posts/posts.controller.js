@@ -5,7 +5,19 @@ export default class PostController {
     this.postRepository = new PostRepository();
   }
 
-  createPost(req, res) {}
+  async createPost(req, res) {
+    console.log(req.file);
+    let name;
+    if (req.file) {
+      name = req.file.filename;
+    }
+    const post = await this.postRepository.new({
+      data: req.body,
+      user: req.userId,
+      imageURL: name,
+    });
+    res.status(200).send(post);
+  }
 
   getPosts(req, res) {}
 
