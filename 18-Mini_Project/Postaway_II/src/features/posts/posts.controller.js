@@ -21,15 +21,34 @@ export default class PostController {
       imageURL: req.body.imageURL,
       location: req.body.location,
       timeStamp: new Date().toString(),
+      tags: req.body.tags,
     });
-    return res.status(201).send("Data");
+    return res.status(201).send(savedPost);
   }
 
-  getPosts(req, res) {}
+  async getPosts(req, res) {
+    let { userId } = req;
+    //* If user want to see Other User's Post so User can do by Passing the Other UserId in Query Parameter
+    if (req.query.userId) {
+      userId = req.query.userId;
+    }
 
-  getOnePost(req, res) {}
+    const posts = await this.postRepository.get(userId);
+    res.status(200).send(posts);
+  }
+
+  async getOnePost(req, res) {
+    const { postId } = req.params;
+    const post = await this.postRepository.getOne(postId);
+    return res.status(200).send(post);
+  }
 
   updatePost(req, res) {}
 
-  deletePost(req, res) {}
+  async deletePost(req, res) {
+    const { userId } = req;
+    const { postId } = req.params;
+    await this.postRepository.delete({ userId, postId });
+    res.status(200).send("Post Deleted Successfully !");
+  }
 }
