@@ -3,18 +3,18 @@ import mongoose, { mongo } from "mongoose";
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   phone: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   email: {
-    type : String,
+    type: String,
     match: [/.+\@.+\../, "Please Enter Valid Email format"],
     required: true,
-    unique: true
+    unique: true,
   },
   age: {
     type: Number,
@@ -30,7 +30,8 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-  }
+  },
+  friends: mongoose.Schema.Types.ObjectId,
 });
 
 const UserModel = mongoose.model("User", userSchema);

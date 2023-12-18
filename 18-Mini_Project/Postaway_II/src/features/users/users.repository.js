@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
 import UserModel from "./users.schema.js";
 import bcrypt from "bcrypt";
+import FriendModel from "../friends/friends.schema.js";
 
 export default class UserRepository {
   async newUser(userData) {
@@ -8,6 +8,9 @@ export default class UserRepository {
       const { password } = userData;
       const hashPassword = await bcrypt.hash(password, 12);
       userData.password = hashPassword;
+      const friends = new FriendModel();
+      await friends.save();
+      userData.friends = friends._id;
       const newUser = new UserModel(userData);
       await newUser.save();
       return newUser;
