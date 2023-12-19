@@ -50,12 +50,10 @@ export default class UserController {
         .send({ success: false, message: "Invalid Credentials !" });
     } catch (error) {
       console.log(error);
-      res
-        .status(404)
-        .json({
-          success: false,
-          message: "Something Went Wrong while Logging",
-        });
+      res.status(404).json({
+        success: false,
+        message: "Something Went Wrong while Logging",
+      });
     }
   }
 
@@ -63,16 +61,28 @@ export default class UserController {
     try {
       const { email } = req.params;
       if (!email) {
-        res.status(404).send("Please Enter Email Address");
+        res
+          .status(404)
+          .send({ success: false, message: "Please Enter Email Address" });
       }
       const userExist = await this.userRepository.userExist(email);
       if (userExist) {
         await sendOtp(email);
-        return res.status(200).send("Otp sent successfully !");
+        return res
+          .status(200)
+          .json({ success: true, message: "Otp sent successfully !" });
       }
-      res.status(404).send("Account Not Exist with this Email !");
+      res.status(404).json({
+        success: false,
+        message: "Account Not Exist with this Email !",
+      });
     } catch (error) {
-      res.status(500).send("Something went wrong while sending Otp!");
+      res
+        .status(500)
+        .send({
+          success: true,
+          message: "Something went wrong while sending Otp!",
+        });
     }
   }
 
@@ -81,7 +91,9 @@ export default class UserController {
       const { email } = req.params;
       const { password, otp } = req.body;
       if (!password) {
-        return res.status(406).send("Password Can't Be Empty !");
+        return res
+          .status(406)
+          .json({ success: false, message: "Password Can't Be Empty !" });
       }
 
       const verified = OTPGenerator.validateOTP(otp, email);
@@ -91,12 +103,16 @@ export default class UserController {
           password
         );
         await updatePasswordAlert(email);
-        return res.status(200).send("Password Updated Successfully !");
+        return res
+          .status(200)
+          .json({ success: true, message: "Password Updated Successfully !" });
       }
-      return res.status(404).send(verified.msg);
+      return res.status(404).json({ success: false, message: verified.msg });
     } catch (error) {
       console.log(error);
-      res.status(500).send("Error while Changing OTP");
+      res
+        .status(500)
+        .send({ success: false, message: "Error while Changing Password !" });
     }
   }
 }
