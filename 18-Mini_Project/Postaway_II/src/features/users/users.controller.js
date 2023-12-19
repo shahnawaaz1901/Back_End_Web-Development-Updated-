@@ -37,6 +37,10 @@ export default class UserController {
             { email: result.email, _id: result._id },
             process.env.SECRET_KEY
           );
+          await this.userRepository.storeLoginDetails({
+            email: result.email,
+            token,
+          });
           res.cookie("JWT_Token", token);
           return res.status(200).json({ success: true, token });
         }
@@ -77,12 +81,10 @@ export default class UserController {
         message: "Account Not Exist with this Email !",
       });
     } catch (error) {
-      res
-        .status(500)
-        .send({
-          success: true,
-          message: "Something went wrong while sending Otp!",
-        });
+      res.status(500).send({
+        success: true,
+        message: "Something went wrong while sending Otp!",
+      });
     }
   }
 
@@ -103,16 +105,32 @@ export default class UserController {
           password
         );
         await updatePasswordAlert(email);
-        return res
-          .status(200)
-          .json({ success: true, message: "Password Updated Successfully !" });
+        return res.status(200).json({ success: true, user: updatedData });
       }
       return res.status(404).json({ success: false, message: verified.msg });
     } catch (error) {
       console.log(error);
       res
         .status(500)
-        .send({ success: false, message: "Error while Changing Password !" });
+        .json({ success: false, message: "Error while Changing Password !" });
+    }
+  }
+
+  async signOutAll(req, res) {
+    try {
+      const { userId } = req;
+      console.log(userId);
+      const updated = await this.userRepository.signOutAll(userId);
+      console.log(updated);
+      return res
+        .status(200)
+        .json({ success: true, message: "SingOut From All Devices !!" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        success: false,
+        message: "Error While SignOut from All Devices !!",
+      });
     }
   }
 }

@@ -47,3 +47,8 @@
 {"level":"info","message":{"data":{},"time":"Tue Dec 19 2023 01:33:18 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
 {"level":"info","message":{"data":{},"time":"Tue Dec 19 2023 01:34:02 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
 {"level":"info","message":{"data":{},"time":"Tue Dec 19 2023 01:34:38 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Wed Dec 20 2023 01:41:20 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Wed Dec 20 2023 01:41:30 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Wed Dec 20 2023 01:42:02 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Wed Dec 20 2023 01:42:12 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Wed Dec 20 2023 01:42:21 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}

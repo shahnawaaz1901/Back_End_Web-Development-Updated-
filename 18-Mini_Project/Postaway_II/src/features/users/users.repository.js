@@ -1,6 +1,7 @@
 import UserModel from "./users.schema.js";
 import bcrypt from "bcrypt";
 import FriendModel from "../friends/friends.schema.js";
+import mongoose from "mongoose";
 
 export default class UserRepository {
   async newUser(userData) {
@@ -43,6 +44,36 @@ export default class UserRepository {
       return updatedUser;
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  async storeLoginDetails(userInfo) {
+    await UserModel.findOneAndUpdate(
+      { email: userInfo.email },
+      { $push: { loginDevices: userInfo.token } }
+    );
+  }
+
+  async signOutAll(userId) {
+    console.log(userId);
+    return await UserModel.findOneAndUpdate(
+      {
+        _id: new mongoose.Types.ObjectId(userId),
+      },
+      {
+        $set: { loginDevices: [] },
+      },
+      { multi: true, returnDocument: "after" }
+    );
+  }
+
+  async isLoginRequired(id, token) {
+    const userLogin = await UserModel.findOne({
+      _id: new mongoose.Types.ObjectId(id),
+      loginDevices: token,
+    });
+    if (!userLogin) {
+      throw new Error("Login to Continue");
     }
   }
 }

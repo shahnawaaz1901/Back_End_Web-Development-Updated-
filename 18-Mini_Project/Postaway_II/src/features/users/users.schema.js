@@ -35,6 +35,11 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Friend",
   },
+  loginDevices: [
+    {
+      type: String,
+    },
+  ],
 });
 
 const UserModel = mongoose.model("User", userSchema);
