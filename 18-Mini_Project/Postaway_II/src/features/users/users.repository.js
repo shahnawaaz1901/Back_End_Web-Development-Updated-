@@ -39,7 +39,8 @@ export default class UserRepository {
       const hashPassword = await bcrypt.hash(newPassword, 12);
       const updatedUser = await UserModel.findOneAndUpdate(
         { email },
-        { password: hashPassword }
+        { password: hashPassword },
+        { returnDocument: "after" }
       );
       return updatedUser;
     } catch (error) {

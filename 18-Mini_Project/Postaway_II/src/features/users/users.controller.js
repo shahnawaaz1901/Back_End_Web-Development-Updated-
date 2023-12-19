@@ -71,7 +71,7 @@ export default class UserController {
       }
       const userExist = await this.userRepository.userExist(email);
       if (userExist) {
-        await sendOtp(email);
+        await sendOtp(email, userExist.name);
         return res
           .status(200)
           .json({ success: true, message: "Otp sent successfully !" });
@@ -99,12 +99,10 @@ export default class UserController {
       }
 
       const verified = OTPGenerator.validateOTP(otp, email);
+      let updatedData;
       if (verified.success) {
-        const updatedData = await this.userRepository.changePassword(
-          email,
-          password
-        );
-        await updatePasswordAlert(email);
+        updatedData = await this.userRepository.changePassword(email, password);
+        await updatePasswordAlert(email, updatedData.name);
         return res.status(200).json({ success: true, user: updatedData });
       }
       return res.status(404).json({ success: false, message: verified.msg });
