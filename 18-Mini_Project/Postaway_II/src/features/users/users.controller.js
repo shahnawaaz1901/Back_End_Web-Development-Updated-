@@ -15,12 +15,14 @@ export default class UserController {
   async signUp(req, res) {
     try {
       const newUser = await this.userRepository.newUser(req.body);
-      return res.status(201).send(newUser);
+      return res.status(201).json({ success: true, user: newUser });
     } catch (error) {
       if (error instanceof mongoose.Error) {
-        res.status(406).send(error.message);
+        res.status(406).json({ success: false, message: error.message });
       }
-      res.status(404).send("Error While Creating new User");
+      res
+        .status(404)
+        .json({ success: false, message: "Error While Creating new User" });
     }
   }
 
@@ -36,15 +38,24 @@ export default class UserController {
             process.env.SECRET_KEY
           );
           res.cookie("JWT_Token", token);
-          return res.status(200).send(token);
+          return res.status(200).json({ success: true, token });
         }
         wrongPasswordAlert(result.email);
-        return res.status(401).send("Password is Incorrect !");
+        return res
+          .status(401)
+          .json({ success: false, message: "Password is Incorrect !" });
       }
-      return res.status(404).send("Invalid Credentials !");
+      return res
+        .status(404)
+        .send({ success: false, message: "Invalid Credentials !" });
     } catch (error) {
       console.log(error);
-      res.status(404).send("Something Went Wrong while Logging");
+      res
+        .status(404)
+        .json({
+          success: false,
+          message: "Something Went Wrong while Logging",
+        });
     }
   }
 

@@ -47,9 +47,11 @@ server.use("/api/comments", auth, commentRouter);
 //* Error Handling
 server.use((err, req, res, next) => {
   if (err instanceof ApplicationError) {
-    return res.status(err.errStatusCode).send(err.message);
+    return res
+      .status(err.errStatusCode)
+      .json({ success: false, message: err.message });
   }
-  res.status(500).send("Internal Server Error !");
+  res.status(500).json({ success: false, message: "Internal Server Error !" });
 });
 
 //* Export
