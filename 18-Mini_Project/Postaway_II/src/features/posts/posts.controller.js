@@ -1,3 +1,4 @@
+import { response } from "express";
 import ApplicationError from "../error/error.application.js";
 import PostRepository from "./posts.repository.js";
 
@@ -7,24 +8,29 @@ export default class PostController {
   }
 
   async createPost(req, res) {
-    /* Because if user not upload any image then req.file value is undefined */
-    if (req.file) {
-      req.body.imageURL = req.file.filename;
-    }
+    try {
+      /* Because if user not upload any image then req.file value is undefined */
+      if (req.file) {
+        req.body.imageURL = req.file.filename;
+      }
 
-    if (req.body.tags) {
-      req.body.tags = req.body.tags.split(",");
-    }
+      if (req.body.tags) {
+        req.body.tags = req.body.tags.split(",");
+      }
 
-    const savedPost = await this.postRepository.new({
-      user: req.userId,
-      caption: req.body.caption,
-      imageURL: req.body.imageURL,
-      location: req.body.location,
-      timeStamp: new Date().toString(),
-      tags: req.body.tags,
-    });
-    return res.status(201).send(savedPost);
+      const savedPost = await this.postRepository.new({
+        user: req.userId,
+        caption: req.body.caption,
+        imageURL: req.body.imageURL,
+        location: req.body.location,
+        timeStamp: new Date().toString(),
+        tags: req.body.tags,
+      });
+      return res.status(201).send(savedPost);
+    } catch (error) {
+      console.log(error);
+      throw new ApplicationError("Something went wrong", 500);
+    }
   }
 
   async getPosts(req, res) {

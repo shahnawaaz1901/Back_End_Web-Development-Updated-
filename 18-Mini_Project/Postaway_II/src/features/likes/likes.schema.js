@@ -13,7 +13,7 @@ const LikeSchema = new mongoose.Schema({
   },
   on_model: {
     type: String,
-    enum: ["Post", "User"],
+    enum: ["Post", "User", "Comment"],
     required: true,
   },
 });
