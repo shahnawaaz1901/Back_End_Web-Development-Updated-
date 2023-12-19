@@ -1,3 +1,4 @@
+import ApplicationError from "../error/error.application.js";
 import PostRepository from "./posts.repository.js";
 
 export default class PostController {
@@ -43,7 +44,21 @@ export default class PostController {
     return res.status(200).send(post);
   }
 
-  updatePost(req, res) {}
+  async updatePost(req, res) {
+    try {
+      const { userId } = req;
+      const { postId } = req.params;
+      const updatedData = req.body;
+      const updatedPost = await this.postRepository.update(updatedData, {
+        userId,
+        postId,
+      });
+      res.status(200).send(updatedPost);
+    } catch (error) {
+      console.log(error);
+      throw new ApplicationError(error.message, 500);
+    }
+  }
 
   async deletePost(req, res) {
     const { userId } = req;

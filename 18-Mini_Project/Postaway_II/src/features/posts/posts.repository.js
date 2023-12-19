@@ -15,10 +15,19 @@ export default class PostRepository {
     return await PostModel.findById(postId);
   }
 
-  async update(updatedData, requireData) {}
+  async update(updatedData, requireData) {
+    return await PostModel.findOneAndUpdate(
+      {
+        _id: new mongoose.Types.ObjectId(requireData.postId),
+        user: new mongoose.Types.ObjectId(requireData.userId),
+      },
+      updatedData,
+      { returnDocument: "after" }
+    );
+  }
 
   async delete(requireData) {
-    await PostModel.deleteOne({
+    const deletedPost = await PostModel.deleteOne({
       _id: new mongoose.Types.ObjectId(requireData.postId),
       user: new mongoose.Types.ObjectId(requireData.userId),
     });
