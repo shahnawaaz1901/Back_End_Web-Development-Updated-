@@ -14,3 +14,5 @@ const orderSchema = new mongoose.Schema({
     required: true,
   },
 });
+
+export default orderSchema;

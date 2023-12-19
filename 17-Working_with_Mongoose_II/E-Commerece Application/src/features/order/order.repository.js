@@ -2,9 +2,13 @@ import ApplicationError from "../errorHandler/application.error.js";
 import OrderModel from "./order.model.js";
 import { ObjectId } from "mongodb";
 import { getDB, getClient } from "../../config/mongodb.js";
+import mongoose from "mongoose";
+import orderSchema from "./order.schema.js";
 /* 
   Mongoclient help us to Create the Session for the Transaction
 */
+
+const OrderModel = mongoose.model("Order", orderSchema);
 
 export default class OrderRepository {
   constructor() {
@@ -67,6 +71,7 @@ export default class OrderRepository {
   }
 
   async totalAmount(userId, session) {
+    await OrderModel.aggregate();
     const db = getDB();
 
     const items = await db
