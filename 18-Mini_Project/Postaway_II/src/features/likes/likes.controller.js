@@ -5,7 +5,9 @@ export default class LikeController {
     this.likeRepository = new LikeRepository();
   }
 
-  addLike(req, res) {}
+  async addLike(req, res) {
+    const likeData = await this.likeRepository.add(req.body);
+  }
 
-  removeLike(req, res) {}
+  async removeLike(req, res) {}
 }
