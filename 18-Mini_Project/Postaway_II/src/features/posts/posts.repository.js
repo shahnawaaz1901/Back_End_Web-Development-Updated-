@@ -4,7 +4,7 @@ export default class PostRepository {
   async new(postData) {
     const newPost = new PostModel(postData);
     await newPost.save();
-    return (await newPost.populate("user")).populate("tags");
+    return newPost;
   }
 
   async get(userId) {
@@ -27,9 +27,14 @@ export default class PostRepository {
   }
 
   async delete(requireData) {
-    const deletedPost = await PostModel.deleteOne({
-      _id: new mongoose.Types.ObjectId(requireData.postId),
-      user: new mongoose.Types.ObjectId(requireData.userId),
-    });
+    try {
+      const deletedPost = await PostModel.deleteOne({
+        _id: new mongoose.Types.ObjectId(requireData.postId),
+        user: new mongoose.Types.ObjectId(requireData.userId),
+      });
+      return deletedPost.deletedCount;
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

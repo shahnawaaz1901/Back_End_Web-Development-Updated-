@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  profileImageURL: String,
   phone: {
     type: String,
     required: true,
@@ -40,6 +41,7 @@ const userSchema = new mongoose.Schema({
       type: String,
     },
   ],
+  likes: [{ type: mongoose.Schema.Types.ObjectId }],
 });
 
 const UserModel = mongoose.model("User", userSchema);

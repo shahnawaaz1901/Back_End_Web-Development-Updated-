@@ -8,6 +8,7 @@ export default class PostController {
   }
 
   async createPost(req, res) {
+    console.log(req.url);
     try {
       /* Because if user not upload any image then req.file value is undefined */
       if (req.file) {
@@ -26,7 +27,7 @@ export default class PostController {
         timeStamp: new Date().toString(),
         tags: req.body.tags,
       });
-      return res.status(201).send(savedPost);
+      return res.status(201).json({ sucess: true, post: savedPost });
     } catch (error) {
       console.log(error);
       throw new ApplicationError("Something went wrong", 500);
@@ -54,12 +55,23 @@ export default class PostController {
     try {
       const { userId } = req;
       const { postId } = req.params;
+      if (req.body.tags) {
+        req.body.tags = req.body.tags.split(",");
+      }
+
+      if (req.file) {
+        req.body.imageURL = req.file.filename;
+      }
+
       const updatedData = req.body;
       const updatedPost = await this.postRepository.update(updatedData, {
         userId,
         postId,
       });
-      res.status(200).send(updatedPost);
+      if (updatedPost) {
+        return res.status(200).send({ success: true, post: updatedPost });
+      }
+      res.status(404).send({ success: false, message: "Post not found !!" });
     } catch (error) {
       console.log(error);
       throw new ApplicationError(error.message, 500);
@@ -67,9 +79,19 @@ export default class PostController {
   }
 
   async deletePost(req, res) {
-    const { userId } = req;
-    const { postId } = req.params;
-    await this.postRepository.delete({ userId, postId });
-    res.status(200).send("Post Deleted Successfully !");
+    try {
+      const { userId } = req;
+      const { postId } = req.params;
+      const result = await this.postRepository.delete({ userId, postId });
+      if (result) {
+        return res
+          .status(200)
+          .json({ success: true, message: "Post Deleted Successfully !" });
+      }
+      res.status(404).json({ success: false, message: "Post not found !" });
+    } catch (error) {
+      console.log(error);
+      throw new ApplicationError(error.message, 404);
+    }
   }
 }

@@ -46,6 +46,7 @@ server.use("/api/comments", auth, commentRouter);
 
 //* Error Handling
 server.use((err, req, res, next) => {
+  console.log(err);
   if (err instanceof ApplicationError) {
     return res
       .status(err.errStatusCode)

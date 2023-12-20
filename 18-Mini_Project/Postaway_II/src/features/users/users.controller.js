@@ -14,6 +14,9 @@ export default class UserController {
 
   async signUp(req, res) {
     try {
+      if (req.file) {
+        req.body.profileImageURL = req.file.filename;
+      }
       const newUser = await this.userRepository.newUser(req.body);
       return res.status(201).json({ success: true, user: newUser });
     } catch (error) {
