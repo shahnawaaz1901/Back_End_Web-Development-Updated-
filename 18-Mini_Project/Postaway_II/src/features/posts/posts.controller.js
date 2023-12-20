@@ -36,9 +36,10 @@ export default class PostController {
 
   async getPosts(req, res) {
     let { userId } = req;
+
     //* If user want to see Other User's Post so User can do by Passing the Other UserId in Query Parameter
-    if (req.query.userId) {
-      userId = req.query.userId;
+    if (req.params.userId) {
+      userId = req.params.userId;
     }
 
     const posts = await this.postRepository.get(userId);
@@ -88,7 +89,9 @@ export default class PostController {
           .status(200)
           .json({ success: true, message: "Post Deleted Successfully !" });
       }
-      res.status(404).json({ success: false, message: "Post not found !" });
+      res
+        .status(404)
+        .json({ success: false, message: "Post not found for the User !!" });
     } catch (error) {
       console.log(error);
       throw new ApplicationError(error.message, 404);

@@ -13,7 +13,7 @@ postRouter.post(
     postController.createPost(req, res);
   }
 );
-postRouter.get("/getPosts", (req, res) => {
+postRouter.get("/getPosts/:userId", (req, res) => {
   postController.getPosts(req, res);
 });
 postRouter.get("/getOnePost/:postId", (req, res) => {
