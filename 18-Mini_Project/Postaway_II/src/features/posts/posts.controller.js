@@ -1,4 +1,4 @@
-import { response } from "express";
+import mongoose from "mongoose";
 import ApplicationError from "../error/error.application.js";
 import PostRepository from "./posts.repository.js";
 
@@ -35,21 +35,35 @@ export default class PostController {
   }
 
   async getPosts(req, res) {
-    let { userId } = req;
+    try {
+      let { userId } = req;
 
-    //* If user want to see Other User's Post so User can do by Passing the Other UserId in Query Parameter
-    if (req.params.userId) {
-      userId = req.params.userId;
+      //* If user want to see Other User's Post so User can do by Passing the Other UserId in Query Parameter
+      if (req.params.userId) {
+        userId = req.params.userId;
+      }
+
+      const posts = await this.postRepository.get(userId);
+      res.status(200).send(posts);
+    } catch (error) {
+      if (error instanceof mongoose.Error) {
+        throw new Error(error.message);
+      }
+      throw new ApplicationError(error.message, 404);
     }
-
-    const posts = await this.postRepository.get(userId);
-    res.status(200).send(posts);
   }
 
   async getOnePost(req, res) {
-    const { postId } = req.params;
-    const post = await this.postRepository.getOne(postId);
-    return res.status(200).send(post);
+    try {
+      const { postId } = req.params;
+      const post = await this.postRepository.getOne(postId);
+      return res.status(200).send(post);
+    } catch (error) {
+      if (error instanceof mongoose.Error) {
+        throw new Error(error.message);
+      }
+      throw new ApplicationError(error.message, 404);
+    }
   }
 
   async updatePost(req, res) {
@@ -74,8 +88,10 @@ export default class PostController {
       }
       res.status(404).send({ success: false, message: "Post not found !!" });
     } catch (error) {
-      console.log(error);
-      throw new ApplicationError(error.message, 500);
+      if (error instanceof mongoose.Error) {
+        throw new Error(error.message);
+      }
+      throw new ApplicationError(error.message, 404);
     }
   }
 
@@ -93,7 +109,9 @@ export default class PostController {
         .status(404)
         .json({ success: false, message: "Post not found for the User !!" });
     } catch (error) {
-      console.log(error);
+      if (error instanceof mongoose.Error) {
+        throw new Error(error.message);
+      }
       throw new ApplicationError(error.message, 404);
     }
   }

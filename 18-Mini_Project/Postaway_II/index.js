@@ -15,6 +15,7 @@ import postRouter from "./src/features/posts/posts.router.js";
 import friendRouter from "./src/features/friends/friends.router.js";
 import likeRouter from "./src/features/likes/likes.router.js";
 import commentRouter from "./src/features/comments/comments.router.js";
+import mongoose from "mongoose";
 
 //* Intialize Server
 const server = express();
@@ -51,6 +52,10 @@ server.use((err, req, res, next) => {
     return res
       .status(err.errStatusCode)
       .json({ success: false, message: err.message });
+  }
+
+  if (err instanceof mongoose.Error) {
+    return res.status(500).json({ success: false, message: err.message });
   }
   res.status(500).json({ success: false, message: "Internal Server Error !" });
 });
