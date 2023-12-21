@@ -10,7 +10,8 @@ export default class CommentRepository {
       return;
     }
     const newComment = new CommentModel({
-      user: new mongoose.Types.ObjectId(object.userId),
+      user: object.userId,
+      post: object.postId,
       comment: object.comment,
     });
     await newComment.save();
