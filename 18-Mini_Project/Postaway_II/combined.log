@@ -105,3 +105,4 @@
 {"level":"info","message":{"data":{"comment":"Ek Number Bhai..","postId":"65835070d4ead00b52abe614"},"time":"Thu Dec 21 2023 11:42:03 GMT+0530 (India Standard Time)","url":"/api/comments/newComment"},"service":"user-service"}
 {"level":"info","message":{"data":{"comment":"Ek Number Bhai..","postId":"65835070d4ead00b52abe614"},"time":"Thu Dec 21 2023 11:43:03 GMT+0530 (India Standard Time)","url":"/api/comments/newComment"},"service":"user-service"}
 {"level":"info","message":{"data":{"comment":"Ek Number Bhai..","postId":"65835070d4ead00b52abe614"},"time":"Thu Dec 21 2023 12:14:14 GMT+0530 (India Standard Time)","url":"/api/comments/newComment"},"service":"user-service"}
+{"level":"info","message":{"data":{"comment":"Ek Number Bhai..","postId":"65835070d4ead00b52abe614"},"time":"Thu Dec 21 2023 12:14:54 GMT+0530 (India Standard Time)","url":"/api/comments/newComment"},"service":"user-service"}
