@@ -38,5 +38,11 @@ export default class LikeRepository {
         : info.type == "Comment"
         ? CommentModel
         : UserModel;
+
+    const data = await entityModel.findOneAndUpdate(
+      { _id: new mongoose.Types.ObjectId(info.likeableDataId) },
+      { $pull: { likes: new mongoose.Types.ObjectId(info.likeId) } },
+      { returnDocument: "after" }
+    );
   }
 }
