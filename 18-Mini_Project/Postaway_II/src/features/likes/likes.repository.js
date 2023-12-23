@@ -5,12 +5,6 @@ import UserModel from "../users/users.schema.js";
 
 export default class LikeRepository {
   async add(likeInfo) {
-    const likeData = new LikeModel({
-      user: likeInfo.userId,
-      likeable: likeInfo.id,
-      on_model: likeInfo.type,
-    });
-    await likeData.save();
     const entityModel =
       likeInfo.type == "Post"
         ? PostModel
@@ -21,6 +15,12 @@ export default class LikeRepository {
     if (!entityExist) {
       throw new Error(`${id} not found !!`);
     }
+    const likeData = new LikeModel({
+      user: likeInfo.userId,
+      likeable: likeInfo.id,
+      on_model: likeInfo.type,
+    });
+    await likeData.save();
     entityExist.likes.push(likeData._id);
     await entityExist.save();
     return likeData;
