@@ -2,6 +2,7 @@ import LikeModel from "./likes.schema.js";
 import CommentModel from "../comments/comments.schema.js";
 import PostModel from "../posts/posts.schema.js";
 import UserModel from "../users/users.schema.js";
+import mongoose from "mongoose";
 
 export default class LikeRepository {
   async add(likeInfo) {
@@ -26,5 +27,16 @@ export default class LikeRepository {
     return likeData;
   }
 
-  async remove(info) {}
+  async remove(info) {
+    const removeData = await LikeModel.deleteOne({
+      _id: new mongoose.Types.ObjectId(info.likeId),
+      user: new mongoose.Types.ObjectId(info.userId),
+    });
+    const entityModel =
+      info.type == "Post"
+        ? PostModel
+        : info.type == "Comment"
+        ? CommentModel
+        : UserModel;
+  }
 }
