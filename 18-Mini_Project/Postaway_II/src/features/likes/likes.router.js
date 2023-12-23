@@ -7,7 +7,7 @@ const likeController = new LikeController();
 likeRouter.post("/addLike", (req, res) => {
   likeController.addLike(req, res);
 });
-likeRouter.delete("/removeLike", (req, res) => {
+likeRouter.post("/removeLike", (req, res) => {
   likeController.removeLike(req, res);
 });
 export default likeRouter;

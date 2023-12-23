@@ -23,5 +23,25 @@ export default class LikeController {
     res.status(201).json({ success: true, likeable: likeData });
   }
 
-  async removeLike(req, res) {}
+  async removeLike(req, res) {
+    const { userId } = req;
+    const { likeId } = req.params;
+    const { likeableDataId, type } = req.body;
+    if (!id || !type || !likeId) {
+      return res
+        .status(406)
+        .json({ success: false, message: "Please Provide Required details" });
+    }
+    if (type != "Post" && type != "User" && type != "Comment") {
+      return res
+        .status(406)
+        .json({ success: false, message: "Type is Invalid" });
+    }
+    const removeLike = await this.likeRepository.remove({
+      userId,
+      likeId,
+      likeableDataId,
+      type,
+    });
+  }
 }
