@@ -1,8 +1,8 @@
+import mongoose from "mongoose";
 import LikeModel from "./likes.schema.js";
 import CommentModel from "../comments/comments.schema.js";
 import PostModel from "../posts/posts.schema.js";
 import UserModel from "../users/users.schema.js";
-import mongoose from "mongoose";
 
 export default class LikeRepository {
   async add(likeInfo) {
@@ -32,6 +32,8 @@ export default class LikeRepository {
       _id: new mongoose.Types.ObjectId(info.likeId),
       user: new mongoose.Types.ObjectId(info.userId),
     });
+    if (!removeData.deletedCount) {
+    }
     const entityModel =
       info.type == "Post"
         ? PostModel
@@ -39,7 +41,7 @@ export default class LikeRepository {
         ? CommentModel
         : UserModel;
 
-    const data = await entityModel.findOneAndUpdate(
+    await entityModel.findOneAndUpdate(
       { _id: new mongoose.Types.ObjectId(info.likeableDataId) },
       { $pull: { likes: new mongoose.Types.ObjectId(info.likeId) } },
       { returnDocument: "after" }
