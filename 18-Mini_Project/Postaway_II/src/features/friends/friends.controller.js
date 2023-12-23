@@ -5,7 +5,11 @@ export default class FriendController {
     this.friendRepository = new FriendRepository();
   }
 
-  getFriends(req, res) {}
+  async getFriends(req, res) {
+    const { userId } = req;
+    const friends = await this.friendRepository.get(userId);
+    res.status(200).send({ success: true, friends: friends.friendList });
+  }
 
   sendRequest(req, res) {}
 

@@ -1,12 +1,29 @@
+import mongoose from "mongoose";
 import FriendModel from "./friends.schema.js";
 export default class FriendRepository {
-  get() {}
+  async get(userId) {
+    return await FriendModel.findOne({
+      user: new mongoose.Types.ObjectId(userId),
+    });
+  }
 
-  accept() {}
+  async accept(friendObject) {
+    const session = await mongoose.startSession();
+    try {
+      session.startTransaction();
+      await session.commitTransaction();
+      await session.endSession();
+    } catch (error) {
+      await session.abortTransaction();
+      await session.endSession();
+    }
+  }
 
-  send() {}
+  async send(friendObject) {
+    const session = await mongoose.startSession();
+  }
 
-  reject() {}
+  async reject(friendObject) {}
 
-  remove() {}
+  async remove(friendObject) {}
 }
