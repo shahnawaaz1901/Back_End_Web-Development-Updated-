@@ -10,11 +10,12 @@ import cors from "cors";
 import auth from "./src/middlewares/jwt.auth.js";
 import userRouter from "./src/features/users/users.router.js";
 import { loggerMiddleware, logger } from "./src/middlewares/winston.logger.js";
-import ApplicationError from "./src/features/error/error.application.js";
+import ApplicationError from "./src/features/error/error.class.js";
 import postRouter from "./src/features/posts/posts.router.js";
 import friendRouter from "./src/features/friends/friends.router.js";
 import likeRouter from "./src/features/likes/likes.router.js";
 import commentRouter from "./src/features/comments/comments.router.js";
+import errorMiddleware from "./src/features/error/error.response.js";
 import mongoose from "mongoose";
 
 //* Intialize Server

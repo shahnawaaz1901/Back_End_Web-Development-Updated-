@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import ApplicationError from "../error/error.application.js";
+import ApplicationError from "../error/error.class.js";
 import PostRepository from "./posts.repository.js";
 
 export default class PostController {
