@@ -12,7 +12,7 @@ friendRouter.post("/sendRequest/:user", (req, res) => {
   friendController.sendRequest(req, res);
 });
 
-friendRouter.post("/acceptRequest/:userId", (req, res) => {
+friendRouter.post("/acceptRequest/:user", (req, res) => {
   friendController.acceptRequest(req, res);
 });
 

@@ -33,7 +33,21 @@ export default class FriendController {
     }
   }
 
-  acceptRequest(req, res) {}
+  async acceptRequest(req, res) {
+    try {
+      const { userId } = req;
+      const { user } = req.params;
+      await this.friendRepository.accept({ userId, requestUser: user });
+      res
+        .status(201)
+        .json({ success: true, message: "Request Accepted Successfully !!" });
+    } catch (error) {
+      console.log(error);
+      res
+        .status(400)
+        .json({ success: false, message: "Something went wrong !!" });
+    }
+  }
 
   rejectRequest(req, res) {}
 

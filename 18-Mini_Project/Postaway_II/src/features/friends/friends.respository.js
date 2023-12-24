@@ -12,6 +12,34 @@ export default class FriendRepository {
     const session = await mongoose.startSession();
     try {
       session.startTransaction();
+      await FriendModel.updateOne(
+        {
+          user: new mongoose.Types.ObjectId(friendObject.userId),
+        },
+        {
+          $pull: {
+            pendingRequests: new mongoose.Types.ObjectId(
+              friendObject.requestUser
+            ),
+          },
+          $push: {
+            friendList: friendObject.requestUser,
+          },
+        }
+      );
+      await FriendModel.updateOne(
+        {
+          user: new mongoose.Types.ObjectId(friendObject.requestUser),
+        },
+        {
+          $pull: {
+            sendRequests: new mongoose.Types.ObjectId(friendObject.userId),
+          },
+          $push: {
+            friendList: friendObject.userId,
+          },
+        }
+      );
       await session.commitTransaction();
       await session.endSession();
     } catch (error) {
