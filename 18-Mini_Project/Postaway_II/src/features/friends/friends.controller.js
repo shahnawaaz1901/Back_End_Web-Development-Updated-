@@ -11,7 +11,27 @@ export default class FriendController {
     res.status(200).send({ success: true, friends: friends.friendList });
   }
 
-  sendRequest(req, res) {}
+  async sendRequest(req, res) {
+    try {
+      const { userId } = req;
+      const { user } = req.params;
+      if (!user) {
+        throw new Error("Invalid User Type !!");
+      }
+      await this.friendRepository.send({
+        fromUser: userId,
+        toUser: user,
+      });
+      res
+        .status(200)
+        .json({ success: true, message: "Request Sent Successfully !!" });
+    } catch (error) {
+      console.log(error);
+      res
+        .status(500)
+        .send({ success: false, message: "Internal Server Error !!" });
+    }
+  }
 
   acceptRequest(req, res) {}
 

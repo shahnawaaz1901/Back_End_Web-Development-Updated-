@@ -14,6 +14,8 @@ export default class UserRepository {
       userData.friends = friends._id;
       const newUser = new UserModel(userData);
       await newUser.save();
+      friends.user = newUser._id;
+      await friends.save();
       return newUser;
     } catch (error) {
       console.log(error);
