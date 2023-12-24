@@ -10,8 +10,8 @@ export default class FriendRepository {
 
   async accept(friendObject) {
     const session = await mongoose.startSession();
+    session.startTransaction();
     try {
-      session.startTransaction();
       await FriendModel.updateOne(
         {
           user: new mongoose.Types.ObjectId(friendObject.userId),
@@ -53,8 +53,8 @@ export default class FriendRepository {
     // const db = await mongoose.createConnection(process.env.DB_URL).asPromise();
     // await db.startSession();
     const session = await mongoose.startSession();
+    session.startTransaction();
     try {
-      session.startTransaction();
       const userExist = await UserModel.findById(friendObject.toUser);
       if (!userExist) {
         throw new Error("User not found");
@@ -86,7 +86,39 @@ export default class FriendRepository {
     }
   }
 
-  async reject(friendObject) {}
+  async reject(friendObject) {
+    const session = await mongoose.startSession();
+    session.startTransaction();
+    try {
+      await FriendModel.findOneAndUpdate(
+        { user: new mongoose.Types.ObjectId(friendObject.receiveRequest) },
+        {
+          $pull: {
+            pendingRequests: new mongoose.Types.ObjectId(
+              friendObject.sendRequest
+            ),
+          },
+        }
+      );
+
+      await FriendModel.findOneAndUpdate(
+        { user: new mongoose.Types.ObjectId(friendObject.sendRequest) },
+        {
+          $pull: {
+            pendingRequests: new mongoose.Types.ObjectId(
+              friendObject.receiveRequest
+            ),
+          },
+        }
+      );
+      await session.commitTransaction();
+      await session.endSession();
+    } catch (error) {
+      console.log(error);
+      await session.abortTransaction();
+      await session.endSession();
+    }
+  }
 
   async remove(friendObject) {}
 }

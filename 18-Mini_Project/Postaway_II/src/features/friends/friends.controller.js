@@ -44,12 +44,29 @@ export default class FriendController {
     } catch (error) {
       console.log(error);
       res
-        .status(400)
+        .status(500)
         .json({ success: false, message: "Something went wrong !!" });
     }
   }
 
-  rejectRequest(req, res) {}
+  async rejectRequest(req, res) {
+    try {
+      const { userId } = req;
+      const { user } = req.params;
+      await this.friendRepository.reject({
+        receiveRequest: userId,
+        sendRequest: user,
+      });
+      res
+        .status(200)
+        .send({ success: true, message: "Request Reject Successfully !!" });
+    } catch (error) {
+      console.log(error);
+      res
+        .status(500)
+        .send({ success: false, message: "Something went Wrong !!" });
+    }
+  }
 
   removeFriend(req, res) {}
 }
