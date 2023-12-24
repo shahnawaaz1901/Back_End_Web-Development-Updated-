@@ -120,5 +120,41 @@ export default class FriendRepository {
     }
   }
 
-  async remove(friendObject) {}
+  async remove(friendObject) {
+    const session = await mongoose.startSession();
+    session.startTransaction();
+    try {
+      const bothFriends = await FriendModel.findOne({
+        user: new mongoose.Types.ObjectId(friendObject.user),
+        friendList: new mongoose.Types.ObjectId(friendObject.friendId),
+      });
+      if (!bothFriends) {
+        throw new Error("Both are not friends !!");
+      }
+      await FriendModel.updateOne(
+        {
+          user: new mongoose.Types.ObjectId(friendObject.user),
+        },
+        {
+          $pull: {
+            friendList: new mongoose.Types.ObjectId(friendObject.friendId),
+          },
+        }
+      );
+      await FriendModel.updateOne(
+        {
+          user: new mongoose.Types.ObjectId(friendObject.friendId),
+        },
+        {
+          $pull: {
+            friendList: new mongoose.Types.ObjectId(friendObject.user),
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+      await session.abortTransaction();
+      await session.endSession();
+    }
+  }
 }

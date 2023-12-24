@@ -68,5 +68,16 @@ export default class FriendController {
     }
   }
 
-  removeFriend(req, res) {}
+  async removeFriend(req, res) {
+    try {
+      const { userId } = req;
+      const { friendId } = req.params;
+      await this.friendRepository.remove({ user: userId, friendId });
+      res
+        .status(200)
+        .json({ success: true, message: "Friend Remove Successfully !!" });
+    } catch (error) {
+      res.status(500).json({ success: false, message: "Something went Wrong" });
+    }
+  }
 }
