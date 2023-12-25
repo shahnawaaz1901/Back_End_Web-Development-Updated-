@@ -13,8 +13,12 @@ export default class UserRepository {
       await newUser.save();
       const friends = new FriendModel({ user: newUser._id });
       await friends.save();
-      await newUser.updateOne({ $push: { friends: friends._id } });
-      return newUser;
+      const afterUpdate = await UserModel.findOneAndUpdate(
+        newUser,
+        { friends: friends._id },
+        { returnDocument: "after" }
+      );
+      return afterUpdate;
     } catch (error) {
       console.log(mongoose.Error);
       throw new Error(error);
