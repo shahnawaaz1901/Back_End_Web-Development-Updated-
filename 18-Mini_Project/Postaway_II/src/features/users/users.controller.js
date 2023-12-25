@@ -20,6 +20,7 @@ export default class UserController {
       const newUser = await this.userRepository.newUser(req.body);
       return res.status(201).json({ success: true, user: newUser });
     } catch (error) {
+      console.log(error);
       if (error instanceof mongoose.Error) {
         res.status(406).json({ success: false, message: error.message });
       }

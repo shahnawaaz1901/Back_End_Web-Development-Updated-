@@ -1,7 +1,7 @@
 import UserModel from "./users.schema.js";
 import bcrypt from "bcrypt";
 import FriendModel from "../friends/friends.schema.js";
-import mongoose from "mongoose";
+import mongoose, { MongooseError, mongo } from "mongoose";
 
 export default class UserRepository {
   async newUser(userData) {
@@ -9,16 +9,14 @@ export default class UserRepository {
       const { password } = userData;
       const hashPassword = await bcrypt.hash(password, 12);
       userData.password = hashPassword;
-      const friends = new FriendModel();
-      await friends.save();
-      userData.friends = friends._id;
       const newUser = new UserModel(userData);
       await newUser.save();
-      friends.user = newUser._id;
+      const friends = new FriendModel({ user: newUser._id });
       await friends.save();
+      await newUser.updateOne({ $push: { friends: friends._id } });
       return newUser;
     } catch (error) {
-      console.log(error);
+      console.log(mongoose.Error);
       throw new Error(error);
     }
   }

@@ -9,7 +9,7 @@ import cors from "cors";
 //? Internal Modules
 import auth from "./src/middlewares/jwt.auth.js";
 import userRouter from "./src/features/users/users.router.js";
-import { loggerMiddleware, logger } from "./src/middlewares/winston.logger.js";
+import { loggerMiddleware } from "./src/middlewares/winston.logger.js";
 import postRouter from "./src/features/posts/posts.router.js";
 import friendRouter from "./src/features/friends/friends.router.js";
 import likeRouter from "./src/features/likes/likes.router.js";
