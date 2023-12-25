@@ -16,11 +16,11 @@ friendRouter.post("/acceptRequest/:user", (req, res) => {
   friendController.acceptRequest(req, res);
 });
 
-friendRouter.post("/rejectRequest/:userId", (req, res) => {
+friendRouter.post("/rejectRequest/:user", (req, res) => {
   friendController.rejectRequest(req, res);
 });
 
-friendRouter.post("/removeFriend", (req, res) => {
+friendRouter.post("/removeFriend/:friendId", (req, res) => {
   friendController.removeFriend(req, res);
 });
 

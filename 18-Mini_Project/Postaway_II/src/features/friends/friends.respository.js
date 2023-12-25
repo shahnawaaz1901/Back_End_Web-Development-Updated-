@@ -124,14 +124,7 @@ export default class FriendRepository {
     const session = await mongoose.startSession();
     session.startTransaction();
     try {
-      const bothFriends = await FriendModel.findOne({
-        user: new mongoose.Types.ObjectId(friendObject.user),
-        friendList: new mongoose.Types.ObjectId(friendObject.friendId),
-      });
-      if (!bothFriends) {
-        throw new Error("Both are not friends !!");
-      }
-      await FriendModel.updateOne(
+      const bothFriends = await FriendModel.findOneAndUpdate(
         {
           user: new mongoose.Types.ObjectId(friendObject.user),
         },
@@ -139,8 +132,12 @@ export default class FriendRepository {
           $pull: {
             friendList: new mongoose.Types.ObjectId(friendObject.friendId),
           },
-        }
+        },
+        { returnDocument: "after" }
       );
+      if (!bothFriends) {
+        throw new Error("Both are not friends !!");
+      }
       await FriendModel.updateOne(
         {
           user: new mongoose.Types.ObjectId(friendObject.friendId),
@@ -151,6 +148,8 @@ export default class FriendRepository {
           },
         }
       );
+      await session.commitTransaction();
+      await session.endSession();
     } catch (error) {
       console.log(error);
       await session.abortTransaction();

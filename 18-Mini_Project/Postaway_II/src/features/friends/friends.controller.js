@@ -77,6 +77,7 @@ export default class FriendController {
         .status(200)
         .json({ success: true, message: "Friend Remove Successfully !!" });
     } catch (error) {
+      console.log(error);
       res.status(500).json({ success: false, message: "Something went Wrong" });
     }
   }
