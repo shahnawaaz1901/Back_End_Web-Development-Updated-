@@ -1,14 +1,19 @@
 import FriendRepository from "./friends.respository.js";
-
+import ApplicationError from "../error/error.class.js";
 export default class FriendController {
   constructor() {
     this.friendRepository = new FriendRepository();
   }
 
   async getFriends(req, res) {
-    const { userId } = req;
-    const friends = await this.friendRepository.get(userId);
-    res.status(200).send({ success: true, friends: friends.friendList });
+    try {
+      const { userId } = req;
+      const friends = await this.friendRepository.get(userId);
+      res.status(200).send({ success: true, friends: friends.friendList });
+    } catch (error) {
+      console.log(error);
+      throw new ApplicationError("Something went wrong with Database", 500);
+    }
   }
 
   async sendRequest(req, res) {
@@ -37,6 +42,9 @@ export default class FriendController {
     try {
       const { userId } = req;
       const { user } = req.params;
+      if (!user) {
+        throw new ApplicationError("Request id must be present", 406);
+      }
       await this.friendRepository.accept({ userId, requestUser: user });
       res
         .status(201)
@@ -53,6 +61,9 @@ export default class FriendController {
     try {
       const { userId } = req;
       const { user } = req.params;
+      if (!user) {
+        throw new ApplicationError("FriendId must be Present", 406);
+      }
       await this.friendRepository.reject({
         receiveRequest: userId,
         sendRequest: user,
@@ -72,6 +83,9 @@ export default class FriendController {
     try {
       const { userId } = req;
       const { friendId } = req.params;
+      if (!friendId) {
+        throw new ApplicationError("FriendId must be Present", 406);
+      }
       await this.friendRepository.remove({ user: userId, friendId });
       res
         .status(200)
