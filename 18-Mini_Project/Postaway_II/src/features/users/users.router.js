@@ -32,4 +32,8 @@ userRouter.put("/forgetPassword/validateOtp/:email", (req, res) => {
 userRouter.delete("/signOutAll", auth, (req, res) => {
   userController.signOutAll(req, res);
 });
+
+userRouter.post("/changePassword", auth, (req, res) => {
+  userController.changePassword(req, res);
+});
 export default userRouter;

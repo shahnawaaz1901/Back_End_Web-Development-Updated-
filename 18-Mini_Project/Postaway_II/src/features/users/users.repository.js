@@ -1,7 +1,8 @@
 import UserModel from "./users.schema.js";
 import bcrypt from "bcrypt";
 import FriendModel from "../friends/friends.schema.js";
-import mongoose, { MongooseError, mongo } from "mongoose";
+import mongoose from "mongoose";
+import ApplicationError from "../error/error.class.js";
 
 export default class UserRepository {
   async newUser(userData) {
@@ -79,6 +80,36 @@ export default class UserRepository {
     });
     if (!userLogin) {
       throw new Error("Login to Continue");
+    }
+  }
+
+  async updatePassword(updatedPasswordDetail) {
+    try {
+      const updatedData = await UserModel.findById(
+        updatedPasswordDetail.userId
+      );
+      if (!updatedData) {
+        throw new ApplicationError("Something went wrong !!", 500);
+      }
+      const passwordMatch = await bcrypt.compare(
+        updatedPasswordDetail.currentPassword,
+        updatedData.password
+      );
+      if (!passwordMatch) {
+        throw new ApplicationError("Password is Incorrect !!", 404);
+      }
+      updatedData.password = await bcrypt.hash(
+        updatedPasswordDetail.updatedPassword,
+        12
+      );
+      await updatedData.save();
+      return updatedData;
+    } catch (error) {
+      console.log(error);
+      if (error instanceof ApplicationError) {
+        throw new ApplicationError(error.message, error.errStatusCode);
+      }
+      throw new Error(error.message);
     }
   }
 }

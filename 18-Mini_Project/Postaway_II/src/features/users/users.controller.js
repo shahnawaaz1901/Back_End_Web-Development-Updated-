@@ -6,6 +6,7 @@ import sendOtp from "../notification/otp.js";
 import OTPGenerator from "../verification/otp.verification.js";
 import wrongPasswordAlert from "../notification/wrongPassword.js";
 import updatePasswordAlert from "../notification/updatePassword.js";
+import ApplicationError from "../error/error.class.js";
 
 export default class UserController {
   constructor() {
@@ -133,6 +134,24 @@ export default class UserController {
         success: false,
         message: "Error While SignOut from All Devices !!",
       });
+    }
+  }
+
+  async changePassword(req, res) {
+    try {
+      const { userId } = req;
+      const { currentPassword, updatedPassword } = req.body;
+      const update = await this.userRepository.updatePassword({
+        userId,
+        currentPassword,
+        updatedPassword,
+      });
+      res.status(200).json({ success: true, user: update });
+    } catch (error) {
+      console.log(error);
+      if (error instanceof ApplicationError) {
+        throw new ApplicationError(error.message, error.errStatusCode);
+      }
     }
   }
 }
