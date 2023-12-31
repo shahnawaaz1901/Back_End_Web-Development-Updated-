@@ -21,18 +21,27 @@ userRouter.post("/signIn", (req, res) => {
   userController.signIn(req, res);
 });
 
+//* SignOut
+userRouter.delete("/signOut", auth, (req, res) => {
+  userController.signOut(req, res);
+});
+
+//* SendOTP for Reset the Password
 userRouter.get("/forgetPassword/sendOtp/:email", (req, res) => {
   userController.sendOtp(req, res);
 });
 
+//* Validate OTP and Reset the Password
 userRouter.put("/forgetPassword/validateOtp/:email", (req, res) => {
   userController.validateAndResetPassword(req, res);
 });
 
+//* SignOut from All Devices
 userRouter.delete("/signOutAll", auth, (req, res) => {
   userController.signOutAll(req, res);
 });
 
+//* Change Password using Existing Password
 userRouter.post("/changePassword", auth, (req, res) => {
   userController.changePassword(req, res);
 });

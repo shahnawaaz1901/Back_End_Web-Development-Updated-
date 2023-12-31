@@ -13,6 +13,7 @@ export default class UserController {
     this.userRepository = new UserRepository();
   }
 
+  //* Create New Account
   async signUp(req, res) {
     try {
       if (req.file) {
@@ -31,10 +32,11 @@ export default class UserController {
     }
   }
 
+  //* SignIn to Existing Account
   async signIn(req, res) {
     try {
       const { email, password } = req.body;
-      const result = await this.userRepository.existingUser(email);
+      const result = await this.userRepository.userExist(email);
       if (result) {
         const isMatch = await bcrypt.compare(password, result.password);
         if (isMatch) {
@@ -66,6 +68,21 @@ export default class UserController {
     }
   }
 
+  async signOut(req, res) {
+    try {
+      const { userId } = req;
+      const { JWT_Token } = req.cookies;
+      await this.userRepository.signOut({ userId, JWT_Token });
+      res
+        .clearCookie("JWT_Token")
+        .status(200)
+        .json({ success: true, message: "SignOut Successfully !!" });
+    } catch (error) {
+      throw new ApplicationError("Something went wrong !!", 500);
+    }
+  }
+
+  //* SentOTP for Reset the Password
   async sendOtp(req, res) {
     try {
       const { email } = req.params;
@@ -86,13 +103,15 @@ export default class UserController {
         message: "Account Not Exist with this Email !",
       });
     } catch (error) {
-      res.status(500).send({
-        success: true,
-        message: "Something went wrong while sending Otp!",
-      });
+      console.log(error);
+      throw new ApplicationError(
+        "Something went wrong while sending Otp!",
+        500
+      );
     }
   }
 
+  //* Validate OTP and Reset the Password
   async validateAndResetPassword(req, res) {
     try {
       const { email } = req.params;
@@ -104,21 +123,22 @@ export default class UserController {
       }
 
       const verified = OTPGenerator.validateOTP(otp, email);
-      let updatedData;
       if (verified.success) {
-        updatedData = await this.userRepository.changePassword(email, password);
+        let updatedData = await this.userRepository.changePassword(
+          email,
+          password
+        );
         await updatePasswordAlert(email, updatedData.name);
         return res.status(200).json({ success: true, user: updatedData });
       }
       return res.status(404).json({ success: false, message: verified.msg });
     } catch (error) {
       console.log(error);
-      res
-        .status(500)
-        .json({ success: false, message: "Error while Changing Password !" });
+      throw new ApplicationError("Error while Changing Password !", 500);
     }
   }
 
+  //* SignOut from All Devices
   async signOutAll(req, res) {
     try {
       const { userId } = req;
@@ -130,13 +150,14 @@ export default class UserController {
         .json({ success: true, message: "SingOut From All Devices !!" });
     } catch (error) {
       console.log(error);
-      res.status(500).json({
-        success: false,
-        message: "Error While SignOut from All Devices !!",
-      });
+      throw new ApplicationError(
+        "Error While SignOut from All Devices !!",
+        500
+      );
     }
   }
 
+  //* Change Password using Existing Password & Login
   async changePassword(req, res) {
     try {
       const { userId } = req;

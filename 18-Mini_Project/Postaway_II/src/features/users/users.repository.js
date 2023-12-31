@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import ApplicationError from "../error/error.class.js";
 
 export default class UserRepository {
+  //* Add New User
   async newUser(userData) {
     try {
       const { password } = userData;
@@ -26,11 +27,7 @@ export default class UserRepository {
     }
   }
 
-  async existingUser(userEmail) {
-    console.log(userEmail);
-    return await UserModel.findOne({ email: userEmail });
-  }
-
+  //* Find Account By Email
   async userExist(email) {
     try {
       return await UserModel.findOne({ email });
@@ -39,6 +36,7 @@ export default class UserRepository {
     }
   }
 
+  //* Change Password
   async changePassword(email, newPassword) {
     try {
       const hashPassword = await bcrypt.hash(newPassword, 12);
@@ -53,6 +51,7 @@ export default class UserRepository {
     }
   }
 
+  //* Store Every Login History
   async storeLoginDetails(userInfo) {
     await UserModel.findOneAndUpdate(
       { email: userInfo.email },
@@ -60,8 +59,17 @@ export default class UserRepository {
     );
   }
 
+  //* SignOut User
+  async signOut(userObj) {
+    await UserModel.findByIdAndUpdate(userObj.userId, {
+      $pull: {
+        loginDevices: userObj.JWT_Token,
+      },
+    });
+  }
+
+  //* SignOut from All Devices
   async signOutAll(userId) {
-    console.log(userId);
     return await UserModel.findOneAndUpdate(
       {
         _id: new mongoose.Types.ObjectId(userId),
@@ -73,6 +81,7 @@ export default class UserRepository {
     );
   }
 
+  //* Check if User use SignOutAll to Logout from All Devices
   async isLoginRequired(id, token) {
     const userLogin = await UserModel.findOne({
       _id: new mongoose.Types.ObjectId(id),
@@ -83,6 +92,7 @@ export default class UserRepository {
     }
   }
 
+  //* Change the Password using the Existing Password
   async updatePassword(updatedPasswordDetail) {
     try {
       const updatedData = await UserModel.findById(
