@@ -14,7 +14,7 @@ export default class UserController {
   }
 
   //* Create New Account
-  async signUp(req, res) {
+  async signUp(req, res, next) {
     try {
       if (req.file) {
         req.body.profileImageURL = req.file.filename;
@@ -22,13 +22,8 @@ export default class UserController {
       const newUser = await this.userRepository.newUser(req.body);
       return res.status(201).json({ success: true, user: newUser });
     } catch (error) {
-      console.log(error);
-      if (error instanceof mongoose.Error) {
-        res.status(406).json({ success: false, message: error.message });
-      }
-      res
-        .status(404)
-        .json({ success: false, message: "Error While Creating new User" });
+      next(error);
+      // res.status(500).json({ success: false, message: "Something went wrong" });
     }
   }
 

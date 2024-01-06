@@ -12,18 +12,17 @@ export default class UserRepository {
       const hashPassword = await bcrypt.hash(password, 12);
       userData.password = hashPassword;
       const newUser = new UserModel(userData);
-      await newUser.save();
       const friends = new FriendModel({ user: newUser._id });
+      newUser.friends = friends._id;
+      friends.user = newUser._id;
+      await newUser.save();
       await friends.save();
-      const afterUpdate = await UserModel.findOneAndUpdate(
-        newUser,
-        { friends: friends._id },
-        { returnDocument: "after" }
-      );
-      return afterUpdate;
+      return newUser;
     } catch (error) {
-      console.log(mongoose.Error);
-      throw new Error(error);
+      console.log(error);
+      if (error instanceof mongoose.Error.ValidationError) {
+        throw new ApplicationError(error.message, 406);
+      }
     }
   }
 
@@ -32,7 +31,7 @@ export default class UserRepository {
     try {
       return await UserModel.findOne({ email });
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   }
 
@@ -53,42 +52,58 @@ export default class UserRepository {
 
   //* Store Every Login History
   async storeLoginDetails(userInfo) {
-    await UserModel.findOneAndUpdate(
-      { email: userInfo.email },
-      { $push: { loginDevices: userInfo.token } }
-    );
+    try {
+      await UserModel.findOneAndUpdate(
+        { email: userInfo.email },
+        { $push: { loginDevices: userInfo.token } }
+      );
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 
   //* SignOut User
   async signOut(userObj) {
-    await UserModel.findByIdAndUpdate(userObj.userId, {
-      $pull: {
-        loginDevices: userObj.JWT_Token,
-      },
-    });
+    try {
+      await UserModel.findByIdAndUpdate(userObj.userId, {
+        $pull: {
+          loginDevices: userObj.JWT_Token,
+        },
+      });
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 
   //* SignOut from All Devices
   async signOutAll(userId) {
-    return await UserModel.findOneAndUpdate(
-      {
-        _id: new mongoose.Types.ObjectId(userId),
-      },
-      {
-        $set: { loginDevices: [] },
-      },
-      { multi: true, returnDocument: "after" }
-    );
+    try {
+      return await UserModel.findOneAndUpdate(
+        {
+          _id: new mongoose.Types.ObjectId(userId),
+        },
+        {
+          $set: { loginDevices: [] },
+        },
+        { multi: true, returnDocument: "after" }
+      );
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 
   //* Check if User use SignOutAll to Logout from All Devices
   async isLoginRequired(id, token) {
-    const userLogin = await UserModel.findOne({
-      _id: new mongoose.Types.ObjectId(id),
-      loginDevices: token,
-    });
-    if (!userLogin) {
-      throw new Error("Login to Continue");
+    try {
+      const userLogin = await UserModel.findOne({
+        _id: new mongoose.Types.ObjectId(id),
+        loginDevices: token,
+      });
+      if (!userLogin) {
+        throw new Error("Login to Continue");
+      }
+    } catch (error) {
+      throw new Error(error.message);
     }
   }
 

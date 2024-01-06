@@ -11,38 +11,38 @@ userRouter.post(
   "/signUp",
   filePath,
   upload.single("profileImageURL"),
-  (req, res) => {
-    userController.signUp(req, res);
+  (req, res, next) => {
+    userController.signUp(req, res, next);
   }
 );
 
 //* Signin User
-userRouter.post("/signIn", (req, res) => {
-  userController.signIn(req, res);
+userRouter.post("/signIn", (req, res, next) => {
+  userController.signIn(req, res, next);
 });
 
 //* SignOut
-userRouter.delete("/signOut", auth, (req, res) => {
-  userController.signOut(req, res);
+userRouter.delete("/signOut", auth, (req, res, next) => {
+  userController.signOut(req, res, next);
 });
 
 //* SendOTP for Reset the Password
-userRouter.get("/forgetPassword/sendOtp/:email", (req, res) => {
-  userController.sendOtp(req, res);
+userRouter.get("/forgetPassword/sendOtp/:email", (req, res, next) => {
+  userController.sendOtp(req, res, next);
 });
 
 //* Validate OTP and Reset the Password
-userRouter.put("/forgetPassword/validateOtp/:email", (req, res) => {
-  userController.validateAndResetPassword(req, res);
+userRouter.put("/forgetPassword/validateOtp/:email", (req, res, next) => {
+  userController.validateAndResetPassword(req, res, next);
 });
 
 //* SignOut from All Devices
-userRouter.delete("/signOutAll", auth, (req, res) => {
-  userController.signOutAll(req, res);
+userRouter.delete("/signOutAll", auth, (req, res, next) => {
+  userController.signOutAll(req, res, next);
 });
 
 //* Change Password using Existing Password
-userRouter.post("/changePassword", auth, (req, res) => {
-  userController.changePassword(req, res);
+userRouter.post("/changePassword", auth, (req, res, next) => {
+  userController.changePassword(req, res, next);
 });
 export default userRouter;
