@@ -28,7 +28,7 @@ export default class UserController {
   }
 
   //* SignIn to Existing Account
-  async signIn(req, res) {
+  async signIn(req, res, next) {
     try {
       const { email, password } = req.body;
       const result = await this.userRepository.userExist(email);
@@ -47,23 +47,16 @@ export default class UserController {
           return res.status(200).json({ success: true, token });
         }
         wrongPasswordAlert(result.email);
-        return res
-          .status(401)
-          .json({ success: false, message: "Password is Incorrect !" });
+        throw new ApplicationError("Password is Incorrect !", 401);
       }
-      return res
-        .status(404)
-        .send({ success: false, message: "Invalid Credentials !" });
+      throw new ApplicationError("Invalid Credentials", 404);
     } catch (error) {
       console.log(error);
-      res.status(404).json({
-        success: false,
-        message: "Something Went Wrong while Logging",
-      });
+      next(error);
     }
   }
 
-  async signOut(req, res) {
+  async signOut(req, res, next) {
     try {
       const { userId } = req;
       const { JWT_Token } = req.cookies;
@@ -73,18 +66,17 @@ export default class UserController {
         .status(200)
         .json({ success: true, message: "SignOut Successfully !!" });
     } catch (error) {
-      throw new ApplicationError("Something went wrong !!", 500);
+      console.log(error);
+      next(error);
     }
   }
 
   //* SentOTP for Reset the Password
-  async sendOtp(req, res) {
+  async sendOtp(req, res, next) {
     try {
       const { email } = req.params;
       if (!email) {
-        res
-          .status(404)
-          .send({ success: false, message: "Please Enter Email Address" });
+        throw new ApplicationError("Please Enter Email Address", 404);
       }
       const userExist = await this.userRepository.userExist(email);
       if (userExist) {
@@ -93,28 +85,20 @@ export default class UserController {
           .status(200)
           .json({ success: true, message: "Otp sent successfully !" });
       }
-      res.status(404).json({
-        success: false,
-        message: "Account Not Exist with this Email !",
-      });
+      throw new ApplicationError("Account Not Exist with this Email !", 404);
     } catch (error) {
       console.log(error);
-      throw new ApplicationError(
-        "Something went wrong while sending Otp!",
-        500
-      );
+      next(error);
     }
   }
 
   //* Validate OTP and Reset the Password
-  async validateAndResetPassword(req, res) {
+  async validateAndResetPassword(req, res, next) {
     try {
       const { email } = req.params;
       const { password, otp } = req.body;
       if (!password) {
-        return res
-          .status(406)
-          .json({ success: false, message: "Password Can't Be Empty !" });
+        throw new ApplicationError("Password Can't Be Empty !", 406);
       }
 
       const verified = OTPGenerator.validateOTP(otp, email);
@@ -126,34 +110,29 @@ export default class UserController {
         await updatePasswordAlert(email, updatedData.name);
         return res.status(200).json({ success: true, user: updatedData });
       }
-      return res.status(404).json({ success: false, message: verified.msg });
+      throw new ApplicationError(verified.msg, 404);
     } catch (error) {
       console.log(error);
-      throw new ApplicationError("Error while Changing Password !", 500);
+      next(error);
     }
   }
 
   //* SignOut from All Devices
-  async signOutAll(req, res) {
+  async signOutAll(req, res, next) {
     try {
       const { userId } = req;
-      console.log(userId);
-      const updated = await this.userRepository.signOutAll(userId);
-      console.log(updated);
+      await this.userRepository.signOutAll(userId);
       return res
         .status(200)
         .json({ success: true, message: "SingOut From All Devices !!" });
     } catch (error) {
       console.log(error);
-      throw new ApplicationError(
-        "Error While SignOut from All Devices !!",
-        500
-      );
+      next(error);
     }
   }
 
   //* Change Password using Existing Password & Login
-  async changePassword(req, res) {
+  async changePassword(req, res, next) {
     try {
       const { userId } = req;
       const { currentPassword, updatedPassword } = req.body;
@@ -165,9 +144,7 @@ export default class UserController {
       res.status(200).json({ success: true, user: update });
     } catch (error) {
       console.log(error);
-      if (error instanceof ApplicationError) {
-        throw new ApplicationError(error.message, error.errStatusCode);
-      }
+      next(error);
     }
   }
 }

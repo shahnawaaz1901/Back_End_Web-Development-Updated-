@@ -71,7 +71,7 @@ export default class UserRepository {
         },
       });
     } catch (error) {
-      throw new Error(error.message);
+      console.log(error);
     }
   }
 
@@ -114,7 +114,7 @@ export default class UserRepository {
         updatedPasswordDetail.userId
       );
       if (!updatedData) {
-        throw new ApplicationError("Something went wrong !!", 500);
+        throw new ApplicationError("User not found !!", 404);
       }
       const passwordMatch = await bcrypt.compare(
         updatedPasswordDetail.currentPassword,
@@ -131,10 +131,6 @@ export default class UserRepository {
       return updatedData;
     } catch (error) {
       console.log(error);
-      if (error instanceof ApplicationError) {
-        throw new ApplicationError(error.message, error.errStatusCode);
-      }
-      throw new Error(error.message);
     }
   }
 }
