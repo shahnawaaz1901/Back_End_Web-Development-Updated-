@@ -9,26 +9,26 @@ postRouter.post(
   "/createPost",
   filePath,
   upload.single("imageURL"),
-  (req, res) => {
-    postController.createPost(req, res);
+  (req, res, next) => {
+    postController.createPost(req, res, next);
   }
 );
-postRouter.get("/getPosts/:userId", (req, res) => {
-  postController.getPosts(req, res);
+postRouter.get("/getPosts/:userId", (req, res, next) => {
+  postController.getPosts(req, res, next);
 });
-postRouter.get("/getOnePost/:postId", (req, res) => {
-  postController.getOnePost(req, res);
+postRouter.get("/getOnePost/:postId", (req, res, next) => {
+  postController.getOnePost(req, res, next);
 });
 postRouter.put(
   "/updatePost/:postId",
   filePath,
   upload.single("imageURL"),
-  (req, res) => {
-    postController.updatePost(req, res);
+  (req, res, next) => {
+    postController.updatePost(req, res, next);
   }
 );
-postRouter.delete("/deletePost/:postId", (req, res) => {
-  postController.deletePost(req, res);
+postRouter.delete("/deletePost/:postId", (req, res, next) => {
+  postController.deletePost(req, res, next);
 });
 
 export default postRouter;

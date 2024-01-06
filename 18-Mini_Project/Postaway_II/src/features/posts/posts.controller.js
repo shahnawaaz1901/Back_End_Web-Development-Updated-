@@ -7,8 +7,8 @@ export default class PostController {
     this.postRepository = new PostRepository();
   }
 
-  async createPost(req, res) {
-    console.log(req.url);
+  //* New Post
+  async createPost(req, res, next) {
     try {
       /* Because if user not upload any image then req.file value is undefined */
       if (req.file) {
@@ -30,43 +30,35 @@ export default class PostController {
       return res.status(201).json({ sucess: true, post: savedPost });
     } catch (error) {
       console.log(error);
-      throw new ApplicationError("Something went wrong", 500);
+      next(error);
     }
   }
 
-  async getPosts(req, res) {
+  //* Get All Post of Self or Other User
+  async getPosts(req, res, next) {
     try {
-      let { userId } = req;
-
-      //* If user want to see Other User's Post so User can do by Passing the Other UserId in Query Parameter
-      if (req.params.userId) {
-        userId = req.params.userId;
-      }
-
+      //* If user want to see Other User's Post so User can do by Passing the Other UserId in Query Parameter */
+      let userId = req.params.userId || req.userId;
       const posts = await this.postRepository.get(userId);
-      res.status(200).send(posts);
+      res.status(200).json({ success: true, posts });
     } catch (error) {
-      if (error instanceof mongoose.Error) {
-        throw new Error(error.message);
-      }
-      throw new ApplicationError(error.message, 404);
+      console.log(error);
+      next(error);
     }
   }
 
-  async getOnePost(req, res) {
+  async getOnePost(req, res, next) {
     try {
       const { postId } = req.params;
       const post = await this.postRepository.getOne(postId);
-      return res.status(200).send(post);
+      return res.status(200).json({ success: true, post });
     } catch (error) {
-      if (error instanceof mongoose.Error) {
-        throw new Error(error.message);
-      }
-      throw new ApplicationError(error.message, 404);
+      console.log(error);
+      next(error);
     }
   }
 
-  async updatePost(req, res) {
+  async updatePost(req, res, next) {
     try {
       const { userId } = req;
       const { postId } = req.params;
@@ -86,16 +78,13 @@ export default class PostController {
       if (updatedPost) {
         return res.status(200).send({ success: true, post: updatedPost });
       }
-      res.status(404).send({ success: false, message: "Post not found !!" });
+      throw new ApplicationError("Post not found", 404);
     } catch (error) {
-      if (error instanceof mongoose.Error) {
-        throw new Error(error.message);
-      }
-      throw new ApplicationError(error.message, 404);
+      next(error);
     }
   }
 
-  async deletePost(req, res) {
+  async deletePost(req, res, next) {
     try {
       const { userId } = req;
       const { postId } = req.params;
