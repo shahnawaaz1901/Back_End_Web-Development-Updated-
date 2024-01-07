@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import PostModel from "./posts.schema.js";
+import ApplicationError from "../error/error.class.js";
 export default class PostRepository {
   async new(postData) {
     try {
@@ -31,7 +32,7 @@ export default class PostRepository {
 
   async update(updatedData, requireData) {
     try {
-      return await PostModel.findOneAndUpdate(
+      const data = await PostModel.findOneAndUpdate(
         {
           _id: new mongoose.Types.ObjectId(requireData.postId),
           user: new mongoose.Types.ObjectId(requireData.userId),
@@ -39,6 +40,10 @@ export default class PostRepository {
         updatedData,
         { returnDocument: "after" }
       );
+      if (!data) {
+        throw new ApplicationError("Post not found !!", 404);
+      }
+      return data;
     } catch (error) {
       console.log(error);
     }

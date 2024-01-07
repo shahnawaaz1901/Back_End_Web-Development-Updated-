@@ -40,7 +40,7 @@ export default class PostController {
   async getPosts(req, res, next) {
     try {
       //* If user want to see Other User's Post so User can do by Passing the Other UserId in Query Parameter */
-      let userId = req.params.userId || req.userId;
+      let userId = req.query.userId || req.userId;
       let posts = await this.postRepository.get(userId);
       res.status(200).json({ success: true, posts });
     } catch (error) {
@@ -69,8 +69,13 @@ export default class PostController {
     try {
       const { userId } = req;
       const { postId } = req.params;
+      if (!postId) {
+        throw new ApplicationError("PostId is mendatory !!", 406);
+      }
       if (req.body.tags) {
         req.body.tags = req.body.tags.split(",");
+      } else {
+        req.body.tags = [];
       }
 
       if (req.file) {
@@ -95,6 +100,9 @@ export default class PostController {
     try {
       const { userId } = req;
       const { postId } = req.params;
+      if (!postId) {
+        throw new ApplicationError("PostId is mendatory !!", 406);
+      }
       const result = await this.postRepository.delete({ userId, postId });
       if (result) {
         return res
