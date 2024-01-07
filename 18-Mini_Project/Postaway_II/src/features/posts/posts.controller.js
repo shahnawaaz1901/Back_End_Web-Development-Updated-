@@ -18,7 +18,9 @@ export default class PostController {
       if (req.body.tags) {
         req.body.tags = req.body.tags.split(",");
       }
-
+      if (!req.body.caption && !req.body.imageURL && !req.body.location) {
+        throw new ApplicationError("Minimum One field is Required", 406);
+      }
       const savedPost = await this.postRepository.new({
         user: req.userId,
         caption: req.body.caption,
@@ -39,7 +41,7 @@ export default class PostController {
     try {
       //* If user want to see Other User's Post so User can do by Passing the Other UserId in Query Parameter */
       let userId = req.params.userId || req.userId;
-      const posts = await this.postRepository.get(userId);
+      let posts = await this.postRepository.get(userId);
       res.status(200).json({ success: true, posts });
     } catch (error) {
       console.log(error);
@@ -47,10 +49,14 @@ export default class PostController {
     }
   }
 
+  //* Get Specific Post
   async getOnePost(req, res, next) {
     try {
       const { postId } = req.params;
       const post = await this.postRepository.getOne(postId);
+      if (!post) {
+        throw new ApplicationError("Post not found !!", 404);
+      }
       return res.status(200).json({ success: true, post });
     } catch (error) {
       console.log(error);
@@ -58,6 +64,7 @@ export default class PostController {
     }
   }
 
+  //* Update Post
   async updatePost(req, res, next) {
     try {
       const { userId } = req;
@@ -94,14 +101,10 @@ export default class PostController {
           .status(200)
           .json({ success: true, message: "Post Deleted Successfully !" });
       }
-      res
-        .status(404)
-        .json({ success: false, message: "Post not found for the User !!" });
+      throw new ApplicationError("Post not found for the User !!", 404);
     } catch (error) {
-      if (error instanceof mongoose.Error) {
-        throw new Error(error.message);
-      }
-      throw new ApplicationError(error.message, 404);
+      console.log(error);
+      next(error);
     }
   }
 }
