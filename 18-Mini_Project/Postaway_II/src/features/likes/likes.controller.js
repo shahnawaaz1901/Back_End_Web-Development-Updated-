@@ -1,3 +1,4 @@
+import ApplicationError from "../error/error.class.js";
 import LikeRepository from "./likes.repository.js";
 
 export default class LikeController {
@@ -5,7 +6,7 @@ export default class LikeController {
     this.likeRepository = new LikeRepository();
   }
 
-  async addLike(req, res) {
+  async addLike(req, res, next) {
     try {
       const { userId } = req;
       const { id, type } = req.body;
@@ -24,23 +25,20 @@ export default class LikeController {
       res.status(201).json({ success: true, likeable: likeData });
     } catch (error) {
       console.log(error);
+      next(error);
     }
   }
 
-  async removeLike(req, res) {
+  async removeLike(req, res, next) {
     try {
       const { userId } = req;
       const { likeId } = req.params;
       const { likeableDataId, type } = req.body;
       if (!likeableDataId || !type || !likeId) {
-        return res
-          .status(406)
-          .json({ success: false, message: "Please Provide Required details" });
+        throw new ApplicationError("Please Provide Require Details !!", 406);
       }
       if (type != "Post" && type != "User" && type != "Comment") {
-        return res
-          .status(406)
-          .json({ success: false, message: "Type is Invalid" });
+        throw new ApplicationError("Type is Invalid !!", 406);
       }
       const removeLike = await this.likeRepository.remove({
         userId,
@@ -53,6 +51,7 @@ export default class LikeController {
         .send({ success: true, message: "Like Removed successfully !!" });
     } catch (error) {
       console.log(error);
+      next(error);
     }
   }
 }
