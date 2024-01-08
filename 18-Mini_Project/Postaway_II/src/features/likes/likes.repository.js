@@ -16,25 +16,28 @@ export default class LikeRepository {
           : likeInfo.type == "Comment"
           ? CommentModel
           : UserModel;
-      const entityExist = await entityModel.findById(likeInfo.id, session);
+      const entityExist = await entityModel.findById(likeInfo.id);
       if (!entityExist) {
         throw new ApplicationError(`${id} not found !!`, 404);
       }
-      const likeData = new LikeModel({
-        user: likeInfo.userId,
-        likeable: likeInfo.id,
-        on_model: likeInfo.type,
-      });
+      const likeData = LikeModel.findOneAndUpdate(
+        {
+          user: likeInfo.userId,
+          likeable: likeInfo.id,
+          on_model: likeInfo.type,
+        },
+        {},
+        { session, upsert: true }
+      );
       entityExist.likes.push(likeData._id);
-      await likeData.save(session);
-      await entityExist.save(session);
+      await entityExist.save({ session });
       await session.commitTransaction();
       await session.endSession();
       return likeData;
     } catch (error) {
       await session.abortTransaction();
       await session.endSession();
-      console.log(error);
+      throw new Error(error.message);
     }
   }
 

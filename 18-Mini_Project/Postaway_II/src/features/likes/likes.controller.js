@@ -12,19 +12,15 @@ export default class LikeController {
       const { id, type } = req.body;
       console.log(id, type);
       if (!id || !type) {
-        return res
-          .status(406)
-          .json({ success: false, message: "Please Provide Required details" });
+        throw new ApplicationError("Please Provide Required details", 406);
       }
       if (type != "Post" && type != "User" && type != "Comment") {
-        return res
-          .status(406)
-          .json({ success: false, message: "Type is Invalid" });
+        throw new ApplicationError("Type is Invalid", 406);
       }
       const likeData = await this.likeRepository.add({ ...req.body, userId });
       res.status(201).json({ success: true, likeable: likeData });
     } catch (error) {
-      console.log(error);
+      console.log("Inside Controller !!");
       next(error);
     }
   }
