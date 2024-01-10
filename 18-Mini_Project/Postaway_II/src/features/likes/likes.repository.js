@@ -6,6 +6,7 @@ import UserModel from "../users/users.schema.js";
 import ApplicationError from "../error/error.class.js";
 
 export default class LikeRepository {
+  //* Add Like
   async add(likeInfo) {
     const session = await mongoose.startSession();
     try {
@@ -50,6 +51,7 @@ export default class LikeRepository {
     }
   }
 
+  //* Remove Like
   async remove(info) {
     const session = await mongoose.startSession();
     try {

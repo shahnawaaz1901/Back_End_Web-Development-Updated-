@@ -5,23 +5,23 @@ export default class FriendController {
     this.friendRepository = new FriendRepository();
   }
 
-  async getFriends(req, res) {
+  async getFriends(req, res, next) {
     try {
       const { userId } = req;
       const friends = await this.friendRepository.get(userId);
-      res.status(200).send({ success: true, friends: friends.friendList });
+      res.status(200).json({ success: true, friends: friends.friendList });
     } catch (error) {
       console.log(error);
-      throw new ApplicationError("Something went wrong with Database", 500);
+      next(error);
     }
   }
 
-  async sendRequest(req, res) {
+  async sendRequest(req, res, next) {
     try {
       const { userId } = req;
       const { user } = req.params;
       if (!user) {
-        throw new Error("Invalid User Type !!");
+        throw new ApplicationError("User Required for Send Request !!", 406);
       }
       await this.friendRepository.send({
         fromUser: userId,
@@ -32,18 +32,16 @@ export default class FriendController {
         .json({ success: true, message: "Request Sent Successfully !!" });
     } catch (error) {
       console.log(error);
-      res
-        .status(500)
-        .send({ success: false, message: "Internal Server Error !!" });
+      next(error);
     }
   }
 
-  async acceptRequest(req, res) {
+  async acceptRequest(req, res, next) {
     try {
       const { userId } = req;
       const { user } = req.params;
       if (!user) {
-        throw new ApplicationError("Request id must be present", 406);
+        throw new ApplicationError("FriendId must be present", 406);
       }
       await this.friendRepository.accept({ userId, requestUser: user });
       res
@@ -51,13 +49,11 @@ export default class FriendController {
         .json({ success: true, message: "Request Accepted Successfully !!" });
     } catch (error) {
       console.log(error);
-      res
-        .status(500)
-        .json({ success: false, message: "Something went wrong !!" });
+      next(error);
     }
   }
 
-  async rejectRequest(req, res) {
+  async rejectRequest(req, res, next) {
     try {
       const { userId } = req;
       const { user } = req.params;
@@ -70,16 +66,14 @@ export default class FriendController {
       });
       res
         .status(200)
-        .send({ success: true, message: "Request Reject Successfully !!" });
+        .json({ success: true, message: "Request Reject Successfully !!" });
     } catch (error) {
       console.log(error);
-      res
-        .status(500)
-        .send({ success: false, message: "Something went Wrong !!" });
+      next(error);
     }
   }
 
-  async removeFriend(req, res) {
+  async removeFriend(req, res, next) {
     try {
       const { userId } = req;
       const { friendId } = req.params;
@@ -92,7 +86,7 @@ export default class FriendController {
         .json({ success: true, message: "Friend Remove Successfully !!" });
     } catch (error) {
       console.log(error);
-      res.status(500).json({ success: false, message: "Something went Wrong" });
+      next(error);
     }
   }
 }

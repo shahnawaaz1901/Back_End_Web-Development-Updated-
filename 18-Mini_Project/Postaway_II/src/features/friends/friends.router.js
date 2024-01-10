@@ -4,24 +4,29 @@ import FriendController from "./friends.controller.js";
 const friendRouter = express.Router();
 const friendController = new FriendController();
 
-friendRouter.get("/getFriends", (req, res) => {
-  friendController.getFriends(req, res);
+//* Get Friends
+friendRouter.get("/getFriends", (req, res, next) => {
+  friendController.getFriends(req, res, next);
 });
 
-friendRouter.post("/sendRequest/:user", (req, res) => {
-  friendController.sendRequest(req, res);
+//* Send Friend Request
+friendRouter.post("/sendRequest/:user", (req, res, next) => {
+  friendController.sendRequest(req, res, next);
 });
 
-friendRouter.post("/acceptRequest/:user", (req, res) => {
-  friendController.acceptRequest(req, res);
+//* Accept Friend Request
+friendRouter.post("/acceptRequest/:user", (req, res, next) => {
+  friendController.acceptRequest(req, res, next);
 });
 
-friendRouter.post("/rejectRequest/:user", (req, res) => {
-  friendController.rejectRequest(req, res);
+//* Reject Friend Request
+friendRouter.post("/rejectRequest/:user", (req, res, next) => {
+  friendController.rejectRequest(req, res, next);
 });
 
-friendRouter.post("/removeFriend/:friendId", (req, res) => {
-  friendController.removeFriend(req, res);
+//* Remove Friend
+friendRouter.post("/removeFriend/:friendId", (req, res, next) => {
+  friendController.removeFriend(req, res, next);
 });
 
 export default friendRouter;

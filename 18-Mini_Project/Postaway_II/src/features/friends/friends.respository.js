@@ -2,16 +2,18 @@ import mongoose from "mongoose";
 import FriendModel from "./friends.schema.js";
 import UserModel from "../users/users.schema.js";
 export default class FriendRepository {
+  //* Get Friend List
   async get(userId) {
     return await FriendModel.findOne({
       user: new mongoose.Types.ObjectId(userId),
     });
   }
 
+  //* Accept Friend Request
   async accept(friendObject) {
     const session = await mongoose.startSession();
-    session.startTransaction();
     try {
+      session.startTransaction();
       await FriendModel.updateOne(
         {
           user: new mongoose.Types.ObjectId(friendObject.userId),
@@ -48,6 +50,7 @@ export default class FriendRepository {
     }
   }
 
+  //* Send Friend Request
   async send(friendObject) {
     /* //*Another way to create Session */
     // const db = await mongoose.createConnection(process.env.DB_URL).asPromise();
@@ -86,6 +89,7 @@ export default class FriendRepository {
     }
   }
 
+  //* Reject Friend Request
   async reject(friendObject) {
     const session = await mongoose.startSession();
     session.startTransaction();
@@ -120,6 +124,7 @@ export default class FriendRepository {
     }
   }
 
+  //* Remove Friend
   async remove(friendObject) {
     const session = await mongoose.startSession();
     session.startTransaction();

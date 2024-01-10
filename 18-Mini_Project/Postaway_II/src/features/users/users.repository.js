@@ -7,7 +7,9 @@ import ApplicationError from "../error/error.class.js";
 export default class UserRepository {
   //* Add New User
   async newUser(userData) {
+    const session = await mongoose.startSession();
     try {
+      session.startTransaction();
       const { password } = userData;
       const hashPassword = await bcrypt.hash(password, 12);
       userData.password = hashPassword;
@@ -15,10 +17,14 @@ export default class UserRepository {
       const friends = new FriendModel({ user: newUser._id });
       newUser.friends = friends._id;
       friends.user = newUser._id;
-      await newUser.save();
-      await friends.save();
+      await newUser.save({ session });
+      await friends.save({ session });
+      await session.commitTransaction();
+      await session.endSession();
       return newUser;
     } catch (error) {
+      await session.abortTransaction();
+      await session.endSession();
       console.log(error);
       if (error instanceof mongoose.Error.ValidationError) {
         throw new ApplicationError(error.message, 406);
