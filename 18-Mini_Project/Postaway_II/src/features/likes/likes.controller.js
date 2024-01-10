@@ -18,9 +18,9 @@ export default class LikeController {
         throw new ApplicationError("Type is Invalid", 406);
       }
       const likeData = await this.likeRepository.add({ ...req.body, userId });
-      res.status(201).json({ success: true, likeable: likeData });
+      res.status(201).json({ success: true, massage: likeData });
     } catch (error) {
-      console.log("Inside Controller !!");
+      console.log(error);
       next(error);
     }
   }
@@ -36,15 +36,13 @@ export default class LikeController {
       if (type != "Post" && type != "User" && type != "Comment") {
         throw new ApplicationError("Type is Invalid !!", 406);
       }
-      const removeLike = await this.likeRepository.remove({
+      const result = await this.likeRepository.remove({
         userId,
         likeId,
         likeableDataId,
         type,
       });
-      res
-        .status(200)
-        .send({ success: true, message: "Like Removed successfully !!" });
+      res.status(200).send({ success: true, message: result });
     } catch (error) {
       console.log(error);
       next(error);

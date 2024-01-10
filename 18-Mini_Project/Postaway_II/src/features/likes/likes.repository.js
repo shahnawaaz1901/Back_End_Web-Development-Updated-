@@ -20,23 +20,32 @@ export default class LikeRepository {
       if (!entityExist) {
         throw new ApplicationError(`${id} not found !!`, 404);
       }
-      const likeData = LikeModel.findOneAndUpdate(
+      const likeData = await LikeModel.updateOne(
         {
           user: likeInfo.userId,
           likeable: likeInfo.id,
+        },
+        {
           on_model: likeInfo.type,
         },
-        {},
-        { session, upsert: true }
+        { upsert: true, returnDocument: "before", session }
       );
-      entityExist.likes.push(likeData._id);
+      // throw new ApplicationError("Or Bhai", 404);
+      console.log(likeData);
+      if (likeData.matchedCount > 0) {
+        throw new ApplicationError(`Already Liked This ${likeInfo.type}`, 406);
+      }
+      entityExist.likes.push(likeData.upsertedId);
       await entityExist.save({ session });
       await session.commitTransaction();
       await session.endSession();
-      return likeData;
+      return `${likeInfo.type} Liked Successfully..`;
     } catch (error) {
       await session.abortTransaction();
       await session.endSession();
+      if (error instanceof ApplicationError) {
+        throw new ApplicationError(error.message, error.errStatusCode);
+      }
       throw new Error(error.message);
     }
   }
@@ -50,7 +59,7 @@ export default class LikeRepository {
           _id: new mongoose.Types.ObjectId(info.likeId),
           user: new mongoose.Types.ObjectId(info.userId),
         },
-        session
+        { session }
       );
       if (!removeData.deletedCount) {
         throw new ApplicationError("Like not found !!", 404);
@@ -65,14 +74,18 @@ export default class LikeRepository {
       await entityModel.findOneAndUpdate(
         { _id: new mongoose.Types.ObjectId(info.likeableDataId) },
         { $pull: { likes: new mongoose.Types.ObjectId(info.likeId) } },
-        { returnDocument: "after", session }
+        { session }
       );
       await session.commitTransaction();
       await session.endSession();
+      return `Like Removed Successfully...`;
     } catch (error) {
       await session.abortTransaction();
       await session.endSession();
-      console.log(error);
+      if (error instanceof ApplicationError) {
+        throw new ApplicationError(error.message, error.errStatusCode);
+      }
+      throw new Error(error);
     }
   }
 }
