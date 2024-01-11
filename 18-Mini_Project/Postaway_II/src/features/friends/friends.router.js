@@ -20,12 +20,12 @@ friendRouter.post("/acceptRequest/:user", (req, res, next) => {
 });
 
 //* Reject Friend Request
-friendRouter.post("/rejectRequest/:user", (req, res, next) => {
+friendRouter.delete("/rejectRequest/:user", (req, res, next) => {
   friendController.rejectRequest(req, res, next);
 });
 
 //* Remove Friend
-friendRouter.post("/removeFriend/:friendId", (req, res, next) => {
+friendRouter.delete("/removeFriend/:friendId", (req, res, next) => {
   friendController.removeFriend(req, res, next);
 });
 
