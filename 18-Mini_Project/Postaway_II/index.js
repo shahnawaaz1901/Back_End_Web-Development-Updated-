@@ -5,7 +5,7 @@ import "./env.js";
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import swaggerUi from "swagger-ui-express";
+import swagger from "swagger-ui-express";
 import apiDoc from "./swagger.json" assert { type: "JSON" };
 
 //? Internal Modules
@@ -30,7 +30,7 @@ server.use(
 );
 
 //* For API Documentation
-server.use("/apiDocs", swaggerUi.serve, swaggerUi.setup(apiDoc));
+server.use("/apiDocs", swagger.serve, swagger.setup(apiDoc));
 
 //* SetUp Cookies
 server.use(cookieParser());
