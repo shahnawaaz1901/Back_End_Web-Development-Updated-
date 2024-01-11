@@ -1,44 +1,60 @@
 import mongoose from "mongoose";
 import FriendModel from "./friends.schema.js";
 import UserModel from "../users/users.schema.js";
+import ApplicationError from "../error/error.class.js";
+
 export default class FriendRepository {
   //* Get Friend List
   async get(userId) {
     return await FriendModel.findOne({
       user: new mongoose.Types.ObjectId(userId),
-    });
+    }).populate("friendList");
   }
 
   //* Accept Friend Request
   async accept(friendObject) {
     const session = await mongoose.startSession();
+    const { userId, requestUser } = friendObject;
     try {
       session.startTransaction();
+      //* Check if Requested User Send Friend Requests or Not
+      const userSendRequest =
+        (await FriendModel.findOne({
+          user: requestUser,
+          sendRequests: userId,
+        })) &&
+        (await FriendModel.findOne({
+          user: userId,
+          pendingRequests: requestUser,
+        }));
+
+      if (!userSendRequest) {
+        throw new ApplicationError("Request not found !!", 404);
+      }
+
       await FriendModel.updateOne(
         {
-          user: new mongoose.Types.ObjectId(friendObject.userId),
+          user: new mongoose.Types.ObjectId(userId),
         },
         {
           $pull: {
-            pendingRequests: new mongoose.Types.ObjectId(
-              friendObject.requestUser
-            ),
+            pendingRequests: new mongoose.Types.ObjectId(requestUser),
           },
           $push: {
-            friendList: friendObject.requestUser,
+            friendList: requestUser,
           },
         }
       );
       await FriendModel.updateOne(
         {
-          user: new mongoose.Types.ObjectId(friendObject.requestUser),
+          user: new mongoose.Types.ObjectId(requestUser),
         },
         {
           $pull: {
-            sendRequests: new mongoose.Types.ObjectId(friendObject.userId),
+            sendRequests: new mongoose.Types.ObjectId(userId),
           },
           $push: {
-            friendList: friendObject.userId,
+            friendList: userId,
           },
         }
       );
@@ -47,6 +63,7 @@ export default class FriendRepository {
     } catch (error) {
       await session.abortTransaction();
       await session.endSession();
+      throw error;
     }
   }
 
@@ -60,7 +77,7 @@ export default class FriendRepository {
     try {
       const userExist = await UserModel.findById(friendObject.toUser);
       if (!userExist) {
-        throw new Error("User not found");
+        throw new ApplicationError("User not found", 404);
       }
       await FriendModel.findOneAndUpdate(
         {
@@ -86,6 +103,7 @@ export default class FriendRepository {
       await session.abortTransaction();
       await session.endSession();
       console.log(error);
+      throw error;
     }
   }
 
@@ -118,9 +136,10 @@ export default class FriendRepository {
       await session.commitTransaction();
       await session.endSession();
     } catch (error) {
-      console.log(error);
       await session.abortTransaction();
       await session.endSession();
+      console.log(error);
+      throw error;
     }
   }
 
@@ -156,9 +175,10 @@ export default class FriendRepository {
       await session.commitTransaction();
       await session.endSession();
     } catch (error) {
-      console.log(error);
       await session.abortTransaction();
       await session.endSession();
+      console.log(error);
+      throw error;
     }
   }
 }

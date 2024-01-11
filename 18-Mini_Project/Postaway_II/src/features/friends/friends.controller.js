@@ -5,6 +5,7 @@ export default class FriendController {
     this.friendRepository = new FriendRepository();
   }
 
+  //* Get Friend List of a User
   async getFriends(req, res, next) {
     try {
       const { userId } = req;
@@ -16,6 +17,7 @@ export default class FriendController {
     }
   }
 
+  //* Send Request to the User
   async sendRequest(req, res, next) {
     try {
       const { userId } = req;
@@ -36,6 +38,7 @@ export default class FriendController {
     }
   }
 
+  //* Accept Request of a User
   async acceptRequest(req, res, next) {
     try {
       const { userId } = req;
@@ -53,6 +56,7 @@ export default class FriendController {
     }
   }
 
+  //* Reject Request of a User
   async rejectRequest(req, res, next) {
     try {
       const { userId } = req;
@@ -73,6 +77,7 @@ export default class FriendController {
     }
   }
 
+  //* Remove a User from FriendList
   async removeFriend(req, res, next) {
     try {
       const { userId } = req;
