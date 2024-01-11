@@ -29,6 +29,7 @@ export default class UserRepository {
       if (error instanceof mongoose.Error.ValidationError) {
         throw new ApplicationError(error.message, 406);
       }
+      throw error;
     }
   }
 
@@ -37,7 +38,7 @@ export default class UserRepository {
     try {
       return await UserModel.findOne({ email });
     } catch (error) {
-      console.log(error.message);
+      throw error;
     }
   }
 
@@ -52,7 +53,7 @@ export default class UserRepository {
       );
       return updatedUser;
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   }
 
@@ -64,7 +65,7 @@ export default class UserRepository {
         { $push: { loginDevices: userInfo.token } }
       );
     } catch (error) {
-      throw new Error(error.message);
+      throw error;
     }
   }
 
@@ -77,7 +78,7 @@ export default class UserRepository {
         },
       });
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   }
 
@@ -94,7 +95,7 @@ export default class UserRepository {
         { multi: true, returnDocument: "after" }
       );
     } catch (error) {
-      throw new Error(error.message);
+      throw error;
     }
   }
 
@@ -109,7 +110,7 @@ export default class UserRepository {
         throw new Error("Login to Continue");
       }
     } catch (error) {
-      throw new Error(error.message);
+      throw error;
     }
   }
 
@@ -136,7 +137,7 @@ export default class UserRepository {
       await updatedData.save();
       return updatedData;
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   }
 }

@@ -188,29 +188,30 @@ export default class FriendRepository {
   //* Remove Friend
   async remove(friendObject) {
     const session = await mongoose.startSession();
+    const { user, friendId } = friendObject;
     session.startTransaction();
     try {
-      const bothFriends = await FriendModel.findOneAndUpdate(
-        {
-          user: new mongoose.Types.ObjectId(friendObject.user),
-        },
-        {
-          $pull: {
-            friendList: new mongoose.Types.ObjectId(friendObject.friendId),
-          },
-        },
-        { returnDocument: "after" }
-      );
+      const bothFriends = await this.#checkBothFriends(user, friendId);
       if (!bothFriends) {
-        throw new Error("Both are not friends !!");
+        throw new ApplicationError("Both are not friends !!", 406);
       }
       await FriendModel.updateOne(
         {
-          user: new mongoose.Types.ObjectId(friendObject.friendId),
+          user: new mongoose.Types.ObjectId(friendId),
         },
         {
           $pull: {
-            friendList: new mongoose.Types.ObjectId(friendObject.user),
+            friendList: new mongoose.Types.ObjectId(user),
+          },
+        }
+      );
+      await FriendModel.updateOne(
+        {
+          user: new mongoose.Types.ObjectId(friendId),
+        },
+        {
+          $pull: {
+            friendList: new mongoose.Types.ObjectId(user),
           },
         }
       );
