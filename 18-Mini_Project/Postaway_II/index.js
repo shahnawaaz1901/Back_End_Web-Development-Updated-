@@ -6,7 +6,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import swagger from "swagger-ui-express";
-import apiDoc from "./swagger.json" assert { type: "JSON" };
+import apiDoc from "./swagger.json" assert { type: "json" };
 
 //? Internal Modules
 import auth from "./src/middlewares/jwt.auth.js";
