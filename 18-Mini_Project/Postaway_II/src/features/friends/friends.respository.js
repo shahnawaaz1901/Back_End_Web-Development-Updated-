@@ -44,8 +44,11 @@ export default class FriendRepository {
   //* Accept Friend Request
   async accept(friendObject) {
     const session = await mongoose.startSession();
-    const { userId: reciever, requestUser: sender } = friendObject;
     try {
+      const { userId: reciever, requestUser: sender } = friendObject;
+      if (sender == reciever) {
+        throw new ApplicationError("Request not Accepted to Self !!", 406);
+      }
       session.startTransaction();
       //* Check if Requested User Send Friend Requests or Not
       const userSendRequest = await this.#checkIfUserSendRequest(
@@ -98,19 +101,22 @@ export default class FriendRepository {
     // const db = await mongoose.createConnection(process.env.DB_URL).asPromise();
     // await db.startSession();
     const session = await mongoose.startSession();
-    session.startTransaction();
     try {
+      session.startTransaction();
       const { toUser: reciever, fromUser: sender } = friendObject;
+      if (sender == reciever) {
+        throw new ApplicationError("Request not send to self !!", 406);
+      }
       //* Check User Exist or Not
       const userExist = await UserModel.findById(friendObject.toUser);
       if (!userExist) {
-        throw new ApplicationError("User not found", 404);
+        throw new ApplicationError("User not found !!", 404);
       }
 
       //* Check if Both users are Already Friends or Not
       const bothUserFriends = await this.#checkBothFriends(sender, reciever);
       if (bothUserFriends) {
-        throw new ApplicationError("This user is Friend Already", 406);
+        throw new ApplicationError("This user is Friend Already !!", 406);
       }
       await FriendModel.findOneAndUpdate(
         {
@@ -139,37 +145,40 @@ export default class FriendRepository {
 
   //* Reject Friend Request
   async reject(friendObject) {
-    const { receiveRequest: to, sendRequest: from } = friendObject;
     const session = await mongoose.startSession();
-    session.startTransaction();
     try {
+      session.startTransaction();
+      const { receiveRequest: reciever, sendRequest: sender } = friendObject;
+      if (sender == reciever) {
+        throw new ApplicationError("Can't Reject Self !!", 406);
+      }
       /* First Check if User Sent Request of Not */
       const requestForFriend =
         (await FriendModel.findOne({
-          user: from,
-          sendRequests: to,
+          user: sender,
+          sendRequests: reciever,
         })) &&
         (await FriendModel.findOne({
-          user: to,
-          pendingRequests: from,
+          user: reciever,
+          pendingRequests: sender,
         }));
       if (!requestForFriend) {
-        throw new ApplicationError("Request not found for the User", 404);
+        throw new ApplicationError("Request not found for the User !!", 404);
       }
       await FriendModel.findOneAndUpdate(
-        { user: new mongoose.Types.ObjectId(from) },
+        { user: new mongoose.Types.ObjectId(sender) },
         {
           $pull: {
-            sendRequests: new mongoose.Types.ObjectId(to),
+            sendRequests: new mongoose.Types.ObjectId(reciever),
           },
         }
       );
 
       await FriendModel.findOneAndUpdate(
-        { user: new mongoose.Types.ObjectId(to) },
+        { user: new mongoose.Types.ObjectId(reciever) },
         {
           $pull: {
-            pendingRequests: new mongoose.Types.ObjectId(from),
+            pendingRequests: new mongoose.Types.ObjectId(sender),
           },
         }
       );
@@ -185,9 +194,12 @@ export default class FriendRepository {
   //* Remove Friend
   async remove(friendObject) {
     const session = await mongoose.startSession();
-    const { user, friendId } = friendObject;
-    session.startTransaction();
     try {
+      session.startTransaction();
+      const { user, friendId } = friendObject;
+      if (user == friendId) {
+        throw new ApplicationError("Can't Remove Self as a Friend !!", 406);
+      }
       const bothFriends = await this.#checkBothFriends(user, friendId);
       if (!bothFriends) {
         throw new ApplicationError("Both are not friends !!", 406);
