@@ -133,7 +133,6 @@ export default class FriendRepository {
     } catch (error) {
       await session.abortTransaction();
       await session.endSession();
-      console.log(error);
       throw error;
     }
   }
@@ -141,7 +140,6 @@ export default class FriendRepository {
   //* Reject Friend Request
   async reject(friendObject) {
     const { receiveRequest: to, sendRequest: from } = friendObject;
-    console.log(from, to);
     const session = await mongoose.startSession();
     session.startTransaction();
     try {
@@ -180,7 +178,6 @@ export default class FriendRepository {
     } catch (error) {
       await session.abortTransaction();
       await session.endSession();
-      console.log(error);
       throw error;
     }
   }
@@ -220,7 +217,6 @@ export default class FriendRepository {
     } catch (error) {
       await session.abortTransaction();
       await session.endSession();
-      console.log(error);
       throw error;
     }
   }
