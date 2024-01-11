@@ -113,6 +113,14 @@ export default class FriendRepository {
         throw new ApplicationError("User not found !!", 404);
       }
 
+      //* Check if Request is sent by someone among both
+      const checkForRequest =
+        (await this.#checkIfUserSendRequest(sender, reciever)) ||
+        (await this.#checkIfUserSendRequest(reciever, sender));
+      if (checkForRequest) {
+        throw new ApplicationError("Already Requested !!", 406);
+      }
+
       //* Check if Both users are Already Friends or Not
       const bothUserFriends = await this.#checkBothFriends(sender, reciever);
       if (bothUserFriends) {
