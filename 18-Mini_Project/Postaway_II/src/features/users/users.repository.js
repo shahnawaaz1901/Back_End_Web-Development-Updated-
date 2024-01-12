@@ -25,7 +25,6 @@ export default class UserRepository {
     } catch (error) {
       await session.abortTransaction();
       await session.endSession();
-      console.log(error);
       if (error instanceof mongoose.Error.ValidationError) {
         throw new ApplicationError(error.message, 406);
       }

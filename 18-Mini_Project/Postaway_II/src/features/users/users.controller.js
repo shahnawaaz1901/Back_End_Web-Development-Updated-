@@ -22,8 +22,8 @@ export default class UserController {
       const newUser = await this.userRepository.newUser(req.body);
       return res.status(201).json({ success: true, user: newUser });
     } catch (error) {
+      console.log(error);
       next(error);
-      // res.status(500).json({ success: false, message: "Something went wrong" });
     }
   }
 

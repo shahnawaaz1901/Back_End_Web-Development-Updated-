@@ -87,11 +87,12 @@ export default class PostController {
         userId,
         postId,
       });
-      if (updatedPost) {
-        return res.status(200).send({ success: true, post: updatedPost });
+      if (!updatedPost) {
+        throw new ApplicationError("Post not found", 404);
       }
-      throw new ApplicationError("Post not found", 404);
+      return res.status(200).send({ success: true, post: updatedPost });
     } catch (error) {
+      console.log(error);
       next(error);
     }
   }

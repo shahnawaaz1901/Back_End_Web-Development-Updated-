@@ -8,7 +8,7 @@ export default class PostRepository {
       await newPost.save();
       return newPost;
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   }
 
@@ -18,7 +18,7 @@ export default class PostRepository {
         user: new mongoose.Types.ObjectId(userId),
       });
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   }
 
@@ -26,7 +26,7 @@ export default class PostRepository {
     try {
       return await PostModel.findById(postId);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   }
 
@@ -45,7 +45,7 @@ export default class PostRepository {
       }
       return data;
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   }
 
@@ -57,7 +57,7 @@ export default class PostRepository {
       });
       return deletedPost.deletedCount;
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   }
 }

@@ -36,9 +36,13 @@ export default class FriendRepository {
 
   //* Get Friend List
   async get(userId) {
-    return await FriendModel.findOne({
-      user: new mongoose.Types.ObjectId(userId),
-    }).populate("friendList");
+    try {
+      return await FriendModel.findOne({
+        user: new mongoose.Types.ObjectId(userId),
+      }).populate("friendList");
+    } catch (error) {
+      throw error;
+    }
   }
 
   //* Accept Friend Request

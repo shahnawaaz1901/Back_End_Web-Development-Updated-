@@ -31,7 +31,6 @@ export default class LikeRepository {
         },
         { upsert: true, returnDocument: "before", session }
       );
-      // throw new ApplicationError("Or Bhai", 404);
       console.log(likeData);
       if (likeData.matchedCount > 0) {
         throw new ApplicationError(`Already Liked This ${likeInfo.type}`, 406);
@@ -44,10 +43,7 @@ export default class LikeRepository {
     } catch (error) {
       await session.abortTransaction();
       await session.endSession();
-      if (error instanceof ApplicationError) {
-        throw new ApplicationError(error.message, error.errStatusCode);
-      }
-      throw new Error(error.message);
+      throw error;
     }
   }
 
@@ -84,10 +80,7 @@ export default class LikeRepository {
     } catch (error) {
       await session.abortTransaction();
       await session.endSession();
-      if (error instanceof ApplicationError) {
-        throw new ApplicationError(error.message, error.errStatusCode);
-      }
-      throw new Error(error);
+      throw error;
     }
   }
 }
