@@ -32,6 +32,23 @@ export default class CommentRepository {
     }
   }
 
+  async get(postId) {
+    try {
+      return await CommentModel.find({
+        post: new mongoose.Types.ObjectId(postId),
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getOne(info) {
+    try {
+      return await CommentModel.findById(info.commentId);
+    } catch (error) {
+      throw error;
+    }
+  }
   async update(updatedData) {
     try {
       const post = await PostModel.findById(updatedData.postId);

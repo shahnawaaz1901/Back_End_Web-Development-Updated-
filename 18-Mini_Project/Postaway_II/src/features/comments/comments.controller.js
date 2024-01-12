@@ -27,14 +27,29 @@ export default class CommentController {
   }
 
   //* Get Comments of a Post
-  async getComments(req, res, next) {}
+  async getComments(req, res, next) {
+    try {
+      const { postId } = req.params;
+      const comments = await this.commentRepository.get(postId);
+      res.status(200).json({ success: true, comments });
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
 
   //* Get a Single Comment
   async getOneComment(req, res, next) {
-    const { userId } = req;
-    const { postId, commentId } = req.body;
-    if (!postId || !commentId) {
-      throw new ApplicationError("Please Provide Required Information", 406);
+    try {
+      const { postId, commentId } = req.body;
+      if (!postId || !commentId) {
+        throw new ApplicationError("Please Provide Required Information", 406);
+      }
+      const comment = await this.commentRepository.getOne();
+      res.status(200).json({ success: true, comment });
+    } catch (error) {
+      console.log(error);
+      next(error);
     }
   }
 
