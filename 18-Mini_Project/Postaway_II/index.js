@@ -25,7 +25,7 @@ const server = express();
 server.use(
   cors({
     origin: "*",
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
 
@@ -51,21 +51,11 @@ server.use("/api/comments", auth, commentRouter);
 
 //* Error Handling
 server.use(errorMiddleware);
-// server.use((err, req, res, next) => {
-//   console.log("Inside the Error Middleware !!");
-//   logger.error({ url: req.url, data: req.body, time: new Date().toString() });
-//   if (err instanceof ApplicationError) {
-//     return res
-//       .status(err.errStatusCode)
-//       .json({ success: false, error: err.message });
-//   }
-//   res.status(500).json({ success: false, error: "Something went wrong !!" });
-// });
 
 server.use((req, res) => {
   res.status(404).json({
     success: false,
-    message: "Resource you are looking for not exist please visit our API Doc",
+    message: `Resource you are looking for not exist please visit our API Doc at ${"/apiDocs"}`,
   });
 });
 //* Export

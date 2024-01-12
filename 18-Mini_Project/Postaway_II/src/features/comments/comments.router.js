@@ -3,20 +3,22 @@ import CommentController from "./comments.controller.js";
 const commentRouter = express.Router();
 const commentController = new CommentController();
 
-commentRouter.post("/newComment", (req, res) => {
-  commentController.createComment(req, res);
+commentRouter.post("/newComment", (req, res, next) => {
+  commentController.createComment(req, res, next);
 });
 
-commentRouter.get("/getComment/:commentId", (req, res) => {
-  commentController.getComment(req, res);
+commentRouter.get("/getComments/:postId", (req, res, next) => {});
+
+commentRouter.get("/getComment/:commentId", (req, res, next) => {
+  commentController.getOneComment(req, res, next);
 });
 
-commentRouter.put("/updateComment", (req, res) => {
-  commentController.updateComment(req, res);
+commentRouter.put("/updateComment", (req, res, next) => {
+  commentController.updateComment(req, res, next);
 });
 
-commentRouter.delete("/deleteComment/:commentId", (req, res) => {
-  commentController.deleteComment(req, res);
+commentRouter.delete("/deleteComment/:commentId", (req, res, next) => {
+  commentController.deleteComment(req, res, next);
 });
 
 export default commentRouter;

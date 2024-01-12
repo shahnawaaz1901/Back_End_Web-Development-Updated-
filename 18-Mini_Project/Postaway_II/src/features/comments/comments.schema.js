@@ -21,6 +21,14 @@ const commentSchema = new mongoose.Schema({
       ref: "Like",
     },
   ],
+  update: {
+    date: {
+      type: String,
+    },
+    time: {
+      type: String,
+    },
+  },
 });
 
 const CommentModel = mongoose.model("Comment", commentSchema);

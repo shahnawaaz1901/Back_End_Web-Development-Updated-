@@ -1,45 +1,51 @@
+import ApplicationError from "../error/error.class.js";
 import CommentRepository from "./comments.repository.js";
 export default class CommentController {
   constructor() {
     this.commentRepository = new CommentRepository();
   }
 
-  async createComment(req, res) {
+  //* New Comment on a Post
+  async createComment(req, res, next) {
     try {
       const { userId } = req;
       const { postId, comment } = req.body;
       console.log(userId, postId, comment);
+      if (!postId || !comment) {
+        throw new ApplicationError("Please Provide Required Information", 406);
+      }
       const newComment = await this.commentRepository.create({
         userId,
         postId,
         comment,
       });
-      if (newComment) {
-        return res.status(201).json({ success: true, comment: newComment });
-      }
-      res.status(404).json({ success: false, message: "Post not found !!" });
+      return res.status(201).json({ success: true, comment: newComment });
     } catch (error) {
-      res
-        .status(500)
-        .json({ success: false, message: "Internal Server Error !!" });
+      console.log(error);
+      next(error);
     }
   }
 
-  getOneComment(req, res) {
+  //* Get Comments of a Post
+  async getComments(req, res, next) {}
+
+  //* Get a Single Comment
+  async getOneComment(req, res, next) {
     const { userId } = req;
-    const { postId, commentId, newComment } = req.body;
+    const { postId, commentId } = req.body;
+    if (!postId || !commentId) {
+      throw new ApplicationError("Please Provide Required Information", 406);
+    }
   }
 
-  async updateComment(req, res) {
+  //* Update a Comment
+  async updateComment(req, res, next) {
     try {
       const { userId } = req;
       const { postId } = req.params;
       const { commentId, newComment } = req.body;
       if (!postId || !commentId || !newComment) {
-        return res.status(406).json({
-          success: false,
-          message: "Please Provide required fields !!",
-        });
+        throw new ApplicationError("Please Provide required fields !!", 406);
       }
       const updatedComment = await this.commentRepository.update({
         userId,
@@ -49,13 +55,13 @@ export default class CommentController {
       });
       res.status(200).json({ success: true, comment: updatedComment });
     } catch (error) {
-      res
-        .status(500)
-        .json({ success: false, message: "Internal Server Error !!" });
+      console.log(error);
+      next(error);
     }
   }
 
-  async deleteComment(req, res) {
+  //* Delete a Comment
+  async deleteComment(req, res, next) {
     try {
       const { userId } = req;
       const { postId, commentId } = req.query;
@@ -69,9 +75,7 @@ export default class CommentController {
         .json({ success: true, message: "Comment Deleted Successfully !!" });
     } catch (error) {
       console.log(error);
-      res
-        .status(500)
-        .json({ success: false, message: "Internal Server Error !!" });
+      next(error);
     }
   }
 }

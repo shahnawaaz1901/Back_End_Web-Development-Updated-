@@ -1,13 +1,14 @@
 import CommentModel from "./comments.schema.js";
 import PostModel from "../posts/posts.schema.js";
 import mongoose from "mongoose";
+import ApplicationError from "../error/error.class.js";
 
 export default class CommentRepository {
   async create(object) {
     try {
       const postExist = await PostModel.findById(object.postId);
       if (!postExist) {
-        return;
+        throw new ApplicationError("Post not found !!", 404);
       }
       const newComment = new CommentModel({
         user: object.userId,
@@ -27,27 +28,34 @@ export default class CommentRepository {
       );
       return newComment;
     } catch (error) {
-      throw new Error(error);
+      throw error;
     }
   }
 
   async update(updatedData) {
-    const post = await PostModel.findById(updatedData.postId);
-    if (!post) {
-      throw new Error("Post not found !!");
-    }
+    try {
+      const post = await PostModel.findById(updatedData.postId);
+      if (!post) {
+        throw new Error("Post not found !!");
+      }
 
-    const commentExist = await CommentModel.findOne({
-      _id: new mongoose.Types.ObjectId(updatedData.commentId),
-      user: new mongoose.Types.ObjectId(updatedData.userId),
-    });
-    if (!commentExist) {
-      throw new Error("Comment Not Found !!");
+      const updatedComment = await CommentModel.findOneAndUpdate(
+        {
+          _id: new mongoose.Types.ObjectId(updatedData.commentId),
+          user: new mongoose.Types.ObjectId(updatedData.userId),
+        },
+        {
+          comment: updatedData.newComment,
+        },
+        { returnDocument: "after" }
+      );
+      if (!updatedComment) {
+        throw new ApplicationError("Comment Not Found !!", 404);
+      }
+      return updatedComment;
+    } catch (error) {
+      throw error;
     }
-
-    commentExist.comment = updatedData.newComment;
-    await commentExist.save();
-    return commentExist;
   }
 
   async delete(commentData) {
