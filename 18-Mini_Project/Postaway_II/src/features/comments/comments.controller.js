@@ -10,10 +10,17 @@ export default class CommentController {
     try {
       const { userId } = req;
       const { postId, comment } = req.body;
-      console.log(userId, postId, comment);
-      if (!postId || !comment) {
-        throw new ApplicationError("Please Provide Required Information", 406);
+
+      //* Check Post Exist or Not
+      if (!postId) {
+        throw new ApplicationError("Please Provide Post Id", 406);
       }
+
+      //* Check Comment Provided or Not
+      if (!comment) {
+        throw new ApplicationError("Comment can't be Empty", 406);
+      }
+
       const newComment = await this.commentRepository.create({
         userId,
         postId,
@@ -42,8 +49,13 @@ export default class CommentController {
   async getOneComment(req, res, next) {
     try {
       const { postId, commentId } = req.body;
-      if (!postId || !commentId) {
-        throw new ApplicationError("Please Provide Required Information", 406);
+
+      if (!postId) {
+        throw new ApplicationError("Please Provide PostId", 406);
+      }
+
+      if (!commentId) {
+        throw new ApplicationError("Please Provide CommentId", 406);
       }
       const comment = await this.commentRepository.getOne();
       res.status(200).json({ success: true, comment });
@@ -59,9 +71,17 @@ export default class CommentController {
       const { userId } = req;
       const { postId } = req.params;
       const { commentId, newComment } = req.body;
-      if (!postId || !commentId || !newComment) {
-        throw new ApplicationError("Please Provide required fields !!", 406);
+
+      //* Check PostId and CommentId is Empty or Not
+      if (!postId || !commentId) {
+        throw new ApplicationError("Please Provide Required Ids !!", 406);
       }
+
+      //* Check if updatedComment are Empty or Not
+      if (!newComment) {
+        throw new ApplicationError("New Comment Can't be Empty !!", 406);
+      }
+
       const updatedComment = await this.commentRepository.update({
         userId,
         postId,
@@ -80,6 +100,17 @@ export default class CommentController {
     try {
       const { userId } = req;
       const { postId, commentId } = req.query;
+
+      //* Check if PostId is Empty or Not
+      if (!postId) {
+        throw new ApplicationError("PostId Can't be Empty", 406);
+      }
+
+      //* Check if CommentId is Empty or Not
+      if (!commentId) {
+        throw new ApplicationError("CommentId Can't be Empty", 406);
+      }
+
       await this.commentRepository.delete({
         userId,
         postId,

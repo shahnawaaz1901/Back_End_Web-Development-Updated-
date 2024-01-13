@@ -5,29 +5,39 @@ import ApplicationError from "../error/error.class.js";
 
 export default class CommentRepository {
   async create(object) {
+    const session = mongoose.startSession();
     try {
-      const postExist = await PostModel.findById(object.postId);
-      if (!postExist) {
-        throw new ApplicationError("Post not found !!", 404);
-      }
+      session.startTransaction();
+
       const newComment = new CommentModel({
         user: object.userId,
         post: object.postId,
         comment: object.comment,
       });
-      await newComment.save();
-      await PostModel.updateOne(
-        {
-          _id: new mongoose.Types.ObjectId(object.postId),
-        },
+
+      //* Push the CommentId on the Post
+      const postExist = await PostModel.findOneAndUpdate(
+        { _id: new mongoose.Types.ObjectId(object.postId) },
         {
           $push: {
             comments: newComment._id,
           },
-        }
+        },
+        { returnDocument: "after" }
       );
+
+      //* Check if Post Exist or Not
+      if (!postExist) {
+        throw new ApplicationError("Post not found !!", 404);
+      }
+
+      await newComment.save();
+      await session.commitTransaction();
+      await session.endSession();
       return newComment;
     } catch (error) {
+      await session.abortTransaction();
+      await session.endSession();
       throw error;
     }
   }
@@ -49,6 +59,7 @@ export default class CommentRepository {
       throw error;
     }
   }
+
   async update(updatedData) {
     try {
       const post = await PostModel.findById(updatedData.postId);
