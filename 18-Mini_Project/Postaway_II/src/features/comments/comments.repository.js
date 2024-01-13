@@ -5,7 +5,7 @@ import ApplicationError from "../error/error.class.js";
 
 export default class CommentRepository {
   async create(object) {
-    const session = mongoose.startSession();
+    const session = await mongoose.startSession();
     try {
       session.startTransaction();
 
@@ -23,7 +23,7 @@ export default class CommentRepository {
             comments: newComment._id,
           },
         },
-        { returnDocument: "after" }
+        { returnDocument: "after", session }
       );
 
       //* Check if Post Exist or Not
@@ -31,7 +31,7 @@ export default class CommentRepository {
         throw new ApplicationError("Post not found !!", 404);
       }
 
-      await newComment.save();
+      await newComment.save({ session });
       await session.commitTransaction();
       await session.endSession();
       return newComment;
@@ -48,6 +48,9 @@ export default class CommentRepository {
         post: new mongoose.Types.ObjectId(postId),
       });
     } catch (error) {
+      if (error instanceof mongoose.mongo.BSON.BSONError) {
+        throw new ApplicationError(error.message, 406);
+      }
       throw error;
     }
   }

@@ -1,7 +1,7 @@
 import UserModel from "./users.schema.js";
 import bcrypt from "bcrypt";
 import FriendModel from "../friends/friends.schema.js";
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 import ApplicationError from "../error/error.class.js";
 
 export default class UserRepository {
@@ -25,7 +25,10 @@ export default class UserRepository {
     } catch (error) {
       await session.abortTransaction();
       await session.endSession();
-      if (error instanceof mongoose.Error.ValidationError) {
+      if (
+        error instanceof mongoose.Error.ValidationError ||
+        error instanceof mongoose.mongo.MongoError
+      ) {
         throw new ApplicationError(error.message, 406);
       }
       throw error;
