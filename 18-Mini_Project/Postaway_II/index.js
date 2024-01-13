@@ -6,7 +6,6 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import swagger from "swagger-ui-express";
-import apiDoc from "./swagger.json" assert { type: "json" };
 
 //? Internal Modules
 import auth from "./src/middlewares/jwt.auth.js";
@@ -17,6 +16,7 @@ import friendRouter from "./src/features/friends/friends.router.js";
 import likeRouter from "./src/features/likes/likes.router.js";
 import commentRouter from "./src/features/comments/comments.router.js";
 import errorMiddleware from "./src/features/error/error.response.js";
+import apiDoc from "./swagger.json" assert { type: "json" };
 
 //* Intialize Server
 const server = express();
@@ -52,6 +52,7 @@ server.use("/api/comments", auth, commentRouter);
 //* Error Handling
 server.use(errorMiddleware);
 
+//* Default Response
 server.use((req, res) => {
   res.status(404).json({
     success: false,

@@ -1,1 +1,66 @@
-{}
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "description": "API for Social Media Application",
+    "title": "Docs for Postaway API"
+  },
+  "host": "localhost:3200",
+  "securitySchemes": {
+    "JWT": {
+      "in": "header",
+      "name": "Authorization",
+      "type": "apikey"
+    }
+  },
+  "paths": {
+    "/api/users/signUp": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "SignUp",
+        "description": "Create Account on Postaway",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Create Account on Postaway",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "age": {
+                  "type": "number"
+                },
+                "gender": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully Created Resource"
+          },
+          "406": {
+            "description": "Email and Phone Must be Unique"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}
