@@ -55,10 +55,13 @@ export default class CommentRepository {
     }
   }
 
-  async getOne(info) {
+  async getOne(commentId) {
     try {
-      return await CommentModel.findById(info.commentId);
+      return await CommentModel.findById(commentId);
     } catch (error) {
+      if (error instanceof mongoose.mongo.BSON.BSONError) {
+        throw new ApplicationError(error.message, 406);
+      }
       throw error;
     }
   }

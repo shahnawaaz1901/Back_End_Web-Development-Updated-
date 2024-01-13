@@ -48,16 +48,11 @@ export default class CommentController {
   //* Get a Single Comment
   async getOneComment(req, res, next) {
     try {
-      const { postId, commentId } = req.body;
-
-      if (!postId) {
-        throw new ApplicationError("Please Provide PostId", 406);
-      }
-
+      const { commentId } = req.params;
       if (!commentId) {
         throw new ApplicationError("Please Provide CommentId", 406);
       }
-      const comment = await this.commentRepository.getOne();
+      const comment = await this.commentRepository.getOne(commentId);
       res.status(200).json({ success: true, comment });
     } catch (error) {
       console.log(error);
