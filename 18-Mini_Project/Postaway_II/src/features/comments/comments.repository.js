@@ -17,7 +17,7 @@ export default class CommentRepository {
 
       //* Push the CommentId on the Post
       const postExist = await PostModel.findOneAndUpdate(
-        { _id: new mongoose.Types.ObjectId(object.postId) },
+        { _id: object.postId },
         {
           $push: {
             comments: newComment._id,
@@ -45,7 +45,7 @@ export default class CommentRepository {
   async get(postId) {
     try {
       return await CommentModel.find({
-        post: new mongoose.Types.ObjectId(postId),
+        post: postId,
       });
     } catch (error) {
       if (error instanceof mongoose.mongo.BSON.BSONError) {
@@ -75,8 +75,8 @@ export default class CommentRepository {
 
       const updatedComment = await CommentModel.findOneAndUpdate(
         {
-          _id: new mongoose.Types.ObjectId(updatedData.commentId),
-          user: new mongoose.Types.ObjectId(updatedData.userId),
+          _id: updatedData.commentId,
+          user: updatedData.userId,
         },
         {
           comment: updatedData.newComment,
@@ -93,17 +93,28 @@ export default class CommentRepository {
   }
 
   async delete(commentData) {
-    const postExist = await PostModel.findById(commentData.postId);
-    if (!postExist) {
-      throw new Error("Post not Found !!");
-    }
+    const session = await mongoose.startSession();
+    try {
+      session.startTransaction();
+      const deleteComment = await CommentModel.deleteOne({
+        _id: commentData.commentId,
+        user: commentData.userId,
+        post: commentData.postId,
+      });
 
-    const deleteComment = await CommentModel.deleteOne({
-      user: new mongoose.Types.ObjectId(commentData.userId),
-      _id: new mongoose.Types.ObjectId(commentData.commentId),
-    });
-    if (!deleteComment.deletedCount) {
-      throw new Error("Comment not found !!");
+      if (!deleteComment.deletedCount) {
+        throw new ApplicationError("Comment Not found !!", 404);
+      }
+      await PostModel.findOneAndUpdate(
+        { _id: commentData.postId },
+        { $pull: { comments: commentData.commentId } }
+      );
+      await session.commitTransaction();
+      await session.endSession();
+    } catch (error) {
+      await session.abortTransaction();
+      await session.endSession();
+      throw error;
     }
   }
 }
