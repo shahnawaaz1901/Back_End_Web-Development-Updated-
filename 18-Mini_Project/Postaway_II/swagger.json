@@ -54,13 +54,57 @@
             "description": "Successfully Created Resource"
           },
           "406": {
-            "description": "Email and Phone Must be Unique"
+            "description": "Email or Phone Must be Unique"
           },
           "500": {
             "description": "Internal Server Error"
           }
         }
       }
-    }
+    },
+    "/api/users/signIn": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "SignIn",
+        "description": "SignIn into the Postaway",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "SignIn Account on Postaway",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "401": {
+            "description": "UnAuthorized Access or Incorrect Password"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/users/forgetPassword/sendOtp/{email}": {},
+    "/api/users/forgetPassword/validateOtp/{email}": {},
+    "/api/users/changePassword": {},
+    "/api/users/signOut": {},
+    "/api/users/signOutAll": {}
   }
 }
