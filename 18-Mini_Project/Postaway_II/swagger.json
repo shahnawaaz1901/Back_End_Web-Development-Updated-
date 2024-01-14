@@ -19,6 +19,8 @@
         "tags": ["Users"],
         "summary": "SignUp",
         "description": "Create Account on Postaway",
+        "Content-Type": "multipart/form-data",
+        "Content-Length": "102400",
         "parameters": [
           {
             "in": "body",
@@ -47,11 +49,17 @@
                 }
               }
             }
+          },
+          {
+            "in": "formData",
+            "name": "profileImageURL",
+            "type": "file",
+            "description": "Profile Image"
           }
         ],
         "responses": {
           "201": {
-            "description": "Successfully Created Resource"
+            "description": "OK"
           },
           "406": {
             "description": "Email or Phone Must be Unique"

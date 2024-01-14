@@ -1,5 +1,4 @@
 import multer from "multer";
-import path from "path";
 
 const diskConfig = multer.diskStorage({
   filename: (req, file, cb) => {

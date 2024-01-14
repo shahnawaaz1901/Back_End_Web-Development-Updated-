@@ -29,9 +29,6 @@ server.use(
   })
 );
 
-//* For API Documentation
-server.use("/apiDocs", swagger.serve, swagger.setup(apiDoc));
-
 //* SetUp Cookies
 server.use(cookieParser());
 
@@ -41,6 +38,9 @@ server.use(express.json());
 
 //* Log Requests
 server.use(loggerMiddleware);
+
+//* For API Documentation
+server.use("/apiDocs", swagger.serve, swagger.setup(apiDoc));
 
 //* SetUp Routers
 server.use("/api/users", userRouter);
