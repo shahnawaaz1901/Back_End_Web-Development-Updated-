@@ -6,6 +6,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import swagger from "swagger-ui-express";
+import session from "express-session";
 
 //? Internal Modules
 import auth from "./src/middlewares/jwt.auth.js";
@@ -31,6 +32,16 @@ server.use(
 
 //* SetUp Cookies
 server.use(cookieParser());
+
+//* SetUp Session
+server.use(
+  session({
+    secret: process.env.SECRET_KEY, //*key
+    resave: false, //* save the session again and again
+    saveUninitialized: true, //* Initialize Session if session is Empty
+    cookie: { secure: false, maxAge: 10 * 60 * 1000 }, //* Because we not use the HTTPs protocol only HTTP
+  })
+);
 
 //* For Populating req.body
 server.use(express.urlencoded({ extended: true }));

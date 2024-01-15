@@ -81,6 +81,7 @@ export default class UserController {
       const userExist = await this.userRepository.userExist(email);
       if (userExist) {
         sendOtp(email, userExist.name);
+        req.session.userEmail = email;
         return res
           .status(200)
           .json({ success: true, message: "Otp sent successfully !" });
@@ -95,7 +96,11 @@ export default class UserController {
   //* Validate OTP and Reset the Password
   async validateAndResetPassword(req, res, next) {
     try {
+      console.log(req.session);
       const { email } = req.params;
+      if (email != req.session.userEmail) {
+        throw new ApplicationError("Please Generate OTP", 406);
+      }
       const { password, otp } = req.body;
       if (!password) {
         throw new ApplicationError("Password Can't Be Empty !!", 406);
@@ -111,6 +116,9 @@ export default class UserController {
           email,
           password
         );
+        req.session.destroy((err) => {
+          console.log(err);
+        });
         await updatePasswordAlert(email, updatedData.name);
         return res.status(200).json({ success: true, user: updatedData });
       }
