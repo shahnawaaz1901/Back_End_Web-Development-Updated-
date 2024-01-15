@@ -3,7 +3,7 @@ import UserRepository from "./users.repository.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import sendOtp from "../notification/otp.js";
-import OTPGenerator from "../verification/otp.verification.js";
+import OTPGenerator from "../verification/otp.controller.js";
 import wrongPasswordAlert from "../notification/wrongPassword.js";
 import updatePasswordAlert from "../notification/updatePassword.js";
 import ApplicationError from "../error/error.class.js";
@@ -80,7 +80,7 @@ export default class UserController {
       }
       const userExist = await this.userRepository.userExist(email);
       if (userExist) {
-        await sendOtp(email, userExist.name);
+        sendOtp(email, userExist.name);
         return res
           .status(200)
           .json({ success: true, message: "Otp sent successfully !" });
@@ -98,10 +98,14 @@ export default class UserController {
       const { email } = req.params;
       const { password, otp } = req.body;
       if (!password) {
-        throw new ApplicationError("Password Can't Be Empty !", 406);
+        throw new ApplicationError("Password Can't Be Empty !!", 406);
       }
 
-      const verified = OTPGenerator.validateOTP(otp, email);
+      if (!otp) {
+        throw new ApplicationError("Otp can't be empty !!", 406);
+      }
+
+      const verified = await OTPGenerator.validateOTP(otp, email);
       if (verified.success) {
         let updatedData = await this.userRepository.changePassword(
           email,

@@ -1,4 +1,4 @@
-import OTPGenerator from "../verification/otp.verification.js";
+import OTPGenerator from "../verification/otp.controller.js";
 import sendMail from "./sendmail.nodemailer.js";
 
 const sendOtp = async (email, name) => {
