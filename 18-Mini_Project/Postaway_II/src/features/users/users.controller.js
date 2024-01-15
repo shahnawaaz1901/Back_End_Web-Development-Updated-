@@ -146,11 +146,11 @@ export default class UserController {
   async changePassword(req, res, next) {
     try {
       const { userId } = req;
-      const { currentPassword, updatedPassword } = req.body;
+      const { currentPassword, newPassword } = req.body;
       const update = await this.userRepository.updatePassword({
         userId,
         currentPassword,
-        updatedPassword,
+        newPassword,
       });
       res.status(200).json({ success: true, user: update });
     } catch (error) {

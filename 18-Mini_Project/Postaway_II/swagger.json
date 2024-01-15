@@ -11,10 +11,10 @@
   "components": [
     {
       "securitySchemes": {
-        "JWT": {
+        "cookieAuth": {
           "type": "apiKey",
-          "in": "header",
-          "name": "Authorization"
+          "in": "cookie",
+          "name": "JWT_Token"
         }
       }
     }
@@ -42,7 +42,9 @@
                     "type": "string"
                   },
                   "age": {
-                    "type": "integer"
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100
                   },
                   "gender": {
                     "type": "string"
@@ -70,6 +72,152 @@
             "description": "Internal Server Error"
           }
         }
+      }
+    },
+    "/api/users/signIn": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "SignIn",
+        "requestBody": {
+          "required": true,
+          "description": "Signin on Postaway",
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Incorrect Password"
+          },
+          "404": {
+            "description": "User Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+
+    "/api/users/forgetPassword/generateOtp/{email}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Generate OTP",
+        "description": "Generate OTP for Reset Password",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "email",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Email which you want to Reset Password"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Otp Sent" },
+          "404": { "description": "User Not found" },
+          "500": { "description": "Internal Server Error" }
+        }
+      }
+    },
+    "/api/users/forgetPassword/validateOtp/{email}": {
+      "put": {
+        "tags": ["Users"],
+        "summary": "Validate Otp",
+        "description": "Validate Otp and Reset Password",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "email",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Email which You Recieved Otp and want to Change Password"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Password Updated"
+          },
+          "401": {
+            "description": "Incorrect Otp"
+          },
+          "404": {
+            "description": "Generate Otp"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/users/changePassword": {
+      "put": {
+        "tags": ["Users"],
+        "summary": "Change Password",
+        "description": "Change Password Using Existing Password",
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "currentPassword": {
+                    "type": "string"
+                  },
+                  "updatedPassword": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Password Updated Successfully"
+          },
+          "401": {
+            "description": "Incorrect Password"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/users/signOut": {
+      "delete": {
+        "tags": ["Users"]
+      }
+    },
+    "/api/users/signOutAll": {
+      "delete": {
+        "tags": ["Users"]
       }
     }
   }

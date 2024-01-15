@@ -27,7 +27,7 @@ userRouter.delete("/signOut", auth, (req, res, next) => {
 });
 
 //* SendOTP for Reset the Password
-userRouter.get("/forgetPassword/sendOtp/:email", (req, res, next) => {
+userRouter.get("/forgetPassword/generateOtp/:email", (req, res, next) => {
   userController.sendOtp(req, res, next);
 });
 
@@ -42,7 +42,7 @@ userRouter.delete("/signOutAll", auth, (req, res, next) => {
 });
 
 //* Change Password using Existing Password
-userRouter.post("/changePassword", auth, (req, res, next) => {
+userRouter.put("/changePassword", auth, (req, res, next) => {
   userController.changePassword(req, res, next);
 });
 export default userRouter;

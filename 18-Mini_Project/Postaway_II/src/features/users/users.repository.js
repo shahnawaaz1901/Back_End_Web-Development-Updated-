@@ -122,18 +122,15 @@ export default class UserRepository {
       const updatedData = await UserModel.findById(
         updatedPasswordDetail.userId
       );
-      if (!updatedData) {
-        throw new ApplicationError("User not found !!", 404);
-      }
       const passwordMatch = await bcrypt.compare(
         updatedPasswordDetail.currentPassword,
         updatedData.password
       );
       if (!passwordMatch) {
-        throw new ApplicationError("Password is Incorrect !!", 404);
+        throw new ApplicationError("Password is Incorrect !!", 401);
       }
       updatedData.password = await bcrypt.hash(
-        updatedPasswordDetail.updatedPassword,
+        updatedPasswordDetail.newPassword,
         12
       );
       await updatedData.save();
