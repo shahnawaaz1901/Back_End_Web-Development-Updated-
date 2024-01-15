@@ -96,7 +96,6 @@ export default class UserController {
   //* Validate OTP and Reset the Password
   async validateAndResetPassword(req, res, next) {
     try {
-      console.log(req.session);
       const { email } = req.params;
       if (email != req.session.userEmail) {
         throw new ApplicationError("Please Generate OTP", 406);

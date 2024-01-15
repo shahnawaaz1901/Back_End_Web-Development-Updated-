@@ -20,11 +20,9 @@ export default class UserRepository {
       await newUser.save({ session });
       await friends.save({ session });
       await session.commitTransaction();
-      await session.endSession();
       return newUser;
     } catch (error) {
       await session.abortTransaction();
-      await session.endSession();
       if (
         error instanceof mongoose.Error.ValidationError ||
         error instanceof mongoose.mongo.MongoError
@@ -32,6 +30,8 @@ export default class UserRepository {
         throw new ApplicationError(error.message, 406);
       }
       throw error;
+    } finally {
+      await session.endSession();
     }
   }
 

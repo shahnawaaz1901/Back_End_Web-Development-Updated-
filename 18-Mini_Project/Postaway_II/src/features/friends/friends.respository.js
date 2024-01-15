@@ -49,11 +49,11 @@ export default class FriendRepository {
   async accept(friendObject) {
     const session = await mongoose.startSession();
     try {
+      session.startTransaction();
       const { userId: reciever, requestUser: sender } = friendObject;
       if (sender == reciever) {
         throw new ApplicationError("Request not Accepted to Self !!", 406);
       }
-      session.startTransaction();
       //* Check if Requested User Send Friend Requests or Not
       const userSendRequest = await this.#checkIfUserSendRequest(
         sender,
@@ -91,11 +91,11 @@ export default class FriendRepository {
         }
       );
       await session.commitTransaction();
-      await session.endSession();
     } catch (error) {
       await session.abortTransaction();
-      await session.endSession();
       throw error;
+    } finally {
+      await session.endSession();
     }
   }
 
@@ -147,11 +147,11 @@ export default class FriendRepository {
         { session }
       );
       await session.commitTransaction();
-      await session.endSession();
     } catch (error) {
       await session.abortTransaction();
-      await session.endSession();
       throw error;
+    } finally {
+      await session.endSession();
     }
   }
 
@@ -195,11 +195,11 @@ export default class FriendRepository {
         }
       );
       await session.commitTransaction();
-      await session.endSession();
     } catch (error) {
       await session.abortTransaction();
-      await session.endSession();
       throw error;
+    } finally {
+      await session.endSession();
     }
   }
 
@@ -237,11 +237,11 @@ export default class FriendRepository {
         }
       );
       await session.commitTransaction();
-      await session.endSession();
     } catch (error) {
       await session.abortTransaction();
-      await session.endSession();
       throw error;
+    } finally {
+      await session.endSession();
     }
   }
 }
