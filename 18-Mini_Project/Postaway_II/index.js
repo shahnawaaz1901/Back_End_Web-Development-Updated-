@@ -53,6 +53,11 @@ server.use(loggerMiddleware);
 //* For API Documentation
 server.use("/apiDocs", swagger.serve, swagger.setup(apiDoc));
 
+//* Greet User
+server.use("/", (req, res) => {
+  res.status(200).json({ success: true, message: "Welcome to Postaway API" });
+});
+
 //* SetUp Routers
 server.use("/api/users", userRouter);
 server.use("/api/posts", auth, postRouter);

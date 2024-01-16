@@ -283,8 +283,7 @@
                   },
                   "tags": {
                     "type": "string",
-                    "description": "*UserId* seprated by **Comma** in case of multiple [Users]",
-                    "format": "id"
+                    "description": "*UserId* seprated by **Comma** in case of multiple [Users]"
                   }
                 }
               }
@@ -307,7 +306,7 @@
         }
       }
     },
-    "/api/posts/getPosts": {
+    "/api/posts/getPosts/{userId}": {
       "get": {
         "tags": ["Posts"],
         "summary": "Get Posts",
@@ -317,12 +316,25 @@
             "ApiKey": []
           }
         ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "userId",
+            "description": "Provide UserId which Posts You want to Retrieve otherwise User who is Loggedin Post retrieved",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Posts fetched"
           },
           "401": {
             "description": "Unauthorized Access"
+          },
+          "406": {
+            "description": "InCorrect UserId"
           },
           "500": {
             "description": "Internal Server Error"
@@ -384,13 +396,39 @@
           {
             "in": "path",
             "name": "postId",
+            "description": "PostId of Post which you want to Update",
             "schema": {
               "type": "string"
             },
-            "required": true,
-            "description": "PostId of Post which you want to Update"
+            "required": true
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "caption": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "imageURL": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "tags": {
+                    "type": "string",
+                    "description": "*UserId* seprated by **Comma** in case of multiple [Users]"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Updated Post"
@@ -443,6 +481,185 @@
           },
           "406": {
             "description": "Incorrect PostId"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "api/friends/getFriends": {
+      "get": {
+        "tags": ["Friends"],
+        "summary": "Get Friends",
+        "description": "Get Friend List of User",
+        "security": [
+          {
+            "ApiKey": []
+          }
+        ]
+      },
+      "responses": {
+        "200": {
+          "description": "Friend List"
+        },
+        "401": {
+          "description": "Unauthorized Access"
+        },
+        "500": {
+          "description": "Internal Server Error"
+        }
+      }
+    },
+    "api/friends/sendRequest/{user}": {
+      "post": {
+        "tags": ["Friends"],
+        "summary": "Send Request",
+        "description": "Send Friend Request to the User",
+        "security": [
+          {
+            "ApiKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ]
+      },
+      "responses": {
+        "200": {
+          "description": "ok"
+        },
+        "401": {
+          "description": "Unauthorized Access"
+        },
+        "404": {
+          "description": "User Not found"
+        },
+        "406": {
+          "description": "InCorrect UserId or Already Sent or Recieve Request"
+        },
+        "500": {
+          "description": "Internal Server Error"
+        }
+      }
+    },
+    "api/friends/acceptRequest/{user}": {
+      "post": {
+        "tags": ["Friends"],
+        "summary": "Accept Friend Request",
+        "description": "Accept Friend Request of the User",
+        "security": [
+          {
+            "ApiKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Become Friend"
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "404": {
+            "description": "Request Not found"
+          },
+          "406": {
+            "description": "InCorrect UserId or Already a Friend"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "api/friends/rejectRequest/{user}": {
+      "get": {
+        "tags": ["Friends"],
+        "summary": "Reject Friend Request",
+        "description": "Reject Friend Request of the User",
+        "security": [
+          {
+            "ApiKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "404": {
+            "description": "Request Not found"
+          },
+          "406": {
+            "description": "InCorrect UserId or Already a Friend"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "api/friends/removeFriend/{friendId}": {
+      "get": {
+        "tags": ["Friends"],
+        "summary": "Remove Friend",
+        "description": "Remove a User From the Friend List",
+        "security": [
+          {
+            "ApiKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "friendId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "404": {
+            "description": "Friend not found "
+          },
+          "406": {
+            "description": "Incorrect FriendId"
           },
           "500": {
             "description": "Internal Server Error"
