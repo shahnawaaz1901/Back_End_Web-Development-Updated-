@@ -666,6 +666,34 @@
           }
         }
       }
+    },
+    "api/likes/addLike": {
+      "post": {
+        "tags": ["Likes"],
+        "summary": "Like Item",
+        "description": "Add Like to Post, User or Comment",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "requestBody": {},
+        "responses": {}
+      }
+    },
+    "api/likes/removeLike/{likeId}": {
+      "put": {
+        "tags": ["Likes"],
+        "summary": "Like Item",
+        "description": "Add Like to Post, User or Comment",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "requestBody": {},
+        "responses": {}
+      }
     }
   }
 }
