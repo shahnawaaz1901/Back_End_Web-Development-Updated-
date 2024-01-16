@@ -8,17 +8,15 @@
   "servers": [
     { "url": "http://localhost:3200", "description": "Postaway API" }
   ],
-  "components": [
-    {
-      "securitySchemes": {
-        "cookieAuth": {
-          "type": "apiKey",
-          "in": "cookie",
-          "name": "JWT_Token"
-        }
+  "components": {
+    "securitySchemes": {
+      "JWT": {
+        "in": "header",
+        "name": "Authorizaion",
+        "type": "apiKey"
       }
     }
-  ],
+  },
   "paths": {
     "/api/users/signUp": {
       "post": {
@@ -176,7 +174,7 @@
         "description": "Change Password Using Existing Password",
         "security": [
           {
-            "cookieAuth": []
+            "ApiKey": []
           }
         ],
         "requestBody": {
@@ -217,7 +215,7 @@
         "description": "SignOut from Postaway",
         "security": [
           {
-            "cookieAuth": []
+            "ApiKey": []
           }
         ],
         "responses": {
@@ -240,7 +238,7 @@
         "description": "SignOut from All Devices",
         "security": [
           {
-            "cookieAuth": []
+            "ApiKey": []
           }
         ],
         "responses": {
@@ -263,7 +261,7 @@
         "description": "Create New Post on Postaway",
         "security": [
           {
-            "cookieAuth": []
+            "ApiKey": []
           }
         ],
         "requestBody": {
@@ -316,7 +314,7 @@
         "description": "Get Posts of Self or Any User",
         "security": [
           {
-            "cookieAuth": []
+            "ApiKey": []
           }
         ],
         "responses": {
@@ -339,7 +337,7 @@
         "description": "Get a Single Post of User",
         "security": [
           {
-            "cookieAuth": []
+            "ApiKey": []
           }
         ],
         "parameters": [
@@ -379,7 +377,7 @@
         "description": "Update Post on Postaway",
         "security": [
           {
-            "cookieAuth": []
+            "ApiKey": []
           }
         ],
         "parameters": [
@@ -419,7 +417,7 @@
         "description": "Delete a Post on Postaway",
         "security": [
           {
-            "cookieAuth": []
+            "ApiKey": []
           }
         ],
         "parameters": [
