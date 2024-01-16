@@ -8,7 +8,7 @@ import orderSchema from "./order.schema.js";
   Mongoclient help us to Create the Session for the Transaction
 */
 
-const OrderModel = mongoose.model("Order", orderSchema);
+// const OrderModel = mongoose.model("Order", orderSchema);
 
 export default class OrderRepository {
   constructor() {
