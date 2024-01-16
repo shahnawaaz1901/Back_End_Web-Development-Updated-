@@ -24,9 +24,9 @@
       "post": {
         "tags": ["Users"],
         "summary": "SignUp",
+        "description": "Create Account on Postaway",
         "requestBody": {
           "required": true,
-          "description": "Create Account on Postaway",
           "content": {
             "multipart/form-data": {
               "schema": {
@@ -212,12 +212,244 @@
     },
     "/api/users/signOut": {
       "delete": {
-        "tags": ["Users"]
+        "tags": ["Users"],
+        "summary": "SignOut",
+        "description": "SignOut from Postaway",
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     },
     "/api/users/signOutAll": {
       "delete": {
-        "tags": ["Users"]
+        "tags": ["Users"],
+        "summary": "SignOut All",
+        "description": "SignOut from All Devices",
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/posts/createPost": {
+      "post": {
+        "tags": ["Posts"],
+        "summary": "Create Post",
+        "description": "Create New Post on Postaway",
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "caption": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "imageURL": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "tags": {
+                    "type": "string",
+                    "description": "*UserId* seprated by **Comma** in case of multiple [Users]",
+                    "format": "id"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Post Created"
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "406": {
+            "description": "Minimum One field is Required"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/posts/getPosts": {
+      "get": {
+        "tags": ["Posts"],
+        "summary": "Get Posts",
+        "description": "Get Posts of Self or Any User",
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Posts fetched"
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/posts/getOnePosts/{postId}": {
+      "get": {
+        "tags": ["Posts"],
+        "summary": "Get Post",
+        "description": "Get a Single Post of User",
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "PostId of Post which you want to get"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post fetched"
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "404": {
+            "description": "Post not found"
+          },
+          "406": {
+            "description": "Incorrect PostId"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/posts/updatePost/{postId}": {
+      "put": {
+        "tags": ["Posts"],
+        "summary": "Update Post",
+        "description": "Update Post on Postaway",
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "PostId of Post which you want to Update"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated Post"
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "404": {
+            "description": "Post not found"
+          },
+          "406": {
+            "description": "Minimum One Field Required"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/posts/deletePost/{postId}": {
+      "delete": {
+        "tags": ["Posts"],
+        "summary": "Delete Post",
+        "description": "Delete a Post on Postaway",
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "PostId of Post which you want to Delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post Deleted"
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "404": {
+            "description": "Post not found"
+          },
+          "406": {
+            "description": "Incorrect PostId"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     }
   }
