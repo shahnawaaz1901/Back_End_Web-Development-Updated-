@@ -677,8 +677,43 @@
             "apiKey": []
           }
         ],
-        "requestBody": {},
-        "responses": {}
+        "requestBody": {
+          "required": true,
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Likeable Item Id"
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "Specify type of id : [**User**, **Post**, **Comment**]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "404": {
+            "description": "Item not found"
+          },
+          "406": {
+            "description": "Incorrect Id"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     },
     "api/likes/removeLike/{likeId}": {
@@ -691,7 +726,28 @@
             "apiKey": []
           }
         ],
-        "requestBody": {},
+        "parameters": [
+          {
+            "in": "path",
+            "name": "likeId",
+            "description": "Likeable Item Id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
         "responses": {}
       }
     }
