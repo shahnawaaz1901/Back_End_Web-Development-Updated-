@@ -54,7 +54,7 @@ server.use(loggerMiddleware);
 server.use("/apiDocs", swagger.serve, swagger.setup(apiDoc));
 
 //* Greet User
-server.use("/", (req, res) => {
+server.get("/", (req, res) => {
   res.status(200).json({ success: true, message: "Welcome to Postaway API" });
 });
 

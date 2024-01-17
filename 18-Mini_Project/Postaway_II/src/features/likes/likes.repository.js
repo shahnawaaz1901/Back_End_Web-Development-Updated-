@@ -38,12 +38,12 @@ export default class LikeRepository {
       entityExist.likes.push(likeData.upsertedId);
       await entityExist.save({ session });
       await session.commitTransaction();
-      await session.endSession();
       return `${likeInfo.type} Liked Successfully..`;
     } catch (error) {
       await session.abortTransaction();
-      await session.endSession();
       throw error;
+    } finally {
+      await session.endSession();
     }
   }
 
@@ -75,12 +75,12 @@ export default class LikeRepository {
         { session }
       );
       await session.commitTransaction();
-      await session.endSession();
       return `Like Removed Successfully...`;
     } catch (error) {
       await session.abortTransaction();
-      await session.endSession();
       throw error;
+    } finally {
+      await session.endSession();
     }
   }
 }

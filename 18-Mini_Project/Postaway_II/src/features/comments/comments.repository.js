@@ -33,12 +33,12 @@ export default class CommentRepository {
 
       await newComment.save({ session });
       await session.commitTransaction();
-      await session.endSession();
       return newComment;
     } catch (error) {
       await session.abortTransaction();
-      await session.endSession();
       throw error;
+    } finally {
+      await session.endSession();
     }
   }
 
@@ -110,11 +110,11 @@ export default class CommentRepository {
         { $pull: { comments: commentData.commentId } }
       );
       await session.commitTransaction();
-      await session.endSession();
     } catch (error) {
       await session.abortTransaction();
-      await session.endSession();
       throw error;
+    } finally {
+      await session.endSession();
     }
   }
 }

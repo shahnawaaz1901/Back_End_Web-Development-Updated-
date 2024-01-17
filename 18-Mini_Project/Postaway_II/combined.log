@@ -851,3 +851,65 @@
 {"level":"info","message":{"data":{},"time":"Wed Jan 17 2024 11:59:23 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-bundle.js"},"service":"user-service"}
 {"level":"info","message":{"data":{},"time":"Wed Jan 17 2024 11:59:23 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-standalone-preset.js"},"service":"user-service"}
 {"level":"info","message":{"data":{},"time":"Wed Jan 17 2024 11:59:23 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-init.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Wed Jan 17 2024 18:28:02 GMT+0530 (India Standard Time)","url":"/apiDocs/"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Wed Jan 17 2024 18:28:02 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui.css"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Wed Jan 17 2024 18:28:02 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-bundle.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Wed Jan 17 2024 18:28:02 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-standalone-preset.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Wed Jan 17 2024 18:28:02 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-init.js"},"service":"user-service"}
+{"level":"error","message":{"data":{},"error":"Invalid Credentials","time":"Wed Jan 17 2024 18:29:15 GMT+0530 (India Standard Time)","url":"/api/users/signIn"},"service":"user-service"}
+{"level":"error","message":{"data":{},"error":"Invalid Credentials","time":"Wed Jan 17 2024 18:30:04 GMT+0530 (India Standard Time)","url":"/api/users/signIn"},"service":"user-service"}
+{"level":"error","message":{"data":{},"error":"Invalid Credentials","time":"Wed Jan 17 2024 18:30:51 GMT+0530 (India Standard Time)","url":"/api/users/signIn"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Wed Jan 17 2024 18:30:55 GMT+0530 (India Standard Time)","url":"/apiDocs/"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Wed Jan 17 2024 18:30:55 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui.css"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Wed Jan 17 2024 18:30:55 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-bundle.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Wed Jan 17 2024 18:30:55 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-standalone-preset.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Wed Jan 17 2024 18:30:55 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-init.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:34:41 GMT+0530 (India Standard Time)","url":"/apiDocs/"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:34:41 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-standalone-preset.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:34:41 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui.css"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:34:41 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-bundle.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:34:41 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-init.js"},"service":"user-service"}
+{"level":"error","message":{"data":{},"error":"connect ECONNREFUSED 65.0.28.196:27017","time":"Thu Jan 18 2024 00:35:37 GMT+0530 (India Standard Time)","url":"/api/users/signIn"},"service":"user-service"}
+{"level":"error","message":{"data":{},"error":"Invalid Credentials","time":"Thu Jan 18 2024 00:36:25 GMT+0530 (India Standard Time)","url":"/api/users/signIn"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:39:31 GMT+0530 (India Standard Time)","url":"/apiDocs/"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:39:31 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui.css"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:39:31 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-bundle.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:39:31 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-standalone-preset.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:39:31 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-init.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:39:32 GMT+0530 (India Standard Time)","url":"/apiDocs/favicon-32x32.png"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:41:02 GMT+0530 (India Standard Time)","url":"/apiDocs/"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:41:02 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui.css"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:41:03 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-bundle.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:41:03 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-standalone-preset.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:41:03 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-init.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:45:57 GMT+0530 (India Standard Time)","url":"/apiDocs/"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:45:57 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui.css"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:45:57 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-bundle.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:45:57 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-standalone-preset.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:45:57 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-init.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:46:58 GMT+0530 (India Standard Time)","url":"/apiDocs/"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:46:58 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui.css"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:46:58 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-bundle.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:46:58 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-standalone-preset.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:46:58 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-init.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:47:59 GMT+0530 (India Standard Time)","url":"/apiDocs"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:47:59 GMT+0530 (India Standard Time)","url":"/apiDocs/"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:47:59 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui.css"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:47:59 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-bundle.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:47:59 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-standalone-preset.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:47:59 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-init.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:59:05 GMT+0530 (India Standard Time)","url":"/apiDocs/"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:59:05 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui.css"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:59:05 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-bundle.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:59:05 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-standalone-preset.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 00:59:05 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-init.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 01:00:00 GMT+0530 (India Standard Time)","url":"/apiDocs/"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 01:00:00 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui.css"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 01:00:00 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-bundle.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 01:00:00 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-standalone-preset.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 01:00:00 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-init.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 01:26:42 GMT+0530 (India Standard Time)","url":"/apiDocs/"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 01:26:42 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui.css"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 01:26:42 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-bundle.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 01:26:42 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-standalone-preset.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Thu Jan 18 2024 01:26:42 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-init.js"},"service":"user-service"}

@@ -11,8 +11,8 @@
   "components": {
     "securitySchemes": {
       "JWT": {
-        "in": "header",
-        "name": "Authorizaion",
+        "in": "cookie",
+        "name": "JWT",
         "type": "apiKey"
       }
     }
@@ -80,7 +80,7 @@
           "required": true,
           "description": "Signin on Postaway",
           "content": {
-            "text/plain": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -719,8 +719,8 @@
     "api/likes/removeLike/{likeId}": {
       "put": {
         "tags": ["Likes"],
-        "summary": "Like Item",
-        "description": "Add Like to Post, User or Comment",
+        "summary": "Dislike Item",
+        "description": "Remove Like on Post, User or Comment",
         "security": [
           {
             "apiKey": []
@@ -743,12 +743,233 @@
             "text/plain": {
               "schema": {
                 "type": "object",
-                "properties": {}
+                "properties": {
+                  "likeableDataId": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "Specify type of id : [**User**,**Post**,**Comment**]"
+                  }
+                }
               }
             }
           }
         },
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Like Remove Successfully"
+          },
+          "404": {
+            "description": "Like not found"
+          },
+          "406": {
+            "description": "Incorrect Id"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/comments/newComment": {
+      "post": {
+        "tags": ["Comments"],
+        "summary": "Create Comment",
+        "description": "Write a Comment on a Post",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "type": "object",
+              "properties": {
+                "postId": {
+                  "type": "string"
+                },
+                "comment": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Ok"
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "404": {
+            "description": "Post not found"
+          },
+          "406": {
+            "description": "PostId or Comment Can't be Empty"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/comments/getComments/{postId}": {
+      "get": {
+        "tags": ["Comments"],
+        "summary": "Get Comments",
+        "description": "Get All Comments of a Post",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "404": {
+            "description": "Post not found"
+          },
+          "406": {
+            "description": "Incorrect PostId"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/comments/getComment/{commentId}": {
+      "get": {
+        "tags": ["Comments"],
+        "summary": "Get Comment",
+        "description": "Get a Single Comment of a Post",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "commentId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "404": {
+            "description": "Comment not found"
+          },
+          "406": {
+            "description": "Incorrect CommentId"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/comments/updateComment/{postId}": {
+      "put": {
+        "tags": ["Comments"],
+        "summary": "Update Comment",
+        "description": "Update a Comment of a Post",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "commentId": {
+                    "type": "string"
+                  },
+                  "newComment": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Ok"
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "404": {
+            "description": "Post not found or Comment not found"
+          },
+          "406": {
+            "description": "Incorrect PostId or CommentId"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/comments/deleteComment/": {
+      "delete": {
+        "tags": ["Comments"],
+        "summary": "Delete Comment",
+        "description": "Delete a Comment of a Post",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "parameters": [{}],
+        "responses": {
+          "201": {
+            "description": "Ok"
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "404": {
+            "description": "Comment not found"
+          },
+          "406": {
+            "description": "Incorrect CommentId"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     }
   }
