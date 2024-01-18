@@ -20,7 +20,7 @@ commentRouter.put("/updateComment/:postId", (req, res, next) => {
   commentController.updateComment(req, res, next);
 });
 
-commentRouter.delete("/deleteComment", (req, res, next) => {
+commentRouter.delete("/deleteComment/:commentId", (req, res, next) => {
   commentController.deleteComment(req, res, next);
 });
 

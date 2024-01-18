@@ -68,11 +68,6 @@ export default class CommentRepository {
 
   async update(updatedData) {
     try {
-      const post = await PostModel.findById(updatedData.postId);
-      if (!post) {
-        throw new Error("Post not found !!");
-      }
-
       const updatedComment = await CommentModel.findOneAndUpdate(
         {
           _id: updatedData.commentId,
@@ -96,18 +91,25 @@ export default class CommentRepository {
     const session = await mongoose.startSession();
     try {
       session.startTransaction();
-      const deleteComment = await CommentModel.deleteOne({
-        _id: commentData.commentId,
-        user: commentData.userId,
-        post: commentData.postId,
-      });
-
-      if (!deleteComment.deletedCount) {
+      const deleteComment = await CommentModel.findOneAndDelete(
+        {
+          _id: commentData.commentId,
+          user: commentData.userId,
+        },
+        {
+          session,
+          projection: {
+            post: 1,
+          },
+        }
+      );
+      if (!deleteComment) {
         throw new ApplicationError("Comment Not found !!", 404);
       }
-      await PostModel.findOneAndUpdate(
-        { _id: commentData.postId },
-        { $pull: { comments: commentData.commentId } }
+      await PostModel.updateOne(
+        { _id: deleteComment.post },
+        { $pull: { comments: deleteComment._id } },
+        { session }
       );
       await session.commitTransaction();
     } catch (error) {

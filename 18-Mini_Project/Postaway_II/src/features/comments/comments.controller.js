@@ -64,12 +64,11 @@ export default class CommentController {
   async updateComment(req, res, next) {
     try {
       const { userId } = req;
-      const { postId } = req.params;
       const { commentId, newComment } = req.body;
 
       //* Check PostId and CommentId is Empty or Not
-      if (!postId || !commentId) {
-        throw new ApplicationError("Please Provide Required Ids !!", 406);
+      if (!commentId) {
+        throw new ApplicationError("CommentId Can't be Empty", 406);
       }
 
       //* Check if updatedComment are Empty or Not
@@ -79,7 +78,6 @@ export default class CommentController {
 
       const updatedComment = await this.commentRepository.update({
         userId,
-        postId,
         commentId,
         newComment,
       });
@@ -94,12 +92,7 @@ export default class CommentController {
   async deleteComment(req, res, next) {
     try {
       const { userId } = req;
-      const { postId, commentId } = req.query;
-
-      //* Check if PostId is Empty or Not
-      if (!postId) {
-        throw new ApplicationError("PostId Can't be Empty", 406);
-      }
+      const { commentId } = req.params;
 
       //* Check if CommentId is Empty or Not
       if (!commentId) {
@@ -108,7 +101,6 @@ export default class CommentController {
 
       await this.commentRepository.delete({
         userId,
-        postId,
         commentId,
       });
       res

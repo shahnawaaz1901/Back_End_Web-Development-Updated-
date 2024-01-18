@@ -786,13 +786,15 @@
           "required": true,
           "content": {
             "application/json": {
-              "type": "object",
-              "properties": {
-                "postId": {
-                  "type": "string"
-                },
-                "comment": {
-                  "type": "string"
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "postId": {
+                    "type": "string"
+                  },
+                  "comment": {
+                    "type": "string"
+                  }
                 }
               }
             }
@@ -905,6 +907,16 @@
             "apiKey": []
           }
         ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -942,7 +954,7 @@
         }
       }
     },
-    "/api/comments/deleteComment/": {
+    "/api/comments/deleteComment/{commentId}": {
       "delete": {
         "tags": ["Comments"],
         "summary": "Delete Comment",
@@ -952,7 +964,16 @@
             "apiKey": []
           }
         ],
-        "parameters": [{}],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "commentId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
         "responses": {
           "201": {
             "description": "Ok"
