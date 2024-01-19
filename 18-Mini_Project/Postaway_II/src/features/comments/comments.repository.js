@@ -48,9 +48,6 @@ export default class CommentRepository {
         post: postId,
       });
     } catch (error) {
-      if (error instanceof mongoose.mongo.BSON.BSONError) {
-        throw new ApplicationError(error.message, 406);
-      }
       throw error;
     }
   }
@@ -59,9 +56,6 @@ export default class CommentRepository {
     try {
       return await CommentModel.findById(commentId);
     } catch (error) {
-      if (error instanceof mongoose.mongo.BSON.BSONError) {
-        throw new ApplicationError(error.message, 406);
-      }
       throw error;
     }
   }

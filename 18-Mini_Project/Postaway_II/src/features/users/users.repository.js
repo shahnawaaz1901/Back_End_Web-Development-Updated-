@@ -89,7 +89,7 @@ export default class UserRepository {
     try {
       return await UserModel.findOneAndUpdate(
         {
-          _id: new mongoose.Types.ObjectId(userId),
+          _id: userId,
         },
         {
           $set: { loginDevices: [] },
@@ -105,7 +105,7 @@ export default class UserRepository {
   async isLoginRequired(id, token) {
     try {
       const userLogin = await UserModel.findOne({
-        _id: new mongoose.Types.ObjectId(id),
+        _id: id,
         loginDevices: token,
       });
       if (!userLogin) {

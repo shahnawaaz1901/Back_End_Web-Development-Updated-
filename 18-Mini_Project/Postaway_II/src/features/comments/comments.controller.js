@@ -13,7 +13,7 @@ export default class CommentController {
 
       //* Check Post Exist or Not
       if (!postId) {
-        throw new ApplicationError("Please Provide Post Id", 406);
+        throw new ApplicationError("PostId can't be Empty", 406);
       }
 
       //* Check Comment Provided or Not
