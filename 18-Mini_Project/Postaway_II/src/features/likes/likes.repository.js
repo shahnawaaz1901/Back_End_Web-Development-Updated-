@@ -31,14 +31,14 @@ export default class LikeRepository {
         },
         { upsert: true, returnDocument: "before", session }
       );
-      console.log(likeData);
+
       if (likeData.matchedCount > 0) {
         throw new ApplicationError(`Already Liked This ${likeInfo.type}`, 406);
       }
       entityExist.likes.push(likeData.upsertedId);
       await entityExist.save({ session });
       await session.commitTransaction();
-      return `${likeInfo.type} Liked Successfully..`;
+      return likeData;
     } catch (error) {
       await session.abortTransaction();
       throw error;
@@ -52,26 +52,27 @@ export default class LikeRepository {
     const session = await mongoose.startSession();
     try {
       session.startTransaction();
-      const removeData = await LikeModel.deleteOne(
+      const removeData = await LikeModel.findOneAndDelete(
         {
           _id: new mongoose.Types.ObjectId(info.likeId),
           user: new mongoose.Types.ObjectId(info.userId),
         },
         { session }
       );
-      if (!removeData.deletedCount) {
+      console.log(removeData);
+      if (!removeData) {
         throw new ApplicationError("Like not found !!", 404);
       }
       const entityModel =
-        info.type == "Post"
+        removeData.on_model == "Post"
           ? PostModel
-          : info.type == "Comment"
+          : removeData.on_model == "Comment"
           ? CommentModel
           : UserModel;
 
       await entityModel.findOneAndUpdate(
-        { _id: new mongoose.Types.ObjectId(info.likeableDataId) },
-        { $pull: { likes: new mongoose.Types.ObjectId(info.likeId) } },
+        { _id: removeData.likeable },
+        { $pull: { likes: removeData._id } },
         { session }
       );
       await session.commitTransaction();

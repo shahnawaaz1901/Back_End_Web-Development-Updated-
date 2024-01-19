@@ -10,9 +10,8 @@ export default class LikeController {
     try {
       const { userId } = req;
       const { id, type } = req.body;
-      console.log(id, type);
-      if (!id || !type) {
-        throw new ApplicationError("Please Provide Required details", 406);
+      if (!id) {
+        throw new ApplicationError("Incorrect id", 406);
       }
       if (type != "Post" && type != "User" && type != "Comment") {
         throw new ApplicationError("Type is Invalid", 406);
@@ -29,18 +28,13 @@ export default class LikeController {
     try {
       const { userId } = req;
       const { likeId } = req.params;
-      const { likeableDataId, type } = req.body;
-      if (!likeableDataId || !type || !likeId) {
-        throw new ApplicationError("Please Provide Require Details !!", 406);
+      if (!likeId) {
+        throw new ApplicationError("Please Provide LikeId !!", 406);
       }
-      if (type != "Post" && type != "User" && type != "Comment") {
-        throw new ApplicationError("Type is Invalid !!", 406);
-      }
+
       const result = await this.likeRepository.remove({
         userId,
         likeId,
-        likeableDataId,
-        type,
       });
       res.status(200).send({ success: true, message: result });
     } catch (error) {

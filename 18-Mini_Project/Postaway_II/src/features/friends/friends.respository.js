@@ -8,30 +8,18 @@ export default class FriendRepository {
 
   //* Check is Both users Are Friends or Not
   async #checkBothFriends(user1, user2) {
-    return (
-      (await FriendModel.findOne({
-        user: user1,
-        friendList: user2,
-      })) &&
-      (await FriendModel.findOne({
-        user: user2,
-        friendList: user1,
-      }))
-    );
+    return await FriendModel.findOne({
+      user: user1,
+      friendList: user2,
+    });
   }
 
   //* Check if User1 sends Request to User2
   async #checkIfUserSendRequest(user1, user2) {
-    return (
-      (await FriendModel.findOne({
-        user: user1,
-        sendRequests: user2,
-      })) &&
-      (await FriendModel.findOne({
-        user: user2,
-        pendingRequests: user1,
-      }))
-    );
+    return await FriendModel.findOne({
+      user: user1,
+      sendRequests: user2,
+    });
   }
 
   //* Get Friend List
@@ -51,9 +39,11 @@ export default class FriendRepository {
     try {
       session.startTransaction();
       const { userId: reciever, requestUser: sender } = friendObject;
+
       if (sender == reciever) {
         throw new ApplicationError("Request not Accepted to Self !!", 406);
       }
+
       //* Check if Requested User Send Friend Requests or Not
       const userSendRequest = await this.#checkIfUserSendRequest(
         sender,
@@ -66,11 +56,11 @@ export default class FriendRepository {
 
       await FriendModel.updateOne(
         {
-          user: new mongoose.Types.ObjectId(userId),
+          user: userId,
         },
         {
           $pull: {
-            pendingRequests: new mongoose.Types.ObjectId(requestUser),
+            pendingRequests: requestUser,
           },
           $push: {
             friendList: requestUser,
@@ -79,11 +69,11 @@ export default class FriendRepository {
       );
       await FriendModel.updateOne(
         {
-          user: new mongoose.Types.ObjectId(requestUser),
+          user: requestUser,
         },
         {
           $pull: {
-            sendRequests: new mongoose.Types.ObjectId(userId),
+            sendRequests: userId,
           },
           $push: {
             friendList: userId,
@@ -112,7 +102,9 @@ export default class FriendRepository {
         throw new ApplicationError("Request not send to self !!", 406);
       }
       //* Check User Exist or Not
-      const userExist = await UserModel.findById(friendObject.toUser);
+      const userExist = await UserModel.findById(friendObject.toUser, {
+        session,
+      });
       if (!userExist) {
         throw new ApplicationError("User not found !!", 404);
       }
@@ -132,7 +124,7 @@ export default class FriendRepository {
       }
       await FriendModel.findOneAndUpdate(
         {
-          user: new mongoose.Types.ObjectId(sender),
+          user: sender,
         },
         {
           $push: { sendRequests: reciever },
@@ -141,7 +133,7 @@ export default class FriendRepository {
       );
       await FriendModel.findOneAndUpdate(
         {
-          user: new mongoose.Types.ObjectId(reciever),
+          user: reciever,
         },
         { $push: { pendingRequests: sender } },
         { session }
@@ -165,34 +157,31 @@ export default class FriendRepository {
         throw new ApplicationError("Can't Reject Self !!", 406);
       }
       /* First Check if User Sent Request of Not */
-      const requestForFriend =
-        (await FriendModel.findOne({
-          user: sender,
-          sendRequests: reciever,
-        })) &&
-        (await FriendModel.findOne({
-          user: reciever,
-          pendingRequests: sender,
-        }));
+      const requestForFriend = await this.#checkIfUserSendRequest(
+        sender,
+        reciever
+      );
       if (!requestForFriend) {
-        throw new ApplicationError("Request not found for the User !!", 404);
+        throw new ApplicationError("Request not found !!", 404);
       }
       await FriendModel.findOneAndUpdate(
-        { user: new mongoose.Types.ObjectId(sender) },
+        { user: sender },
         {
           $pull: {
-            sendRequests: new mongoose.Types.ObjectId(reciever),
+            sendRequests: reciever,
           },
-        }
+        },
+        { session }
       );
 
       await FriendModel.findOneAndUpdate(
-        { user: new mongoose.Types.ObjectId(reciever) },
+        { user: reciever },
         {
           $pull: {
-            pendingRequests: new mongoose.Types.ObjectId(sender),
+            pendingRequests: sender,
           },
-        }
+        },
+        { session }
       );
       await session.commitTransaction();
     } catch (error) {
@@ -218,23 +207,25 @@ export default class FriendRepository {
       }
       await FriendModel.updateOne(
         {
-          user: new mongoose.Types.ObjectId(friendId),
+          user: friendId,
         },
         {
           $pull: {
-            friendList: new mongoose.Types.ObjectId(user),
+            friendList: user,
           },
-        }
+        },
+        { session }
       );
       await FriendModel.updateOne(
         {
-          user: new mongoose.Types.ObjectId(friendId),
+          user: friendId,
         },
         {
           $pull: {
-            friendList: new mongoose.Types.ObjectId(user),
+            friendList: user,
           },
-        }
+        },
+        { session }
       );
       await session.commitTransaction();
     } catch (error) {
