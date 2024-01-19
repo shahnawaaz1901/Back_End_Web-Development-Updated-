@@ -16,7 +16,7 @@ commentRouter.get("/getComment/:commentId", (req, res, next) => {
   commentController.getOneComment(req, res, next);
 });
 
-commentRouter.put("/updateComment/:postId", (req, res, next) => {
+commentRouter.put("/updateComment/:commentId", (req, res, next) => {
   commentController.updateComment(req, res, next);
 });
 

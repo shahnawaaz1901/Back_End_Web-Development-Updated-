@@ -64,7 +64,8 @@ export default class CommentController {
   async updateComment(req, res, next) {
     try {
       const { userId } = req;
-      const { commentId, newComment } = req.body;
+      const { newComment } = req.body;
+      const { commentId } = req.params;
 
       //* Check PostId and CommentId is Empty or Not
       if (!commentId) {
