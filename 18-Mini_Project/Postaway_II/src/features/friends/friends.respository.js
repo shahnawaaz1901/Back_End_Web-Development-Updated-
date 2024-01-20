@@ -22,6 +22,7 @@ export default class FriendRepository {
     });
   }
 
+  /* Public Functions */
   //* Get Friend List
   async get(userId) {
     try {
@@ -56,27 +57,27 @@ export default class FriendRepository {
 
       await FriendModel.updateOne(
         {
-          user: userId,
+          user: reciever,
         },
         {
           $pull: {
-            pendingRequests: requestUser,
+            pendingRequests: sender,
           },
           $push: {
-            friendList: requestUser,
+            friendList: sender,
           },
         }
       );
       await FriendModel.updateOne(
         {
-          user: requestUser,
+          user: sender,
         },
         {
           $pull: {
-            sendRequests: userId,
+            sendRequests: reciever,
           },
           $push: {
-            friendList: userId,
+            friendList: reciever,
           },
         }
       );
@@ -102,9 +103,7 @@ export default class FriendRepository {
         throw new ApplicationError("Request not send to self !!", 406);
       }
       //* Check User Exist or Not
-      const userExist = await UserModel.findById(friendObject.toUser, {
-        session,
-      });
+      const userExist = await UserModel.findById(friendObject.toUser);
       if (!userExist) {
         throw new ApplicationError("User not found !!", 404);
       }
@@ -120,7 +119,7 @@ export default class FriendRepository {
       //* Check if Both users are Already Friends or Not
       const bothUserFriends = await this.#checkBothFriends(sender, reciever);
       if (bothUserFriends) {
-        throw new ApplicationError("This user is Friend Already !!", 406);
+        throw new ApplicationError("Can't Sent Request to Friends !!", 406);
       }
       await FriendModel.findOneAndUpdate(
         {
@@ -218,11 +217,11 @@ export default class FriendRepository {
       );
       await FriendModel.updateOne(
         {
-          user: friendId,
+          user: user,
         },
         {
           $pull: {
-            friendList: user,
+            friendList: friendId,
           },
         },
         { session }

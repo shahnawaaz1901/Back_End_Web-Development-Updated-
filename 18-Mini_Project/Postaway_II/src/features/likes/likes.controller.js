@@ -19,7 +19,6 @@ export default class LikeController {
       const likeData = await this.likeRepository.add({ ...req.body, userId });
       res.status(201).json({ success: true, massage: likeData });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -38,7 +37,6 @@ export default class LikeController {
       });
       res.status(200).send({ success: true, message: result });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }

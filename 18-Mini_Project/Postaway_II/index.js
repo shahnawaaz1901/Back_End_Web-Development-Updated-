@@ -72,7 +72,7 @@ server.use(errorMiddleware);
 server.use((req, res) => {
   res.status(404).json({
     success: false,
-    message: `Resource you are looking for not exist please visit our API Doc at "/apiDocs"`,
+    message: `Resource you are looking for not exist please visit our API Doc at /apiDocs`,
   });
 });
 //* Export

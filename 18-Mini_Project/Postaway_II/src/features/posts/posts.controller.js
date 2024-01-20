@@ -31,7 +31,6 @@ export default class PostController {
       });
       return res.status(201).json({ sucess: true, post: savedPost });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -44,7 +43,6 @@ export default class PostController {
       let posts = await this.postRepository.get(userId);
       res.status(200).json({ success: true, posts });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -59,7 +57,6 @@ export default class PostController {
       }
       return res.status(200).json({ success: true, post });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -92,7 +89,6 @@ export default class PostController {
       }
       return res.status(200).send({ success: true, post: updatedPost });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -112,7 +108,6 @@ export default class PostController {
       }
       throw new ApplicationError("Post not found for the User !!", 404);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }

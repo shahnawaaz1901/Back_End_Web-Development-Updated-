@@ -127,7 +127,7 @@ export default class UserRepository {
         updatedData.password
       );
       if (!passwordMatch) {
-        throw new ApplicationError("Password is Incorrect !!", 401);
+        throw new ApplicationError("Current Password is Incorrect !!", 401);
       }
       updatedData.password = await bcrypt.hash(
         updatedPasswordDetail.newPassword,

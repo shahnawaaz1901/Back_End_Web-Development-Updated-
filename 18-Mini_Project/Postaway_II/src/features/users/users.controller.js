@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import UserRepository from "./users.repository.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -22,7 +21,6 @@ export default class UserController {
       const newUser = await this.userRepository.newUser(req.body);
       return res.status(201).json({ success: true, user: newUser });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -51,7 +49,6 @@ export default class UserController {
       }
       throw new ApplicationError("Invalid Credentials", 404);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -66,7 +63,6 @@ export default class UserController {
         .status(200)
         .json({ success: true, message: "SignOut Successfully !!" });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -88,7 +84,6 @@ export default class UserController {
       }
       throw new ApplicationError("Account Not Exist with this Email !", 404);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -118,12 +113,11 @@ export default class UserController {
         req.session.destroy((err) => {
           console.log(err);
         });
-        await updatePasswordAlert(email, updatedData.name);
+        updatePasswordAlert(email, updatedData.name);
         return res.status(200).json({ success: true, user: updatedData });
       }
       throw new ApplicationError(verified.msg, 404);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -137,7 +131,6 @@ export default class UserController {
         .status(200)
         .json({ success: true, message: "SingOut From All Devices !!" });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -147,6 +140,9 @@ export default class UserController {
     try {
       const { userId } = req;
       const { currentPassword, newPassword } = req.body;
+      if (currentPassword == newPassword) {
+        throw new ApplicationError("Password Can't be Same as Previous", 406);
+      }
       const update = await this.userRepository.updatePassword({
         userId,
         currentPassword,
@@ -154,7 +150,6 @@ export default class UserController {
       });
       res.status(200).json({ success: true, user: update });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }

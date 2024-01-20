@@ -12,7 +12,6 @@ export default class FriendController {
       const friends = await this.friendRepository.get(userId);
       res.status(200).json({ success: true, friends: friends.friendList });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -33,7 +32,6 @@ export default class FriendController {
         .status(200)
         .json({ success: true, message: "Request Sent Successfully !!" });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -51,7 +49,6 @@ export default class FriendController {
         .status(201)
         .json({ success: true, message: "Request Accepted Successfully !!" });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -72,7 +69,6 @@ export default class FriendController {
         .status(200)
         .json({ success: true, message: "Request Reject Successfully !!" });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -90,7 +86,6 @@ export default class FriendController {
         .status(200)
         .json({ success: true, message: "Friend Remove Successfully !!" });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }

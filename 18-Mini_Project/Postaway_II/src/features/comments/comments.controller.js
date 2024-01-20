@@ -28,7 +28,6 @@ export default class CommentController {
       });
       return res.status(201).json({ success: true, comment: newComment });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -40,7 +39,6 @@ export default class CommentController {
       const comments = await this.commentRepository.get(postId);
       res.status(200).json({ success: true, comments });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -55,7 +53,6 @@ export default class CommentController {
       const comment = await this.commentRepository.getOne(commentId);
       res.status(200).json({ success: true, comment });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -84,7 +81,6 @@ export default class CommentController {
       });
       res.status(200).json({ success: true, comment: updatedComment });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -108,7 +104,6 @@ export default class CommentController {
         .status(200)
         .json({ success: true, message: "Comment Deleted Successfully !!" });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
