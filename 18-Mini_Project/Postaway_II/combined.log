@@ -1141,3 +1141,87 @@
 {"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 00:57:11 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-standalone-preset.js"},"service":"user-service"}
 {"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 00:57:11 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-init.js"},"service":"user-service"}
 {"level":"error","message":{"data":{"currentPassword":"C7HHE198","newPassword":"B6GGD087"},"error":"Current Password is Incorrect !!","time":"Sun Jan 21 2024 00:57:33 GMT+0530 (India Standard Time)","url":"/api/users/changePassword"},"service":"user-service"}
+{"level":"error","message":{"data":{"email":"ashu.home733@gmail.com","password":"A5FFC976"},"error":"Password is Incorrect !","time":"Sun Jan 21 2024 01:03:26 GMT+0530 (India Standard Time)","url":"/api/users/signIn"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:04:00 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"error","message":{"data":{},"error":"Minimum One field is Required","time":"Sun Jan 21 2024 01:04:00 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:04:09 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:04:58 GMT+0530 (India Standard Time)","url":"/apiDocs/"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:04:59 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui.css"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:04:59 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-bundle.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:04:59 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-standalone-preset.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:04:59 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-init.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:05:51 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:06:27 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:06:39 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"error","message":{"data":{"caption":"Missing SomeOne Badly at Late Night","imageURL":"2024-01-20T19_36_40.114ZScreenshot (7).png","location":"Kota, Rajasthan","tags":""},"error":"Post validation failed: tags.0: Cast to [ObjectId] failed for value \"[ '' ]\" (type string) at path \"tags.0\" because of \"CastError\"","time":"Sun Jan 21 2024 01:06:40 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:06:59 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"error","message":{"data":{"caption":"Missing SomeOne Badly at Late Night","imageURL":"2024-01-20T19_36_59.364ZScreenshot (7).png","location":"Kota, Rajasthan","tags":""},"error":"Post validation failed: tags.0: Cast to [ObjectId] failed for value \"[ '' ]\" (type string) at path \"tags.0\" because of \"CastError\"","time":"Sun Jan 21 2024 01:06:59 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:07:52 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"error","message":{"data":{"caption":"Missing SomeOne Badly at Late Night","imageURL":"2024-01-20T19_37_53.136ZScreenshot (7).png","location":"Kota, Rajasthan","tags":""},"error":"Post validation failed: tags.0: Cast to [ObjectId] failed for value \"[ '' ]\" (type string) at path \"tags.0\" because of \"CastError\"","time":"Sun Jan 21 2024 01:07:53 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:08:08 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"error","message":{"data":{"caption":"Missing SomeOne Badly at Late Night","imageURL":"2024-01-20T19_38_09.214ZScreenshot (7).png","location":"Kota, Rajasthan","tags":""},"error":"Post validation failed: tags.0: Cast to [ObjectId] failed for value \"[ '' ]\" (type string) at path \"tags.0\" because of \"CastError\"","time":"Sun Jan 21 2024 01:08:09 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:09:07 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"error","message":{"data":{"caption":"Missing SomeOne Badly at Late Night","imageURL":"2024-01-20T19_39_07.392ZScreenshot (7).png","location":"Kota, Rajasthan","tags":""},"error":"Post validation failed: tags.0: Cast to [ObjectId] failed for value \"[ '' ]\" (type string) at path \"tags.0\" because of \"CastError\"","time":"Sun Jan 21 2024 01:09:07 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:09:58 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:10:53 GMT+0530 (India Standard Time)","url":"/apiDocs/"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:10:53 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui.css"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:10:53 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-bundle.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:10:53 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-standalone-preset.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:10:53 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-init.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:11:02 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"error","message":{"data":{"caption":"","imageURL":"","location":"","tags":""},"error":"Minimum One field is Required","time":"Sun Jan 21 2024 01:11:02 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:11:59 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:13:55 GMT+0530 (India Standard Time)","url":"/api/posts/getPosts/%7BuserId%7D"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:15:17 GMT+0530 (India Standard Time)","url":"/api/posts/createPost"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:16:07 GMT+0530 (India Standard Time)","url":"/apiDocs/"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:16:07 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui.css"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:16:07 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-bundle.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:16:07 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-standalone-preset.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:16:07 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-init.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:16:30 GMT+0530 (India Standard Time)","url":"/apiDocs/"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:16:30 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui.css"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:16:30 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-bundle.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:16:30 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-standalone-preset.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:16:30 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-init.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:16:57 GMT+0530 (India Standard Time)","url":"/api/posts/getPosts/?userId=65ac19556368a50b65eea7cf"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:17:03 GMT+0530 (India Standard Time)","url":"/api/posts/getPosts/"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:24:22 GMT+0530 (India Standard Time)","url":"/api/posts/deletePost/65ac22cd788b9eb8574f43e4"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:24:26 GMT+0530 (India Standard Time)","url":"/api/posts/deletePost/65ac22cd788b9eb8574f43e4"},"service":"user-service"}
+{"level":"error","message":{"data":{},"error":"Post not found for the User !!","time":"Sun Jan 21 2024 01:24:26 GMT+0530 (India Standard Time)","url":"/api/posts/deletePost/65ac22cd788b9eb8574f43e4"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:24:29 GMT+0530 (India Standard Time)","url":"/api/posts/deletePost/65ac22cd788b9eb8574f43e4"},"service":"user-service"}
+{"level":"error","message":{"data":{},"error":"Post not found for the User !!","time":"Sun Jan 21 2024 01:24:29 GMT+0530 (India Standard Time)","url":"/api/posts/deletePost/65ac22cd788b9eb8574f43e4"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:29:57 GMT+0530 (India Standard Time)","url":"/api/posts/updatePost/65ac22cd788b9eb8574f43e4"},"service":"user-service"}
+{"level":"error","message":{"data":{"caption":"","imageURL":"","location":"Kota, Rajasthan","tags":[]},"error":"Post not found !!","time":"Sun Jan 21 2024 01:29:57 GMT+0530 (India Standard Time)","url":"/api/posts/updatePost/65ac22cd788b9eb8574f43e4"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:30:20 GMT+0530 (India Standard Time)","url":"/api/posts/updatePost/65ac220a4abffdb26f07b683"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:42:14 GMT+0530 (India Standard Time)","url":"/api/posts/getOnePosts/65ac218f4abffdb26f07b67f"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:42:24 GMT+0530 (India Standard Time)","url":"/apiDocs/"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:42:24 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui.css"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:42:24 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-bundle.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:42:24 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-standalone-preset.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:42:24 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-init.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:42:37 GMT+0530 (India Standard Time)","url":"/api/posts/getOnePosts/65ac218f4abffdb26f07b67f"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:42:52 GMT+0530 (India Standard Time)","url":"/api/posts/getOnePosts/65ac218f4abffdb26f07b67f"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:43:01 GMT+0530 (India Standard Time)","url":"/apiDocs/"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:43:01 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui.css"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:43:01 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-bundle.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:43:01 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-standalone-preset.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:43:01 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-init.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:43:12 GMT+0530 (India Standard Time)","url":"/api/posts/getOnePost/65ac218f4abffdb26f07b67f"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:43:33 GMT+0530 (India Standard Time)","url":"/api/posts/updatePost/65ac218f4abffdb26f07b67f"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:43:45 GMT+0530 (India Standard Time)","url":"/api/posts/getOnePost/65ac218f4abffdb26f07b67f"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:44:25 GMT+0530 (India Standard Time)","url":"/api/posts/updatePost/65ac218f4abffdb26f07b67f"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:48:28 GMT+0530 (India Standard Time)","url":"/apiDocs/"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:48:28 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui.css"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:48:28 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-bundle.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:48:28 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-standalone-preset.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:48:28 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-init.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:48:29 GMT+0530 (India Standard Time)","url":"/apiDocs/favicon-32x32.png"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:48:53 GMT+0530 (India Standard Time)","url":"/api/posts/updatePost/65ac20bc0515fb026df34cb5"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:50:43 GMT+0530 (India Standard Time)","url":"/api/posts/updatePost/65ac20bc0515fb026df34cb5"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:51:18 GMT+0530 (India Standard Time)","url":"/api/posts/updatePost/65ac20bc0515fb026df34cb5"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:51:52 GMT+0530 (India Standard Time)","url":"/api/posts/updatePost/65ac20bc0515fb026df34cb"},"service":"user-service"}
+{"level":"error","message":{"data":{"caption":"Please Do Not Disturb Me","location":"Baran, Rajasthan","tags":""},"error":"Cast to ObjectId failed for value \"65ac20bc0515fb026df34cb\" (type string) at path \"_id\" for model \"Post\"","time":"Sun Jan 21 2024 01:51:52 GMT+0530 (India Standard Time)","url":"/api/posts/updatePost/65ac20bc0515fb026df34cb"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:53:08 GMT+0530 (India Standard Time)","url":"/api/posts/updatePost/65ac20bc0515fb026df34cb"},"service":"user-service"}
+{"level":"error","message":{"data":{"caption":"Please Do Not Disturb Me","location":"Baran, Rajasthan","tags":""},"error":"Cast to ObjectId failed for value \"65ac20bc0515fb026df34cb\" (type string) at path \"_id\" for model \"Post\"","time":"Sun Jan 21 2024 01:53:08 GMT+0530 (India Standard Time)","url":"/api/posts/updatePost/65ac20bc0515fb026df34cb"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 01:54:11 GMT+0530 (India Standard Time)","url":"/api/posts/updatePost/65ac20bc0515fb026df34cb"},"service":"user-service"}
+{"level":"error","message":{"data":{"caption":"Please Do Not Disturb Me","location":"Baran, Rajasthan","tags":""},"error":"Cast to ObjectId failed for value \"65ac20bc0515fb026df34cb\" (type string) at path \"_id\" for model \"Post\"","time":"Sun Jan 21 2024 01:54:11 GMT+0530 (India Standard Time)","url":"/api/posts/updatePost/65ac20bc0515fb026df34cb"},"service":"user-service"}

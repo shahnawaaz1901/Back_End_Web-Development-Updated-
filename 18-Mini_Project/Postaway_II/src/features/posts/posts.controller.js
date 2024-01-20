@@ -27,7 +27,7 @@ export default class PostController {
         imageURL: req.body.imageURL,
         location: req.body.location,
         timeStamp: new Date().toString(),
-        tags: req.body.tags,
+        tags: req.body.tags || undefined,
       });
       return res.status(201).json({ sucess: true, post: savedPost });
     } catch (error) {
@@ -69,17 +69,23 @@ export default class PostController {
       if (!postId) {
         throw new ApplicationError("PostId is mendatory !!", 406);
       }
+      const updatedData = {};
       if (req.body.tags) {
-        req.body.tags = req.body.tags.split(",");
+        updatedData.tags = req.body.tags.split(",");
       } else {
-        req.body.tags = [];
+        updatedData.tags = [];
       }
-
       if (req.file) {
-        req.body.imageURL = req.file.filename;
+        updatedData.imageURL = req.file.filename;
       }
 
-      const updatedData = req.body;
+      if (req.body.caption) {
+        updatedData.caption = req.body.caption;
+      }
+
+      if (req.body.location) {
+        updatedData.location = req.body.location;
+      }
       const updatedPost = await this.postRepository.update(updatedData, {
         userId,
         postId,

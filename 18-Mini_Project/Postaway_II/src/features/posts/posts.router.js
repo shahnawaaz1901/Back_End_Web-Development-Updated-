@@ -13,7 +13,7 @@ postRouter.post(
     postController.createPost(req, res, next);
   }
 );
-postRouter.get("/getPosts/", (req, res, next) => {
+postRouter.get("/getPosts", (req, res, next) => {
   postController.getPosts(req, res, next);
 });
 

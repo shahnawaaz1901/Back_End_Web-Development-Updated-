@@ -34,8 +34,8 @@ export default class PostRepository {
     try {
       const data = await PostModel.findOneAndUpdate(
         {
-          _id: new mongoose.Types.ObjectId(requireData.postId),
-          user: new mongoose.Types.ObjectId(requireData.userId),
+          _id: requireData.postId,
+          user: requireData.userId,
         },
         updatedData,
         { returnDocument: "after" }

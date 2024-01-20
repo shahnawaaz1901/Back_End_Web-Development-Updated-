@@ -332,7 +332,7 @@
         }
       }
     },
-    "/api/posts/getPosts/{userId}": {
+    "/api/posts/getPosts": {
       "get": {
         "tags": ["Posts"],
         "summary": "Get Posts",
@@ -346,7 +346,7 @@
           {
             "in": "query",
             "name": "userId",
-            "description": "Provide UserId which Posts You want to Retrieve otherwise User who is Loggedin Post retrieved",
+            "description": "Provide UserId which Posts You want to Retrieve otherwise Loggedin User Post is retrieved",
             "schema": {
               "type": "string"
             }
@@ -354,13 +354,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Posts fetched"
+            "description": "ok"
           },
           "401": {
             "description": "Unauthorized Access"
           },
           "406": {
-            "description": "InCorrect UserId"
+            "description": "Incorrect UserId"
           },
           "500": {
             "description": "Internal Server Error"
@@ -368,7 +368,7 @@
         }
       }
     },
-    "/api/posts/getOnePosts/{postId}": {
+    "/api/posts/getOnePost/{postId}": {
       "get": {
         "tags": ["Posts"],
         "summary": "Get Post",

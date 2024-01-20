@@ -17,6 +17,7 @@ const errorMiddleware = (err, req, res, next) => {
   }
 
   if (
+    err instanceof mongoose.Error.CastError ||
     err instanceof mongoose.mongo.BSON.BSONError ||
     err instanceof mongoose.Error.ValidationError ||
     err instanceof mongoose.mongo.MongoError
