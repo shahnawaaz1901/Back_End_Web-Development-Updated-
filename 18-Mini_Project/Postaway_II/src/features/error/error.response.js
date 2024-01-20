@@ -14,8 +14,14 @@ const errorMiddleware = (err, req, res, next) => {
     return res
       .status(err.errStatusCode)
       .json({ success: false, message: err.message });
-  } else if (err instanceof mongoose.mongo.BSON.BSONError) {
-    throw new ApplicationError(err.message, 406);
+  }
+
+  if (
+    err instanceof mongoose.mongo.BSON.BSONError ||
+    err instanceof mongoose.Error.ValidationError ||
+    err instanceof mongoose.mongo.MongoError
+  ) {
+    return res.status(406).json({ success: false, message: err.message });
   }
   res.status(500).json({ success: false, error: "Something went wrong !!" });
 };

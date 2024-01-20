@@ -23,12 +23,6 @@ export default class UserRepository {
       return newUser;
     } catch (error) {
       await session.abortTransaction();
-      if (
-        error instanceof mongoose.Error.ValidationError ||
-        error instanceof mongoose.mongo.MongoError
-      ) {
-        throw new ApplicationError(error.message, 406);
-      }
       throw error;
     } finally {
       await session.endSession();

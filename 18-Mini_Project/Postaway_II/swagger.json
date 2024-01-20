@@ -151,6 +151,26 @@
             "description": "Email which You Recieved Otp and want to Change Password"
           }
         ],
+        "requestBody": {
+          "required": "true",
+          "type": "object",
+          "description": "Enter Otp and New Password",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string"
+                  },
+                  "otp": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Password Updated"
@@ -160,6 +180,9 @@
           },
           "404": {
             "description": "Generate Otp"
+          },
+          "406": {
+            "description": "Otp Expired or Email or Password is Empty"
           },
           "500": {
             "description": "Internal Server Error"
@@ -180,14 +203,14 @@
         "requestBody": {
           "required": true,
           "content": {
-            "text/plain": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
                   "currentPassword": {
                     "type": "string"
                   },
-                  "updatedPassword": {
+                  "newPassword": {
                     "type": "string"
                   }
                 }
@@ -200,7 +223,10 @@
             "description": "Password Updated Successfully"
           },
           "401": {
-            "description": "Incorrect Password"
+            "description": "Incorrect Current Password"
+          },
+          "406": {
+            "description": "New Password can't be Same as Current Password"
           },
           "500": {
             "description": "Internal Server Error"
