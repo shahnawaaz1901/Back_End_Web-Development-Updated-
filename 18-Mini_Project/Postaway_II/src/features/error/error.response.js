@@ -17,12 +17,17 @@ const errorMiddleware = (err, req, res, next) => {
   }
 
   if (
-    err instanceof mongoose.Error.CastError ||
-    err instanceof mongoose.mongo.BSON.BSONError ||
     err instanceof mongoose.Error.ValidationError ||
     err instanceof mongoose.mongo.MongoError
   ) {
     return res.status(406).json({ success: false, message: err.message });
+  }
+
+  if (
+    err instanceof mongoose.Error.CastError ||
+    err instanceof mongoose.mongo.BSON.BSONError
+  ) {
+    return res.status(406).json({ success: false, message: "Invalid Id" });
   }
   res.status(500).json({ success: false, error: "Something went wrong !!" });
 };

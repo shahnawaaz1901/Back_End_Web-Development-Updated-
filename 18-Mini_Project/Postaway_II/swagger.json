@@ -514,7 +514,7 @@
         }
       }
     },
-    "api/friends/getFriends": {
+    "/api/friends/getFriends": {
       "get": {
         "tags": ["Friends"],
         "summary": "Get Friends",
@@ -523,21 +523,21 @@
           {
             "ApiKey": []
           }
-        ]
-      },
-      "responses": {
-        "200": {
-          "description": "Friend List"
-        },
-        "401": {
-          "description": "Unauthorized Access"
-        },
-        "500": {
-          "description": "Internal Server Error"
+        ],
+        "responses": {
+          "200": {
+            "description": "Friend List"
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
       }
     },
-    "api/friends/sendRequest/{user}": {
+    "/api/friends/sendRequest/{user}": {
       "post": {
         "tags": ["Friends"],
         "summary": "Send Request",
@@ -556,27 +556,27 @@
             },
             "required": true
           }
-        ]
-      },
-      "responses": {
-        "200": {
-          "description": "ok"
-        },
-        "401": {
-          "description": "Unauthorized Access"
-        },
-        "404": {
-          "description": "User Not found"
-        },
-        "406": {
-          "description": "InCorrect UserId or Already Sent or Recieve Request"
-        },
-        "500": {
-          "description": "Internal Server Error"
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "404": {
+            "description": "User Not found"
+          },
+          "406": {
+            "description": "InCorrect UserId or Already Sent or Recieve Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
       }
     },
-    "api/friends/acceptRequest/{user}": {
+    "/api/friends/acceptRequest/{user}": {
       "post": {
         "tags": ["Friends"],
         "summary": "Accept Friend Request",
@@ -597,7 +597,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "Become Friend"
           },
           "401": {
@@ -615,8 +615,8 @@
         }
       }
     },
-    "api/friends/rejectRequest/{user}": {
-      "get": {
+    "/api/friends/rejectRequest/{user}": {
+      "delete": {
         "tags": ["Friends"],
         "summary": "Reject Friend Request",
         "description": "Reject Friend Request of the User",
@@ -654,8 +654,8 @@
         }
       }
     },
-    "api/friends/removeFriend/{friendId}": {
-      "get": {
+    "/api/friends/removeFriend/{friendId}": {
+      "delete": {
         "tags": ["Friends"],
         "summary": "Remove Friend",
         "description": "Remove a User From the Friend List",
@@ -693,7 +693,7 @@
         }
       }
     },
-    "api/likes/addLike": {
+    "/api/likes/addLike": {
       "post": {
         "tags": ["Likes"],
         "summary": "Like Item",
@@ -742,7 +742,7 @@
         }
       }
     },
-    "api/likes/removeLike/{likeId}": {
+    "/api/likes/removeLike/{likeId}": {
       "put": {
         "tags": ["Likes"],
         "summary": "Dislike Item",
