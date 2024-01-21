@@ -1,7 +1,7 @@
 import UserModel from "./users.schema.js";
 import bcrypt from "bcrypt";
 import FriendModel from "../friends/friends.schema.js";
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 import ApplicationError from "../error/error.class.js";
 
 export default class UserRepository {

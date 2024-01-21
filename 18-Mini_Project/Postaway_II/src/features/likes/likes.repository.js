@@ -60,7 +60,6 @@ export default class LikeRepository {
         },
         { session }
       );
-      console.log(removeData);
       if (!removeData) {
         throw new ApplicationError("Like not found !!", 404);
       }

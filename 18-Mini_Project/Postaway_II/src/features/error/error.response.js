@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 
 import { logger } from "../../middlewares/winston.logger.js";
 const errorMiddleware = (err, req, res, next) => {
-  console.log(err);
   logger.error({
     url: req.url,
     data: req.body,

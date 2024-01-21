@@ -97,6 +97,7 @@ export default class CommentRepository {
           },
         }
       );
+      console.log(deleteComment);
       if (!deleteComment) {
         throw new ApplicationError("Comment Not found !!", 404);
       }

@@ -957,7 +957,7 @@
         }
       }
     },
-    "/api/comments/updateComment/{postId}": {
+    "/api/comments/updateComment": {
       "put": {
         "tags": ["Comments"],
         "summary": "Update Comment",
@@ -965,16 +965,6 @@
         "security": [
           {
             "apiKey": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "postId",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
           }
         ],
         "requestBody": {
@@ -1003,10 +993,10 @@
             "description": "Unauthorized Access"
           },
           "404": {
-            "description": "Post not found or Comment not found"
+            "description": "Comment not found"
           },
           "406": {
-            "description": "Incorrect PostId or CommentId"
+            "description": "Incorrect CommentId"
           },
           "500": {
             "description": "Internal Server Error"

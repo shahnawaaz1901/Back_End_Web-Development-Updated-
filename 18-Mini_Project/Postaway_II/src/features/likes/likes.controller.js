@@ -64,7 +64,6 @@ export default class LikeController {
       const likesData = await this.likeRepository.get({ id, type });
       res.status(200).json({ sucess: true, likes: likesData });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }

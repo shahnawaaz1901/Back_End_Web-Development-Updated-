@@ -36,6 +36,9 @@ export default class CommentController {
   async getComments(req, res, next) {
     try {
       const { postId } = req.params;
+      if (!postId) {
+        throw new ApplicationError("PostId Can't be Empty", 406);
+      }
       const comments = await this.commentRepository.get(postId);
       res.status(200).json({ success: true, comments });
     } catch (error) {
@@ -61,10 +64,8 @@ export default class CommentController {
   async updateComment(req, res, next) {
     try {
       const { userId } = req;
-      const { newComment } = req.body;
-      const { commentId } = req.params;
-
-      //* Check PostId and CommentId is Empty or Not
+      const { commentId, newComment } = req.body;
+      //* Check CommentId is Empty or Not
       if (!commentId) {
         throw new ApplicationError("CommentId Can't be Empty", 406);
       }
