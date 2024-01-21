@@ -9,39 +9,14 @@
   <body>
     <div class="container">
       <div class="chat-box">
-        <div class="userDetails" id="user">
-          <div id="online-logo"></div>
-          <div id="user-name"></div>
-        </div>
-        <div class="chats">
-          <div class="chat">
-            <div class="image"></div>
-            <div class="userMassage"></div>
-          </div>
-          <!-- <div class="chat">
-            <div class="image"></div>
-            <div class="userMassage"></div>
-          </div><div class="chat">
-            <div class="image"></div>
-            <div class="userMassage"></div>
-          </div> -->
-        </div>
-        <div class="input-msg">
-          <form>
-            <input type="text" required name="input-msg" id="input-form" placeholder="Enter your massage .."/>
-            <button type="button" id="input-btn">Send</button>
-          </form>
+        <div class="user">
+          <div class="online"></div>
+          <div class="username"></div>
         </div>
       </div>
       <div class="online-users">
-        <div class="online-users-heading">
-          <span>Connected Users</span>
-          <span>0</span>
-        </div>
-        <div class="online-user">
-          <div class="online-user-logo"></div>
-          <div class="online-user-name">Ashu Ansari</div>
-        </div>
+        <div class="online-users-heading"></div>
+        <div class="online-user"></div>
       </div>
     </div>
     <script src="http://localhost:3200/socket.io/socket.io.js"></script>
