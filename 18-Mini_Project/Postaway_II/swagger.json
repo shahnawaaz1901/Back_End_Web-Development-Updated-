@@ -786,7 +786,7 @@
         }
       }
     },
-    "/api/likes/removeLike/{likeId}": {
+    "/api/likes/removeLike": {
       "put": {
         "tags": ["Likes"],
         "summary": "Dislike Item",

@@ -1454,3 +1454,23 @@
 {"level":"error","message":{"data":{},"error":"Incorrect type","time":"Sun Jan 21 2024 14:16:47 GMT+0530 (India Standard Time)","url":"/api/likes/removeLike?likeId=65acbed1374cc980fd7a1751&type=Use"},"service":"user-service"}
 {"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 14:16:54 GMT+0530 (India Standard Time)","url":"/api/likes/removeLike"},"service":"user-service"}
 {"level":"error","message":{"data":{},"error":"LikeId is Mendatory!!","time":"Sun Jan 21 2024 14:16:54 GMT+0530 (India Standard Time)","url":"/api/likes/removeLike"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 14:26:11 GMT+0530 (India Standard Time)","url":"/apiDocs/"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 14:26:12 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui.css"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 14:26:12 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-bundle.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 14:26:12 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-standalone-preset.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 14:26:12 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-init.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 14:28:03 GMT+0530 (India Standard Time)","url":"/api/likes/getLikes?id=65ac19556368a50b65eea7cf&type=Post"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 14:29:24 GMT+0530 (India Standard Time)","url":"/apiDocs/"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 14:29:24 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui.css"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 14:29:24 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-bundle.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 14:29:24 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-standalone-preset.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 14:29:24 GMT+0530 (India Standard Time)","url":"/apiDocs/swagger-ui-init.js"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 14:30:39 GMT+0530 (India Standard Time)","url":"/api/likes/removeLike?likeId=65acbea9374cc980fd7a0298&type=Post"},"service":"user-service"}
+{"level":"error","message":{"data":{},"error":"Like not found !!","time":"Sun Jan 21 2024 14:30:39 GMT+0530 (India Standard Time)","url":"/api/likes/removeLike?likeId=65acbea9374cc980fd7a0298&type=Post"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 14:33:31 GMT+0530 (India Standard Time)","url":"/api/likes/removeLike?likeId=65acbea9374cc980fd7a0298&type=Post"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 14:33:38 GMT+0530 (India Standard Time)","url":"/api/likes/removeLike?likeId=65acbea9374cc980fd7a0298&type=Pos"},"service":"user-service"}
+{"level":"error","message":{"data":{},"error":"Incorrect type","time":"Sun Jan 21 2024 14:33:39 GMT+0530 (India Standard Time)","url":"/api/likes/removeLike?likeId=65acbea9374cc980fd7a0298&type=Pos"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 14:34:00 GMT+0530 (India Standard Time)","url":"/api/likes/removeLike?likeId=65acbea9374cc980fd7a029&type=Post"},"service":"user-service"}
+{"level":"error","message":{"data":{},"error":"Cast to ObjectId failed for value \"65acbea9374cc980fd7a029\" (type string) at path \"_id\" for model \"Like\"","time":"Sun Jan 21 2024 14:34:00 GMT+0530 (India Standard Time)","url":"/api/likes/removeLike?likeId=65acbea9374cc980fd7a029&type=Post"},"service":"user-service"}
+{"level":"info","message":{"data":{},"time":"Sun Jan 21 2024 14:34:29 GMT+0530 (India Standard Time)","url":"/api/likes/removeLike?likeId=65acbea9374cc980fd7a0298&type=Post"},"service":"user-service"}
+{"level":"error","message":{"data":{},"error":"Like not found !!","time":"Sun Jan 21 2024 14:34:30 GMT+0530 (India Standard Time)","url":"/api/likes/removeLike?likeId=65acbea9374cc980fd7a0298&type=Post"},"service":"user-service"}
