@@ -26,14 +26,23 @@ export default class LikeController {
   async removeLike(req, res, next) {
     try {
       const { userId } = req;
-      const { likeId } = req.params;
+      const { likeId, type } = req.query;
+
       if (!likeId) {
-        throw new ApplicationError("Please Provide LikeId !!", 406);
+        throw new ApplicationError("LikeId is Mendatory!!", 406);
       }
 
+      if (!type) {
+        throw new ApplicationError("Type is Mendatory !!", 406);
+      }
+
+      if (type != "Post" && type != "Comment" && type != "User") {
+        throw new ApplicationError("Incorrect type", 406);
+      }
       const result = await this.likeRepository.remove({
         userId,
         likeId,
+        type,
       });
       res.status(200).send({ success: true, message: result });
     } catch (error) {

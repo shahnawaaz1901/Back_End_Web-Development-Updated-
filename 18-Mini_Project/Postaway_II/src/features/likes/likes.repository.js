@@ -56,6 +56,7 @@ export default class LikeRepository {
         {
           _id: info.likeId,
           user: info.userId,
+          on_model: info.type,
         },
         { session }
       );

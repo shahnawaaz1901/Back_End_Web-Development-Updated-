@@ -742,6 +742,50 @@
         }
       }
     },
+    "/api/likes/getLikes": {
+      "get": {
+        "tags": ["Likes"],
+        "summary": "Get Likes",
+        "description": "Get All Likes of Post, User, Comment",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "schema": {
+              "type": "string",
+              "description": "Provide id of [**Post**,**User**,**Comment**]"
+            },
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "schema": {
+              "type": "string",
+              "description": "Provide type of id [**Post**,**User**,**Comment**]"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          },
+          "401": {
+            "description": "Unauthorized Access"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "406": {
+            "description": "Incorrect Id or Type"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/api/likes/removeLike/{likeId}": {
       "put": {
         "tags": ["Likes"],
