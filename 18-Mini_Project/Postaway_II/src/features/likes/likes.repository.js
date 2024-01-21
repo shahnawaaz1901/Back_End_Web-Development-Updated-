@@ -19,7 +19,7 @@ export default class LikeRepository {
           : UserModel;
       const entityExist = await entityModel.findById(likeInfo.id);
       if (!entityExist) {
-        throw new ApplicationError(`${id} not found !!`, 404);
+        throw new ApplicationError(`${likeInfo.id} not found !!`, 404);
       }
       const likeData = await LikeModel.updateOne(
         {
@@ -54,8 +54,8 @@ export default class LikeRepository {
       session.startTransaction();
       const removeData = await LikeModel.findOneAndDelete(
         {
-          _id: new mongoose.Types.ObjectId(info.likeId),
-          user: new mongoose.Types.ObjectId(info.userId),
+          _id: info.likeId,
+          user: info.userId,
         },
         { session }
       );
@@ -82,6 +82,18 @@ export default class LikeRepository {
       throw error;
     } finally {
       await session.endSession();
+    }
+  }
+
+  //* Get Likes
+  async get(itemInfo) {
+    try {
+      return await LikeModel.find({
+        likeable: itemInfo.id,
+        on_model: itemInfo.type,
+      }).populate("user");
+    } catch (error) {
+      throw error;
     }
   }
 }

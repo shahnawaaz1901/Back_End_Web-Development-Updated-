@@ -17,7 +17,7 @@ export default class LikeController {
         throw new ApplicationError("Type is Invalid", 406);
       }
       const likeData = await this.likeRepository.add({ ...req.body, userId });
-      res.status(201).json({ success: true, massage: likeData });
+      res.status(201).json({ success: true, likeId: likeData.upsertedId });
     } catch (error) {
       next(error);
     }
@@ -37,6 +37,25 @@ export default class LikeController {
       });
       res.status(200).send({ success: true, message: result });
     } catch (error) {
+      next(error);
+    }
+  }
+
+  async getLikes(req, res, next) {
+    try {
+      const { id, type } = req.query;
+
+      if (!id) {
+        throw new ApplicationError("Likeable Item Id Can't be Empty", 406);
+      }
+      if (type != "Post" && type != "User" && type != "Comment") {
+        throw new ApplicationError("Invalid Type", 406);
+      }
+
+      const likesData = await this.likeRepository.get({ id, type });
+      res.status(200).json({ sucess: true, likes: likesData });
+    } catch (error) {
+      console.log(error);
       next(error);
     }
   }

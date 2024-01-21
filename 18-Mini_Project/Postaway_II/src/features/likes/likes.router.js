@@ -10,4 +10,7 @@ likeRouter.post("/addLike", (req, res, next) => {
 likeRouter.put("/removeLike/:likeId", (req, res, next) => {
   likeController.removeLike(req, res, next);
 });
+likeRouter.get("/getLikes", (req, res, next) => {
+  likeController.getLikes(req, res, next);
+});
 export default likeRouter;

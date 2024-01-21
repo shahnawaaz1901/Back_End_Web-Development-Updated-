@@ -706,7 +706,7 @@
         "requestBody": {
           "required": true,
           "content": {
-            "text/plain": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -754,34 +754,24 @@
         ],
         "parameters": [
           {
-            "in": "path",
+            "in": "query",
             "name": "likeId",
             "description": "Likeable Item Id",
             "schema": {
               "type": "string"
             },
             "required": true
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "description": "Specify Type [**User**,**Post**,**Comment**]",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
           }
         ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "text/plain": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "likeableDataId": {
-                    "type": "string"
-                  },
-                  "type": {
-                    "type": "string",
-                    "description": "Specify type of id : [**User**,**Post**,**Comment**]"
-                  }
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Like Remove Successfully"
