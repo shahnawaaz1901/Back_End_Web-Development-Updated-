@@ -1,3 +1,6 @@
+* {
+  font-size: 18px;
+}
 body {
   background-color: rgb(204, 214, 230);
 }
@@ -10,14 +13,13 @@ body {
   padding: 15px;
   justify-content: space-around;
 }
-
+/* Chat Section */
 .chat-box {
   background-color: white;
-  padding: 0px 10px;
   border: 1px solid lightgrey;
   border-radius: 4px;
-  width: 70%;
-  box-shadow: 0px 0px 8px 2px lightgrey;
+  width: 74%;
+  box-shadow: 0px 0px 10px 3px lightgrey;
 }
 
 .online-users {
@@ -25,5 +27,106 @@ body {
 }
 
 .user {
-  width: 100%;
+  width: 97%;
+  height: 50px;
+  margin: auto;
+  background-color: rgb(238, 238, 238);
+  display: flex;
+  align-items: center;
+}
+
+.online {
+  height: 10px;
+  width: 10px;
+  margin-left: 10px;
+  border-radius: 50%;
+  background-color: green;
+}
+
+.username {
+  color: green;
+  margin-left: 10px;
+}
+
+.chats {
+  width: 97%;
+  height: 50px;
+  max-height: 550px;
+  margin: auto;
+  background-image: url("../image/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
+  background-position: center;
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  overflow-y: scroll;
+}
+
+.input {
+  width: 97%;
+  height: 60px;
+  margin: auto;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#input-message {
+  padding: 10px;
+  width: 82%;
+  background-color: rgb(238, 238, 238);
+  border: none;
+}
+
+#input-message:focus {
+  outline: none;
+}
+
+#send-btn {
+  width: 10%;
+  padding: 10px;
+  font-weight: 550;
+  color: white;
+  background-color: lightgreen;
+  border: none;
+  border-radius: 5%;
+  cursor: pointer;
+  transition: all 0.5s ease-in;
+}
+
+#send-btn:hover {
+  background-color: green;
+  border: 1px solid white;
+}
+
+/* Online User Section */
+.online-users {
+  width: 22%;
+  /* background-color: lightblue; */
+  border-radius: 5px;
+}
+
+.online-users-heading {
+  height: 40px;
+  width: 95%;
+  color: white;
+  background-color: rgb(13, 110, 251);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.online-user {
+  height: 40px;
+  width: 95%;
+  display: flex;
+  background-color: rgb(209, 231, 221);
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.online-user-name {
+  margin-left: 10px;
 }
