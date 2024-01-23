@@ -1,4 +1,8 @@
-// // const socket = io.connect("http://localhost:3200");
-// const userName = prompt("Please Enter Your Name .?");
-// const userProfileName = document.getElementById("user-name");
-// userProfileName.innerText = userName;
+const socket = io.connect("http://localhost:3200");
+
+const userName = prompt("Please Enter your name ..?");
+
+socket.emit("connection");
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("input-message").focus();
+});
