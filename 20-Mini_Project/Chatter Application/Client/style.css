@@ -116,7 +116,7 @@ body {
 }
 
 .chat {
-  min-width: 30%;
+  min-width: 100px;
   /* border: 1px solid black; */
   max-width: 80%;
   margin: 10px;

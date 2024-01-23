@@ -16,6 +16,16 @@ const io = new Server(server, {
 
 io.on("connection", (socket) => {
   console.log("Connection is Enstablished");
+
+  socket.on("Connect", (value) => {
+    socket.name = value.name;
+  });
+
+  socket.on("new-message", (value) => {
+    console.log(socket.name);
+    console.log(value);
+  });
+
   socket.on("disconnect", () => {
     console.log("Connection is Ended !");
   });
