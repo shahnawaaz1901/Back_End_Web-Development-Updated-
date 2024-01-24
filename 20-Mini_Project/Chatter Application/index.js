@@ -31,6 +31,7 @@ io.on("connection", (socket) => {
       message: value,
       time: `${new Date().getHours()}:${new Date().getMinutes()}`,
     };
+
     socket.broadcast.emit("broadCast_message", messageDetail);
     console.log("Message has been emitted");
   });

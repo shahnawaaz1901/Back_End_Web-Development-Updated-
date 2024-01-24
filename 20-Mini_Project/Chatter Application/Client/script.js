@@ -3,7 +3,7 @@ const socket = io.connect("http://localhost:3200");
 const userName = prompt("Please Enter your name ..?");
 
 socket.emit("Connect", { name: userName || "User" });
-
+let index = 0;
 const chatContainer = document.getElementById("chats");
 const inputMessage = document.getElementById("input-message");
 const sendBtn = document.getElementById("send-btn");
