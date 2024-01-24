@@ -62,7 +62,6 @@ body {
 
 .chats {
   width: 97%;
-  /* border: 1px solid black; */
   position: relative;
   min-height: 70px;
   max-height: 450px;
@@ -181,7 +180,7 @@ body {
 }
 
 .user-message {
-  padding: 0px 15px 15px;
+  padding: 0px 10px 15px;
   box-sizing: content-box;
   text-align: justify;
   word-spacing: 4px;

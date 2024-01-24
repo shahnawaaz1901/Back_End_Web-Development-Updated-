@@ -50,7 +50,7 @@ function sendMessage() {
   chatContainer.scrollBy(0, chatContainer.scrollHeight);
 }
 
-function broadCastMessage(messageData) {
+function renderMessage(messageData) {
   const newElement = document.createElement("div");
   newElement.className = "chat";
   newElement.innerHTML = `<div class="user-image">
@@ -67,28 +67,34 @@ function broadCastMessage(messageData) {
   chatContainer.scrollBy(0, chatContainer.scrollHeight);
 }
 
-function updateUserData(usersData) {
-  userList.innerHTML = "";
-  userCount.textContent = usersData.length;
-  console.log(usersData);
-  for (let everyUser of usersData) {
-    renderOnlineUser(everyUser);
+// function updateUserData(usersData) {
+//   userList.innerHTML = "";
+//   userCount.textContent = usersData.length;
+//   console.log(usersData);
+//   for (let everyUser of usersData) {
+//     renderOnlineUser(everyUser);
+//   }
+// }
+
+// function renderOnlineUser(user) {
+//   const newElement = document.createElement("div");
+//   newElement.className = "online-user";
+//   newElement.innerHTML = `<span class="online"></span>
+//   <span class="online-user-name">${user}</span>`;
+//   userList.appendChild(newElement);
+// }
+
+/* Socket Events */
+socket.on("broadCast_message", renderMessage);
+
+// socket.on("Update-Active-User", updateUserData);
+
+// socket.on("show-Users", updateUserData);
+
+socket.on("loadPreviousChats", loadChats);
+
+function loadChats(chatsData) {
+  for (let everyChat of chatsData) {
+    renderMessage(everyChat);
   }
 }
-
-function renderOnlineUser(user) {
-  const newElement = document.createElement("div");
-  newElement.className = "online-user";
-  newElement.innerHTML = `<span class="online"></span>
-  <span class="online-user-name">${user}</span>`;
-  userList.appendChild(newElement);
-}
-
-socket.on("broadCast_message", (messageData) => {
-  broadCastMessage(messageData);
-});
-
-socket.on("Update-Active-User", (usersData) => {
-  console.log("Update User");
-  updateUserData(usersData);
-});
