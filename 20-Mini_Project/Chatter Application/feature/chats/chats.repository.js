@@ -9,4 +9,8 @@ export default class ChatRepository {
   async retrieveMessage() {
     return await ChatModel.find().limit(50).sort({ time: 1 });
   }
+
+  async deleteAll() {
+    await ChatModel.deleteMany();
+  }
 }

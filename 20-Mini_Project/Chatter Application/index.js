@@ -19,31 +19,34 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-  console.log("Connection is Enstablished");
-
-  socket.on("Connect", async (value) => {
+  socket.on("newUserConnect", async (value) => {
     socket.name = value.name;
     activeUser.push(socket.name);
+    socket.broadcast.emit("Update-User-List", activeUser);
+
     const chats = await chatRepository.retrieveMessage();
     socket.emit("loadPreviousChats", chats);
+    socket.emit("loadOnlineUsers", activeUser);
   });
 
-  socket.on("new-message", async (value) => {
+  socket.on("new-message", async (msg) => {
     const messageDetail = {
       name: socket.name,
-      message: value,
-      time: `${new Date().getHours()}:${new Date().getMinutes()}`,
+      message: msg,
+      time: `${new Date()}`,
     };
     await chatRepository.storeMessage(messageDetail);
     socket.broadcast.emit("broadCast_message", messageDetail);
-    console.log("Message has been emitted");
+  });
+
+  socket.on("typing", (user) => {
+    socket.broadcast.emit("typing-status", user);
   });
 
   socket.on("disconnect", () => {
     const index = activeUser.findIndex((u) => u == socket.name);
     activeUser.splice(index, 1);
-    console.log(activeUser);
-    console.log("Disconnect User !!");
+    socket.broadcast.emit("Update-User-List", activeUser);
   });
 });
 

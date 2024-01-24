@@ -39,7 +39,7 @@ body {
 
 .user {
   width: 97%;
-  height: 50px;
+  height: 80px;
   margin: auto;
   font-size: 18px;
   background-color: rgb(238, 238, 238);
@@ -116,7 +116,7 @@ body {
 }
 
 .chat {
-  margin: 10px;
+  margin: 15px 10px;
   display: flex;
   max-width: 80%;
 }
@@ -150,8 +150,8 @@ body {
 .user-image {
   display: flex;
   width: 10%;
-  min-width: 60px;
-  max-width: 60px;
+  min-width: 50px;
+  max-width: 50px;
   margin-right: 10px;
   align-items: end;
   border-radius: 50%;
@@ -177,8 +177,12 @@ body {
 
 .user-name {
   font-weight: 550;
+  max-width: 120px;
 }
 
+.user-time {
+  font-size: 12px;
+}
 .user-message {
   padding: 0px 10px 15px;
   box-sizing: content-box;
@@ -251,6 +255,11 @@ body {
     min-width: 40px;
     max-width: 40px;
   }
+
+  .user-message {
+    word-spacing: 0px;
+  }
+
   #input-message {
     width: 74%;
   }
