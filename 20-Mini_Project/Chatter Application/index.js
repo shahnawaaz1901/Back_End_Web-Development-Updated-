@@ -22,7 +22,11 @@ io.on("connection", (socket) => {
   socket.on("newUserConnect", async (value) => {
     socket.name = value.name;
     activeUser.push(socket.name);
-    socket.broadcast.emit("Update-User-List", activeUser);
+    socket.broadcast.emit("Update-User-List", {
+      activeUser,
+      name: socket.name,
+      reason: "join",
+    });
 
     const chats = await chatRepository.retrieveMessage();
     socket.emit("loadPreviousChats", chats);
@@ -47,9 +51,10 @@ io.on("connection", (socket) => {
     const index = activeUser.findIndex((u) => u == socket.name);
     activeUser.splice(index, 1);
 
-    socket.broadcast.emit("Update-User-List-After-Leave", {
+    socket.broadcast.emit("Update-User-List", {
       activeUser,
       name: socket.name,
+      reason: "leave",
     });
   });
 });

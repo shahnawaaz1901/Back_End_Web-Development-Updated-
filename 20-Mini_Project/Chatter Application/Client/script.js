@@ -1,9 +1,10 @@
 const userName = prompt("Please Enter your name ..?") || "User";
 
 const socket = io.connect("http://localhost:3200");
-let profileIndex = 0;
-
 socket.emit("newUserConnect", { name: userName || "User" });
+
+//* For Changing User Profile logo Continuesly
+let profileIndex = 0;
 const chatContainer = document.getElementById("chats");
 const inputMessage = document.getElementById("input-message");
 const sendBtn = document.getElementById("send-btn");
@@ -16,10 +17,6 @@ const userNameSection = document.querySelector(".user");
 
 //* Add UserName on Top
 document.querySelector(".username").textContent = userName;
-//* Focus on Input Chat Box
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("input-message").focus();
-});
 
 //* Add Event Listener to the Input Message Box
 inputMessage.addEventListener("keyup", (e) => {
@@ -33,68 +30,54 @@ sendBtn.addEventListener("click", () => {
   sendMessage();
 });
 
-//* Recieve Message
+//* Show Send Message
 function sendMessage() {
   const message = inputMessage.value;
   inputMessage.value = "";
-  const newElement = document.createElement("div");
-  newElement.innerHTML = `<div class="user-image">
-  <img src="../image/${profileIndex}.png" alt="logo" />
-</div>
-<div class="user-info send-message">
-  <div class="message-box-heading">
-    <div class="user-name">${userName}</div>
-    <div class="user-time">${new Date().toLocaleTimeString()}</div>
-  </div>
-  <div class="user-message">
-    ${message}
-  </div>
-</div>`;
+  const newElement = createMessageElement({
+    name: userName,
+    message,
+    time: new Date(),
+    class: "send-message",
+  });
   newElement.classList.add("chat", "sender");
-  chatContainer.appendChild(newElement);
-  chatContainer.scrollBy(0, chatContainer.scrollHeight);
+  appendElement(newElement, chatContainer);
   socket.emit("new-message", message);
+  incrementProfileLogoIndex();
+}
+
+//* Increment Profile logo
+function incrementProfileLogoIndex() {
   profileIndex++;
   if (profileIndex == 5) {
     profileIndex = 0;
   }
 }
 
+//* Show Recieve Message
 function broadCastMessage(messageData) {
-  userNameSection.style.height = "100%";
-  typingStatus.style.height = "0px";
-  typingStatus.textContent = ``;
-  typingStatusVisible = false;
+  //* Remove Typing Status Before BroadCasting Message
+  removeTypingStatus();
 
-  const newElement = document.createElement("div");
+  //* Create New Element of Message
+  const newElement = createMessageElement({
+    ...messageData,
+    class: "recieve-message",
+  });
   newElement.className = "chat";
-  newElement.innerHTML = `<div class="user-image">
-  <img src="../image/${profileIndex}.png" alt="" />
-</div>
-<div class="user-info recieve-message">
-  <div class="message-box-heading">
-    <div class="user-name">${messageData.name}</div>
-    <div class="user-time">${new Date(
-      messageData.time
-    ).toLocaleTimeString()}</div>
-  </div>
-  <div class="user-message">${messageData.message}</div>
-</div>`;
-  chatContainer.appendChild(newElement);
-  chatContainer.scrollBy(0, chatContainer.scrollHeight);
-  profileIndex++;
-  if (profileIndex == 5) {
-    profileIndex = 0;
-  }
+  appendElement(newElement, chatContainer);
+  incrementProfileLogoIndex();
 }
 
+//* BroadCast Joined or Leave User in ChatBox
 function broadCastUserStatusMessage(message) {
   const newElement = document.createElement("div");
   newElement.className = "user-status";
   newElement.textContent = message;
-  chatContainer.appendChild(newElement);
+  appendElement(newElement, chatContainer);
 }
 
+//* Show Online Users
 function showOnlineUsers(user) {
   const newElement = document.createElement("div");
   newElement.className = "online-user";
@@ -103,59 +86,89 @@ function showOnlineUsers(user) {
   userList.appendChild(newElement);
 }
 
-function updateUsers(data) {
-  userList.innerHTML = "";
-  userCount.textContent = data.length;
-  for (let every of data) {
-    showOnlineUsers(every);
-  }
-}
-
-/* Socket Events */
-socket.on("broadCast_message", broadCastMessage);
-socket.on("loadPreviousChats", loadChats);
-socket.on("loadOnlineUsers", loadUsers);
-
-socket.on("Update-User-List", (data) => {
-  updateUsers(data);
-  broadCastUserStatusMessage(`${data[data.length - 1]} Joined the Chat`);
-  chatContainer.scrollBy(0, chatContainer.scrollHeight);
-});
-
-socket.on("Update-User-List-After-Leave", (data) => {
-  updateUsers(data.activeUser);
-  broadCastUserStatusMessage(`${data.name} leaves the Chat`);
-});
-
-function loadChats(chatsData) {
-  for (let everyChat of chatsData) {
-    broadCastMessage(everyChat);
-  }
-}
-
 function loadUsers(activeUsers) {
+  userList.innerHTML = "";
   for (let everyUser of activeUsers) {
     showOnlineUsers(everyUser);
   }
   userCount.textContent = activeUsers.length;
 }
 
+/* Socket Events */
+socket.on("broadCast_message", broadCastMessage);
+socket.on("loadPreviousChats", loadChats);
+socket.on("loadOnlineUsers", loadUsers);
+socket.on("typing-status", handleTypingStatus);
+socket.on("Update-User-List", handleUpdateUser);
+
+function handleUpdateUser(data) {
+  console.log(data);
+  loadUsers(data.activeUser);
+  chatContainer.scrollBy(0, chatContainer.scrollHeight);
+  if (data.reason == "join") {
+    broadCastUserStatusMessage(`${data.name} Joined the Chat`);
+  } else {
+    broadCastUserStatusMessage(`${data.name} leaves the Chat`);
+  }
+}
+
+function handleTypingStatus(user) {
+  if (!typingStatusVisible) {
+    showTypingStatus(user);
+    setTimeout(removeTypingStatus, 3000);
+  }
+}
+function loadChats(chatsData) {
+  for (let everyChat of chatsData) {
+    broadCastMessage(everyChat);
+  }
+}
+
 inputMessage.addEventListener("keyup", () => {
   socket.emit("typing", userName);
 });
 
-socket.on("typing-status", (user) => {
-  if (!typingStatusVisible) {
-    userNameSection.style.height = "60%";
-    typingStatus.style.height = "30%";
-    typingStatus.textContent = `${user} is typing...`;
-    typingStatusVisible = true;
+//* Show typing Status
+function showTypingStatus(user) {
+  userNameSection.style.height = "60%";
+  typingStatus.style.height = "30%";
+  typingStatus.textContent = `${user} is typing...`;
+  typingStatusVisible = true;
+}
 
-    setTimeout(() => {
-      userNameSection.style.height = "100%";
-      typingStatus.style.height = "0px";
-      typingStatus.textContent = ``;
-      typingStatusVisible = false;
-    }, 3000);
-  }
+//* Remove typing Status
+function removeTypingStatus() {
+  userNameSection.style.height = "100%";
+  typingStatus.style.height = "0px";
+  typingStatus.textContent = ``;
+  typingStatusVisible = false;
+}
+
+function createMessageElement(messageInfo) {
+  const newElement = document.createElement("div");
+  newElement.innerHTML = `<div class="user-image">
+  <img src="../image/${profileIndex}.png" alt="logo" />
+</div>
+<div class="user-info ${messageInfo.class}">
+  <div class="message-box-heading">
+    <div class="user-name">${messageInfo.name}</div>
+    <div class="user-time">${new Date(
+      messageInfo.time
+    ).toLocaleTimeString()}</div>
+  </div>
+  <div class="user-message">
+    ${messageInfo.message}
+  </div>
+</div>`;
+  return newElement;
+}
+
+function appendElement(element, container) {
+  container.appendChild(element);
+  container.scrollBy(0, container.scrollHeight);
+}
+
+//* Focus on Input Chat Box
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("input-message").focus();
 });
