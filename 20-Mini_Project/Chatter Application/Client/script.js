@@ -10,6 +10,10 @@ const sendBtn = document.getElementById("send-btn");
 const userList = document.querySelector(".online-users-list");
 const userCount = document.querySelector("#number");
 const userNamePlace = document.querySelector(".user");
+const typingStatus = document.querySelector(".typing-status");
+let typingStatusVisible = false;
+const userNameSection = document.querySelector(".user");
+
 //* Add UserName on Top
 document.querySelector(".username").textContent = userName;
 //* Focus on Input Chat Box
@@ -57,6 +61,11 @@ function sendMessage() {
 }
 
 function broadCastMessage(messageData) {
+  userNameSection.style.height = "100%";
+  typingStatus.style.height = "0px";
+  typingStatus.textContent = ``;
+  typingStatusVisible = false;
+
   const newElement = document.createElement("div");
   newElement.className = "chat";
   newElement.innerHTML = `<div class="user-image">
@@ -109,7 +118,7 @@ socket.on("loadOnlineUsers", loadUsers);
 
 socket.on("Update-User-List", (data) => {
   updateUsers(data);
-  broadCastUserStatusMessage(`${data[data.length - 1]} is Joined Chat`);
+  broadCastUserStatusMessage(`${data[data.length - 1]} Joined the Chat`);
   chatContainer.scrollBy(0, chatContainer.scrollHeight);
 });
 
@@ -135,8 +144,18 @@ inputMessage.addEventListener("keyup", () => {
   socket.emit("typing", userName);
 });
 
-// socket.on("typing-status", (user) => {
-//   const newElement = document.createElement("div");
-//   newElement.innerText = `${user} is typing...`;
-//   userNamePlace.appendChild(newElement);
-// });
+socket.on("typing-status", (user) => {
+  if (!typingStatusVisible) {
+    userNameSection.style.height = "60%";
+    typingStatus.style.height = "30%";
+    typingStatus.textContent = `${user} is typing...`;
+    typingStatusVisible = true;
+
+    setTimeout(() => {
+      userNameSection.style.height = "100%";
+      typingStatus.style.height = "0px";
+      typingStatus.textContent = ``;
+      typingStatusVisible = false;
+    }, 3000);
+  }
+});
