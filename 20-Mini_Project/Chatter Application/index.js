@@ -46,7 +46,11 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     const index = activeUser.findIndex((u) => u == socket.name);
     activeUser.splice(index, 1);
-    socket.broadcast.emit("Update-User-List", activeUser);
+
+    socket.broadcast.emit("Update-User-List-After-Leave", {
+      activeUser,
+      name: socket.name,
+    });
   });
 });
 

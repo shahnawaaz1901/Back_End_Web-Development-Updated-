@@ -79,6 +79,13 @@ function broadCastMessage(messageData) {
   }
 }
 
+function broadCastUserStatusMessage(message) {
+  const newElement = document.createElement("div");
+  newElement.className = "user-status";
+  newElement.textContent = message;
+  chatContainer.appendChild(newElement);
+}
+
 function showOnlineUsers(user) {
   const newElement = document.createElement("div");
   newElement.className = "online-user";
@@ -87,17 +94,28 @@ function showOnlineUsers(user) {
   userList.appendChild(newElement);
 }
 
+function updateUsers(data) {
+  userList.innerHTML = "";
+  userCount.textContent = data.length;
+  for (let every of data) {
+    showOnlineUsers(every);
+  }
+}
+
 /* Socket Events */
 socket.on("broadCast_message", broadCastMessage);
 socket.on("loadPreviousChats", loadChats);
 socket.on("loadOnlineUsers", loadUsers);
 
 socket.on("Update-User-List", (data) => {
-  userList.innerHTML = "";
-  userCount.textContent = data.length;
-  for (let every of data) {
-    showOnlineUsers(every);
-  }
+  updateUsers(data);
+  broadCastUserStatusMessage(`${data[data.length - 1]} is Joined Chat`);
+  chatContainer.scrollBy(0, chatContainer.scrollHeight);
+});
+
+socket.on("Update-User-List-After-Leave", (data) => {
+  updateUsers(data.activeUser);
+  broadCastUserStatusMessage(`${data.name} leaves the Chat`);
 });
 
 function loadChats(chatsData) {
@@ -117,8 +135,8 @@ inputMessage.addEventListener("keyup", () => {
   socket.emit("typing", userName);
 });
 
-socket.on("typing-status", (user) => {
-  const newElement = document.createElement("div");
-  newElement.innerText = `${user} is typing...`;
-  userNamePlace.appendChild(newElement);
-});
+// socket.on("typing-status", (user) => {
+//   const newElement = document.createElement("div");
+//   newElement.innerText = `${user} is typing...`;
+//   userNamePlace.appendChild(newElement);
+// });

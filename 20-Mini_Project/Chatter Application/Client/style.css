@@ -37,14 +37,32 @@ body {
   width: 30%;
 }
 
-.user {
+.top {
+  display: block;
   width: 97%;
-  height: 80px;
-  margin: auto;
-  font-size: 18px;
   background-color: rgb(238, 238, 238);
+  margin: auto;
+  height: 50px;
+}
+.user {
+  /* width: 97%; */
+  height: 35px;
+  /* margin: auto; */
+  font-size: 18px;
+  /* background-color: rgb(238, 238, 238); */
   display: flex;
+  font-family: "Times New Roman", Times, serif;
   align-items: center;
+}
+
+.typing-status {
+  font-family: sans-serif;
+  color: rgb(0, 196, 65);
+  width: 100%;
+  font-size: 12px;
+  margin-top: -1px;
+  font-weight: 550;
+  margin-left: 35px;
 }
 
 .online {
@@ -53,6 +71,17 @@ body {
   margin-left: 10px;
   border-radius: 50%;
   background-color: green;
+}
+
+.user-status {
+  text-align: center;
+  background-color: white;
+  color: grey;
+  max-width: 150px;
+  font-size: 14px;
+  padding: 5px;
+  margin: 5px auto;
+  border-radius: 10px;
 }
 
 .username {
