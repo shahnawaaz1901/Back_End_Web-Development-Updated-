@@ -6,10 +6,12 @@ export default class ChatRepository {
     await newMessage.save();
   }
 
+  //* Get Privous Chats
   async retrieveMessage() {
-    return await ChatModel.find().limit(50).sort({ time: 1 });
+    return await ChatModel.find().sort({ time: 1 });
   }
 
+  //* Delete All Chats
   async deleteAll() {
     await ChatModel.deleteMany();
   }

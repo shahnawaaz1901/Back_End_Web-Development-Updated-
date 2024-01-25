@@ -19,6 +19,7 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
+  console.log("Connection Enstablished !!");
   socket.on("newUserConnect", async (value) => {
     socket.name = value.name;
     activeUser.push(socket.name);
@@ -37,7 +38,8 @@ io.on("connection", (socket) => {
     const messageDetail = {
       name: socket.name,
       message: msg,
-      time: `${new Date()}`,
+      // Store time in MiliSecond Format So that We Can Sort Correctly when Retrieve Chats
+      time: `${new Date().getTime()}`,
     };
     await chatRepository.storeMessage(messageDetail);
     socket.broadcast.emit("broadCast_message", messageDetail);
@@ -56,6 +58,7 @@ io.on("connection", (socket) => {
       name: socket.name,
       reason: "leave",
     });
+    console.log("Connection End !!");
   });
 });
 

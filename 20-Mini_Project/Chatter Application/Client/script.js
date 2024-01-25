@@ -33,6 +33,9 @@ sendBtn.addEventListener("click", () => {
 //* Show Send Message
 function sendMessage() {
   const message = inputMessage.value;
+  if (!message) {
+    return;
+  }
   inputMessage.value = "";
   const newElement = createMessageElement({
     name: userName,
@@ -153,7 +156,7 @@ function createMessageElement(messageInfo) {
   <div class="message-box-heading">
     <div class="user-name">${messageInfo.name}</div>
     <div class="user-time">${new Date(
-      messageInfo.time
+      Number(messageInfo.time)
     ).toLocaleTimeString()}</div>
   </div>
   <div class="user-message">
