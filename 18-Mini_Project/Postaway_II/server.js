@@ -1,8 +1,9 @@
 import server from "./index.js";
 import connectToDB from "./config/mongoose.js";
 
+const Port = process.env.PORT;
 //* Listen Server
-server.listen(3200, async (err) => {
+server.listen(Port, async (err) => {
   if (err) {
     console.log(err);
     return;

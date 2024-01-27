@@ -6,7 +6,10 @@
     "version": "1.0.0"
   },
   "servers": [
-    { "url": "http://localhost:3200", "description": "Postaway API" }
+    {
+      "url": "https://postaway-pghi.onrender.com/",
+      "description": "Postaway API"
+    }
   ],
   "components": {
     "securitySchemes": {
