@@ -150,7 +150,7 @@ function removeTypingStatus() {
 function createMessageElement(messageInfo) {
   const newElement = document.createElement("div");
   newElement.innerHTML = `<div class="user-image">
-  <img src="../image/${profileIndex}.png" alt="logo" />
+  <img src="./image/${profileIndex}.png" alt="logo" />
 </div>
 <div class="user-info ${messageInfo.class}">
   <div class="message-box-heading">
