@@ -1,6 +1,6 @@
 const userName = prompt("Please Enter your name ..?") || "User";
 
-const socket = io.connect("http://localhost:3200");
+const socket = io.connect("https://openchat-ksu1.onrender.com");
 socket.emit("newUserConnect", { name: userName || "User" });
 
 //* For Changing User Profile logo Continuesly
