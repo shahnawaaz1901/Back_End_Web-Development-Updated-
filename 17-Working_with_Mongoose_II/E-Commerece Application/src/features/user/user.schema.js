@@ -5,7 +5,7 @@ import mongoose from "mongoose";
   Data like for string minLength and maxLength, uppercase or lowercase and
   for numbers min and max number for get the number inside the range
 */
-export const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   //* We Specify Fields Require and corresponding the type of name
   name: {
     type: String, //* Type of the Name

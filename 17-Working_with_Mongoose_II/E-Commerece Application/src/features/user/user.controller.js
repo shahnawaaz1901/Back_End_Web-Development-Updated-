@@ -16,19 +16,23 @@ export default class UserController {
     try {
       const { name, email, password, typeOfUser } = req.body;
       const hashPassword = await bcrypt.hash(password, 12);
-
+      if (password.length < 8) {
+        throw new ApplicationError(
+          "Password must be greater then 8 Characters",
+          406
+        );
+      }
       const newUser = new UserModel(
         name,
         email,
-        password, //instead of Create Object in Plain password using the hashpassword
-        // hashPassword, //* HashPassword Instead of Plain text Password
+        // password, //instead of Create Object in Plain password using the hashpassword
+        hashPassword, //* HashPassword Instead of Plain text Password
         typeOfUser
       );
       const user = await this.userRepository.signUp(newUser);
       res.status(201).send(user);
     } catch (error) {
       if (error instanceof mongoose.Error.ValidationError) {
-        console.log("Inside");
         return res.status(400).send("Validation failed");
       }
 
@@ -43,9 +47,7 @@ export default class UserController {
 
       //* Find the UserObject with the email address which user Provides
       const user = await this.userRepository.findByEmail(email);
-      if (!user) {
-        return res.status(400).send("Invalid Credentials , Please Try Again!!");
-      } else {
+      if (user) {
         //* if w reach else means user if found by email now compare the password
         const result = await bcrypt.compare(password, user.password);
         if (result) {
@@ -56,10 +58,10 @@ export default class UserController {
             { expiresIn: "1h" }
           );
           return res.cookie("token", token).status(200).send(token);
-        } else {
-          return res.status(404).send("Please Enter a Valid Password !!");
         }
+        return res.status(401).send("Please Enter a Valid Password !!");
       }
+      return res.status(400).send("Invalid Credentials , Please Try Again!!");
     } catch (error) {
       console.log(error);
       return res.status(500).send("Something Went Wrong !!");
@@ -74,7 +76,6 @@ export default class UserController {
       await this.userRepository.reset(userId, hashPassword);
       res.status(201).send("Password Reset Successfully !!");
     } catch (error) {
-      console.log(error);
       throw new ApplicationError("Something Went Wrong", 500);
     }
   }

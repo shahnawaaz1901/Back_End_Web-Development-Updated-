@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import { userSchema } from "./user.schema.js";
 import ApplicationError from "../errorHandler/application.error.js";
-import { ObjectId } from "mongodb";
 
 /* 
     Model Functionn takes two argument first name of the collection 
@@ -18,7 +17,6 @@ export default class UserRepository {
       await newUser.save(); // Insert the Data into the database
       return newUser; // Return the Data
     } catch (error) {
-      console.log(error);
       if (error instanceof mongoose.Error.ValidationError) {
         throw error;
       } else {
