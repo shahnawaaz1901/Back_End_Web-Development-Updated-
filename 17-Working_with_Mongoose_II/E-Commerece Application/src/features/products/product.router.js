@@ -1,6 +1,7 @@
 import express from "express";
 import ProductController from "./product.controller.js";
 import upload from "../../middlewares/file-upload.js";
+
 // *Create Router Product
 const productRouter = express.Router();
 

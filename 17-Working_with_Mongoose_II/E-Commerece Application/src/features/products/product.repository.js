@@ -66,7 +66,7 @@ export default class ProductRepository {
 
   async getAll() {
     try {
-      const products = await ProductModel.find().toArray();
+      const products = await ProductModel.find();
       // const db = getDB();
       // const collection = db.collection(this.collection);
       // await collection.find().toArray();
@@ -99,8 +99,8 @@ export default class ProductRepository {
     let { minPrice, maxPrice, categories } = filterConditions;
 
     try {
-      const db = getDB();
-      const collection = db.collection(this.collection);
+      // const db = getDB();
+      // const collection = db.collection(this.collection);
       let filterConditions = {};
       // * gte means greater then equal to
       if (minPrice) {
@@ -188,28 +188,25 @@ export default class ProductRepository {
         if we Not Specify the _id then id is bydefault sent if We dont want the id then
         we need to exlude the _id field by specifying the value to 0.
       */
-      const filterData = await collection
-        .find(filterConditions)
-        .project({
-          _id: 0,
-          name: 1,
-          price: 1,
-          // _id : 0                              //* If Dont Want to Send the Id
-          /* 
+      const filterData = await ProductModel.find(filterConditions).project({
+        _id: 0,
+        name: 1,
+        price: 1,
+        // _id : 0                              //* If Dont Want to Send the Id
+        /* 
             slice keyword number is the document which we want to receive for in Our case 
             we want only 1 Document from ratings array so that we specify $slice value to 1
             if field which we want to slice is not present then it not return anything about
             that field
           */
-          ratings: { $slice: 1 },
-          /* 
+        ratings: { $slice: 1 },
+        /* 
             if We want to get the Last Document of the Field then we need to specify value -1
             to return the last document in that fields Array
 
             ratings : {$slice : -1}
           */
-        })
-        .toArray();
+      });
       return filterData;
     } catch (error) {
       console.log(error);
