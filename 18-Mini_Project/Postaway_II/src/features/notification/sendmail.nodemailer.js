@@ -11,7 +11,6 @@ const sendMail = async (mailObject) => {
 
   try {
     await transport.sendMail(mailObject);
-    console.log("Mail sent successfully");
   } catch (error) {
     console.log("Mail not sent");
   }
