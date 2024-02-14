@@ -2,6 +2,7 @@ import express from "express";
 import JobController from "../controllers/job.controller.js";
 import auth from "../middlewares/auth.middleware.js";
 import upload from "../middlewares/file-upload.middleware.js";
+import jobValidation from "../middlewares/validation.middleware.js";
 
 const jobRouter = express.Router();
 const jobController = new JobController();
@@ -16,7 +17,7 @@ jobRouter.post(
   upload.single("resume"),
   jobController.addJobApplicant
 );
-jobRouter.post("/postJob", auth, jobController.postJob);
+jobRouter.post("/postJob", auth, jobValidation, jobController.postJob);
 jobRouter.post("/delete-Job/:id", auth, jobController.deleteJob);
 jobRouter.post("/search", jobController.searchJob);
 jobRouter.get("/:id", jobController.getJobDescription);

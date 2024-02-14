@@ -65,6 +65,7 @@ export default class JobController {
     res.render("post-job", {
       title: "Post Job | Easily",
       name: req.session.name,
+      errors: null,
     });
   }
 
@@ -72,7 +73,13 @@ export default class JobController {
     const jobData = req.body;
     JobModel.addJob(jobData);
     const jobs = JobModel.getJobData();
-    res.render("jobs", { name: req.session.name, jobs });
+
+    res.render("jobs", {
+      title: "Jobs | Easily",
+      message: "No Jobs Available",
+      name: req.session.name,
+      jobs,
+    });
   }
 
   getUpdateJobPage(req, res) {
