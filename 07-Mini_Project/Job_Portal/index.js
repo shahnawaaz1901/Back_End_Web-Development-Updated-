@@ -1,17 +1,16 @@
 //* Import Modules
+import "./dotenv.js";
 import express from "express";
 import JobController from "./src/controllers/job.controller.js";
-import UserController from "./src/controllers/user.controller.js";
 import expressEjsLayouts from "express-ejs-layouts";
 import ejs from "ejs";
 import path from "path";
-import upload from "./src/middlewares/file-upload.middleware.js";
 import bodyParser from "body-parser";
-import auth from "./src/middlewares/auth.middleware.js";
 import session from "express-session";
 import jobRouter from "./src/routers/job.router.js";
 import userRouter from "./src/routers/user.router.js";
 import fs from "fs";
+import connectToDB from "./src/config/mongoose.js";
 
 //* Run the Server
 const app = express();
@@ -74,7 +73,7 @@ app.get("/getResume/:resume", (req, res) => {
   const filePath = path.join("public", "data", resume);
   const fileExist = fs.existsSync(filePath);
   if (fileExist) {
-    // Read the file 
+    // Read the file
     const file = fs.createReadStream(filePath);
     // statSync function use to get the size of content
     const stat = fs.statSync(filePath);
@@ -98,10 +97,11 @@ app.get("/getResume/:resume", (req, res) => {
   }
 });
 
-app.listen(3200, function (err) {
+app.listen(3200, async function (err) {
   if (err) {
     console.log(`Error : ${err}`);
     return;
   }
   console.log(`Server is Up and Run on Port : 3200`);
+  await connectToDB();
 });
