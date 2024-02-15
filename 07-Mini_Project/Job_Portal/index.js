@@ -96,12 +96,4 @@ app.get("/getResume/:resume", (req, res) => {
     res.status(404).send("not found !!");
   }
 });
-
-app.listen(3200, async function (err) {
-  if (err) {
-    console.log(`Error : ${err}`);
-    return;
-  }
-  console.log(`Server is Up and Run on Port : 3200`);
-  await connectToDB();
-});
+export default app;
