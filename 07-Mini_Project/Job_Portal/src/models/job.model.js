@@ -1,3 +1,4 @@
+let index = 0;
 class ApplicantModel {
   constructor(_name, _email, _contact, _resume) {
     this.name = _name;
@@ -62,7 +63,7 @@ export default class JobModel {
   static addJob(jobDetail) {
     jobDetails.push(
       new JobModel(
-        jobDetails.length + 1,
+        index++,
         jobDetail.companyName,
         jobDetail.jobType,
         jobDetail.jobDesingnation,
@@ -97,7 +98,11 @@ export default class JobModel {
 
   static search(word) {
     const result = jobDetails.filter(
-      (j) => j.companyName == word || j.post == word || j.jobType == word || j.location == word
+      (j) =>
+        j.companyName == word ||
+        j.post == word ||
+        j.jobType == word ||
+        j.location == word
     );
     return result;
   }
@@ -113,7 +118,7 @@ export default class JobModel {
 
 var jobDetails = [
   new JobModel(
-    1,
+    index++,
     "Coding Ninjas",
     "Tech",
     "SDE",
@@ -126,7 +131,7 @@ var jobDetails = [
     new Date().toLocaleTimeString()
   ),
   new JobModel(
-    2,
+    index++,
     "Go Digit",
     "Tech",
     "Angular Developer",
@@ -139,7 +144,7 @@ var jobDetails = [
     new Date().toLocaleTimeString()
   ),
   new JobModel(
-    3,
+    index++,
     "Juspay",
     "Tech",
     "SDE",
