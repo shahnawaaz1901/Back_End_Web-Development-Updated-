@@ -1,10 +1,18 @@
 import mongoose from "mongoose";
+import Grid from "gridfs-stream";
 
 const connectToDB = async () => {
   try {
-    const url = process.env.DB_URL;
-    await mongoose.connect(`${url}/JobPortal`);
-    console.log("Database is Connected Via Mongoose !!");
+    const { DB_URL } = process.env;
+    const conn = mongoose.createConnection(`${DB_URL}/JobPortal`);
+    Grid.mongo = mongoose.mongo;
+
+    conn.once("open", () => {
+      // Initialize Stream
+      var gfs = Grid(conn.db);
+      gfs.collection("uploads");
+      console.log("Database is Connected Via Mongoose !!");
+    });
   } catch (error) {
     console.log("Error While Connecting with Database");
   }

@@ -2,6 +2,7 @@ import express from "express";
 import JobController from "../controllers/job.controller.js";
 import auth from "../middlewares/auth.middleware.js";
 import upload from "../middlewares/file-upload.middleware.js";
+// import upload from "../middlewares/multer.middleware.js";
 import jobValidation from "../middlewares/validation.middleware.js";
 
 const jobRouter = express.Router();

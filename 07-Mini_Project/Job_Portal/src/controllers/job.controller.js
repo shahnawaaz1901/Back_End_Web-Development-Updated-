@@ -71,6 +71,18 @@ export default class JobController {
 
   postJob(req, res) {
     const jobData = req.body;
+    //* Check if Skills is Array or String
+    /* One Way to Check Array or Not
+      if (req.body.skills.contructor != Array) {
+        req.body.skills = req.body.skills.split(",");
+      }
+    */
+
+    //* Second Way to Check Array or Not
+    if (!Array.isArray(req.body.skills)) {
+      req.body.skills = req.body.skills.split(",");
+    }
+
     JobModel.addJob(jobData);
     const jobs = JobModel.getJobData();
 

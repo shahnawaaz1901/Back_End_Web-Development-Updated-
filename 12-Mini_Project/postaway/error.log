@@ -4,3 +4,11 @@
 {"level":"info","message":"/apiDocs/swagger-ui-standalone-preset.js {}","service":"request-logging"}
 {"level":"info","message":"/apiDocs/swagger-ui-init.js {}","service":"request-logging"}
 {"level":"info","message":"/apiDocs/favicon-32x32.png {}","service":"request-logging"}
+{"level":"info","message":"/ {}","service":"request-logging"}
+{"level":"info","message":"/favicon.ico {}","service":"request-logging"}
+{"level":"info","message":"/apiDocs/ {}","service":"request-logging"}
+{"level":"info","message":"/apiDocs/swagger-ui.css {}","service":"request-logging"}
+{"level":"info","message":"/apiDocs/swagger-ui-bundle.js {}","service":"request-logging"}
+{"level":"info","message":"/apiDocs/swagger-ui-standalone-preset.js {}","service":"request-logging"}
+{"level":"info","message":"/apiDocs/swagger-ui-init.js {}","service":"request-logging"}
+{"level":"info","message":"/apiDocs/favicon-32x32.png {}","service":"request-logging"}
