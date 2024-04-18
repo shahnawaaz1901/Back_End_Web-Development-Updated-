@@ -1,6 +1,7 @@
 import JobModel from "../models/job.model.js";
 import path from "path";
 import sendNotification from "../../nodemailer.js";
+import uploadOnCloudinary from "../utils/cloudinary.js";
 
 export default class JobController {
   getHomePage(req, res) {
@@ -32,8 +33,11 @@ export default class JobController {
     });
   }
 
-  addJobApplicant(req, res) {
+  async addJobApplicant(req, res) {
     const { id, name, email, contact } = req.body;
+    // console.log(req.file);
+    const data = await uploadOnCloudinary(req.file.path);
+    console.log(data);
     const resume = req.file.filename;
     const obj = {
       id,
