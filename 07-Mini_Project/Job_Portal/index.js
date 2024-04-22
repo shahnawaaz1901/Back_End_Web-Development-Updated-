@@ -10,7 +10,6 @@ import session from "express-session";
 import jobRouter from "./src/routers/job.router.js";
 import userRouter from "./src/routers/user.router.js";
 import fs from "fs";
-import connectToDB from "./src/config/mongoose.js";
 
 //* Run the Server
 const app = express();
