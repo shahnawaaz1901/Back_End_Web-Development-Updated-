@@ -3,7 +3,6 @@ import connectToDB from "./src/config/mongoose.js";
 import path from "path";
 const { PORT } = process.env;
 app.listen(PORT, async function (err) {
-  console.log(path.resolve());
   if (err) {
     console.log(`Error : ${err}`);
     return;
