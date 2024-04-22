@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const applicantSchema = new mongoose.Schema({
+  jobId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Job",
+  },
   name: {
     type: String,
     required: true,
@@ -18,3 +22,6 @@ const applicantSchema = new mongoose.Schema({
     required: true,
   },
 });
+
+const ApplicantModel = mongoose.model("Applicant", applicantSchema);
+export default ApplicantModel;

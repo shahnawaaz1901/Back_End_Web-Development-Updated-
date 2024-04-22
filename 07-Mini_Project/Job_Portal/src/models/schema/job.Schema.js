@@ -7,6 +7,7 @@ const jobSchema = new mongoose.Schema({
   },
   jobType: {
     type: String,
+    enum: ["Tech", "Non-Tech"],
     required: true,
   },
   jobDesingnation: {
@@ -32,9 +33,15 @@ const jobSchema = new mongoose.Schema({
     required: true,
   },
   lastDate: {
-    type: String,
+    type: Date,
     required: true,
   },
+  applicants: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Applicant",
+    },
+  ],
 });
 
 const JobModel = mongoose.model("Job", jobSchema);

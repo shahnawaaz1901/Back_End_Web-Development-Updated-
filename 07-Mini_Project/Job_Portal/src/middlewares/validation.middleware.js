@@ -7,7 +7,6 @@ import { body, validationResult } from "express-validator";
 
 const jobValidation = async (req, res, next) => {
   // Setup Rules Validation
-  console.log(req.body);
   const rules = [
     body("companyName").notEmpty().withMessage("Company Name is Required"),
     body("jobType").notEmpty().withMessage("Job Type is Required"),
