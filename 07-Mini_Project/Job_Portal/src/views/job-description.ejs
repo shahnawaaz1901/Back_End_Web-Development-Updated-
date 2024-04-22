@@ -1,6 +1,8 @@
 <link href="css/job-description.css" />
 <% if(job){%>
-<main class="container border border-secondary-subtle rounded mt-3 mb-2 pt-2 pb-2 shadow">
+<main
+  class="container border border-secondary-subtle rounded mt-3 mb-2 pt-2 pb-2 shadow"
+>
   <h1 class="job-description-header text-center">
     <span class="job-post text-danger"><%= job.post %></span>
     <span class="text-primary">Opportunity in </span>
@@ -19,7 +21,10 @@
         <a href="/jobs/update/<%=job.id%>" class="text-primary me-2">
           <span class="col-6"><i class="fa-regular fa-pen-to-square"></i></span>
         </a>
-        <a  class="text-danger ms-2 deleteBtn" onclick="deleteJob('<%= job.id %>')">
+        <a
+          class="text-danger ms-2 deleteBtn"
+          onclick="deleteJob('<%= job.id %>')"
+        >
           <span class="col-6"><i class="fa-solid fa-trash-can"></i></span>
         </a>
       </div>
@@ -119,7 +124,8 @@
                         type="text"
                         id="name"
                         name="name"
-                        class="form-control" required
+                        class="form-control"
+                        required
                       />
                     </div>
                   </div>
@@ -163,7 +169,7 @@
                         id="Resume"
                         class="form-control"
                         name="resume"
-                        accept="pdf"
+                        accept=".pdf"
                         required
                       />
                     </div>
