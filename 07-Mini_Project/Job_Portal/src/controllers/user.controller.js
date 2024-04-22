@@ -1,4 +1,3 @@
-import session from "express-session";
 import UserModel from "../models/user.model.js";
 import sendNotification from "../../nodemailer.js";
 export default class UserController {
