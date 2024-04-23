@@ -3,8 +3,7 @@ import path from "path";
 
 const diskConfig = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log(path.resolve());
-    cb(null, path.resolve("asset"));
+    cb(null, path.resolve("public"));
   },
 
   filename: (req, file, cb) => {

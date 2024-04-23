@@ -10,19 +10,21 @@ const configDetail = {
 
 cloudinary.config(configDetail);
 
+function removeFile(path) {
+  fs.unlink(path);
+}
+
 const uploadOnCloudinary = async (filepath) => {
+  let response = null;
   try {
-    const response = await cloudinary.uploader.upload(filepath, {
+    response = await cloudinary.uploader.upload(filepath, {
       resource_type: "raw",
     });
-    console.log(filepath);
-    console.log(path.resolve());
-    fs.unlinkSync(filepath);
-    return response;
   } catch (error) {
     console.log(error);
-    fs.unlinkSync(filepath);
-    return null;
+  } finally {
+    fs.unlink(filepath);
+    return response;
   }
 };
 
