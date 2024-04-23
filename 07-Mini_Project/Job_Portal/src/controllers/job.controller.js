@@ -35,7 +35,6 @@ export default class JobController {
 
   async addJobApplicant(req, res) {
     const { id, name, email, contact } = req.body;
-    console.log(req.file);
     const data = await uploadOnCloudinary(path.resolve(req.file.path));
     const resume = data.secure_url;
     const obj = {
