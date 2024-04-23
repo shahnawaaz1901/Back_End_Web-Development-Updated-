@@ -36,13 +36,12 @@ export default class JobController {
   async addJobApplicant(req, res) {
     const { id, name, email, contact } = req.body;
     const data = await uploadOnCloudinary(path.resolve(req.file.path));
-    const resume = data.secure_url;
     const obj = {
       id,
       name,
       email,
       contact,
-      resume,
+      resume: data ? data.secure_url : "",
     };
     JobModel.addApplicants(obj);
     sendNotification(email, "jobApply");
