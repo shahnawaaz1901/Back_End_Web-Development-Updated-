@@ -2,11 +2,11 @@
   "name": "postaway_api",
   "version": "1.0.0",
   "description": "A Post Away API For Social Media Application",
-  "main": "index.js",
+  "main": "app.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "node app.js"
   },
   "author": "Shahnawaaz Ansari",
   "license": "ISC",
