@@ -1,7 +1,7 @@
 import server from "./index.js";
 import connectToDB from "./config/mongoose.js";
 
-const Port = process.env.PORT;
+const Port = process.env.PORT || 8000;
 //* Listen Server
 server.listen(Port, async (err) => {
   if (err) {
