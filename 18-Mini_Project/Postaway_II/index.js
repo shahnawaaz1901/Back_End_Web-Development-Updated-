@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import swagger from "swagger-ui-express";
 import session from "express-session";
+import fs from "fs";
 
 //? Internal Modules
 import auth from "./src/middlewares/jwt.auth.js";
@@ -17,7 +18,9 @@ import friendRouter from "./src/features/friends/friends.router.js";
 import likeRouter from "./src/features/likes/likes.router.js";
 import commentRouter from "./src/features/comments/comments.router.js";
 import errorMiddleware from "./src/features/error/error.response.js";
-import apiDoc from "./swagger.json" assert { type: "json" };
+
+//? Load Swagger API Documentation
+const apiDoc = JSON.parse(fs.readFileSync("./swagger.json", "utf8"));
 
 //* Intialize Server
 const server = express();
