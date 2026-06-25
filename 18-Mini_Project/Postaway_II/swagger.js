@@ -1,4 +1,5 @@
-{
+
+export const sawggerJSON = {
   "openapi": "3.0.0",
   "info": {
     "title": "Docs for Postaway API",

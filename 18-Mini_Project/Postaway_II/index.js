@@ -20,7 +20,7 @@ import commentRouter from "./src/features/comments/comments.router.js";
 import errorMiddleware from "./src/features/error/error.response.js";
 
 //? Load Swagger API Documentation
-const apiDoc = JSON.parse(fs.readFileSync("./swagger.json", "utf8"));
+import { sawggerJSON as apiDoc } from "./swagger.js";
 
 //* Intialize Server
 const server = express();
